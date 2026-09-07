@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
+from typing import Optional
 
 from .models import Color, Evaluation, MoveQuality
 
@@ -55,13 +56,25 @@ class ClassificationThresholds:
     box. These are the primary knob for the classification-agreement
     experiment -- vary them, report agreement against Lichess annotations as
     a function of the thresholds.
+
+    `decided_win_pct` caps severity once the game is already decided: above
+    it, a move can be an inaccuracy but never a mistake or a blunder. Off by
+    default, because Lichess does not do this and leaving it off keeps the
+    agreement experiment clean. Turn it on for commentary, where announcing
+    a "blunder" by a player who is still completely winning is simply wrong
+    -- see COMMENTARY_THRESHOLDS.
     """
     inaccuracy: float = 10.0
     mistake: float = 20.0
     blunder: float = 30.0
+    decided_win_pct: Optional[float] = None
 
 
 DEFAULT_THRESHOLDS = ClassificationThresholds()
+
+#: Same ladder, but refusing to call a move played from a won position a
+#: blunder. Use this on the commentary path, not on the evaluation path.
+COMMENTARY_THRESHOLDS = ClassificationThresholds(decided_win_pct=90.0)
 
 
 # ---------------------------------------------------------------------------
@@ -139,10 +152,19 @@ def classify_move(
     *,
     is_best: bool = False,
     in_book: bool = False,
+    win_pct_after_mover: Optional[float] = None,
     thresholds: ClassificationThresholds = DEFAULT_THRESHOLDS,
 ) -> MoveQuality:
     """
     Label a move from the win probability it cost.
+
+    A move the engine itself ranks first is never an error, whatever the
+    numbers say. When the top move appears to lose win probability, the
+    search has revised its own earlier assessment after seeing one move
+    deeper -- that is the engine correcting itself, not the player erring.
+    Without this rule the classifier calls Morphy's winning combination in
+    the Opera Game an inaccuracy, which is the kind of output that destroys
+    a listener's trust in everything else the commentary says.
 
     `in_book` only suppresses the *minor* labels. A move still nominally in a
     database but losing 30 points of win probability is a blunder regardless
@@ -153,17 +175,28 @@ def classify_move(
     BRILLIANT and GREAT are never returned here: they need sacrifice and
     only-move detection, which is a separate layer with board access.
     """
-    if win_loss >= thresholds.blunder:
-        return MoveQuality.BLUNDER
-    if win_loss >= thresholds.mistake:
-        return MoveQuality.MISTAKE
-    if win_loss >= thresholds.inaccuracy:
-        return MoveQuality.INACCURACY
-    if in_book:
-        return MoveQuality.BOOK
     if is_best:
-        return MoveQuality.BEST
-    return MoveQuality.GOOD
+        return MoveQuality.BOOK if in_book else MoveQuality.BEST
+
+    if win_loss >= thresholds.blunder:
+        severity = MoveQuality.BLUNDER
+    elif win_loss >= thresholds.mistake:
+        severity = MoveQuality.MISTAKE
+    elif win_loss >= thresholds.inaccuracy:
+        severity = MoveQuality.INACCURACY
+    else:
+        return MoveQuality.BOOK if in_book else MoveQuality.GOOD
+
+    # Still winning comfortably? Then it cost something, but it did not cost
+    # the game, and calling it a blunder would misdescribe the position.
+    if (
+        thresholds.decided_win_pct is not None
+        and win_pct_after_mover is not None
+        and win_pct_after_mover >= thresholds.decided_win_pct
+    ):
+        return MoveQuality.INACCURACY
+
+    return severity
 
 
 #: Labels that mean the mover made a real error, for filtering and counting.

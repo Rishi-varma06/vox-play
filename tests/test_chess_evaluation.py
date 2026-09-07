@@ -10,6 +10,7 @@ from __future__ import annotations
 import pytest
 
 from voxplay.chessgame.evaluation import (
+    COMMENTARY_THRESHOLDS,
     ClassificationThresholds,
     accuracy_pct,
     classify_move,
@@ -140,8 +141,23 @@ def test_engine_top_move_is_labelled_best():
     assert classify_move(0.0, is_best=True) == MoveQuality.BEST
 
 
+def test_the_engines_own_top_move_is_never_an_error():
+    """
+    Regression: the Opera Game's winning combination was being called an
+    inaccuracy. When the top move appears to lose win probability, the search
+    is revising its own earlier assessment one move deeper -- that is the
+    engine correcting itself, not the player blundering.
+    """
+    assert classify_move(15.5, is_best=True) == MoveQuality.BEST
+    assert classify_move(80.0, is_best=True) == MoveQuality.BEST
+
+
 def test_book_move_is_labelled_book():
     assert classify_move(2.0, in_book=True) == MoveQuality.BOOK
+
+
+def test_a_best_move_still_in_book_stays_book():
+    assert classify_move(0.0, is_best=True, in_book=True) == MoveQuality.BOOK
 
 
 def test_book_does_not_hide_a_blunder():
@@ -153,6 +169,30 @@ def test_thresholds_are_tunable():
     strict = ClassificationThresholds(inaccuracy=5.0, mistake=10.0, blunder=15.0)
     assert classify_move(16.0, thresholds=strict) == MoveQuality.BLUNDER
     assert classify_move(16.0) == MoveQuality.INACCURACY
+
+
+def test_decided_guard_is_off_by_default():
+    """Lichess does not do this, so agreement experiments stay comparable."""
+    assert classify_move(40.0, win_pct_after_mover=95.0) == MoveQuality.BLUNDER
+
+
+def test_decided_guard_refuses_to_call_a_won_position_a_blunder():
+    assert classify_move(
+        40.0, win_pct_after_mover=95.0, thresholds=COMMENTARY_THRESHOLDS
+    ) == MoveQuality.INACCURACY
+
+
+def test_decided_guard_leaves_live_positions_alone():
+    """Throwing away a real game is still a blunder."""
+    assert classify_move(
+        40.0, win_pct_after_mover=55.0, thresholds=COMMENTARY_THRESHOLDS
+    ) == MoveQuality.BLUNDER
+
+
+def test_decided_guard_never_upgrades_a_good_move():
+    assert classify_move(
+        1.0, win_pct_after_mover=99.0, thresholds=COMMENTARY_THRESHOLDS
+    ) == MoveQuality.GOOD
 
 
 def test_classifier_never_invents_brilliancies():

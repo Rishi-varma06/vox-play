@@ -158,11 +158,35 @@ _STOCKFISH_CANDIDATES = (
 )
 
 
+def _vendored_stockfish() -> Optional[str]:
+    """
+    Any Stockfish binary under <repo>/.tools/stockfish/.
+
+    Checked ahead of PATH on purpose. Engine version changes evaluations, so
+    a result is only reproducible if everyone runs the same binary; a copy
+    pinned inside the repo is easier to keep aligned than whatever each
+    machine happens to have installed. The directory is gitignored -- the
+    binary is ~100MB and does not belong in history.
+    """
+    tools = Path(__file__).resolve().parents[2] / ".tools" / "stockfish"
+    if not tools.is_dir():
+        return None
+    for pattern in ("stockfish*.exe", "stockfish*"):
+        for candidate in sorted(tools.glob(pattern)):
+            if candidate.is_file():
+                return str(candidate)
+    return None
+
+
 def find_stockfish(explicit: Optional[str] = None) -> Optional[str]:
-    """Locate a Stockfish binary: explicit path, env var, PATH, then guesses."""
+    """Locate a Stockfish binary: explicit, env var, vendored, PATH, guesses."""
     for candidate in (explicit, os.environ.get("VOXPLAY_STOCKFISH_PATH")):
         if candidate and Path(candidate).exists():
             return candidate
+
+    vendored = _vendored_stockfish()
+    if vendored:
+        return vendored
 
     on_path = shutil.which("stockfish")
     if on_path:
@@ -419,7 +443,12 @@ def analyse_game(
             win_pct_after=round(win_after, 2),
             win_loss=round(win_loss, 2),
             accuracy=round(accuracy_pct(win_loss), 2),
-            quality=classify_move(win_loss, is_best=is_best, thresholds=thresholds),
+            quality=classify_move(
+                win_loss,
+                is_best=is_best,
+                win_pct_after_mover=win_pct_for(eval_after, move.color),
+                thresholds=thresholds,
+            ),
             is_best=is_best,
             is_only_move=bool(top_gap is not None and top_gap >= ONLY_MOVE_GAP),
             top_gap=round(top_gap, 2) if top_gap is not None else None,

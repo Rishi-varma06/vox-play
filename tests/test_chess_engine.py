@@ -105,7 +105,8 @@ def test_engine_returns_nothing_for_a_finished_game():
 # ---------------------------------------------------------------------------
 
 def test_factory_builds_the_mock():
-    assert get_engine("mock").name == "mock"
+    with get_engine("mock") as engine:
+        assert engine.name == "mock"
 
 
 def test_factory_rejects_an_unknown_engine():
@@ -114,8 +115,15 @@ def test_factory_rejects_an_unknown_engine():
 
 
 def test_auto_never_fails_even_without_stockfish():
-    """The demo path must run on a machine with no engine installed."""
-    assert get_engine("auto").name in {"stockfish", "mock"}
+    """
+    The demo path must run on a machine with no engine installed.
+
+    Held in a `with` block deliberately: on a machine that DOES have
+    Stockfish this spawns a real subprocess, and leaking it hangs pytest at
+    exit waiting on the child. Always close an AnalysisEngine.
+    """
+    with get_engine("auto") as engine:
+        assert engine.name in {"stockfish", "mock"}
 
 
 # ---------------------------------------------------------------------------

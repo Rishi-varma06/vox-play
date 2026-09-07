@@ -134,6 +134,50 @@ Both `CSVEventSource` and `JSONEventSource` implement `EventSource` (lazy iterat
 
 `TTSProvider.synthesize(text, output_path) -> Path` is the interface. Concrete providers: `GttsTTSProvider`, `ElevenLabsTTSProvider` (stub), `MockTTSProvider` (writes silent WAV). The assembler (`assembler.py`) concatenates clips into a final `.wav`. Register new providers in `voxplay/tts/__init__.py::get_provider()`.
 
+## Chess domain (`voxplay/chessgame/`)
+
+The second domain. Cricket needs a human scoring ball by ball before any
+commentary exists; chess gets a complete event stream from a free text file
+plus ground-truth evaluation from an engine. Package is named `chessgame`, not
+`chess`, so it does not shadow the python-chess library.
+
+```
+PGN / Lichess -> pgn_source -> MoveEvent stream -> engine.analyse_game -> MoveAnalysis
+                 (no engine)                       (Stockfish or mock)
+```
+
+### Load-bearing decisions
+
+- **Classify on win probability, not centipawns.** 100cp is ~12 points of win
+  probability near equality and under 1 point at +900. Centipawn thresholds
+  therefore mislabel both ends of the range. `evaluation.py` owns the mapping.
+- **A move the engine ranks first is never an error.** When the top move
+  appears to lose win probability, the search is revising its own earlier
+  assessment one ply deeper. Without this rule the classifier calls Morphy's
+  winning combination an inaccuracy.
+- **Budget by nodes, not depth or time.** Time-limited analysis gives
+  different answers on different machines, which makes reported numbers
+  unreproducible.
+- **Analyse positions, not moves.** The position after move i is the position
+  before move i+1, so N moves need N+1 evaluations rather than 2N.
+- **Always close an AnalysisEngine** (use `with`). A leaked Stockfish
+  subprocess hangs pytest at exit.
+
+### Thresholds
+
+`DEFAULT_THRESHOLDS` matches Lichess so classification agreement stays
+comparable. `COMMENTARY_THRESHOLDS` adds `decided_win_pct=90`, which refuses
+to call a move played from a won position a blunder. Use the default on the
+evaluation path and the commentary one on the commentary path.
+
+### Stockfish
+
+Vendored at `.tools/stockfish/` (gitignored, ~100MB). `find_stockfish()`
+checks explicit path, then `VOXPLAY_STOCKFISH_PATH`, then `.tools/`, then
+PATH. `get_engine("auto")` falls back to `MockAnalysisEngine` when no binary
+is present, so the demo path always runs. Mock evaluations are deterministic
+and position-correlated but are not chess -- never report them as results.
+
 ## Test data
 
 - `data/sample_match.json` — bundled T20 demo match, used by `voxplay demo` and `eval`

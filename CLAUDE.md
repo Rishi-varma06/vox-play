@@ -163,6 +163,37 @@ PGN / Lichess -> pgn_source -> MoveEvent stream -> engine.analyse_game -> MoveAn
 - **Always close an AnalysisEngine** (use `with`). A leaked Stockfish
   subprocess hangs pytest at exit.
 
+### Motifs (`motifs.py`)
+
+Deterministic board geometry, never the LLM. A model asked "was that a fork?"
+answers confidently either way, and a listener who plays chess catches the one
+time in ten it is wrong. Detectors hand the commentary layer a fact plus a
+factual sentence; the model narrates it rather than deducing it.
+
+Names match Lichess puzzle-database themes so the detectors can be scored for
+precision and recall against that dataset (CC0, human-tagged) rather than
+asserted to work.
+
+`static_exchange_eval()` is the shared primitive -- python-chess has no SEE,
+and hanging-piece, sacrifice and trapped-piece detection all need one.
+
+Three filters exist because the naive version had terrible precision. On the
+33-move Opera Game it emitted 36 motifs including 17 "pins"; it now emits 13,
+all meaningful:
+
+- **Pawns are excluded from pins and skewers.** A queen notionally pinning a
+  pawn to another pawn is geometrically real and conversationally nothing.
+- **A fork needs two targets worth a knight or more.** "Forks the king and a
+  pawn" is a check that happens to hit a pawn.
+- **Standing motifs are reported only when created.** A pin persists for as
+  many moves as the pieces stay put; `STANDING_MOTIFS` patterns are diffed
+  against the position before the move so only the news survives. Without
+  this the same pin is announced five moves running.
+
+Soundness of a sacrifice is NOT decided here -- geometry cannot know whether
+one works. This layer reports the material fact; the analysis layer combines
+it with the evaluation.
+
 ### Thresholds
 
 `DEFAULT_THRESHOLDS` matches Lichess so classification agreement stays

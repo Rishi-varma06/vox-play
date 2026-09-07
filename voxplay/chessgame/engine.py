@@ -41,6 +41,7 @@ from .evaluation import (
     win_pct_for,
     win_pct_white,
 )
+from .motifs import detect_motifs
 from .pgn_source import ParsedGame, PIECE_VALUES
 
 
@@ -455,6 +456,9 @@ def analyse_game(
             best_move_san=best.move_san if best else None,
             best_line_san=list(best.pv_san) if best else [],
             material_swing=_material_swing(move),
+            motifs=detect_motifs(
+                chess.Board(move.fen_before), chess.Move.from_uci(move.uci)
+            ),
         )
         move.state.win_pct_white = round(win_after, 2)
 

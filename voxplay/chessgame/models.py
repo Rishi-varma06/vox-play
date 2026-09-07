@@ -72,6 +72,41 @@ class MoveQuality(str, Enum):
     BLUNDER = "blunder"
 
 
+class Motif(str, Enum):
+    """
+    Tactical patterns detected from board geometry, not from the engine.
+
+    Names match Lichess puzzle-database themes wherever one exists, so the
+    detectors can be scored for precision and recall against that dataset
+    (CC0, millions of human-tagged puzzles) instead of being asserted to work.
+    """
+    FORK = "fork"
+    PIN = "pin"
+    SKEWER = "skewer"
+    DISCOVERED_ATTACK = "discoveredAttack"
+    DOUBLE_CHECK = "doubleCheck"
+    HANGING_PIECE = "hangingPiece"
+    SACRIFICE = "sacrifice"
+    BACK_RANK_MATE = "backRankMate"
+    SMOTHERED_MATE = "smotheredMate"
+    PROMOTION = "promotion"
+    EN_PASSANT = "enPassant"
+    ADVANCED_PAWN = "advancedPawn"
+
+
+class MotifHit(BaseModel):
+    """
+    One detected pattern, with the squares it involves.
+
+    `squares` drives board highlighting in the renderer. `description` is a
+    factual sentence handed to the commentary layer -- the model narrates it
+    rather than deducing it, which is what stops it inventing tactics.
+    """
+    motif: Motif
+    squares: List[str] = Field(default_factory=list)
+    description: str
+
+
 class GameResult(str, Enum):
     WHITE_WINS = "1-0"
     BLACK_WINS = "0-1"
@@ -130,8 +165,9 @@ class MoveAnalysis(BaseModel):
     best_move_san: Optional[str] = None
     best_line_san: List[str] = Field(default_factory=list)
 
-    # Cheap-to-compute flags used by later layers (motifs, salience).
+    # Cheap-to-compute flags used by later layers (salience, pacing).
     material_swing: int = 0                # material delta in pawns, mover POV
+    motifs: List[MotifHit] = Field(default_factory=list)
     tags: List[str] = Field(default_factory=list)
 
 

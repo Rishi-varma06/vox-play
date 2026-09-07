@@ -194,6 +194,37 @@ Soundness of a sacrifice is NOT decided here -- geometry cannot know whether
 one works. This layer reports the material fact; the analysis layer combines
 it with the evaluation.
 
+### Beat selection (`beats.py`) -- the research core
+
+The layer the project rests on. Engine analysis is solved, LLM prose is easy,
+speech is a paid API; deciding which of a hundred half-moves deserve airtime
+is the open question, and it is what separates commentary from a machine
+reading a move list.
+
+Posed as constrained selection: maximise total salience subject to a spoken
+duration budget, mandatory coverage (beginning, decisive moment, end), and
+spacing rules that stop three detailed beats landing back to back.
+
+**Two baselines live beside the real selector on purpose.** An A/B test needs
+all three to exist and emit the same shape of output:
+
+| function | strategy | on the Opera Game |
+|---|---|---|
+| `select_every_move()` | flat, one beat per half-move | 594s (9.9 min), 33 beats |
+| `select_top_n()` | top N by swing, no constraints | 144s, clusters on adjacent plies, misses the mate |
+| `select_beats()` | salience + budget + coverage + spacing | 105s, 6 beats |
+
+If the constrained selector does not beat the baselines with listeners, that
+is a real result, and this module is where it gets measured.
+
+`SalienceWeights` and `PacingConfig` are the experiment's knobs -- vary them
+and report the effect. `Archetype` conditions the narrative shape; without it
+a collapse and a grind get the same script.
+
+Duration is modelled as `words / WORDS_PER_SECOND` (150 wpm). The budget is
+spent in airtime, so beat sizes are chunky relative to a short game -- that is
+intentional, not a bug.
+
 ### Thresholds
 
 `DEFAULT_THRESHOLDS` matches Lichess so classification agreement stays

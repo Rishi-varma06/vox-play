@@ -1,0 +1,259 @@
+{
+  "match_id": "eval_collapse_001",
+  "description": "Eval: Low-Scoring Collapse -- Barracudas vs Wolfpack T20",
+  "notes": "Barracudas start well (46/1 after 6 overs) then lose 9 wickets for 43 runs, all out 89 in 17.3 overs. Designed to exercise collapse/pressure commentary.",
+  "events": [
+    {
+      "event_type": "innings_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "batting_team": "Barracudas",
+      "bowling_team": "Wolfpack",
+      "overs": 20,
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "balls_remaining": 120}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 0,
+      "bowler": "Rashid Collins",
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "balls_remaining": 120}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 0,
+      "ball": 1,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Arjun Sharma",
+      "batsman_non_striker": "Dev Patel",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "cover_drive"},
+      "state": {"score": 4, "wickets": 0, "overs_complete": 0, "balls_in_over": 1, "balls_remaining": 119, "striker_runs": 4, "striker_balls": 1, "partnership_runs": 4, "current_run_rate": 24.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 0,
+      "ball": 4,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Dev Patel",
+      "batsman_non_striker": "Arjun Sharma",
+      "outcome": {"runs": 0},
+      "state": {"score": 5, "wickets": 0, "overs_complete": 0, "balls_in_over": 4, "balls_remaining": 116, "striker_runs": 0, "striker_balls": 1, "partnership_runs": 5, "current_run_rate": 7.5}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 3,
+      "bowler": "Jake Morrow",
+      "state": {"score": 28, "wickets": 0, "overs_complete": 3, "balls_in_over": 0, "balls_remaining": 102, "current_run_rate": 9.33}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 3,
+      "ball": 2,
+      "bowler": "Jake Morrow",
+      "batsman_striker": "Arjun Sharma",
+      "batsman_non_striker": "Dev Patel",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog_sweep"},
+      "state": {"score": 34, "wickets": 0, "overs_complete": 3, "balls_in_over": 2, "balls_remaining": 100, "striker_runs": 22, "striker_balls": 12, "partnership_runs": 34, "current_run_rate": 10.2}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 4,
+      "ball": 3,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Arjun Sharma",
+      "batsman_non_striker": "Dev Patel",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Arjun Sharma", "fielder": "Torres"}},
+      "state": {"score": 38, "wickets": 1, "overs_complete": 4, "balls_in_over": 3, "balls_remaining": 93, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 8.73}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 6,
+      "bowler": "Rashid Collins",
+      "state": {"score": 46, "wickets": 1, "overs_complete": 6, "balls_in_over": 0, "balls_remaining": 84, "current_run_rate": 7.67}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 6,
+      "ball": 2,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Dev Patel",
+      "batsman_non_striker": "Rahul Kumar",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "lbw", "dismissed_batsman": "Dev Patel"}},
+      "state": {"score": 46, "wickets": 2, "overs_complete": 6, "balls_in_over": 2, "balls_remaining": 82, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 7.53},
+      "tags": ["collapse_begins"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 6,
+      "ball": 4,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Rahul Kumar",
+      "batsman_non_striker": "Vijay Singh",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Rahul Kumar"}},
+      "state": {"score": 47, "wickets": 3, "overs_complete": 6, "balls_in_over": 4, "balls_remaining": 80, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 7.35}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 6,
+      "ball": 6,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Vijay Singh",
+      "batsman_non_striker": "Nikhil Gupta",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "run_out", "dismissed_batsman": "Vijay Singh", "fielder": "Hendricks"}},
+      "state": {"score": 47, "wickets": 4, "overs_complete": 7, "balls_in_over": 0, "balls_remaining": 78, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 6.71},
+      "tags": ["three_wickets_in_over"]
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 7,
+      "bowler": "Jake Morrow",
+      "state": {"score": 47, "wickets": 4, "overs_complete": 7, "balls_in_over": 0, "balls_remaining": 78, "current_run_rate": 6.71}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 7,
+      "ball": 2,
+      "bowler": "Jake Morrow",
+      "batsman_striker": "Nikhil Gupta",
+      "batsman_non_striker": "Suresh Verma",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "stumped", "dismissed_batsman": "Nikhil Gupta", "fielder": "Torres"}},
+      "state": {"score": 48, "wickets": 5, "overs_complete": 7, "balls_in_over": 2, "balls_remaining": 76, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 6.4}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 7,
+      "ball": 4,
+      "bowler": "Jake Morrow",
+      "batsman_striker": "Suresh Verma",
+      "batsman_non_striker": "Pradeep Rao",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Suresh Verma", "fielder": "Collins"}},
+      "state": {"score": 50, "wickets": 6, "overs_complete": 7, "balls_in_over": 4, "balls_remaining": 74, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 6.52},
+      "tags": ["five_wickets_in_two_overs"]
+    },
+    {
+      "event_type": "drinks",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 8,
+      "state": {"score": 54, "wickets": 6, "overs_complete": 8, "balls_in_over": 0, "balls_remaining": 72, "current_run_rate": 6.75}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 9,
+      "bowler": "Rashid Collins",
+      "state": {"score": 54, "wickets": 6, "overs_complete": 9, "balls_in_over": 0, "balls_remaining": 66, "current_run_rate": 6.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 9,
+      "ball": 3,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Pradeep Rao",
+      "batsman_non_striker": "Amit Dutt",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Pradeep Rao"}},
+      "state": {"score": 56, "wickets": 7, "overs_complete": 9, "balls_in_over": 3, "balls_remaining": 63, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 5.93}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 13,
+      "bowler": "Jake Morrow",
+      "state": {"score": 72, "wickets": 7, "overs_complete": 13, "balls_in_over": 0, "balls_remaining": 42, "current_run_rate": 5.54}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 13,
+      "ball": 3,
+      "bowler": "Jake Morrow",
+      "batsman_striker": "Amit Dutt",
+      "batsman_non_striker": "Kiran Pillai",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog"},
+      "state": {"score": 78, "wickets": 7, "overs_complete": 13, "balls_in_over": 3, "balls_remaining": 39, "striker_runs": 18, "striker_balls": 14, "partnership_runs": 22, "current_run_rate": 5.96}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 13,
+      "ball": 6,
+      "bowler": "Jake Morrow",
+      "batsman_striker": "Amit Dutt",
+      "batsman_non_striker": "Kiran Pillai",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Amit Dutt", "fielder": "Torres"}},
+      "state": {"score": 78, "wickets": 8, "overs_complete": 14, "balls_in_over": 0, "balls_remaining": 36, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 5.57}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 16,
+      "bowler": "Rashid Collins",
+      "state": {"score": 83, "wickets": 8, "overs_complete": 16, "balls_in_over": 0, "balls_remaining": 24, "current_run_rate": 5.19}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 16,
+      "ball": 2,
+      "bowler": "Rashid Collins",
+      "batsman_striker": "Kiran Pillai",
+      "batsman_non_striker": "Sanjay Bhat",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "lbw", "dismissed_batsman": "Kiran Pillai"}},
+      "state": {"score": 83, "wickets": 9, "overs_complete": 16, "balls_in_over": 2, "balls_remaining": 22, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 5.09}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 17,
+      "bowler": "Jake Morrow",
+      "state": {"score": 85, "wickets": 9, "overs_complete": 17, "balls_in_over": 0, "balls_remaining": 18, "current_run_rate": 5.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_collapse_001",
+      "innings": 1,
+      "over": 17,
+      "ball": 3,
+      "bowler": "Jake Morrow",
+      "batsman_striker": "Sanjay Bhat",
+      "batsman_non_striker": "Ravi Naik",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Sanjay Bhat"}},
+      "state": {"score": 89, "wickets": 10, "overs_complete": 17, "balls_in_over": 3, "balls_remaining": 15, "current_run_rate": 5.11},
+      "tags": ["all_out", "innings_end"]
+    }
+  ]
+}

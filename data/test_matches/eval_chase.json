@@ -1,0 +1,285 @@
+{
+  "match_id": "eval_chase_001",
+  "description": "Eval: One-Sided Chase -- Falcons vs Eagles T20",
+  "notes": "Eagles set 118. Falcons chase it down in 11.2 overs, losing only 2 wickets. Designed to exercise low-tension, dominant-team commentary where the required run rate is never a concern.",
+  "events": [
+    {
+      "event_type": "innings_start",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "batting_team": "Eagles",
+      "bowling_team": "Falcons",
+      "overs": 20,
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "balls_remaining": 120}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 0,
+      "bowler": "Marco Silva",
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "balls_remaining": 120}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 0,
+      "ball": 2,
+      "bowler": "Marco Silva",
+      "batsman_striker": "Oliver Finn",
+      "batsman_non_striker": "Ben Carter",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Oliver Finn"}},
+      "state": {"score": 2, "wickets": 1, "overs_complete": 0, "balls_in_over": 2, "balls_remaining": 118, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 6.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 2,
+      "ball": 4,
+      "bowler": "Arun Das",
+      "batsman_striker": "Ben Carter",
+      "batsman_non_striker": "Nathan Wells",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Nathan Wells", "fielder": "Marco Silva"}},
+      "state": {"score": 14, "wickets": 2, "overs_complete": 2, "balls_in_over": 4, "balls_remaining": 104, "striker_runs": 10, "striker_balls": 8, "partnership_runs": 0, "current_run_rate": 5.25}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 5,
+      "bowler": "Marco Silva",
+      "state": {"score": 35, "wickets": 3, "overs_complete": 5, "balls_in_over": 0, "balls_remaining": 90, "current_run_rate": 7.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 9,
+      "ball": 5,
+      "bowler": "Arun Das",
+      "batsman_striker": "Ben Carter",
+      "batsman_non_striker": "Jamie Hogg",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "run_out", "dismissed_batsman": "Ben Carter", "fielder": "Silva"}},
+      "state": {"score": 68, "wickets": 4, "overs_complete": 9, "balls_in_over": 5, "balls_remaining": 61, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 7.47}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 14,
+      "ball": 6,
+      "bowler": "Marco Silva",
+      "batsman_striker": "Jamie Hogg",
+      "batsman_non_striker": "Lee Marsh",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Jamie Hogg", "fielder": "Das"}},
+      "state": {"score": 92, "wickets": 5, "overs_complete": 15, "balls_in_over": 0, "balls_remaining": 30, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 6.13}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 18,
+      "ball": 4,
+      "bowler": "Arun Das",
+      "batsman_striker": "Lee Marsh",
+      "batsman_non_striker": "Raj Puri",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Lee Marsh"}},
+      "state": {"score": 108, "wickets": 9, "overs_complete": 18, "balls_in_over": 4, "balls_remaining": 8, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 5.84}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 1,
+      "over": 19,
+      "ball": 4,
+      "bowler": "Marco Silva",
+      "batsman_striker": "Raj Puri",
+      "batsman_non_striker": "Tom Vance",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Raj Puri"}},
+      "state": {"score": 118, "wickets": 10, "overs_complete": 19, "balls_in_over": 4, "balls_remaining": 2, "current_run_rate": 6.07},
+      "tags": ["all_out", "innings_end"]
+    },
+    {
+      "event_type": "innings_start",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "batting_team": "Falcons",
+      "bowling_team": "Eagles",
+      "target": 119,
+      "overs": 20,
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "target": 119, "balls_remaining": 120}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 0,
+      "bowler": "Oliver Finn",
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "target": 119, "balls_remaining": 120, "required_run_rate": 5.95}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 0,
+      "ball": 1,
+      "bowler": "Oliver Finn",
+      "batsman_striker": "Jake Hendricks",
+      "batsman_non_striker": "Finn Larsen",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "straight_drive"},
+      "state": {"score": 4, "wickets": 0, "overs_complete": 0, "balls_in_over": 1, "target": 119, "balls_remaining": 119, "striker_runs": 4, "striker_balls": 1, "partnership_runs": 4, "required_run_rate": 5.88, "current_run_rate": 24.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 0,
+      "ball": 2,
+      "bowler": "Oliver Finn",
+      "batsman_striker": "Jake Hendricks",
+      "batsman_non_striker": "Finn Larsen",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog"},
+      "state": {"score": 10, "wickets": 0, "overs_complete": 0, "balls_in_over": 2, "target": 119, "balls_remaining": 118, "striker_runs": 10, "striker_balls": 2, "partnership_runs": 10, "required_run_rate": 5.84, "current_run_rate": 30.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 0,
+      "ball": 4,
+      "bowler": "Oliver Finn",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Jake Hendricks",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "cut_shot"},
+      "state": {"score": 16, "wickets": 0, "overs_complete": 0, "balls_in_over": 4, "target": 119, "balls_remaining": 116, "striker_runs": 4, "striker_balls": 1, "partnership_runs": 16, "required_run_rate": 5.68, "current_run_rate": 24.0}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 1,
+      "bowler": "Ben Carter",
+      "state": {"score": 18, "wickets": 0, "overs_complete": 1, "balls_in_over": 0, "target": 119, "balls_remaining": 114, "required_run_rate": 5.32, "current_run_rate": 18.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 1,
+      "ball": 2,
+      "bowler": "Ben Carter",
+      "batsman_striker": "Jake Hendricks",
+      "batsman_non_striker": "Finn Larsen",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Jake Hendricks", "fielder": "Finn"}},
+      "state": {"score": 19, "wickets": 1, "overs_complete": 1, "balls_in_over": 2, "target": 119, "balls_remaining": 112, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 5.36, "current_run_rate": 7.6}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 1,
+      "ball": 3,
+      "bowler": "Ben Carter",
+      "batsman_striker": "Arun Sharma",
+      "batsman_non_striker": "Finn Larsen",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "pull_shot"},
+      "state": {"score": 23, "wickets": 1, "overs_complete": 1, "balls_in_over": 3, "target": 119, "balls_remaining": 111, "striker_runs": 4, "striker_balls": 1, "partnership_runs": 4, "required_run_rate": 5.41, "current_run_rate": 9.2}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 3,
+      "bowler": "Ben Carter",
+      "state": {"score": 42, "wickets": 1, "overs_complete": 3, "balls_in_over": 0, "target": 119, "balls_remaining": 102, "required_run_rate": 4.51, "current_run_rate": 14.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 3,
+      "ball": 1,
+      "bowler": "Ben Carter",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Arun Sharma",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog_sweep"},
+      "state": {"score": 48, "wickets": 1, "overs_complete": 3, "balls_in_over": 1, "target": 119, "balls_remaining": 101, "striker_runs": 26, "striker_balls": 16, "partnership_runs": 29, "required_run_rate": 4.27, "current_run_rate": 14.91}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 6,
+      "bowler": "Oliver Finn",
+      "state": {"score": 72, "wickets": 1, "overs_complete": 6, "balls_in_over": 0, "target": 119, "balls_remaining": 84, "required_run_rate": 3.5, "current_run_rate": 12.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 6,
+      "ball": 3,
+      "bowler": "Oliver Finn",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Arun Sharma",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "cut_shot"},
+      "state": {"score": 76, "wickets": 1, "overs_complete": 6, "balls_in_over": 3, "target": 119, "balls_remaining": 81, "striker_runs": 44, "striker_balls": 28, "partnership_runs": 57, "required_run_rate": 3.26, "current_run_rate": 11.85}
+    },
+    {
+      "event_type": "milestone",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "description": "Finn Larsen brings up a magnificent fifty off just 30 balls",
+      "player": "Finn Larsen",
+      "value": 50,
+      "state": {"score": 82, "wickets": 1, "overs_complete": 6, "balls_in_over": 5, "target": 119, "balls_remaining": 79, "striker_runs": 50, "striker_balls": 30, "partnership_runs": 63, "required_run_rate": 2.81, "current_run_rate": 12.6}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 9,
+      "bowler": "Ben Carter",
+      "state": {"score": 98, "wickets": 1, "overs_complete": 9, "balls_in_over": 0, "target": 119, "balls_remaining": 66, "required_run_rate": 1.91, "current_run_rate": 10.89}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 9,
+      "ball": 2,
+      "bowler": "Ben Carter",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Arun Sharma",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "cover_drive"},
+      "state": {"score": 102, "wickets": 1, "overs_complete": 9, "balls_in_over": 2, "target": 119, "balls_remaining": 64, "striker_runs": 60, "striker_balls": 36, "partnership_runs": 83, "required_run_rate": 1.59, "current_run_rate": 10.84}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 10,
+      "ball": 2,
+      "bowler": "Oliver Finn",
+      "batsman_striker": "Arun Sharma",
+      "batsman_non_striker": "Finn Larsen",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "run_out", "dismissed_batsman": "Arun Sharma", "fielder": "Carter"}},
+      "state": {"score": 110, "wickets": 2, "overs_complete": 10, "balls_in_over": 2, "target": 119, "balls_remaining": 52, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 1.04, "current_run_rate": 10.91}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_chase_001",
+      "innings": 2,
+      "over": 11,
+      "ball": 1,
+      "bowler": "Ben Carter",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Tej Kapoor",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog_sweep"},
+      "state": {"score": 119, "wickets": 2, "overs_complete": 11, "balls_in_over": 1, "target": 119, "balls_remaining": 47, "striker_runs": 72, "striker_balls": 42, "partnership_runs": 9, "required_run_rate": 0.0, "current_run_rate": 10.82},
+      "tags": ["match_winning_shot", "falcons_win"]
+    }
+  ]
+}

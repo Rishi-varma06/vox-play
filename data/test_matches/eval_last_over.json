@@ -1,0 +1,349 @@
+{
+  "match_id": "eval_last_over_001",
+  "description": "Eval: Tense Last-Over Finish -- Titans vs Raiders T20",
+  "notes": "Titans set 182. Raiders need 18 off the final over. 4, 6, 0, 4, WICKET, 4 = WIN off last ball by 1 wicket. Designed to push dramatic/tension commentary to the limit.",
+  "events": [
+    {
+      "event_type": "innings_start",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "batting_team": "Titans",
+      "bowling_team": "Raiders",
+      "overs": 20,
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "balls_remaining": 120}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 0,
+      "bowler": "Kris Jacobs",
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "balls_remaining": 120}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 0,
+      "ball": 1,
+      "bowler": "Kris Jacobs",
+      "batsman_striker": "Marcus Reed",
+      "batsman_non_striker": "Luca Torres",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog_sweep"},
+      "state": {"score": 6, "wickets": 0, "overs_complete": 0, "balls_in_over": 1, "balls_remaining": 119, "striker_runs": 6, "striker_balls": 1, "partnership_runs": 6, "current_run_rate": 36.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 2,
+      "ball": 3,
+      "bowler": "Dev Mukherjee",
+      "batsman_striker": "Marcus Reed",
+      "batsman_non_striker": "Luca Torres",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Marcus Reed", "fielder": "Jacobs"}},
+      "state": {"score": 22, "wickets": 1, "overs_complete": 2, "balls_in_over": 3, "balls_remaining": 99, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "current_run_rate": 8.8}
+    },
+    {
+      "event_type": "milestone",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "description": "Titans reach 50 in just 4.2 overs -- a blistering start",
+      "value": 50,
+      "state": {"score": 50, "wickets": 1, "overs_complete": 4, "balls_in_over": 2, "balls_remaining": 94, "partnership_runs": 28, "current_run_rate": 11.54}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 9,
+      "bowler": "Kris Jacobs",
+      "state": {"score": 95, "wickets": 2, "overs_complete": 9, "balls_in_over": 0, "balls_remaining": 66, "current_run_rate": 10.56}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 9,
+      "ball": 4,
+      "bowler": "Kris Jacobs",
+      "batsman_striker": "Luca Torres",
+      "batsman_non_striker": "Sam Nair",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "flat_six_over_long_on"},
+      "state": {"score": 101, "wickets": 2, "overs_complete": 9, "balls_in_over": 4, "balls_remaining": 62, "striker_runs": 52, "striker_balls": 34, "partnership_runs": 46, "current_run_rate": 11.23}
+    },
+    {
+      "event_type": "milestone",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "description": "Titans cross 100 -- powerhouse batting on display",
+      "value": 100,
+      "state": {"score": 101, "wickets": 2, "overs_complete": 9, "balls_in_over": 4, "balls_remaining": 62, "current_run_rate": 11.23}
+    },
+    {
+      "event_type": "drinks",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 10,
+      "state": {"score": 108, "wickets": 2, "overs_complete": 10, "balls_in_over": 0, "balls_remaining": 60, "current_run_rate": 10.8}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 15,
+      "bowler": "Dev Mukherjee",
+      "state": {"score": 142, "wickets": 3, "overs_complete": 15, "balls_in_over": 0, "balls_remaining": 30, "current_run_rate": 9.47}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 15,
+      "ball": 3,
+      "bowler": "Dev Mukherjee",
+      "batsman_striker": "Sam Nair",
+      "batsman_non_striker": "Nico Brandt",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "ramp_shot"},
+      "state": {"score": 146, "wickets": 3, "overs_complete": 15, "balls_in_over": 3, "balls_remaining": 27, "striker_runs": 38, "striker_balls": 22, "partnership_runs": 32, "current_run_rate": 9.63}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 18,
+      "ball": 5,
+      "bowler": "Kris Jacobs",
+      "batsman_striker": "Nico Brandt",
+      "batsman_non_striker": "Omar Khan",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog"},
+      "state": {"score": 170, "wickets": 4, "overs_complete": 18, "balls_in_over": 5, "balls_remaining": 7, "striker_runs": 28, "striker_balls": 14, "partnership_runs": 26, "current_run_rate": 11.33}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 1,
+      "over": 19,
+      "ball": 6,
+      "bowler": "Dev Mukherjee",
+      "batsman_striker": "Omar Khan",
+      "batsman_non_striker": "Nico Brandt",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "ramp_shot"},
+      "state": {"score": 181, "wickets": 4, "overs_complete": 20, "balls_in_over": 0, "balls_remaining": 0, "striker_runs": 18, "striker_balls": 10, "partnership_runs": 37, "current_run_rate": 9.05},
+      "tags": ["titans_innings_end"]
+    },
+    {
+      "event_type": "innings_start",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "batting_team": "Raiders",
+      "bowling_team": "Titans",
+      "target": 182,
+      "overs": 20,
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "target": 182, "balls_remaining": 120}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 0,
+      "bowler": "Luca Torres",
+      "state": {"score": 0, "wickets": 0, "overs_complete": 0, "balls_in_over": 0, "target": 182, "balls_remaining": 120, "required_run_rate": 9.1}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 0,
+      "ball": 1,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Rehan Iqbal",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "cover_drive"},
+      "state": {"score": 4, "wickets": 0, "overs_complete": 0, "balls_in_over": 1, "target": 182, "balls_remaining": 119, "striker_runs": 4, "striker_balls": 1, "partnership_runs": 4, "required_run_rate": 9.07, "current_run_rate": 24.0}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 0,
+      "ball": 3,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Rehan Iqbal",
+      "batsman_non_striker": "Finn Larsen",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Rehan Iqbal"}},
+      "state": {"score": 5, "wickets": 1, "overs_complete": 0, "balls_in_over": 3, "target": 182, "balls_remaining": 117, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 9.15, "current_run_rate": 10.0}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 5,
+      "bowler": "Sam Nair",
+      "state": {"score": 48, "wickets": 2, "overs_complete": 5, "balls_in_over": 0, "target": 182, "balls_remaining": 90, "required_run_rate": 9.07, "current_run_rate": 9.6}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 5,
+      "ball": 4,
+      "bowler": "Sam Nair",
+      "batsman_striker": "Finn Larsen",
+      "batsman_non_striker": "Ali Hassan",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog_sweep"},
+      "state": {"score": 54, "wickets": 2, "overs_complete": 5, "balls_in_over": 4, "target": 182, "balls_remaining": 86, "striker_runs": 34, "striker_balls": 24, "partnership_runs": 42, "required_run_rate": 9.07, "current_run_rate": 10.54}
+    },
+    {
+      "event_type": "drinks",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 10,
+      "state": {"score": 96, "wickets": 3, "overs_complete": 10, "balls_in_over": 0, "target": 182, "balls_remaining": 60, "required_run_rate": 9.1, "current_run_rate": 9.6}
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 10,
+      "bowler": "Luca Torres",
+      "state": {"score": 96, "wickets": 3, "overs_complete": 10, "balls_in_over": 0, "target": 182, "balls_remaining": 60, "required_run_rate": 9.1, "current_run_rate": 9.6}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 14,
+      "ball": 3,
+      "bowler": "Sam Nair",
+      "batsman_striker": "Ali Hassan",
+      "batsman_non_striker": "Raj Puri",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Ali Hassan", "fielder": "Torres"}},
+      "state": {"score": 130, "wickets": 5, "overs_complete": 14, "balls_in_over": 3, "target": 182, "balls_remaining": 33, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 9.45, "current_run_rate": 9.24}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 16,
+      "ball": 2,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Raj Puri",
+      "batsman_non_striker": "Omer Saeed",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Raj Puri"}},
+      "state": {"score": 147, "wickets": 6, "overs_complete": 16, "balls_in_over": 2, "target": 182, "balls_remaining": 22, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 9.55, "current_run_rate": 9.23}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 17,
+      "ball": 5,
+      "bowler": "Sam Nair",
+      "batsman_striker": "Omer Saeed",
+      "batsman_non_striker": "Dev Das",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Omer Saeed", "fielder": "Nair"}},
+      "state": {"score": 154, "wickets": 7, "overs_complete": 17, "balls_in_over": 5, "target": 182, "balls_remaining": 13, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 12.46, "current_run_rate": 9.18}
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 18,
+      "ball": 6,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Dev Das",
+      "batsman_non_striker": "Priya Singh",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "bowled", "dismissed_batsman": "Dev Das"}},
+      "state": {"score": 163, "wickets": 8, "overs_complete": 19, "balls_in_over": 0, "target": 182, "balls_remaining": 6, "required_run_rate": 19.0, "current_run_rate": 8.58},
+      "tags": ["last_over_setup"]
+    },
+    {
+      "event_type": "over_start",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "bowler": "Luca Torres",
+      "state": {"score": 163, "wickets": 8, "overs_complete": 19, "balls_in_over": 0, "target": 182, "balls_remaining": 6, "required_run_rate": 19.0, "current_run_rate": 8.58},
+      "tags": ["final_over", "need_19_off_6"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "ball": 1,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Priya Singh",
+      "batsman_non_striker": "Carlos Ramos",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "ramp_shot"},
+      "state": {"score": 167, "wickets": 8, "overs_complete": 19, "balls_in_over": 1, "target": 182, "balls_remaining": 5, "striker_runs": 4, "striker_balls": 1, "partnership_runs": 4, "required_run_rate": 18.0, "current_run_rate": 8.79},
+      "tags": ["need_15_off_5"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "ball": 2,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Priya Singh",
+      "batsman_non_striker": "Carlos Ramos",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog"},
+      "state": {"score": 173, "wickets": 8, "overs_complete": 19, "balls_in_over": 2, "target": 182, "balls_remaining": 4, "striker_runs": 10, "striker_balls": 2, "partnership_runs": 10, "required_run_rate": 13.5, "current_run_rate": 9.03},
+      "tags": ["need_9_off_4"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "ball": 3,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Priya Singh",
+      "batsman_non_striker": "Carlos Ramos",
+      "outcome": {"runs": 0},
+      "state": {"score": 173, "wickets": 8, "overs_complete": 19, "balls_in_over": 3, "target": 182, "balls_remaining": 3, "striker_runs": 10, "striker_balls": 3, "partnership_runs": 10, "required_run_rate": 18.0, "current_run_rate": 8.77},
+      "tags": ["dot_ball_pressure", "need_9_off_3"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "ball": 4,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Priya Singh",
+      "batsman_non_striker": "Carlos Ramos",
+      "outcome": {"runs": 4, "is_boundary": true, "shot_tag": "pull_shot"},
+      "state": {"score": 177, "wickets": 8, "overs_complete": 19, "balls_in_over": 4, "target": 182, "balls_remaining": 2, "striker_runs": 14, "striker_balls": 4, "partnership_runs": 14, "required_run_rate": 15.0, "current_run_rate": 9.07},
+      "tags": ["need_5_off_2"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "ball": 5,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Carlos Ramos",
+      "batsman_non_striker": "Priya Singh",
+      "outcome": {"runs": 0, "wicket": {"dismissal_type": "caught", "dismissed_batsman": "Carlos Ramos", "fielder": "Nair"}},
+      "state": {"score": 177, "wickets": 9, "overs_complete": 19, "balls_in_over": 5, "target": 182, "balls_remaining": 1, "striker_runs": 0, "striker_balls": 0, "partnership_runs": 0, "required_run_rate": 30.0, "current_run_rate": 8.98},
+      "tags": ["wicket_penultimate_ball", "need_5_off_1", "maximum_tension"]
+    },
+    {
+      "event_type": "ball",
+      "match_id": "eval_last_over_001",
+      "innings": 2,
+      "over": 19,
+      "ball": 6,
+      "bowler": "Luca Torres",
+      "batsman_striker": "Priya Singh",
+      "batsman_non_striker": "Vikram Anand",
+      "outcome": {"runs": 6, "is_boundary": true, "is_six": true, "shot_tag": "slog_sweep"},
+      "state": {"score": 183, "wickets": 9, "overs_complete": 20, "balls_in_over": 0, "target": 182, "balls_remaining": 0, "striker_runs": 20, "striker_balls": 5, "partnership_runs": 6, "required_run_rate": null, "current_run_rate": 9.15},
+      "tags": ["match_winning_six", "last_ball_thriller", "raiders_win_by_1_wicket"]
+    }
+  ]
+}

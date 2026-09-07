@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoxPlay Scorer</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>VoxPlay Scorer</h1>
+    <div class="sub">Ball-by-ball cricket scoring</div>
+  </div>
+</header>
+
+<!-- =========================================================
+     SCREEN 1: Setup (match list + new match form)
+     ========================================================= -->
+<div id="screen-setup" class="screen active">
+
+  <div class="card">
+    <h2>Resume a Match</h2>
+    <div id="match-list" class="match-list">
+      <div class="empty-state">Loading...</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>New Match</h2>
+    <div class="two-col">
+      <div>
+        <div class="form-row">
+          <label>Home Team Name</label>
+          <input id="home-team" type="text" placeholder="e.g. Mumbai Indians">
+        </div>
+        <div class="form-row">
+          <label>Home XI (one player per line)</label>
+          <textarea id="home-xi" placeholder="Rohit Sharma&#10;Ishan Kishan&#10;Virat Kohli&#10;..."></textarea>
+          <div class="form-hint" id="home-xi-count">0 / 11 players entered</div>
+        </div>
+      </div>
+      <div>
+        <div class="form-row">
+          <label>Away Team Name</label>
+          <input id="away-team" type="text" placeholder="e.g. Chennai Super Kings">
+        </div>
+        <div class="form-row">
+          <label>Away XI (one player per line)</label>
+          <textarea id="away-xi" placeholder="MS Dhoni&#10;Ruturaj Gaikwad&#10;Devon Conway&#10;..."></textarea>
+          <div class="form-hint" id="away-xi-count">0 / 11 players entered</div>
+        </div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="form-row">
+        <label>Overs per innings</label>
+        <input id="overs" type="number" min="1" max="50" value="20" placeholder="20">
+        <div class="form-hint">Leave blank for unlimited (Test match)</div>
+      </div>
+      <div></div>
+    </div>
+    <div class="two-col">
+      <div class="form-row">
+        <label>Toss won by</label>
+        <div class="radio-group">
+          <label><input type="radio" name="toss-winner" value="home" checked> <span id="toss-home-label">Home</span></label>
+          <label><input type="radio" name="toss-winner" value="away"> <span id="toss-away-label">Away</span></label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Elected to</label>
+        <div class="radio-group">
+          <label><input type="radio" name="toss-choice" value="bat" checked> Bat</label>
+          <label><input type="radio" name="toss-choice" value="bowl"> Bowl</label>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="submitNewMatch()">Create Match</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- =========================================================
+     SCREEN 2: Innings setup (openers + bowler)
+     ========================================================= -->
+<div id="screen-innings" class="screen">
+
+  <div class="innings-header">
+    <div id="innings-title">Innings 1</div>
+    <div class="detail" id="innings-detail"></div>
+  </div>
+
+  <div class="card">
+    <h2>Opening Batsmen</h2>
+    <div class="two-col">
+      <div class="form-row">
+        <label>Striker (facing first ball)</label>
+        <select id="sel-striker"></select>
+      </div>
+      <div class="form-row">
+        <label>Non-striker</label>
+        <select id="sel-non-striker"></select>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Opening Bowler</h2>
+    <div class="form-row" style="max-width:320px">
+      <label>Bowler</label>
+      <select id="sel-bowler"></select>
+    </div>
+  </div>
+
+  <div id="target-display" style="display:none" class="card">
+    <h2>Target</h2>
+    <p id="target-text" style="font-size:18px;font-weight:700;color:var(--green-dark)"></p>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="showScreen('setup')">Back</button>
+    <button class="btn btn-primary" onclick="submitStartInnings()">Start Innings</button>
+  </div>
+
+</div>
+
+<!-- =========================================================
+     SCREEN 3: Ball-by-ball scoring
+     ========================================================= -->
+<div id="screen-score" class="screen">
+
+  <!-- Score bar -->
+  <div class="score-bar">
+    <span class="innings-pill" id="innings-pill">INN 1</span>
+    <div class="score-main">
+      <div><span class="score-num" id="score-num">0/0</span><span class="score-sub" id="score-overs" style="margin-left:10px">(0.0 ov)</span></div>
+      <div class="score-sub" id="batting-team-disp"></div>
+    </div>
+    <div id="chase-strip" class="chase-strip" style="display:none">
+      <span id="chase-need"></span> &bull; <span id="chase-rrr"></span>
+    </div>
+    <div class="clock-zone">
+      <span class="clock-num" id="clock-num">0:00</span>
+      <button class="btn btn-sm" id="clock-btn" onclick="toggleClock()">Pause</button>
+    </div>
+  </div>
+
+  <!-- Players strip -->
+  <div class="players-strip">
+    <div class="batter-card on-strike" id="striker-card">
+      <div class="batter-role">* On Strike</div>
+      <div class="batter-name" id="striker-name">--</div>
+      <div class="batter-stats" id="striker-stats">0 (0)</div>
+    </div>
+    <button class="swap-btn" onclick="swapStrike()" title="Swap strike">&#8651;</button>
+    <div class="batter-card" id="non-striker-card">
+      <div class="batter-role">Non-Striker</div>
+      <div class="batter-name" id="non-striker-name">--</div>
+      <div class="batter-stats" id="non-striker-stats">0 (0)</div>
+    </div>
+    <div class="batter-card" style="flex:0.8">
+      <div class="batter-role">Bowler</div>
+      <div class="batter-name" id="bowler-disp"></div>
+      <div class="batter-stats" id="bowler-stats-disp">0-0-0-0</div>
+    </div>
+  </div>
+
+  <!-- This over -->
+  <div class="over-display">
+    <span class="over-label">Over</span>
+    <div class="over-balls-wrap" id="this-over-balls"></div>
+    <span class="partnership-disp" id="partnership-disp"></span>
+  </div>
+
+  <!-- Scoring columns -->
+  <div class="scoring-cols">
+
+    <!-- Left: entry panel -->
+    <div class="entry-panel card">
+
+      <!-- ONE row of outcome buttons -->
+      <div class="outcome-row">
+        <button class="obs obs-dot" onclick="quickRecord(0)" title="Dot ball">&#8226;</button>
+        <button class="obs obs-1"   onclick="quickRecord(1)">1</button>
+        <button class="obs obs-2"   onclick="quickRecord(2)">2</button>
+        <button class="obs obs-3"   onclick="quickRecord(3)">3</button>
+        <button class="obs obs-4"   onclick="quickRecord(4)">4</button>
+        <button class="obs obs-6"   onclick="quickRecord(6)">6</button>
+        <button class="obs obs-w"   onclick="openWicketPanel()">W</button>
+      </div>
+
+      <!-- Extras / manual -->
+      <div class="extras-row">
+        <button class="ext-btn" onclick="quickExtra('wide')">Wide +1</button>
+        <button class="ext-btn" onclick="quickExtra('no_ball')">No Ball +1</button>
+        <button class="ext-btn" onclick="openManualPanel()">Manual &hellip;</button>
+      </div>
+
+      <!-- Shot chips -->
+      <div class="chip-section">
+        <div class="chip-label">
+          Shot
+          <span class="chip-clear" onclick="clearSel('shot')">&times; clear</span>
+        </div>
+        <div class="chip-grid" id="shot-grid"></div>
+      </div>
+
+      <!-- Delivery chips -->
+      <div class="chip-section">
+        <div class="chip-label">
+          Delivery
+          <span class="chip-clear" onclick="clearSel('delivery')">&times; clear</span>
+        </div>
+        <div class="chip-grid" id="delivery-grid"></div>
+      </div>
+
+      <!-- Note -->
+      <div class="form-row">
+        <label>Note</label>
+        <input id="note-input" type="text" placeholder="Optional scorer annotation...">
+      </div>
+
+      <!-- Video offset for last ball -->
+      <div class="offset-row">
+        <span class="offset-label">Last ball offset:</span>
+        <span class="offset-val" id="offset-val">--</span>
+        <button class="nudge-btn" id="nudge-minus" onclick="nudgeOffset(-1)" disabled>-1s</button>
+        <button class="nudge-btn" id="nudge-plus"  onclick="nudgeOffset(+1)" disabled>+1s</button>
+      </div>
+      <div class="offset-hint">
+        Auto clock records entry time (~a few seconds after actual delivery). Nudge backward to compensate.
+        <a href="#" onclick="openRefinePanel();return false;" style="color:var(--green)">Refine all timings&hellip;</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="action-row">
+        <button class="btn btn-danger btn-sm" id="undo-btn" onclick="undoBall()" disabled>Undo</button>
+        <button class="btn btn-secondary btn-sm" onclick="confirmEndInnings()">End Innings</button>
+      </div>
+
+    </div>
+
+    <!-- Right: info -->
+    <div class="info-panel">
+
+      <div class="card">
+        <h3>Recent Balls</h3>
+        <div class="recent-balls-wrap" id="recent-balls"></div>
+      </div>
+
+      <div class="card">
+        <h3>Commentary</h3>
+        <div class="commentary-lines" id="commentary-lines"><div class="empty-state" style="font-size:13px">No commentary yet.</div></div>
+        <div class="actions mt-8">
+          <button class="btn btn-secondary btn-sm" onclick="genCommentary(false)">Live AI</button>
+          <button class="btn btn-secondary btn-sm" onclick="genCommentary(true)">Mock</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY: Wicket panel
+     ========================================================= -->
+<div id="wicket-overlay" class="overlay" style="display:none" onclick="maybeClose('wicket',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2>Record Wicket</h2>
+
+    <div class="form-row">
+      <label>Dismissed batsman</label>
+      <select id="w-dismissed"></select>
+    </div>
+
+    <div class="form-row">
+      <label>Dismissal type</label>
+      <div class="dismissal-chips" id="w-type-chips"></div>
+    </div>
+
+    <div class="form-row">
+      <label>Fielder <span style="font-weight:400;text-transform:none">(optional)</span></label>
+      <input id="w-fielder" type="text" placeholder="e.g. Kohli (catcher / run-out fielder)">
+    </div>
+
+    <div class="form-row">
+      <label>New batsman</label>
+      <select id="w-new-bat"></select>
+    </div>
+
+    <div class="form-row">
+      <label>Bat runs on this delivery</label>
+      <input id="w-runs" type="number" min="0" max="6" value="0" style="width:80px">
+    </div>
+
+    <!-- Run-out: who is on strike after the wicket? -->
+    <div id="w-runout-section" style="display:none">
+      <div class="form-row">
+        <label>After this run-out, who is on strike?</label>
+        <div class="radio-group" id="w-strike-after"></div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeOverlay('wicket')">Cancel</button>
+      <button class="btn btn-danger" onclick="submitWicket()">Record Wicket</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY: Manual entry (overthrows / unusual outcomes)
+     ========================================================= -->
+<div id="manual-overlay" class="overlay" style="display:none" onclick="maybeClose('manual',event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h2>Manual Entry</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">
+      Use for overthrows (5 runs), penalty runs, byes, leg byes, or any non-standard delivery.
+    </p>
+
+    <div class="two-col">
+      <div class="form-row">
+        <label>Bat runs</label>
+        <input id="m-runs" type="number" min="0" max="7" value="0">
+      </div>
+      <div class="form-row">
+        <label>Extras type</label>
+        <select id="m-extras-type">
+          <option value="">None</option>
+          <option value="wide">Wide</option>
+          <option value="no_ball">No Ball</option>
+          <option value="bye">Bye</option>
+          <option value="leg_bye">Leg Bye</option>
+          <option value="penalty">Penalty</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row" id="m-extras-runs-row" style="display:none">
+      <label>Extras runs</label>
+      <input id="m-extras-runs" type="number" min="1" max="5" value="1" style="width:80px">
+    </div>
+
+    <div class="form-row">
+      <label style="text-transform:none;font-weight:400;display:flex;align-items:center;gap:8px">
+        <input id="m-boundary" type="checkbox"> Is boundary (4s counted)
+      </label>
+    </div>
+    <div class="form-row">
+      <label style="text-transform:none;font-weight:400;display:flex;align-items:center;gap:8px">
+        <input id="m-six" type="checkbox"> Is six (over the rope)
+      </label>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeOverlay('manual')">Cancel</button>
+      <button class="btn btn-primary" onclick="submitManual()">Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY: Over complete — new bowler
+     ========================================================= -->
+<div id="over-overlay" class="overlay" style="display:none">
+  <div class="modal">
+    <h2 id="over-title">Over Complete</h2>
+    <p class="over-summary" id="over-summary"></p>
+
+    <div class="form-row">
+      <label>New bowler</label>
+      <select id="new-bowler-sel"></select>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="submitNewOver()">Start Next Over</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY: Innings complete
+     ========================================================= -->
+<div id="innings-overlay" class="overlay" style="display:none">
+  <div class="modal" style="text-align:center">
+    <h2 id="innings-done-heading">Innings Complete</h2>
+    <div class="innings-done">
+      <div class="innings-done-label" id="innings-done-team"></div>
+      <div class="innings-done-score" id="innings-done-score">0/0</div>
+      <div class="innings-done-label" id="innings-done-overs"></div>
+      <div class="innings-done-target" id="innings-done-target" style="margin-top:14px"></div>
+    </div>
+    <div class="modal-actions" style="justify-content:center;margin-top:24px">
+      <button class="btn btn-primary" id="innings-next-btn" onclick="goToNextInnings()">Start 2nd Innings</button>
+      <button class="btn btn-secondary" id="innings-done-btn" style="display:none" onclick="closeOverlay('innings')">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     OVERLAY: Refine timings (post-match accuracy pass)
+     ========================================================= -->
+<div id="refine-overlay" class="overlay" style="display:none" onclick="maybeClose('refine',event)">
+  <div class="modal" style="max-width:620px" onclick="event.stopPropagation()">
+    <h2>Refine Ball Timings</h2>
+    <p class="refine-note">
+      The auto clock records the time you <em>entered</em> each ball, which typically lags the
+      actual delivery by a few seconds. Adjust the offsets below to better reflect when each ball
+      was actually bowled. This is for audio/video alignment; frame-accurate automatic sync is a
+      future vision phase.
+    </p>
+    <div class="refine-wrap">
+      <table class="refine-tbl">
+        <thead>
+          <tr><th>Over</th><th>Outcome</th><th>Delivery</th><th>Offset (s)</th><th>Nudge</th></tr>
+        </thead>
+        <tbody id="refine-body"></tbody>
+      </table>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeOverlay('refine')">Close</button>
+      <button class="btn btn-primary" onclick="saveRefineTimings()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

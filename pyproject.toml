@@ -9,7 +9,9 @@ description = "AI cricket commentary engine — structured ball data → natural
 requires-python = ">=3.11"
 dependencies = [
     "anthropic>=0.25.0",
+    "chess>=1.11",
     "pydantic>=2.0",
+    "requests>=2.31",
     "gtts>=2.3",
     "pydub>=0.25",
     "python-dotenv>=1.0",

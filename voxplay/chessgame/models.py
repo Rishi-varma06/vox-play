@@ -1,0 +1,260 @@
+"""
+Chess event schema -- the contract the chess domain produces.
+
+Mirrors the design of voxplay/events/models.py: a discriminated union on
+`event_type`, with a state snapshot attached to every event describing the
+position AFTER that event.
+
+Two fields carry the whole downstream pipeline:
+
+    GameState.win_pct_white -- position value on a 0-100 scale. Every
+        classification, salience score and narrative decision runs off this,
+        never off raw centipawns (see evaluation.py for why).
+
+    MoveAnalysis.win_loss -- how much win probability the mover threw away.
+        This is the chess equivalent of "what just happened" and is the single
+        most important number for pacing.
+
+Convergence note: cricket events (voxplay/events/models.py) and chess events
+are deliberately separate unions for now. They converge later behind a narrow
+protocol that the commentary engine consumes; nothing here should grow a
+cricket-shaped field to speed that up.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime
+from enum import Enum
+from typing import Annotated, List, Literal, Optional, Union
+
+from pydantic import BaseModel, Field
+
+
+# ---------------------------------------------------------------------------
+# Enumerations
+# ---------------------------------------------------------------------------
+
+class ChessEventType(str, Enum):
+    GAME_START = "game_start"
+    MOVE = "move"
+    GAME_END = "game_end"
+
+
+class Color(str, Enum):
+    WHITE = "white"
+    BLACK = "black"
+
+
+class GamePhase(str, Enum):
+    OPENING = "opening"
+    MIDDLEGAME = "middlegame"
+    ENDGAME = "endgame"
+
+
+class MoveQuality(str, Enum):
+    """
+    Move classification, ordered best to worst.
+
+    BOOK is not a quality judgement -- it marks a move still inside opening
+    theory, where engine deltas are noise and commentary should talk about
+    plans rather than accuracy.
+
+    BRILLIANT and GREAT require sacrifice / only-move detection that lives in
+    a later layer; the eval-delta classifier never returns them.
+    """
+    BRILLIANT = "brilliant"
+    GREAT = "great"
+    BEST = "best"
+    GOOD = "good"
+    BOOK = "book"
+    INACCURACY = "inaccuracy"
+    MISTAKE = "mistake"
+    BLUNDER = "blunder"
+
+
+class GameResult(str, Enum):
+    WHITE_WINS = "1-0"
+    BLACK_WINS = "0-1"
+    DRAW = "1/2-1/2"
+    UNKNOWN = "*"
+
+
+# ---------------------------------------------------------------------------
+# Sub-objects
+# ---------------------------------------------------------------------------
+
+class Evaluation(BaseModel):
+    """
+    An engine evaluation, always normalised to WHITE's point of view.
+
+    Exactly one of `cp` / `mate` is meaningful. Positive favours White in both
+    cases (`mate=3` means White mates in 3, `mate=-2` means Black mates in 2).
+    Storing one POV everywhere removes a whole class of sign-flip bugs; use
+    evaluation.win_pct_for() to get a mover-relative number.
+    """
+    cp: Optional[int] = None
+    mate: Optional[int] = None
+
+    @property
+    def is_mate(self) -> bool:
+        return self.mate is not None
+
+
+class EngineLine(BaseModel):
+    """One MultiPV line from the engine."""
+    rank: int                              # 1 = engine's best
+    move_san: str
+    move_uci: str
+    evaluation: Evaluation
+    pv_san: List[str] = Field(default_factory=list)
+
+
+class MoveAnalysis(BaseModel):
+    """
+    Engine verdict on a single played move.
+
+    Populated by the analysis layer; absent on a freshly-parsed PGN. All
+    win-percentage fields are 0-100.
+    """
+    eval_before: Evaluation
+    eval_after: Evaluation
+    win_pct_before: float                  # White POV, position before the move
+    win_pct_after: float                   # White POV, position after the move
+    win_loss: float                        # MOVER POV, win% thrown away (>= 0)
+    accuracy: float                        # 0-100, Lichess accuracy formula
+    quality: MoveQuality
+
+    is_best: bool = False                  # played move was engine top-1
+    is_only_move: bool = False             # top-1 far better than top-2
+    top_gap: Optional[float] = None        # win% between top-1 and top-2
+    best_move_san: Optional[str] = None
+    best_line_san: List[str] = Field(default_factory=list)
+
+    # Cheap-to-compute flags used by later layers (motifs, salience).
+    material_swing: int = 0                # material delta in pawns, mover POV
+    tags: List[str] = Field(default_factory=list)
+
+
+class GameState(BaseModel):
+    """
+    Snapshot of the position AFTER the event.
+
+    Everything here is derivable from the FEN, but is materialised so the
+    commentary layer never has to reason about a board -- it only reads
+    numbers and labels it was given. That separation is what keeps the LLM
+    from inventing chess facts.
+    """
+    fen: str
+    ply: int = 0                           # half-moves played so far
+    move_number: int = 1                   # full move number
+    side_to_move: Color = Color.WHITE
+
+    white_material: int = 39               # standard values, kings excluded
+    black_material: int = 39
+    material_balance: int = 0              # white - black, in pawns
+
+    phase: GamePhase = GamePhase.OPENING
+
+    # Engine-derived; None until the analysis layer runs.
+    win_pct_white: Optional[float] = None
+
+    is_check: bool = False
+    is_checkmate: bool = False
+    is_stalemate: bool = False
+
+    white_clock_s: Optional[float] = None
+    black_clock_s: Optional[float] = None
+
+
+# ---------------------------------------------------------------------------
+# Game metadata
+# ---------------------------------------------------------------------------
+
+class GameMeta(BaseModel):
+    """PGN headers, normalised. Everything optional -- PGNs vary wildly."""
+    game_id: str
+    white: Optional[str] = None
+    black: Optional[str] = None
+    white_elo: Optional[int] = None
+    black_elo: Optional[int] = None
+    result: GameResult = GameResult.UNKNOWN
+    eco: Optional[str] = None
+    opening: Optional[str] = None
+    event: Optional[str] = None
+    site: Optional[str] = None
+    date: Optional[str] = None
+    time_control: Optional[str] = None
+    termination: Optional[str] = None
+    source: Optional[str] = None           # "pgn" | "lichess" | "chesscom"
+
+
+# ---------------------------------------------------------------------------
+# Event models
+# ---------------------------------------------------------------------------
+
+class _BaseChessEvent(BaseModel):
+    """Fields common to every chess event."""
+    game_id: str
+    timestamp: Optional[datetime] = None
+    tags: List[str] = Field(default_factory=list)
+    video_offset: Optional[float] = None   # seconds from start; for AV sync
+
+
+class GameStartEvent(_BaseChessEvent):
+    event_type: Literal[ChessEventType.GAME_START] = ChessEventType.GAME_START
+    meta: GameMeta
+    state: GameState
+
+
+class MoveEvent(_BaseChessEvent):
+    event_type: Literal[ChessEventType.MOVE] = ChessEventType.MOVE
+
+    ply: int                               # 1-based half-move index
+    move_number: int
+    color: Color
+    san: str
+    uci: str
+
+    from_square: str
+    to_square: str
+    piece: str                             # "pawn", "knight", ... (spoken form)
+    captured_piece: Optional[str] = None
+
+    is_capture: bool = False
+    is_check: bool = False
+    is_checkmate: bool = False
+    is_castle: bool = False
+    is_promotion: bool = False
+    promotion_piece: Optional[str] = None
+    is_en_passant: bool = False
+
+    fen_before: str
+    fen_after: str
+
+    state: GameState
+    analysis: Optional[MoveAnalysis] = None
+
+    clock_s: Optional[float] = None        # mover's clock after the move
+    think_time_s: Optional[float] = None   # derived from consecutive clocks
+
+
+class GameEndEvent(_BaseChessEvent):
+    event_type: Literal[ChessEventType.GAME_END] = ChessEventType.GAME_END
+    result: GameResult
+    termination: Optional[str] = None
+    total_plies: int = 0
+    state: GameState
+
+
+# ---------------------------------------------------------------------------
+# Discriminated union -- the single type the chess pipeline handles
+# ---------------------------------------------------------------------------
+
+ChessEvent = Annotated[
+    Union[
+        GameStartEvent,
+        MoveEvent,
+        GameEndEvent,
+    ],
+    Field(discriminator="event_type"),
+]

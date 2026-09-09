@@ -66,11 +66,24 @@ class AnalysisConfig:
 
     `multipv` of 3 is the minimum that supports only-move detection, which
     needs the gap between the best and second-best move.
+
+    LEAVE `threads` AT 1 FOR ANYTHING YOU REPORT. Stockfish's Lazy SMP shares
+    a transposition table between racing threads, so a fixed node budget does
+    NOT pin the result once threads > 1 -- measured on the Opera Game, two
+    runs at 4 threads disagreed on 27 of 33 plies, enough to move the detected
+    turning point to a different move. Single-threaded runs are bit-identical.
+    Raise it only for interactive runs where speed matters more than a number
+    you will have to defend.
     """
     nodes: int = 1_000_000
     multipv: int = 3
     threads: int = 1
     hash_mb: int = 128
+
+    @property
+    def reproducible(self) -> bool:
+        """False when the configuration cannot produce identical repeat runs."""
+        return self.threads == 1
 
     @property
     def cache_key(self) -> str:

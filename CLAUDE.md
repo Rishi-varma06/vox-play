@@ -225,6 +225,45 @@ Duration is modelled as `words / WORDS_PER_SECOND` (150 wpm). The budget is
 spent in airtime, so beat sizes are chunky relative to a short game -- that is
 intentional, not a bug.
 
+### Script layer (`speech.py`, `script.py`)
+
+**The model narrates facts it is handed and never derives a chess fact of its
+own.** It is given the spoken form of the move, the classification, the
+evaluation in words, the motifs, and what the engine preferred, and asked only
+to say them well. It never sees a board, never sees notation, and is never
+asked whether something was a fork. Everything a listener could catch as wrong
+is computed upstream by code that has tests.
+
+`speech.py` converts notation to spoken English -- rule-based, not a prompt.
+"Qxh7#" becomes "queen takes on h seven, checkmate". Built from MoveEvent's
+structured fields, so there is no string to misparse. `speak_squares_in()`
+exists because motif descriptions carry raw squares as data ("the bishop on
+d7 forks...") and that text can otherwise reach the speech backend verbatim.
+
+`script.py` generates in two passes: an editorial outline, then each beat in
+order with the previous lines for continuity. One-shot whole-script generation
+drifts; independent beats produce sentences that do not add up to a story.
+
+Two generators, same output shape:
+
+- `TemplateGenerator` -- deterministic sentences from the facts. Offline
+  fallback AND the third arm of the listener study: accurate, grounded, and
+  completely flat, which isolates how much the LLM adds over correct facts.
+- `ClaudeGenerator` -- `claude-opus-5`, adaptive thinking, system prompt
+  cached across beats within a game.
+
+Model note: the cricket engine still points at `claude-sonnet-4-6`. Worth
+updating, but separately.
+
+### Reproducibility: keep Stockfish single-threaded
+
+**`threads=1` for anything you report.** Lazy SMP shares a transposition
+table between racing threads, so a fixed node budget does NOT pin the result
+above one thread. Measured on the Opera Game: two 4-thread runs disagreed on
+**27 of 33 plies**, enough to move the detected turning point to a different
+move. Single-threaded runs are bit-identical. `AnalysisConfig.reproducible`
+reports this, and there is a regression test.
+
 ### Thresholds
 
 `DEFAULT_THRESHOLDS` matches Lichess so classification agreement stays

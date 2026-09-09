@@ -18,6 +18,7 @@ from voxplay.chessgame.engine import (
     AnalysisError,
     MockAnalysisEngine,
     analyse_game,
+    find_stockfish,
     get_engine,
     terminal_evaluation,
 )
@@ -180,6 +181,35 @@ def test_quiet_moves_show_no_material_swing():
     game = analyse_game(load_pgn(SAMPLE_PGN), MockAnalysisEngine())
     opening = game.moves[0]
     assert opening.analysis.material_swing == 0
+
+
+# ---------------------------------------------------------------------------
+# Reproducibility
+# ---------------------------------------------------------------------------
+
+def test_config_reports_whether_it_can_be_reproduced():
+    assert AnalysisConfig(threads=1).reproducible
+    assert not AnalysisConfig(threads=4).reproducible
+
+
+@pytest.mark.skipif(find_stockfish() is None, reason="Stockfish not installed")
+def test_single_threaded_analysis_is_bit_identical_across_runs():
+    """
+    The node budget exists to make results reproducible, and it only does that
+    at one thread. Stockfish's Lazy SMP shares a transposition table between
+    racing threads, so more threads means a different answer for the same
+    budget: measured on this game, two 4-thread runs disagreed on 27 of 33
+    plies -- enough to move the detected turning point to a different move.
+
+    Anything reported in the writeup must come from a single-threaded run.
+    """
+    def run():
+        config = AnalysisConfig(nodes=50_000, multipv=2, threads=1)
+        with get_engine("stockfish", config) as engine:
+            game = analyse_game(load_pgn(SAMPLE_PGN), engine)
+        return [move.analysis.win_loss for move in game.moves]
+
+    assert run() == run()
 
 
 def test_analysing_a_game_with_no_moves_is_a_no_op():

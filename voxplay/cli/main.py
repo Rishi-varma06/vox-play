@@ -8,6 +8,7 @@ Usage
   voxplay commentate <events.json>   # generate commentary transcript
   voxplay synthesize <transcript.json> [--tts gtts|mock] [--out dir]
   voxplay demo                       # end-to-end demo on bundled sample match
+  voxplay chess <file.pgn|lichess-url|game-id>   # chess commentary pipeline
 """
 
 from __future__ import annotations
@@ -15,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from pathlib import Path
 from typing import List
 
@@ -257,6 +259,104 @@ def cmd_demo(args: argparse.Namespace) -> None:
 # Subcommand: eval
 # ---------------------------------------------------------------------------
 
+def cmd_chess(args: argparse.Namespace) -> None:
+    """Full chess pipeline: PGN or Lichess link -> commentary script."""
+    from voxplay.chessgame import beats as B
+    from voxplay.chessgame.engine import AnalysisConfig, analyse_game, get_engine
+    from voxplay.chessgame.evaluation import COMMENTARY_THRESHOLDS, ERROR_QUALITIES
+    from voxplay.chessgame.models import Color
+    from voxplay.chessgame.pgn_source import load_lichess, load_pgn
+    from voxplay.chessgame.script import ScriptError, ScriptStyle, generate_script
+    from voxplay.chessgame.speech import ascii_fold
+
+    source = args.source
+    print("=" * 70)
+    if source.lower().endswith(".pgn") or Path(source).exists():
+        print(f"  Loading PGN: {source}")
+        game = load_pgn(source)
+    else:
+        print(f"  Fetching from Lichess: {source}")
+        game = load_lichess(source)
+
+    meta = game.meta
+    print(f"  {ascii_fold(meta.white or '?')} vs {ascii_fold(meta.black or '?')}"
+          f"   {meta.result.value}   {meta.eco or ''} {ascii_fold(meta.opening or '')}")
+    print(f"  {game.total_plies} half-moves")
+    print("=" * 70)
+
+    config = AnalysisConfig(nodes=args.nodes, multipv=3, threads=args.threads)
+    if not config.reproducible:
+        print("  NOTE: threads > 1 -- results will not reproduce exactly.")
+    print(f"\n[1/4] Analysing {game.total_plies + 1} positions "
+          f"({args.nodes:,} nodes each) ...")
+    started = time.time()
+    with get_engine(args.engine, config) as engine:
+        game = analyse_game(game, engine, thresholds=COMMENTARY_THRESHOLDS)
+    print(f"      done in {time.time() - started:.1f}s using {engine.name}")
+
+    for colour, name in ((Color.WHITE, meta.white), (Color.BLACK, meta.black)):
+        played = [m for m in game.moves if m.color == colour and m.analysis]
+        if not played:
+            continue
+        errors = [m for m in played if m.analysis.quality in ERROR_QUALITIES]
+        average = sum(m.analysis.accuracy for m in played) / len(played)
+        print(f"      {ascii_fold(name or colour.value)[:26]:<26} "
+              f"accuracy {average:5.1f}%   errors {len(errors)}"
+              + (f"   ({', '.join(m.san for m in errors[:5])})" if errors else ""))
+
+    motifs = [(m, h) for m in game.moves for h in (m.analysis.motifs if m.analysis else [])]
+    print(f"\n[2/4] Tactical motifs: {len(motifs)} detected")
+    for move, hit in motifs[: args.max_motifs]:
+        print(f"      move {move.move_number:>3} {move.san:<8} "
+              f"{hit.motif.value:<16} {hit.description}")
+    if len(motifs) > args.max_motifs:
+        print(f"      ... and {len(motifs) - args.max_motifs} more")
+
+    arc = B.extract_arc(game)
+    by_ply = {m.ply: m for m in game.moves}
+    turning = by_ply[arc.turning_point_ply].san if arc.turning_point_ply in by_ply else "-"
+    budget = args.budget or B.budget_for(game)
+    sheet = B.select_beats(game, pacing=B.PacingConfig(budget_seconds=budget))
+    print(f"\n[3/4] Narrative arc: {arc.archetype.value}   "
+          f"turning point: {turning}   lead changes: {arc.lead_changes}")
+    print(f"      {len(sheet.beats)} beats, {sheet.total_seconds:.0f}s "
+          f"(budget {budget:.0f}s)")
+    if args.baselines:
+        flat = B.select_every_move(game)
+        topn = B.select_top_n(game, 8)
+        print(f"      baselines: every-move {flat.total_seconds:.0f}s "
+              f"({len(flat.beats)} beats), top-8 {topn.total_seconds:.0f}s")
+
+    print(f"\n[4/4] Commentary script")
+    style = ScriptStyle(persona=args.persona, audience_elo=args.audience)
+    try:
+        script = generate_script(game, sheet, generator=args.generator, style=style)
+    except ScriptError as exc:
+        # "auto" means "whatever actually works": a key that is present but
+        # rejected (no credit, revoked, wrong org) must not kill the run. An
+        # explicit --generator claude is a request, so that one fails loudly.
+        if args.generator != "auto":
+            print(f"      ERROR: {exc}", file=sys.stderr)
+            sys.exit(1)
+        print(f"      Claude unavailable -- {exc}")
+        print("      Falling back to the template generator.")
+        script = generate_script(game, sheet, generator="template", style=style)
+    print(f"      {script.generator}: {script.total_words} words, "
+          f"{script.total_seconds:.0f}s spoken\n")
+    print("-" * 70)
+    for line in script.lines:
+        print(f"[{line.beat_type.value}]")
+        print(f"  {line.text}")
+        print()
+    print("-" * 70)
+
+    if args.out:
+        out = Path(args.out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(script.model_dump_json(indent=2), encoding="utf-8")
+        print(f"  Script saved -> {out}")
+
+
 def cmd_eval(args: argparse.Namespace) -> None:
     """Run commentary quality evaluation over the full test suite."""
     from voxplay.eval.runner import run_match_eval
@@ -378,6 +478,34 @@ def build_parser() -> argparse.ArgumentParser:
     p_demo = sub.add_parser("demo", help="Run the full pipeline on the bundled sample match.")
     p_demo.add_argument("--tts", default="mock", choices=["gtts", "elevenlabs", "mock"])
 
+    # chess
+    p_chess = sub.add_parser(
+        "chess",
+        help="Chess commentary: PGN file, Lichess URL, or Lichess game id.",
+    )
+    p_chess.add_argument(
+        "source",
+        help="Path to a .pgn file, a Lichess game URL, or a bare Lichess game id.",
+    )
+    p_chess.add_argument("--engine", default="auto", choices=["auto", "stockfish", "mock"],
+                         help="auto falls back to the mock when Stockfish is absent.")
+    p_chess.add_argument("--nodes", type=int, default=1_000_000,
+                         help="Engine node budget per position (default 1000000).")
+    p_chess.add_argument("--threads", type=int, default=1,
+                         help="Engine threads. Keep at 1 -- above 1 results stop reproducing.")
+    p_chess.add_argument("--generator", default="auto", choices=["auto", "template", "claude"],
+                         help="auto uses Claude when an API key is set, else the template.")
+    p_chess.add_argument("--budget", type=float, default=None,
+                         help="Target spoken seconds. Defaults to scaling with game length.")
+    p_chess.add_argument("--persona", default="analytical", choices=["analytical", "energetic"])
+    p_chess.add_argument("--audience", type=int, default=1200,
+                         help="Listener rating; below 1600 chess terms get explained.")
+    p_chess.add_argument("--baselines", action="store_true",
+                         help="Also print the every-move and top-N pacing baselines.")
+    p_chess.add_argument("--max-motifs", type=int, default=20,
+                         help="Cap how many motifs are listed.")
+    p_chess.add_argument("--out", default=None, help="Write the script to a JSON file.")
+
     # eval
     p_eval = sub.add_parser(
         "eval",
@@ -406,6 +534,7 @@ def app() -> None:
         "commentate": cmd_commentate,
         "synthesize": cmd_synthesize,
         "demo": cmd_demo,
+        "chess": cmd_chess,
         "eval": cmd_eval,
     }
     dispatch[args.command](args)

@@ -30,10 +30,11 @@ from typing import Dict, List, Optional
 from pydantic import BaseModel, Field
 
 from .beats import Beat, BeatSheet, BeatType, WORDS_PER_SECOND
-from .evaluation import describe_eval
+from .evaluation import ERROR_QUALITIES, describe_eval
 from .models import Color, MoveEvent, MoveQuality
 from .pgn_source import ParsedGame
 from .speech import (
+    ascii_fold,
     speak_colour,
     speak_duration,
     speak_move,
@@ -116,11 +117,16 @@ DEFAULT_STYLE = ScriptStyle()
 
 def _players(game: ParsedGame) -> str:
     meta = game.meta
-    white = meta.white or "White"
-    black = meta.black or "Black"
+    white = ascii_fold(meta.white or "White")
+    black = ascii_fold(meta.black or "Black")
     if meta.white_elo and meta.black_elo:
         return f"{white} ({meta.white_elo}) vs {black} ({meta.black_elo})"
     return f"{white} vs {black}"
+
+
+def _opening(game: ParsedGame) -> Optional[str]:
+    """Opening name, folded to ASCII -- real PGNs carry accented names."""
+    return ascii_fold(game.meta.opening) if game.meta.opening else None
 
 
 def _move_facts(move: MoveEvent, style: ScriptStyle) -> List[str]:
@@ -173,7 +179,7 @@ def beat_facts(beat: Beat, game: ParsedGame, sheet: BeatSheet, style: ScriptStyl
         if meta.event:
             facts.append(f"event: {meta.event}")
         if meta.opening:
-            facts.append(f"opening: {meta.opening}")
+            facts.append(f"opening: {_opening(game)}")
         facts.append(f"length: {arc.total_plies} half-moves")
         facts.append(f"shape of the game: {arc.archetype.value.replace('_', ' ')}")
         if not style.spoiler_free and arc.winner:
@@ -183,7 +189,7 @@ def beat_facts(beat: Beat, game: ParsedGame, sheet: BeatSheet, style: ScriptStyl
 
     elif beat.beat_type == BeatType.OPENING:
         if meta.opening:
-            facts.append(f"opening played: {meta.opening}")
+            facts.append(f"opening played: {_opening(game)}")
         if meta.eco:
             facts.append(f"ECO code: {meta.eco}")
         facts.append("moves: " + "; ".join(speak_move(m, with_number=True) for m in moves))
@@ -199,6 +205,12 @@ def beat_facts(beat: Beat, game: ParsedGame, sheet: BeatSheet, style: ScriptStyl
             captures = [m for m in moves if m.is_capture]
             if captures:
                 facts.append(f"pieces traded: {len(captures)}")
+            slips = [m for m in moves if m.analysis
+                     and m.analysis.quality in ERROR_QUALITIES]
+            if slips:
+                facts.append(f"errors in this stretch: {len(slips)}")
+            else:
+                facts.append("no errors in this stretch")
             if moves[-1].analysis:
                 facts.append(f"position at the end of this stretch: "
                              f"{describe_eval(moves[-1].analysis.win_pct_after)}")
@@ -367,18 +379,34 @@ class TemplateGenerator(ScriptGenerator):
         outcome = f"{speak_colour(arc.winner)} won" if arc.winner else "the game was drawn"
 
         if beat.beat_type == BeatType.INTRO:
-            opening = f", a {meta.opening}" if meta.opening else ""
+            name = _opening(game)
+            opening = f", {_article(name)} {name}" if name else ""
             return (f"{_players(game)}{opening}. "
                     f"{arc.total_plies} half-moves, and {outcome}.")
 
         if beat.beat_type == BeatType.OPENING:
             spoken = "; ".join(speak_move(m) for m in moves[:6])
-            named = f"They played the {meta.opening}. " if meta.opening else ""
+            name = _opening(game)
+            named = f"They played the {name}. " if name else ""
             return f"{named}The game opened: {spoken}."
 
         if beat.beat_type == BeatType.BRIDGE and moves:
-            return (f"Moves {moves[0].move_number} through {moves[-1].move_number} "
-                    f"pass without incident.")
+            # Never claim a stretch was uneventful without checking. A bridge
+            # over 40 moves of a real game said "pass without incident" across
+            # six errors and a dozen tactics.
+            span = f"Moves {moves[0].move_number} through {moves[-1].move_number}"
+            slips = sum(
+                1 for m in moves
+                if m.analysis and m.analysis.quality in ERROR_QUALITIES
+            )
+            captures = sum(1 for m in moves if m.is_capture)
+            if slips:
+                return (f"{span} bring {slips} more "
+                        f"{'slips' if slips != 1 else 'slip'} from both sides.")
+            if captures:
+                return (f"{span} see {captures} "
+                        f"{'pieces' if captures != 1 else 'piece'} come off the board.")
+            return f"{span} pass quietly."
 
         if beat.beat_type in (BeatType.MOMENT, BeatType.TURNING_POINT) and moves:
             move = moves[0]
@@ -457,7 +485,13 @@ class ClaudeGenerator(ScriptGenerator):
                 messages=[{"role": "user", "content": prompt}],
             )
         except anthropic.APIStatusError as exc:
-            raise ScriptError(f"Claude API error ({exc.status_code}): {exc.message}") from exc
+            # exc.message is the whole JSON envelope; pull the human sentence
+            # out of it so the CLI can print something a person can act on.
+            try:
+                detail = exc.body["error"]["message"]
+            except Exception:  # noqa: BLE001 - best-effort extraction
+                detail = exc.message
+            raise ScriptError(f"Claude API error {exc.status_code}: {detail}") from exc
         except anthropic.APIConnectionError as exc:
             raise ScriptError(f"could not reach the Claude API: {exc}") from exc
 

@@ -392,6 +392,31 @@ class PacingConfig:
 
 DEFAULT_PACING = PacingConfig()
 
+#: Spoken seconds to allow per half-move when sizing a budget automatically.
+SECONDS_PER_PLY = 1.5
+
+#: Floor. Below about two minutes even a short game loses its middle beats to
+#: the mandatory intro/opening/finish/outro, and a 17-move miniature ends up
+#: with nothing between the opening and the mate.
+MIN_BUDGET_SECONDS = 120.0
+MAX_BUDGET_SECONDS = 300.0
+
+
+def budget_for(game: ParsedGame) -> float:
+    """
+    A sensible spoken duration for a game of this length.
+
+    A fixed budget does not survive contact with real games: 120 seconds is
+    generous for a 17-move miniature and leaves a 68-move blitz game with one
+    beat every twenty moves, at which point the bridges start claiming that
+    nothing happened across stretches where plenty did. Scaling with length
+    and clamping at both ends keeps coverage roughly constant.
+    """
+    return max(
+        MIN_BUDGET_SECONDS,
+        min(MAX_BUDGET_SECONDS, game.total_plies * SECONDS_PER_PLY),
+    )
+
 
 def _mandatory_beats(game: ParsedGame, arc: GameArc) -> List[Beat]:
     """Intro, opening and finish: a game needs a beginning and an end."""

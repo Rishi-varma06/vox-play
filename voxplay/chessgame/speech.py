@@ -14,6 +14,7 @@ structured fields -- there is no string to misparse.
 from __future__ import annotations
 
 import re
+import unicodedata
 from typing import Optional
 
 from .models import Color, MoveEvent
@@ -143,15 +144,65 @@ def speak_san(san: str, *, colour: Optional[Color] = None) -> str:
         text = text[1:]
 
     takes = "x" in text
-    destination = text.split("x")[-1][-2:] if takes else text[-2:]
+    text = text.replace("x", "")
+    destination, disambiguation = text[-2:], text[:-2]
+
+    # Disambiguation is the difference between two legal moves to the same
+    # square. Dropping it makes "R5c4" and "Rc4" read identically, so a line
+    # like "better was rook to c four" names the move that was just played.
+    if len(disambiguation) == 2:
+        subject = f"the {piece} on {speak_square(disambiguation)}"
+    elif disambiguation in _FILE_WORDS:
+        subject = f"the {disambiguation}-file {piece}"
+    elif disambiguation in _RANK_ORDINALS:
+        subject = f"the {piece} on the {_RANK_ORDINALS[disambiguation]} rank"
+    else:
+        subject = piece
 
     verb = "takes on" if takes else "to"
-    return f"{piece} {verb} {speak_square(destination)}{promotion}{suffix}"
+    return f"{subject} {verb} {speak_square(destination)}{promotion}{suffix}"
 
 
 _PIECE_LETTERS = {
     "K": "king", "Q": "queen", "R": "rook", "B": "bishop", "N": "knight",
 }
+
+_RANK_ORDINALS = {
+    "1": "first", "2": "second", "3": "third", "4": "fourth",
+    "5": "fifth", "6": "sixth", "7": "seventh", "8": "eighth",
+}
+
+
+# ---------------------------------------------------------------------------
+# Text safety
+# ---------------------------------------------------------------------------
+
+#: Characters that do not decompose to ASCII under NFKD and would otherwise
+#: be dropped entirely. Common in European player names.
+_TRANSLITERATIONS = {
+    "ß": "ss", "ø": "o", "Ø": "O", "æ": "ae", "Æ": "AE",
+    "œ": "oe", "Œ": "OE", "ł": "l", "Ł": "L",
+    "đ": "d", "Đ": "D", "þ": "th", "Þ": "Th", "ð": "d",
+}
+
+
+def ascii_fold(text: str) -> str:
+    """
+    Strip accents down to plain ASCII: 'Samisch' from 'Sa[umlaut]misch'.
+
+    Two reasons this is not optional. The project's terminal is CP1252, so a
+    real PGN's accented names print as replacement characters; and speech
+    backends mispronounce or choke on characters they were not trained on.
+    Player and opening names come from arbitrary user data, so this runs at
+    every boundary where text becomes output.
+    """
+    if not text:
+        return text
+    for source, replacement in _TRANSLITERATIONS.items():
+        text = text.replace(source, replacement)
+    decomposed = unicodedata.normalize("NFKD", text)
+    stripped = "".join(c for c in decomposed if not unicodedata.combining(c))
+    return stripped.encode("ascii", "ignore").decode("ascii")
 
 
 # ---------------------------------------------------------------------------

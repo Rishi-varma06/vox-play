@@ -31,6 +31,10 @@ dev = [
 [project.scripts]
 voxplay = "voxplay.cli.main:app"
 
+[tool.setuptools.package-data]
+# The player template must ship with the package, not just the repo.
+voxplay = ["chessgame/*.html"]
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["voxplay*"]

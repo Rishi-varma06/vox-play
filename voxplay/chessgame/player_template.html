@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<style>
+  :root {
+    --bg:#15181b; --panel:#1d2126; --panel-2:#252a30; --line:#31373e;
+    --ink:#e7eae7; --muted:#9aa3a0; --accent:#5fae87; --buff:#c9b382;
+    --danger:#d1624c; --engine:#5b8fc9; --amber:#c9a227;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif;
+  }
+  .wrap { max-width:1180px; margin:0 auto; padding:20px 18px 40px; }
+  header { border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:18px; }
+  h1 { margin:0 0 4px; font-size:20px; font-weight:600; letter-spacing:-0.01em; }
+  .sub { color:var(--muted); font-size:13px; }
+  .sub b { color:var(--ink); font-weight:600; }
+  .tag {
+    display:inline-block; padding:1px 7px; border-radius:3px; margin-left:8px;
+    background:var(--panel-2); color:var(--accent);
+    font:11px/1.6 var(--mono); text-transform:uppercase; letter-spacing:.06em;
+  }
+
+  /* Board is capped so the transport stays above the fold on a laptop. */
+  .grid { display:grid; grid-template-columns:minmax(280px,540px) 300px; gap:16px; align-items:start; }
+  @media (max-width:880px){ .grid{ grid-template-columns:1fr; } }
+
+  /* The bar stretches to the board's height, which the board itself sets via
+     its aspect-ratio padding -- hence the flex row rather than a grid column. */
+  .boardrow { display:flex; gap:10px; align-items:stretch; }
+  .boardrow .boardwrap { flex:1; min-width:0; }
+  .evalbar { position:relative; width:20px; flex:none; background:#0d0f11; border-radius:3px; overflow:hidden; }
+  .evalbar .white { position:absolute; left:0; right:0; bottom:0; background:#e8e6df; transition:height .35s ease; }
+  .evalbar .mid { position:absolute; left:0; right:0; top:50%; height:1px; background:#00000055; }
+
+  /* Board */
+  .boardwrap { position:relative; }
+  .board { position:relative; width:100%; padding-bottom:100%; border-radius:4px; overflow:hidden; }
+  .board .sq { position:absolute; width:12.5%; height:12.5%; }
+  .sq.light { background:#ebecd0; } .sq.dark { background:#5c8a5f; }
+  .sq.from, .sq.to { box-shadow:inset 0 0 0 100px rgba(201,162,39,.38); }
+  .sq.motif { box-shadow:inset 0 0 0 3px var(--engine); }
+  .sq.check { box-shadow:inset 0 0 0 100px rgba(209,98,76,.55); }
+  .piece {
+    position:absolute; width:12.5%; height:12.5%; display:flex; align-items:center; justify-content:center;
+    font-size:min(7.2vw,58px); line-height:1; user-select:none; pointer-events:none;
+    transition:left .28s ease, top .28s ease;
+  }
+  .piece.w { color:#fff; text-shadow:0 0 1px #000,0 1px 2px #0008; }
+  .piece.b { color:#1f2326; text-shadow:0 0 1px #fff6; }
+  #arrows { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+  .coord { position:absolute; font:10px var(--mono); color:#0006; pointer-events:none; }
+
+  /* Side panel */
+  .side { display:flex; flex-direction:column; gap:12px; }
+  .card { background:var(--panel); border:1px solid var(--line); border-radius:5px; }
+  .card h2 {
+    margin:0; padding:9px 12px; border-bottom:1px solid var(--line);
+    font:11px/1.4 var(--mono); text-transform:uppercase; letter-spacing:.08em; color:var(--muted); font-weight:600;
+  }
+  .card .body { padding:11px 12px; }
+
+  #caption { min-height:96px; font-size:15px; }
+  #caption .beat { font:10px var(--mono); text-transform:uppercase; letter-spacing:.08em; color:var(--accent); display:block; margin-bottom:6px; }
+
+  #moves { max-height:230px; overflow-y:auto; padding:6px; }
+  #moves .row { display:flex; gap:4px; align-items:baseline; padding:1px 4px; border-radius:3px; }
+  #moves .n { width:26px; color:var(--muted); font:11px var(--mono); text-align:right; flex:none; }
+  #moves .m { font:12px var(--mono); padding:1px 5px; border-radius:3px; cursor:pointer; min-width:56px; }
+  #moves .m:hover { background:var(--panel-2); }
+  #moves .m.cur { background:var(--accent); color:#10221a; font-weight:700; }
+  #moves .m.blunder { color:var(--danger); } #moves .m.mistake { color:#d99a5b; }
+  #moves .m.inaccuracy { color:var(--amber); } #moves .m.best { color:var(--accent); }
+
+  .facts div { display:flex; justify-content:space-between; gap:10px; padding:2px 0; font-size:13px; }
+  .facts span:first-child { color:var(--muted); }
+  .facts span:last-child { font-family:var(--mono); font-size:12px; text-align:right; }
+
+  /* Transport */
+  .transport { margin-top:16px; background:var(--panel); border:1px solid var(--line); border-radius:5px; padding:12px 14px; }
+  .controls { display:flex; align-items:center; gap:12px; }
+  button {
+    background:var(--panel-2); color:var(--ink); border:1px solid var(--line);
+    border-radius:4px; padding:7px 14px; font-size:14px; cursor:pointer; font-family:inherit;
+  }
+  button:hover { border-color:var(--accent); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+  #play { min-width:84px; font-weight:600; }
+  #seek { flex:1; accent-color:var(--accent); cursor:pointer; }
+  #clock { font:12px var(--mono); color:var(--muted); min-width:84px; text-align:right; }
+  .chips { display:flex; flex-wrap:wrap; gap:5px; margin-top:11px; }
+  .chip {
+    font:10px var(--mono); text-transform:uppercase; letter-spacing:.05em;
+    padding:4px 9px; border-radius:3px; border:1px solid var(--line);
+    background:transparent; color:var(--muted); cursor:pointer;
+  }
+  .chip:hover { border-color:var(--accent); color:var(--ink); }
+  .chip.cur { background:var(--accent); color:#10221a; border-color:var(--accent); font-weight:700; }
+  .hint { margin-top:10px; color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>__HEADLINE__<span class="tag" id="archetype"></span></h1>
+    <div class="sub" id="subtitle"></div>
+  </header>
+
+  <div class="grid">
+    <div class="boardrow">
+      <div class="evalbar" title="White's winning chances">
+        <div class="white" id="evalwhite" style="height:50%"></div><div class="mid"></div>
+      </div>
+      <div class="boardwrap">
+        <div class="board" id="board"></div>
+        <svg id="arrows" viewBox="0 0 8 8" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <marker id="ah" markerWidth="4" markerHeight="4" refX="2.6" refY="2" orient="auto">
+              <polygon points="0,0.4 4,2 0,3.6" fill="var(--accent)" opacity="0.85"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="card"><h2>Commentary</h2><div class="body" id="caption"></div></div>
+      <div class="card"><h2>Position</h2><div class="body facts" id="facts"></div></div>
+      <div class="card"><h2>Moves</h2><div id="moves"></div></div>
+    </div>
+  </div>
+
+  <div class="transport">
+    <div class="controls">
+      <button id="play" aria-label="Play or pause">Play</button>
+      <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
+      <span id="clock">0:00 / 0:00</span>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="hint">Click a beat to jump there. Space plays and pauses; arrow keys step move by move.</div>
+  </div>
+
+  <audio id="audio" src="__AUDIO_SRC__" preload="auto"></audio>
+</div>
+
+<script id="payload" type="application/json">__PAYLOAD__</script>
+<script>
+(function () {
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("payload").textContent);
+  var GLYPH = { k:"♚", q:"♛", r:"♜", b:"♝", n:"♞", p:"♟" };
+
+  var boardEl = document.getElementById("board");
+  var arrowsEl = document.getElementById("arrows");
+  var audioEl = document.getElementById("audio");
+  var playBtn = document.getElementById("play");
+  var seekEl = document.getElementById("seek");
+  var clockEl = document.getElementById("clock");
+  var capEl = document.getElementById("caption");
+  var factsEl = document.getElementById("facts");
+  var chipsEl = document.getElementById("chips");
+  var movesEl = document.getElementById("moves");
+  var evalEl = document.getElementById("evalwhite");
+
+  var squares = {}, pieces = {}, currentPly = -1, currentCue = -1;
+
+  function fileRank(sq) { return [sq.charCodeAt(0) - 97, parseInt(sq[1], 10) - 1]; }
+  function xy(sq) { var fr = fileRank(sq); return { x: fr[0] * 12.5, y: (7 - fr[1]) * 12.5 }; }
+
+  // ---- board scaffold -----------------------------------------------------
+  "abcdefgh".split("").forEach(function (f, fi) {
+    for (var r = 1; r <= 8; r++) {
+      var name = f + r, p = xy(name), el = document.createElement("div");
+      el.className = "sq " + ((fi + r) % 2 ? "light" : "dark");
+      el.style.left = p.x + "%"; el.style.top = p.y + "%";
+      boardEl.appendChild(el); squares[name] = el;
+    }
+  });
+
+  function parseFen(fen) {
+    var rows = fen.split(" ")[0].split("/"), out = {};
+    rows.forEach(function (row, i) {
+      var file = 0;
+      row.split("").forEach(function (ch) {
+        if (/\d/.test(ch)) { file += parseInt(ch, 10); return; }
+        out["abcdefgh"[file] + (8 - i)] = ch;
+        file += 1;
+      });
+    });
+    return out;
+  }
+
+  function renderPieces(fen) {
+    var map = parseFen(fen), seen = {};
+    Object.keys(map).forEach(function (sq) {
+      var code = map[sq], key = code + ":" + sq;
+      seen[key] = true;
+      if (pieces[key]) return;
+      var el = document.createElement("div");
+      el.className = "piece " + (code === code.toUpperCase() ? "w" : "b");
+      el.textContent = GLYPH[code.toLowerCase()];
+      var p = xy(sq); el.style.left = p.x + "%"; el.style.top = p.y + "%";
+      boardEl.appendChild(el); pieces[key] = el;
+    });
+    Object.keys(pieces).forEach(function (key) {
+      if (!seen[key]) { pieces[key].remove(); delete pieces[key]; }
+    });
+  }
+
+  function clearMarks() {
+    Object.keys(squares).forEach(function (s) {
+      squares[s].classList.remove("from", "to", "motif", "check");
+    });
+    while (arrowsEl.lastChild && arrowsEl.lastChild.tagName === "line") arrowsEl.removeChild(arrowsEl.lastChild);
+  }
+
+  function drawArrow(from, to) {
+    var a = fileRank(from), b = fileRank(to);
+    var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", a[0] + 0.5); line.setAttribute("y1", 7.5 - a[1]);
+    line.setAttribute("x2", b[0] + 0.5); line.setAttribute("y2", 7.5 - b[1]);
+    line.setAttribute("stroke", "var(--accent)");
+    line.setAttribute("stroke-width", "0.13");
+    line.setAttribute("opacity", "0.8");
+    line.setAttribute("marker-end", "url(#ah)");
+    arrowsEl.appendChild(line);
+  }
+
+  // ---- panels -------------------------------------------------------------
+  function setFacts(rows) {
+    factsEl.innerHTML = rows.map(function (r) {
+      return "<div><span>" + r[0] + "</span><span>" + r[1] + "</span></div>";
+    }).join("");
+  }
+
+  function showPly(index) {
+    if (index === currentPly) return;
+    currentPly = index;
+    var node = DATA.plies[index];
+    renderPieces(node.fen);
+    clearMarks();
+
+    if (node.from) { squares[node.from].classList.add("from"); squares[node.to].classList.add("to"); drawArrow(node.from, node.to); }
+    (node.motifSquares || []).forEach(function (s) { if (squares[s]) squares[s].classList.add("motif"); });
+    if (node.checkSquare && squares[node.checkSquare]) squares[node.checkSquare].classList.add("check");
+
+    evalEl.style.height = (node.winPct == null ? 50 : node.winPct) + "%";
+
+    var rows = [];
+    if (node.san) rows.push(["Move", node.moveNumber + (node.color === "white" ? "." : "...") + " " + node.san]);
+    if (node.quality) rows.push(["Verdict", node.quality]);
+    if (node.winPct != null) rows.push(["White", node.winPct.toFixed(0) + "%"]);
+    if (node.material) rows.push(["Material", (node.material > 0 ? "+" : "") + node.material]);
+    if (node.best) rows.push(["Engine", node.best]);
+    if (!rows.length) rows.push(["Position", "starting position"]);
+    setFacts(rows);
+
+    Array.prototype.forEach.call(movesEl.querySelectorAll(".m"), function (el) {
+      el.classList.toggle("cur", +el.dataset.ply === index);
+    });
+    var cur = movesEl.querySelector(".m.cur");
+    if (cur) { var t = cur.offsetTop - movesEl.clientHeight / 2; movesEl.scrollTop = Math.max(0, t); }
+  }
+
+  function showCue(index) {
+    if (index === currentCue) return;
+    currentCue = index;
+    var cue = DATA.cues[index];
+    capEl.innerHTML = '<span class="beat">' + (cue ? cue.type.replace(/_/g, " ") : "") + "</span>" +
+                      (cue ? cue.text : "");
+    Array.prototype.forEach.call(chipsEl.children, function (c, i) { c.classList.toggle("cur", i === index); });
+  }
+
+  // ---- timeline -----------------------------------------------------------
+  // Within a cue the board walks its plies evenly, so a beat covering eight
+  // half-moves actually moves the board instead of freezing on the last one.
+  function plyForTime(ms) {
+    var chosen = 0;
+    for (var i = 0; i < DATA.cues.length; i++) {
+      var cue = DATA.cues[i];
+      if (ms < cue.startMs) break;
+      if (!cue.plies.length) continue;
+      if (ms >= cue.startMs + cue.durationMs) { chosen = cue.plies[cue.plies.length - 1]; continue; }
+      var share = (ms - cue.startMs) / Math.max(1, cue.durationMs);
+      var step = Math.min(cue.plies.length - 1, Math.floor(share * cue.plies.length));
+      chosen = cue.plies[step];
+    }
+    return chosen;
+  }
+
+  function cueForTime(ms) {
+    var found = 0;
+    for (var i = 0; i < DATA.cues.length; i++) if (ms >= DATA.cues[i].startMs) found = i;
+    return found;
+  }
+
+  function fmt(sec) {
+    sec = Math.max(0, Math.floor(sec));
+    return Math.floor(sec / 60) + ":" + ("0" + (sec % 60)).slice(-2);
+  }
+
+  function tick() {
+    var ms = audioEl.currentTime * 1000;
+    showCue(cueForTime(ms));
+    showPly(plyForTime(ms));
+    var dur = audioEl.duration || DATA.totalMs / 1000;
+    seekEl.value = String(Math.round((ms / 1000 / dur) * 1000));
+    clockEl.textContent = fmt(ms / 1000) + " / " + fmt(dur);
+  }
+
+  // ---- wiring -------------------------------------------------------------
+  DATA.cues.forEach(function (cue, i) {
+    var b = document.createElement("button");
+    b.className = "chip"; b.textContent = cue.type.replace(/_/g, " ");
+    b.addEventListener("click", function () { audioEl.currentTime = cue.startMs / 1000; tick(); });
+    chipsEl.appendChild(b);
+  });
+
+  var html = "", openRow = false;
+  DATA.plies.forEach(function (node, i) {
+    if (!node.san) return;
+    if (node.color === "white") {
+      if (openRow) html += "</div>";
+      html += '<div class="row"><span class="n">' + node.moveNumber + "</span>";
+      openRow = true;
+    }
+    html += '<span class="m ' + (node.quality || "") + '" data-ply="' + i + '">' + node.san + "</span>";
+  });
+  if (openRow) html += "</div>";
+  movesEl.innerHTML = html;
+  movesEl.addEventListener("click", function (e) {
+    var el = e.target.closest(".m"); if (!el) return;
+    var ply = +el.dataset.ply;
+    for (var i = 0; i < DATA.cues.length; i++) {
+      if (DATA.cues[i].plies.indexOf(ply) !== -1) { audioEl.currentTime = DATA.cues[i].startMs / 1000; tick(); return; }
+    }
+    audioEl.pause(); playBtn.textContent = "Play"; showPly(ply);
+  });
+
+  playBtn.addEventListener("click", function () {
+    if (audioEl.paused) { audioEl.play(); playBtn.textContent = "Pause"; }
+    else { audioEl.pause(); playBtn.textContent = "Play"; }
+  });
+  audioEl.addEventListener("timeupdate", tick);
+  audioEl.addEventListener("ended", function () { playBtn.textContent = "Play"; });
+  seekEl.addEventListener("input", function () {
+    var dur = audioEl.duration || DATA.totalMs / 1000;
+    audioEl.currentTime = (seekEl.value / 1000) * dur; tick();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.target.tagName === "INPUT") return;
+    if (e.code === "Space") { e.preventDefault(); playBtn.click(); }
+    if (e.code === "ArrowRight") { audioEl.pause(); playBtn.textContent = "Play"; showPly(Math.min(DATA.plies.length - 1, currentPly + 1)); }
+    if (e.code === "ArrowLeft") { audioEl.pause(); playBtn.textContent = "Play"; showPly(Math.max(0, currentPly - 1)); }
+  });
+
+  document.getElementById("subtitle").innerHTML = DATA.subtitle;
+  document.getElementById("archetype").textContent = DATA.archetype;
+  showPly(0); showCue(0);
+  clockEl.textContent = "0:00 / " + fmt(DATA.totalMs / 1000);
+})();
+</script>
+</body>
+</html>

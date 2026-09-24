@@ -356,7 +356,7 @@ def cmd_chess(args: argparse.Namespace) -> None:
         out.write_text(script.model_dump_json(indent=2), encoding="utf-8")
         print(f"  Script saved -> {out}")
 
-    if args.audio:
+    if args.audio or args.player:
         from voxplay.chessgame.audio import AudioError, narrate, write_timeline
 
         print(f"\n[5/5] Narrating with the '{args.tts}' voice ...")
@@ -376,6 +376,19 @@ def cmd_chess(args: argparse.Namespace) -> None:
             span = f"{cue.plies[0]}-{cue.plies[-1]}" if cue.plies else "-"
             print(f"        {cue.start_ms / 1000:6.1f}s  {cue.duration_ms / 1000:5.1f}s  "
                   f"{cue.beat_type.value:<14} plies {span}")
+
+        if args.player:
+            from voxplay.chessgame.player import PlayerError, build_player
+
+            page = Path(args.audio_dir) / f"{game.meta.game_id}_player.html"
+            try:
+                page = build_player(game, sheet, audio, page)
+            except PlayerError as exc:
+                print(f"      ERROR: {exc}", file=sys.stderr)
+                sys.exit(1)
+            size_mb = page.stat().st_size / (1024 * 1024)
+            print(f"      player   -> {page}  ({size_mb:.1f} MB, self-contained)")
+            print(f"      open it in a browser: board, audio and captions in one file")
 
 
 def cmd_eval(args: argparse.Namespace) -> None:
@@ -530,6 +543,8 @@ def build_parser() -> argparse.ArgumentParser:
                          help="Synthesise spoken audio and a timeline for the script.")
     p_chess.add_argument("--tts", default="offline", choices=["offline", "mock", "gtts"],
                          help="Voice backend. 'offline' needs no network or ffmpeg.")
+    p_chess.add_argument("--player", action="store_true",
+                         help="Also build a standalone HTML player (implies --audio).")
     p_chess.add_argument("--audio-dir", default="output/chess",
                          help="Where to write clips, the track, and the timeline.")
 

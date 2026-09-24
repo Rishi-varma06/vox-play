@@ -292,6 +292,28 @@ Budgeting at the raw rate promised two minutes and delivered nearly three.
 and 1.03 after. If it strays from 1.0, recalibrate rather than live with
 budgets that lie.
 
+### Player (`chessgame/player.py` + `player_template.html`)
+
+`--player` renders one self-contained HTML file: board, audio, captions, move
+list, eval bar and beat chips. A web player rather than an mp4 because it
+needs no ffmpeg, it is scrubbable (a demo jumps straight to the turning point
+instead of waiting for it), and it is one file you can email. Audio is inlined
+as a data URI by default -- it roughly doubles the size, but one file that
+always works beats two that break when one is moved.
+
+The board follows the audio through the timeline, and **within a cue it walks
+that cue's plies evenly**, so a beat covering eight half-moves moves the board
+rather than freezing on the last one.
+
+Two details that are easy to get wrong:
+
+- `plies[0]` is the starting position, so the player indexes positions by ply
+  number with no offset arithmetic.
+- The payload is embedded in a `<script type="application/json">`, so `<` is
+  escaped to `<`. Commentary text is arbitrary, and a literal
+  `</script>` in it would close the block early and spill the rest of the
+  payload into the document. There is a test for exactly that.
+
 ### Reproducibility: keep Stockfish single-threaded
 
 **`threads=1` for anything you report.** Lazy SMP shares a transposition

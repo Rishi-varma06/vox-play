@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .base import TTSProvider, TTSError
+from .base import TTSProvider, TTSError, with_audio_extension
 
 
 class GTTSProvider(TTSProvider):
@@ -29,7 +29,7 @@ class GTTSProvider(TTSProvider):
             ) from exc
 
         # Ensure .mp3 extension
-        mp3_path = output_path.with_suffix(".mp3")
+        mp3_path = with_audio_extension(output_path, ".mp3")
         mp3_path.parent.mkdir(parents=True, exist_ok=True)
 
         try:

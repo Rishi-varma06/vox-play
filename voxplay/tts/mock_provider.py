@@ -11,7 +11,7 @@ import struct
 import wave
 from pathlib import Path
 
-from .base import TTSProvider
+from .base import TTSProvider, with_audio_extension
 
 
 # Duration in seconds for the silent placeholder clip
@@ -34,6 +34,6 @@ class MockTTSProvider(TTSProvider):
     """Produces silent WAV stubs — no network calls, no API keys required."""
 
     def synthesize(self, text: str, output_path: Path) -> Path:
-        wav_path = output_path.with_suffix(".wav")
+        wav_path = with_audio_extension(output_path, ".wav")
         _write_silent_wav(wav_path)
         return wav_path

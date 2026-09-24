@@ -2,6 +2,7 @@ from .base import TTSProvider, TTSError
 from .gtts_provider import GTTSProvider
 from .elevenlabs_provider import ElevenLabsProvider
 from .mock_provider import MockTTSProvider
+from .offline_provider import OfflineTTSProvider
 from .assembler import assemble
 
 
@@ -11,6 +12,7 @@ def get_provider(name: str = "gtts") -> TTSProvider:
         "gtts": GTTSProvider,
         "elevenlabs": ElevenLabsProvider,
         "mock": MockTTSProvider,
+        "offline": OfflineTTSProvider,
     }
     if name not in providers:
         raise ValueError(
@@ -26,6 +28,7 @@ __all__ = [
     "GTTSProvider",
     "ElevenLabsProvider",
     "MockTTSProvider",
+    "OfflineTTSProvider",
     "assemble",
     "get_provider",
 ]

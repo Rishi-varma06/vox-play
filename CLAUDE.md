@@ -255,6 +255,43 @@ Two generators, same output shape:
 Model note: the cricket engine still points at `claude-sonnet-4-6`. Worth
 updating, but separately.
 
+### Audio (`chessgame/audio.py`, `tts/offline_provider.py`)
+
+`narrate()` speaks a script and returns a **timeline**: every cue carries its
+start, its duration measured from the rendered WAV, and the half-moves it
+describes. That last field is the contract the board renderer will consume --
+it is what lets the board show the right position while the sentence about it
+plays. `audio.py` assembles WAV itself instead of calling `tts.assemble`,
+because that function's gap differs between its pydub and pure-WAV paths, so
+offsets would shift depending on whether ffmpeg happened to be installed.
+
+The offline provider needs no network, no API key and no ffmpeg -- WAV out,
+concatenated with the standard library. Two things about it are load-bearing:
+
+- **Windows uses SAPI through COM, not pyttsx3.** pyttsx3's SAPI5 driver
+  deadlocks on the second `runAndWait()` in a process, with or without a fresh
+  engine per clip. Clip 0 lands in 0.1s and clip 1 never returns. A game needs
+  one clip per beat, so on Windows that is fatal. pyttsx3 remains the fallback
+  elsewhere.
+- **The wpm -> SAPI dial table is measured, not documented.** The docs say 0 is
+  200 wpm with threefold ends; measurement says 188.5 wpm at 0, ~1.12x per
+  step. The documented curve picked dial -3 (138 wpm) when asked for 150.
+
+**Never use `Path.with_suffix()` on a clip path.** It replaces everything after
+the last dot, and PGN game ids contain dots (`..._1858.11.02_000_intro` became
+`..._1858.11.wav`). Every clip collapsed onto one filename, each overwriting
+the last, and the track came out the right length made entirely of the final
+clip repeated. Use `tts.base.with_audio_extension()`.
+
+**`WORDS_PER_SECOND` is calibrated against measured audio**, currently 1.85.
+The raw speaking rate is 155 wpm but the effective rate is 111: sentence and
+clause boundaries insert pauses, numerals expand when spoken ("98 percent" is
+three spoken words), and each clip carries about a second of padding.
+Budgeting at the raw rate promised two minutes and delivered nearly three.
+`CommentaryAudio.drift_ratio` is the check -- it was 1.56 before calibration
+and 1.03 after. If it strays from 1.0, recalibrate rather than live with
+budgets that lie.
+
 ### Reproducibility: keep Stockfish single-threaded
 
 **`threads=1` for anything you report.** Lazy SMP shares a transposition

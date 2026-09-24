@@ -39,10 +39,21 @@ from .pgn_source import ParsedGame
 # Speaking rate
 # ---------------------------------------------------------------------------
 
-#: Words per second of clear narration (about 150 wpm). Converts a beat's
-#: target word count into the airtime it will consume, which is what the
-#: budget is actually spent in.
-WORDS_PER_SECOND = 2.5
+#: Written words per second of finished audio. MEASURED, not assumed: a
+#: 134-word script rendered by the offline voice at 155 wpm took 72.6s, which
+#: is 1.85 written words per second.
+#:
+#: The gap between 155 wpm and an effective 111 wpm is real and worth
+#: understanding, because the obvious model gets it wrong by 40 percent:
+#: sentence and clause boundaries insert pauses, numerals expand when spoken
+#: ("98 percent" is three spoken words, not two), and every clip carries about
+#: a second of leading and trailing padding. Budgeting at a raw speaking rate
+#: therefore promises a two-minute recap and delivers nearly three.
+#:
+#: This is backend- and style-dependent, so CommentaryAudio.drift_ratio exists
+#: to check it: if it strays from 1.0, recalibrate here rather than living
+#: with budgets that lie.
+WORDS_PER_SECOND = 1.85
 
 
 class BeatType(str, Enum):
@@ -393,13 +404,14 @@ class PacingConfig:
 DEFAULT_PACING = PacingConfig()
 
 #: Spoken seconds to allow per half-move when sizing a budget automatically.
-SECONDS_PER_PLY = 1.5
+SECONDS_PER_PLY = 2.0
 
-#: Floor. Below about two minutes even a short game loses its middle beats to
-#: the mandatory intro/opening/finish/outro, and a 17-move miniature ends up
-#: with nothing between the opening and the mate.
-MIN_BUDGET_SECONDS = 120.0
-MAX_BUDGET_SECONDS = 300.0
+#: Floor. The mandatory intro/opening/finish/outro alone cost about 83 seconds
+#: of real speech, so a budget much under this leaves nothing between the
+#: opening and the mate. Raised when WORDS_PER_SECOND was calibrated against
+#: measured audio -- the old figures were the same length in honest seconds.
+MIN_BUDGET_SECONDS = 150.0
+MAX_BUDGET_SECONDS = 360.0
 
 
 def budget_for(game: ParsedGame) -> float:

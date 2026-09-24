@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import wave
 from pathlib import Path
+
+from .base import with_audio_extension
 from typing import List
 
 
@@ -30,7 +32,7 @@ def _concat_wav_pure(clip_paths: List[Path], output_path: Path) -> Path:
     if params is None or not frames_list:
         raise ValueError("No valid audio clips to assemble.")
 
-    wav_out = output_path.with_suffix(".wav")
+    wav_out = with_audio_extension(output_path, ".wav")
     with wave.open(str(wav_out), "wb") as wf:
         wf.setparams(params)
         for frames in frames_list:
@@ -55,7 +57,7 @@ def _concat_pydub(clip_paths: List[Path], output_path: Path) -> Path:
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     suffix = output_path.suffix.lstrip(".") or "mp3"
-    out = output_path.with_suffix(f".{suffix}")
+    out = with_audio_extension(output_path, f".{suffix}")
     combined.export(str(out), format=suffix)
     return out
 

@@ -100,9 +100,12 @@ def test_articles_agree_with_the_word_that_follows(game, sheet):
 
 
 def test_duration_is_measured_from_the_words_actually_written(game, sheet):
+    """Reads the constant rather than a literal -- it is calibrated, not fixed."""
     script = TemplateGenerator().generate(game, sheet)
     assert script.total_words > 0
-    assert script.total_seconds == pytest.approx(script.total_words / 2.5, abs=0.5)
+    assert script.total_seconds == pytest.approx(
+        script.total_words / B.WORDS_PER_SECOND, abs=0.5
+    )
 
 
 def test_the_budget_is_recorded_for_comparison(game, sheet):

@@ -356,6 +356,27 @@ def cmd_chess(args: argparse.Namespace) -> None:
         out.write_text(script.model_dump_json(indent=2), encoding="utf-8")
         print(f"  Script saved -> {out}")
 
+    if args.audio:
+        from voxplay.chessgame.audio import AudioError, narrate, write_timeline
+
+        print(f"\n[5/5] Narrating with the '{args.tts}' voice ...")
+        started = time.time()
+        try:
+            audio = narrate(script, args.audio_dir, provider=args.tts)
+        except AudioError as exc:
+            print(f"      ERROR: {exc}", file=sys.stderr)
+            sys.exit(1)
+        timeline = write_timeline(audio)
+        print(f"      synthesised {len(audio.cues)} clips in {time.time() - started:.1f}s")
+        print(f"      track    -> {audio.track_path}  ({audio.total_ms / 1000:.0f}s)")
+        print(f"      timeline -> {timeline}")
+        print(f"      word-count estimate {audio.estimated_ms / 1000:.0f}s, "
+              f"actual {audio.total_ms / 1000:.0f}s (drift {audio.drift_ratio:.2f}x)")
+        for cue in audio.cues:
+            span = f"{cue.plies[0]}-{cue.plies[-1]}" if cue.plies else "-"
+            print(f"        {cue.start_ms / 1000:6.1f}s  {cue.duration_ms / 1000:5.1f}s  "
+                  f"{cue.beat_type.value:<14} plies {span}")
+
 
 def cmd_eval(args: argparse.Namespace) -> None:
     """Run commentary quality evaluation over the full test suite."""
@@ -505,6 +526,12 @@ def build_parser() -> argparse.ArgumentParser:
     p_chess.add_argument("--max-motifs", type=int, default=20,
                          help="Cap how many motifs are listed.")
     p_chess.add_argument("--out", default=None, help="Write the script to a JSON file.")
+    p_chess.add_argument("--audio", action="store_true",
+                         help="Synthesise spoken audio and a timeline for the script.")
+    p_chess.add_argument("--tts", default="offline", choices=["offline", "mock", "gtts"],
+                         help="Voice backend. 'offline' needs no network or ffmpeg.")
+    p_chess.add_argument("--audio-dir", default="output/chess",
+                         help="Where to write clips, the track, and the timeline.")
 
     # eval
     p_eval = sub.add_parser(

@@ -11,3 +11,5 @@ build/
 .coverage
 htmlcov/
 .tools/
+# fetched puzzle corpus is regenerable; the cache can grow large
+data/puzzles/

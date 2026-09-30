@@ -391,6 +391,37 @@ def cmd_chess(args: argparse.Namespace) -> None:
             print(f"      open it in a browser: board, audio and captions in one file")
 
 
+def cmd_validate_motifs(args: argparse.Namespace) -> None:
+    """Score the motif detectors against human-tagged Lichess puzzles."""
+    from voxplay.chessgame.validate import run_validation
+
+    print("=" * 70)
+    print("  Motif detector validation against the Lichess puzzle database (CC0)")
+    print(f"  {args.count} puzzles per theme, {args.controls} control puzzles")
+    print("=" * 70)
+    print()
+
+    started = time.time()
+    report = run_validation(
+        count=args.count,
+        controls=args.controls,
+        cache_dir=args.cache_dir,
+        delay=args.delay,
+        progress=True,
+    )
+    print()
+    print(report.table())
+    print()
+    print(f"  {report.puzzles_used} puzzles scored in {time.time() - started:.0f}s")
+    print("  recall  = of puzzles a human tagged with this theme, how many we find")
+    print("  control = puzzles NOT about this theme; how often we fire anyway")
+
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(report.model_dump_json(indent=2), encoding="utf-8")
+    print(f"  report -> {out}")
+
+
 def cmd_eval(args: argparse.Namespace) -> None:
     """Run commentary quality evaluation over the full test suite."""
     from voxplay.eval.runner import run_match_eval
@@ -548,6 +579,21 @@ def build_parser() -> argparse.ArgumentParser:
     p_chess.add_argument("--audio-dir", default="output/chess",
                          help="Where to write clips, the track, and the timeline.")
 
+    # validate-motifs
+    p_val = sub.add_parser(
+        "validate-motifs",
+        help="Score motif detectors against human-tagged Lichess puzzles.",
+    )
+    p_val.add_argument("--count", type=int, default=40,
+                       help="Puzzles to sample per theme (default 40).")
+    p_val.add_argument("--controls", type=int, default=60,
+                       help="Control puzzles drawn from unrelated themes.")
+    p_val.add_argument("--delay", type=float, default=2.0,
+                       help="Seconds between API calls. 0.7 earns HTTP 429s; be kind.")
+    p_val.add_argument("--cache-dir", default="data/puzzles",
+                       help="Where fetched puzzles are cached between runs.")
+    p_val.add_argument("--out", default="output/motif_validation.json")
+
     # eval
     p_eval = sub.add_parser(
         "eval",
@@ -577,6 +623,7 @@ def app() -> None:
         "synthesize": cmd_synthesize,
         "demo": cmd_demo,
         "chess": cmd_chess,
+        "validate-motifs": cmd_validate_motifs,
         "eval": cmd_eval,
     }
     dispatch[args.command](args)

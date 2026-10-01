@@ -314,8 +314,7 @@ output, which is a style warning rather than a defect but a fair one.
 
 | Item | Objective | Notes |
 |---|---|---|
-| Classification agreement with Lichess annotations | 5 | Comparable because the same win-probability mapping is used |
-| Listener study | 5 | Long pole; both baselines already implemented |
+| Listener study | 5 | **The only remaining research item.** Protocol pre-registered in `listener-study-protocol.md`; blocked on recruiting participants |
 | Opening-deviation detection | 2 | Requires the Lichess opening explorer |
 | Live language-model commentary path | 3 | Implemented but unverified; the API key currently has no credit |
 

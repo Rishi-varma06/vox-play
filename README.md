@@ -1,153 +1,174 @@
-# VoxPlay — AI Cricket Commentary Engine
+# VoxPlay
 
-Turns structured ball-by-ball match data into natural English audio commentary.
+**Automatic spoken commentary for games, from structured data alone.**
 
-**University Capstone · Phase 1 MVP**
+Millions of chess games are played every day and almost none of them are ever
+explained. Engine analysis gives you an accurate table of move labels; human
+commentary gives you a story but only exists for elite events. VoxPlay closes
+that gap: paste a game link, get narrated commentary synced to a board, at
+negligible cost per game.
 
----
-
-## Architecture
-
-```
-Input source          Event stream          Commentary engine         Audio
-─────────────         ────────────          ─────────────────         ─────
-scorecard file  ──►  BallEvent             Anthropic Claude   ──►   per-ball clips
-interactive scorer ─► InningsStartEvent    (rolling 3-ball            │
-[vision model*]       OverStartEvent        context window)            ▼
-                      MilestoneEvent                          assembled track (.wav)
-                      DrinksEvent
-
-* Extension point — see voxplay/ingest/base.py
-```
-
-The **Event** is the single contract through the whole system. Input sources produce events; commentary/TTS consume them. Adding a new source (vision model, live feed) or a new output (multilingual, different TTS) requires no changes to other layers.
+*University capstone. Two domains -- chess and cricket -- on one pipeline.*
 
 ---
 
-## Setup
+## What it does
 
-```bash
-# 1. Clone & enter the project
-cd voxplay
-
-# 2. Create a virtual environment
-python -m venv .venv
-# Windows:
-.venv\Scripts\activate
-# macOS/Linux:
-source .venv/bin/activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Configure API keys (optional — demo works without them)
-cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
+```
+PGN / Lichess link
+      |
+      v
+  engine analysis  ->  move classification  ->  tactical motifs
+      |
+      v
+  beat selection   <-- decides WHAT gets airtime and for how long
+      |
+      v
+  commentary script  ->  verification gate  <-- rejects anything unsupported
+      |
+      v
+  spoken audio + timeline  ->  synced board player
 ```
 
-> **ffmpeg** is needed by pydub to handle MP3 files. Install it from https://ffmpeg.org/download.html and add it to your PATH.  
-> The mock TTS provider writes silent WAV files, so **ffmpeg is not required** to run the demo.
+Stages 1-3 are chess-specific. Everything after is domain-agnostic, and the
+proof is that it was written for cricket first.
 
 ---
 
-## Quick start — demo day
-
-This command runs the complete pipeline on the bundled sample T20 match with **no API keys or internet connection**:
+## Quick start
 
 ```bash
-voxplay demo
+pip install -e ".[dev]"
 ```
 
-Outputs land in `./output/demo/`:
-- `demo_events.json` — the parsed event stream
-- `demo_transcript.json` — generated commentary (one line per event)
-- `demo_commentary.wav` — assembled audio track (silent placeholders in mock mode)
+Narrate the bundled 1858 Opera Game:
 
-To run with live Anthropic commentary:
 ```bash
-# .env must contain ANTHROPIC_API_KEY
-voxplay demo
+python -m voxplay.cli.main chess data/sample_game.pgn --player
+```
+
+Or any real game, fetched live:
+
+```bash
+python -m voxplay.cli.main chess https://lichess.org/<game-id> --player --baselines
+```
+
+`--player` writes a **single self-contained HTML file** -- board, audio,
+captions, evaluation bar and move list. Open it in a browser and press play.
+No ffmpeg, no server, no API key.
+
+Add `--baselines` to print the pacing comparison the project is built around.
+
+### Useful flags
+
+| Flag | |
+|---|---|
+| `--audio` | synthesise speech and a timeline (implied by `--player`) |
+| `--generator template\|claude\|auto` | `auto` uses Claude if a key is set, else the grounded template |
+| `--nodes N` | engine budget per position (default 1,000,000) |
+| `--threads N` | **keep at 1** -- above 1, results stop being reproducible |
+| `--audience N` | listener rating; below 1600 chess terms get explained |
+| `--persona analytical\|energetic` | narration voice |
+
+---
+
+## Measured results
+
+Nothing below is an estimate.
+
+| What | Result |
+|---|---|
+| Tactical motif recall vs. human-tagged Lichess puzzles | **91.6%** mean over 11 motifs, n=1,000 each; six at 100% |
+| Move classification agreement with Lichess | **Cohen's kappa 0.932** on 24,255 moves from 339 games |
+| Pacing vs. baselines (same game) | **105s** system / 144s top-N / **594s** flat move-by-move |
+| Spoken-duration model accuracy | **1.03x** predicted vs. actual |
+| Verified hallucinations in grounded output | **0** errors per 100 beats |
+| Analysis speed | 137 positions in 37s, single-threaded and reproducible |
+
+The pacing figure is the one to look at: narrating a 17-move game move by
+move takes nearly ten minutes and nobody listens to it.
+
+---
+
+## The three things that are new here
+
+Automatic chess commentary has a literature going back to Jhamtani et al.
+(ACL 2018). "A language model writes chess commentary" is well covered. What
+is not:
+
+1. **Pacing.** Essentially all prior work emits one comment per move. There
+   is no content-selection stage. In audio that is fatal.
+2. **Spoken, synchronised output.** The literature generates text.
+3. **Grounding by construction.** The model narrates facts it is handed and
+   never derives a chess fact of its own; a verification gate checks every
+   beat against those facts and regenerates anything unsupported. Hebbar et
+   al. (2026) measured a strong model producing incorrect chess claims 22% of
+   the time without tool support.
+
+See [`docs/project-report.md`](docs/project-report.md) for the full survey.
+
+---
+
+## Validation tools
+
+```bash
+# Score motif detectors against the Lichess puzzle database (CC0)
+python -m voxplay.cli.main validate-motifs --database data/lichess_db_puzzle.csv.zst
+
+# Measure classifier agreement with Lichess's own annotations
+python -m voxplay.cli.main agreement
 ```
 
 ---
 
-## All commands
+## Cricket
 
-### Interactive scorer
-Score a match ball-by-ball in the terminal. State is computed automatically.
+The original domain, and the reason the architecture generalises. Cricket
+needs a human scoring ball by ball before any commentary is possible, which
+is exactly the problem chess does not have -- that is why the project moved.
 
 ```bash
-voxplay score
-voxplay score --match-id my_match --out ./output
+python -m voxplay.cli.main demo          # full offline pipeline, bundled match
+python -m voxplay.cli.main score         # score a match in the terminal
+python -m uvicorn voxplay.web.app:app --reload --port 8000   # browser scorer
 ```
 
-**Scorer key reference**
-
-| Input | Action |
-|-------|--------|
-| `0`–`6` | Runs scored (4 and 6 set boundary/six flags automatically) |
-| `w` | Wide (+1, ball not counted) |
-| `n` | No-ball (+1, ball not counted) |
-| `b <runs>` | Byes |
-| `l <runs>` | Leg byes |
-| `W` | Wicket (prompts for dismissal details) |
-| `u` / `undo` | Remove last ball |
-| `d` | Add drinks break |
-| `s` / `save` | Save event stream and exit |
-| `q` / `quit` | Quit without saving |
-| `?` | Help |
-
-### Ingest a scorecard file
-```bash
-voxplay ingest data/sample_match.json
-voxplay ingest data/my_scorecard.csv --out ./output
-```
-
-**CSV column format** — required columns: `match_id, innings, over, ball, runs`.  
-Optional: `bowler, batsman_striker, batsman_non_striker, extras_type, extras_runs, dismissal_type, dismissed_batsman, fielder, shot_tag, is_boundary, is_six, timestamp, tags` (pipe-separated).
-
-### Generate commentary
-```bash
-voxplay commentate output/my_match_events.json
-voxplay commentate output/my_match_events.json --mock   # offline
-```
-
-### Synthesize audio
-```bash
-voxplay synthesize output/my_match_transcript.json --tts gtts
-voxplay synthesize output/my_match_transcript.json --tts mock   # silent stubs
-```
+The chess domain was added *alongside* cricket without modifying the shared
+core, which is the evidence for the reuse claim rather than an assertion
+about it.
 
 ---
 
-## Running tests
+## Documentation
 
-```bash
-pytest
-pytest --cov=voxplay --cov-report=term-missing
-```
-
-Test coverage includes:
-- Schema parsing and edge cases
-- Automatic state computation (runs, extras, wickets, run rates, over rollover)
-- Commentary windowing logic and mock generation
-- Interactive scorer event output and undo
+| | |
+|---|---|
+| [`docs/project-report.md`](docs/project-report.md) | Problem, literature survey, limitations, objectives, results |
+| [`docs/weekly-diary.md`](docs/weekly-diary.md) | Running record of work, backed by commits |
+| [`docs/listener-study-protocol.md`](docs/listener-study-protocol.md) | Pre-registered human evaluation design |
+| `CLAUDE.md` | Architecture notes and the decisions that are load-bearing |
 
 ---
 
-## Extension points
+## Requirements
 
-### Adding a new input source (e.g. a vision model)
-See `voxplay/ingest/base.py` — implement the `EventSource` interface and wire it into `voxplay/cli/main.py` as a new subcommand. **No changes to the commentary engine or TTS layer are required.**
+- Python 3.11+
+- **Stockfish** for real analysis. Put it on PATH, set `VOXPLAY_STOCKFISH_PATH`,
+  or drop it in `.tools/stockfish/`. Without it, `--engine mock` runs the whole
+  pipeline offline with deterministic placeholder evaluations -- useful for
+  testing, never for results.
+- `ANTHROPIC_API_KEY` only for model-written commentary. Without it the
+  grounded template generator runs instead, and the demo still works.
 
-### Adding multilingual support
-The commentary engine produces English text from a system prompt (`voxplay/commentary/prompts.py`). To add a language:
-1. Add a translated `SYSTEM_PROMPT` and prompt builders in a new `prompts_<lang>.py`.
-2. Add a language flag to `CommentaryEngine.__init__` and select the prompt module there.
-3. Pass the language code to the TTS provider (gTTS supports ~60 languages via its `lang` parameter).
+---
 
-### Swapping in ElevenLabs TTS
-See `voxplay/tts/elevenlabs_provider.py` — the stub explains exactly what to implement. Use `--tts elevenlabs` once done.
+## Tests
+
+```bash
+python -m pytest tests/
+```
+
+444 tests, entirely offline -- no network, no API key, no engine required.
 
 ---
 
@@ -155,18 +176,16 @@ See `voxplay/tts/elevenlabs_provider.py` — the stub explains exactly what to i
 
 ```
 voxplay/
-├── voxplay/
-│   ├── events/          # Pydantic event schema + automatic state engine
-│   ├── ingest/          # EventSource interface, CSV + JSON parsers
-│   ├── commentary/      # Commentary engine + prompt builders
-│   ├── tts/             # TTS interface, gTTS, ElevenLabs stub, assembler
-│   ├── scorer/          # Interactive terminal scorer
-│   └── cli/             # CLI entry point (argparse subcommands)
-├── data/
-│   └── sample_match.json   # Bundled T20 demo match
-├── tests/
-├── output/              # Generated files (gitignored)
-├── requirements.txt
-├── pyproject.toml
-└── .env.example
+  chessgame/     chess domain: ingest, engine, motifs, beats, script,
+                 speech, audio, player, validation, verification
+  events/        cricket event schema and state engine
+  ingest/        cricket scorecard parsers
+  commentary/    LLM commentary engine (shared)
+  eval/          cricket quality checks
+  tts/           speech providers and assembly (shared)
+  scorer/        interactive cricket scorer
+  web/           browser-based cricket scorer
+  cli/           command line entry point
+data/            sample game, sample match, test fixtures
+docs/            report sections, diary, study protocol
 ```

@@ -441,6 +441,48 @@ def cmd_validate_motifs(args: argparse.Namespace) -> None:
     print(f"  report -> {out}")
 
 
+def cmd_agreement(args: argparse.Namespace) -> None:
+    """Measure classifier agreement against Lichess's own annotations."""
+    from voxplay.chessgame.agreement import (
+        AgreementError, annotated_moves, featured_users,
+        fetch_annotated_games, read_games, rule_agreement,
+    )
+
+    print("=" * 70)
+    print("  Move classifier agreement with Lichess annotations")
+    print("=" * 70)
+    try:
+        if args.pgn:
+            text = Path(args.pgn).read_text(encoding="utf-8")
+            print(f"  source: {args.pgn}")
+        else:
+            users = args.users.split(",") if args.users else featured_users(args.players)
+            print(f"  players: {', '.join(users)}")
+            text = fetch_annotated_games(users, per_user=args.per_player,
+                                         cache=args.cache, progress=True)
+    except AgreementError as exc:
+        print(f"  ERROR: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    moves, games = [], 0
+    for game in read_games(text):
+        games += 1
+        moves.extend(annotated_moves(game))
+    print(f"  {games} analysed games, {len(moves):,} annotated moves\n")
+
+    if not moves:
+        print("  ERROR: no annotated moves found.", file=sys.stderr)
+        sys.exit(1)
+
+    report = rule_agreement(moves)
+    print(report.table())
+
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(report.model_dump_json(indent=2), encoding="utf-8")
+    print(f"\n  report -> {out}")
+
+
 def cmd_eval(args: argparse.Namespace) -> None:
     """Run commentary quality evaluation over the full test suite."""
     from voxplay.eval.runner import run_match_eval
@@ -618,6 +660,22 @@ def build_parser() -> argparse.ArgumentParser:
                        help="Stop scanning the database after this many puzzles.")
     p_val.add_argument("--out", default="output/motif_validation.json")
 
+    # agreement
+    p_agr = sub.add_parser(
+        "agreement",
+        help="Measure classifier agreement with Lichess's own annotations.",
+    )
+    p_agr.add_argument("--pgn", default=None,
+                       help="Score an existing PGN of analysed games instead of fetching.")
+    p_agr.add_argument("--users", default=None,
+                       help="Comma-separated Lichess usernames to pull games from.")
+    p_agr.add_argument("--players", type=int, default=8,
+                       help="How many currently-featured players to sample from.")
+    p_agr.add_argument("--per-player", type=int, default=40,
+                       help="Analysed games to fetch per player.")
+    p_agr.add_argument("--cache", default="data/games/annotated.pgn")
+    p_agr.add_argument("--out", default="output/agreement.json")
+
     # eval
     p_eval = sub.add_parser(
         "eval",
@@ -648,6 +706,7 @@ def app() -> None:
         "demo": cmd_demo,
         "chess": cmd_chess,
         "validate-motifs": cmd_validate_motifs,
+        "agreement": cmd_agreement,
         "eval": cmd_eval,
     }
     dispatch[args.command](args)

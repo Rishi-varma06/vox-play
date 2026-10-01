@@ -11,6 +11,7 @@ import pytest
 
 from voxplay.chessgame.evaluation import (
     COMMENTARY_THRESHOLDS,
+    DEFAULT_THRESHOLDS,
     ClassificationThresholds,
     accuracy_pct,
     classify_move,
@@ -120,6 +121,10 @@ def test_accuracy_stays_inside_zero_to_one_hundred():
 # Classification
 # ---------------------------------------------------------------------------
 
+#: Explicit, so this tests the ladder rather than whatever the defaults are.
+LADDER = ClassificationThresholds(inaccuracy=10.0, mistake=20.0, blunder=30.0)
+
+
 @pytest.mark.parametrize(
     "win_loss,expected",
     [
@@ -133,8 +138,26 @@ def test_accuracy_stays_inside_zero_to_one_hundred():
         (95.0, MoveQuality.BLUNDER),
     ],
 )
-def test_classification_thresholds(win_loss, expected):
-    assert classify_move(win_loss) == expected
+def test_classification_ladder_is_inclusive_at_each_boundary(win_loss, expected):
+    assert classify_move(win_loss, thresholds=LADDER) == expected
+
+
+def test_the_default_thresholds_are_the_measured_ones():
+    """
+    5/10/15, fitted against Lichess's own annotations on 24,255 moves from
+    339 analysed games. The documented 10/20/30 this project shipped first
+    gave Cohen's kappa 0.355 and agreed on none of Lichess's 2,133
+    inaccuracies; these give 0.932. Changing them without re-running that
+    measurement un-grounds every classification in the system.
+    """
+    assert (DEFAULT_THRESHOLDS.inaccuracy,
+            DEFAULT_THRESHOLDS.mistake,
+            DEFAULT_THRESHOLDS.blunder) == (5.0, 10.0, 15.0)
+
+
+def test_the_measured_defaults_classify_a_real_inaccuracy():
+    """The case the old thresholds got wrong: a 7-point loss is an inaccuracy."""
+    assert classify_move(7.0) == MoveQuality.INACCURACY
 
 
 def test_engine_top_move_is_labelled_best():
@@ -166,9 +189,9 @@ def test_book_does_not_hide_a_blunder():
 
 
 def test_thresholds_are_tunable():
-    strict = ClassificationThresholds(inaccuracy=5.0, mistake=10.0, blunder=15.0)
-    assert classify_move(16.0, thresholds=strict) == MoveQuality.BLUNDER
-    assert classify_move(16.0) == MoveQuality.INACCURACY
+    lenient = ClassificationThresholds(inaccuracy=20.0, mistake=40.0, blunder=60.0)
+    assert classify_move(16.0, thresholds=lenient) == MoveQuality.GOOD
+    assert classify_move(16.0) == MoveQuality.BLUNDER
 
 
 def test_decided_guard_is_off_by_default():

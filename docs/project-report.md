@@ -323,8 +323,40 @@ Validate the system against annotated master games and real user feedback.
 Lichess puzzle database; agreement with Lichess annotations for move
 classification; and a blind listener study against the implemented baselines.
 
-**Status: motif validation complete; classification agreement and the
+**Status: motif validation and classification agreement complete; the
 listener study outstanding.**
+
+#### Move classification agreement
+
+Our classifier against Lichess's own annotations on **24,255 moves from 339
+analysed games**, both reading Lichess's published evaluations so that any
+disagreement is attributable to the classification rule rather than to two
+engines differing:
+
+| | Lichess: ok | inaccuracy | mistake | blunder |
+|---|---|---|---|---|
+| **ours: ok** | 19,405 | 170 | 50 | 0 |
+| **inaccuracy** | 170 | 1,963 | 43 | 19 |
+| **mistake** | 40 | 0 | 882 | 31 |
+| **blunder** | 21 | 0 | 0 | 1,461 |
+
+Raw agreement **97.8%**, expected by chance 66.8%, **Cohen's kappa 0.932** --
+"almost perfect" on the conventional scale. Per class: inaccuracy 92.0%,
+mistake 90.5%, blunder 96.7%.
+
+Kappa is the headline rather than raw agreement because most moves are not
+errors: a classifier that called everything "fine" would score over 90% raw
+and have no skill at all.
+
+**This measurement corrected the system.** The project originally used the
+thresholds given in community documentation -- roughly 10, 20 and 30 points
+of winning chances. Measured, those gave kappa 0.355 and agreed with
+**none** of Lichess's 2,133 inaccuracies, being about twice too lenient.
+Fitting thresholds to maximise agreement lands on 5 / 10 / 15, and the values
+are round for a reason: Lichess thresholds a winning-chances delta of 0.1 /
+0.2 / 0.3 on a -1..1 scale, which is 5 / 10 / 15 on a 0-100 one. The
+corrected thresholds are now the defaults, and the salience model's swing
+saturation is tied to them rather than hard-coded.
 
 Motif detectors scored against the Lichess puzzle database (CC0), 1,000
 human-tagged puzzles per theme and 2,000 control puzzles drawn from unrelated

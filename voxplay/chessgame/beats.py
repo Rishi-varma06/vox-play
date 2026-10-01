@@ -31,7 +31,7 @@ from typing import Dict, List, Optional, Sequence
 
 from pydantic import BaseModel, Field
 
-from .evaluation import ERROR_QUALITIES
+from .evaluation import DEFAULT_THRESHOLDS, ERROR_QUALITIES
 from .models import Color, GamePhase, GameResult, Motif, MoveEvent
 from .pgn_source import ParsedGame
 
@@ -190,9 +190,12 @@ MOTIF_WEIGHT: Dict[Motif, float] = {
     Motif.ADVANCED_PAWN: 0.30,
 }
 
-#: Win-percentage loss that counts as a full-strength swing. Set at the
-#: blunder threshold so a blunder saturates the term.
-SWING_SATURATION = 30.0
+#: Win-percentage loss that counts as a full-strength swing. Tied to the
+#: blunder threshold so a blunder saturates the term -- it moved from 30 to 15
+#: when that threshold was measured against Lichess's annotations rather than
+#: taken from documentation. Leaving it at 30 would have made every real
+#: blunder score half the salience it deserves.
+SWING_SATURATION = DEFAULT_THRESHOLDS.blunder
 
 #: Only-move gap that counts as full-strength criticality.
 CRITICALITY_SATURATION = 30.0

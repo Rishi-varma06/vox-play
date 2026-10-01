@@ -16,3 +16,6 @@ data/puzzles/
 
 # 290MB CC0 puzzle corpus; regenerable from database.lichess.org
 data/lichess_db_puzzle.csv.zst
+
+# fetched game corpus is regenerable
+data/games/

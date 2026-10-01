@@ -247,10 +247,35 @@ undefended". Telling a won piece from a recapture needs move history that
 neither a detector nor a puzzle position has, so the change was reverted and
 the theme is now reported as not comparable with the reason attached.
 
-### Planned for next week
+### Classification agreement (Objective 5)
 
-- Measure classification agreement against Lichess's own annotations, which
-  is directly comparable because both use the same win-probability mapping.
+Our move classifier against Lichess's own annotations on 24,255 moves from
+339 analysed games: **Cohen's kappa 0.932**, raw agreement 97.8%. Full
+confusion matrix in `project-report.md`.
+
+**The measurement found a real error in the system, which is why it was worth
+doing.** The project had been using the thresholds community documentation
+gives -- about 10, 20 and 30 points of winning chances. Measured against
+ground truth those scored kappa 0.355 and agreed with *none* of Lichess's
+2,133 inaccuracies: they are roughly twice too lenient. The confusion matrix
+made it obvious, because the disagreement was not noise but a clean one-band
+shift, every inaccuracy called fine and every blunder called a mistake.
+
+Fitting thresholds to maximise agreement gives 5 / 10 / 15 and kappa 0.932.
+The values are round because Lichess thresholds a winning-chances delta of
+0.1 / 0.2 / 0.3 on a -1..1 scale, which is 5 / 10 / 15 on a 0-100 one. The
+documentation this project trusted described a different quantity.
+
+The corrected thresholds changed behaviour everywhere they are used: the
+salience model's swing saturation was hard-coded to the old blunder
+threshold, so every genuine blunder had been scoring half the salience it
+deserved. It is now tied to the threshold rather than repeated.
+
+Both halves of this week's validation work followed the same pattern -- the
+first number was wrong, the confusion matrix or recall table showed *how* it
+was wrong, and the diagnosis was more useful than the final figure.
+
+### Planned for next week
 - Draft the listener-study protocol and register thresholds before running
   it.
 - Begin recruiting listeners -- identified as the schedule's long pole.

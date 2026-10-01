@@ -52,10 +52,21 @@ class ClassificationThresholds:
     """
     Win-percentage loss required to earn each label.
 
-    Defaults follow Lichess so our output is comparable to theirs out of the
-    box. These are the primary knob for the classification-agreement
-    experiment -- vary them, report agreement against Lichess annotations as
-    a function of the thresholds.
+    Defaults are MEASURED against Lichess's own annotations, not taken from
+    documentation. Community sources describe the bands as roughly 10, 20 and
+    30 points of winning chances, and this project shipped those numbers
+    until they were tested: on 24,255 moves from 339 analysed games they gave
+    Cohen's kappa of 0.355 and agreed on exactly zero of Lichess's 2,133
+    inaccuracies, because they are about twice too lenient.
+
+    Fitting thresholds to maximise agreement on that corpus lands on 5 / 10 /
+    15, which raises kappa to 0.932 -- almost perfect agreement -- and the
+    values are exactly round for a reason: Lichess thresholds a
+    winning-chances delta of 0.1 / 0.2 / 0.3 on a -1..1 scale, which is
+    5 / 10 / 15 on this 0-100 one.
+
+    Still the primary knob for the sensitivity experiment; the point is that
+    the starting position is now a measurement rather than a guess.
 
     `decided_win_pct` caps severity once the game is already decided: above
     it, a move can be an inaccuracy but never a mistake or a blunder. Off by
@@ -64,9 +75,9 @@ class ClassificationThresholds:
     a "blunder" by a player who is still completely winning is simply wrong
     -- see COMMENTARY_THRESHOLDS.
     """
-    inaccuracy: float = 10.0
-    mistake: float = 20.0
-    blunder: float = 30.0
+    inaccuracy: float = 5.0
+    mistake: float = 10.0
+    blunder: float = 15.0
     decided_win_pct: Optional[float] = None
 
 

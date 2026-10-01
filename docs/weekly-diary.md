@@ -15,10 +15,10 @@ recalled. Companion document: `project-report.md`.
 | 1 | 07 Sep -- 13 Sep 2026 | Pivot to chess; analysis, motifs, pacing, script, CLI | 7 | 320 |
 | 2 | 14 Sep -- 20 Sep 2026 | No recorded activity | 0 | 320 |
 | 3 | 21 Sep -- 27 Sep 2026 | Spoken audio and the synchronised board player | 2 | 358 |
-| 4 | 28 Sep -- 04 Oct 2026 | Literature survey and project documentation | in progress | 358 |
+| 4 | 28 Sep -- 04 Oct 2026 | Literature survey, documentation, motif validation | in progress | 390 |
 
-**Current scale:** 11,118 lines of Python across implementation and tests,
-358 automated tests passing, 9 commits.
+**Current scale:** ~12,500 lines of Python across implementation and tests,
+390 automated tests passing.
 
 ---
 
@@ -205,11 +205,52 @@ This external measurement independently supports a design decision already
 taken in week 1 -- that motif detection and evaluation must be computed by
 tested code and handed to the model as facts, never asked of the model.
 
+### Motif validation (Objective 5)
+
+Detectors scored against 1,000 human-tagged puzzles per theme plus 2,000
+controls. **Mean recall 91.6%** across the eleven comparable motifs, six of
+them at 100%. Full table in `project-report.md`.
+
+Getting there took three corrections, and each was worth more than the
+number:
+
+**The obvious approach failed.** Sampling the puzzle API one call at a time
+ran for four hours, collected 25 puzzles across twelve themes, and was rate
+limited out. Ten themes got nothing. The run was abandoned in favour of the
+published database -- one 290MB download, no rate limits, every theme, 54
+seconds to score 14,000 puzzles.
+
+**The harness lied about an empty sample.** With no puzzles collected it
+printed "0.0% recall" for ten themes and a confident mean of 58.3% computed
+over two themes with six puzzles each. That reads as detectors that never
+fire rather than a sample that never arrived. Recall now returns nothing
+below a sample, undersized themes are excluded from the mean, and a run with
+nothing usable says so in words.
+
+**The first real measurement was measuring the wrong thing.** Scored against
+the solution's first move only, the mean was 46.5% and `promotion` scored
+10.5% -- impossible for a detector whose entire test is whether the move
+carries a promotion. A Lichess theme names the whole solution line, not its
+first move. Walking the line and scoring every move the solver makes took the
+mean from 46.5% to 86.0%. The detector had been right; the question was
+wrong.
+
+**A diagnosed defect was fixed, measured, and then reverted.** The
+hanging-piece detector scored 26.8% recall against a 26.3% control rate --
+no signal at all. Diagnosis was unambiguous: of 1,000 tagged puzzles, 100%
+have a piece already hanging and 100% of solutions capture an undefended one,
+while our detector reports pieces a move *leaves* hanging, which cannot
+include the one just taken. The alternative detector reached 100% recall, but
+control firing rose to 56.9% and on the Opera Game it called an ordinary
+recapture and the acceptance of Morphy's queen sacrifice pieces "left
+undefended". Telling a won piece from a recapture needs move history that
+neither a detector nor a puzzle position has, so the change was reverted and
+the theme is now reported as not comparable with the reason attached.
+
 ### Planned for next week
 
-- Score motif detection against the Lichess puzzle database (CC0,
-  human-tagged themes) for precision and recall per motif.
-- Measure classification agreement against Lichess's own annotations.
+- Measure classification agreement against Lichess's own annotations, which
+  is directly comparable because both use the same win-probability mapping.
 - Draft the listener-study protocol and register thresholds before running
   it.
 - Begin recruiting listeners -- identified as the schedule's long pole.
@@ -220,7 +261,6 @@ tested code and handed to the model as facts, never asked of the model.
 
 | Item | Objective | Notes |
 |---|---|---|
-| Motif scoring against the Lichess puzzle database | 5 | Free labelled ground truth; yields a precision/recall table |
 | Classification agreement with Lichess annotations | 5 | Comparable because the same win-probability mapping is used |
 | Listener study | 5 | Long pole; both baselines already implemented |
 | Verification gate for chess claims | 3 | Extends the existing grounding checks |

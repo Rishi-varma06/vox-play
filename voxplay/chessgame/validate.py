@@ -102,6 +102,26 @@ class Puzzle(BaseModel):
             return None
 
 
+#: Themes whose Lichess definition does not ask the question our detector
+#: answers, so a recall figure would be a category error rather than a
+#: measurement. Excluded from the headline mean and marked in the table.
+#:
+#: hangingPiece: Lichess tags a puzzle this way when the SOLUTION TAKES an
+#: undefended piece. We detect a move that LEAVES one hanging, which by
+#: construction cannot include the piece just captured. Measured on 1000
+#: tagged puzzles: 100% have a piece already hanging before the move and 100%
+#: of solutions capture an undefended one.
+#:
+#: Detecting captures-of-hanging instead was tried and reverted. It took
+#: recall to 100% but control firing to 56.9%, and on a real game it labelled
+#: an ordinary recapture and the acceptance of a famous queen sacrifice as
+#: pieces "left undefended". Separating a won piece from a recapture or an
+#: accepted sacrifice needs move history, which neither a detector nor a
+#: puzzle FEN carries. The commentary-relevant question is the one we keep.
+NOT_COMPARABLE: Dict[Motif, str] = {
+    Motif.HANGING_PIECE: "we detect leaving a piece hanging, not taking one",
+}
+
 #: Below this many tagged puzzles a recall figure is not worth printing. A
 #: first run collected zero puzzles for ten of twelve themes and the table
 #: dutifully reported "0.0% recall" for every one of them, which reads as a
@@ -120,9 +140,14 @@ class ThemeScore(BaseModel):
     fired_in_controls: int = 0
 
     @property
+    def comparable(self) -> bool:
+        """False when the theme does not ask what this detector answers."""
+        return self.motif not in NOT_COMPARABLE
+
+    @property
     def measured(self) -> bool:
         """True when enough puzzles arrived for the figures to mean anything."""
-        return self.positives >= MIN_SAMPLE
+        return self.positives >= MIN_SAMPLE and self.comparable
 
     @property
     def recall(self) -> Optional[float]:
@@ -160,7 +185,12 @@ class ValidationReport(BaseModel):
             self.scores, key=lambda s: (not s.measured, -(s.recall or 0.0))
         )
         for score in ordered:
-            note = "" if score.measured else "   (sample too small)"
+            if not score.comparable:
+                note = "   (not comparable: %s)" % NOT_COMPARABLE[score.motif]
+            elif not score.measured:
+                note = "   (sample too small)"
+            else:
+                note = ""
             lines.append(
                 "%-18s %-16s %4d   %s    %5d  %s%s"
                 % (score.motif.value, score.theme, score.positives,
@@ -367,12 +397,14 @@ def puzzle_from_row(row: Dict[str, str]) -> Optional[Puzzle]:
     )
 
 
-def stream_database(archive: Path | str) -> Iterable[Puzzle]:
+def stream_rows(archive: Path | str) -> Iterable[Dict[str, str]]:
     """
-    Every puzzle in the compressed CSV, decompressed on the fly.
+    Raw CSV rows from the compressed archive, decompressed on the fly.
 
     Streamed rather than extracted: the archive is about 290MB compressed and
-    several times that on disk, and a single pass is all this needs.
+    several times that on disk, and a single pass is all this needs. Rows are
+    handed back unparsed because building a board for all five million of
+    them, when a few thousand will be sampled, is most of the runtime.
     """
     import csv
     import io
@@ -389,10 +421,15 @@ def stream_database(archive: Path | str) -> Iterable[Puzzle]:
     decompressor = zstandard.ZstdDecompressor()
     with archive.open("rb") as raw, decompressor.stream_reader(raw) as stream:
         text = io.TextIOWrapper(stream, encoding="utf-8", newline="")
-        for row in csv.DictReader(text):
-            puzzle = puzzle_from_row(row)
-            if puzzle is not None:
-                yield puzzle
+        yield from csv.DictReader(text)
+
+
+def stream_database(archive: Path | str) -> Iterable[Puzzle]:
+    """Every puzzle in the archive, as parsed Puzzle objects."""
+    for row in stream_rows(archive):
+        puzzle = puzzle_from_row(row)
+        if puzzle is not None:
+            yield puzzle
 
 
 def sample_database(
@@ -416,42 +453,53 @@ def sample_database(
 
     rng = random.Random(SAMPLE_SEED)
     wanted = set(themes)
-    reservoirs: Dict[str, List[Puzzle]] = {theme: [] for theme in themes}
-    seen_counts: Dict[str, int] = {theme: 0 for theme in themes}
-    control_pool: List[Puzzle] = []
-    control_seen = 0
     control_set = set(control_themes)
 
-    for index, puzzle in enumerate(stream_database(archive)):
+    # Reservoirs hold raw rows. Boards are built only for what survives the
+    # sampling, turning five million board constructions into a few thousand.
+    reservoirs: Dict[str, List[Dict[str, str]]] = {theme: [] for theme in themes}
+    seen_counts: Dict[str, int] = {theme: 0 for theme in themes}
+    control_rows: List[Dict[str, str]] = []
+    control_seen = 0
+
+    for index, row in enumerate(stream_rows(archive)):
         if max_rows is not None and index >= max_rows:
             break
-        if progress and index and index % 500_000 == 0:
-            print(f"      scanned {index:,} puzzles")
+        if progress and index and index % 1_000_000 == 0:
+            print(f"      scanned {index:,} rows")
 
-        tags = set(puzzle.themes)
+        tags = set((row.get("Themes") or "").split())
 
         for theme in wanted & tags:
             seen_counts[theme] += 1
             bucket = reservoirs[theme]
             if len(bucket) < per_theme:
-                bucket.append(puzzle)
+                bucket.append(row)
             else:
                 slot = rng.randrange(seen_counts[theme])
                 if slot < per_theme:
-                    bucket[slot] = puzzle
+                    bucket[slot] = row
 
-        if tags & control_set:
+        if tags & control_set and not (tags & wanted):
+            # A control must not be about any motif under test, or it is not
+            # a control -- score_theme filters per theme, this filters broadly.
             control_seen += 1
-            if len(control_pool) < controls:
-                control_pool.append(puzzle)
+            if len(control_rows) < controls:
+                control_rows.append(row)
             else:
                 slot = rng.randrange(control_seen)
                 if slot < controls:
-                    control_pool[slot] = puzzle
+                    control_rows[slot] = row
+
+    def build(rows: Iterable[Dict[str, str]]) -> List[Puzzle]:
+        return [p for p in (puzzle_from_row(r) for r in rows) if p is not None]
+
+    sampled = {theme: build(rows) for theme, rows in reservoirs.items()}
+    control_pool = build(control_rows)
 
     if progress:
-        print(f"      sampled from {sum(seen_counts.values()):,} theme-tagged puzzles")
-    return reservoirs, control_pool
+        print(f"      drew from {sum(seen_counts.values()):,} theme-tagged puzzles")
+    return sampled, control_pool
 
 
 def run_validation_from_database(
@@ -487,23 +535,49 @@ def run_validation_from_database(
 # Scoring
 # ---------------------------------------------------------------------------
 
-def detected_motifs(puzzle: Puzzle) -> Set[Motif]:
+def detected_motifs(puzzle: Puzzle, whole_line: bool = True) -> Set[Motif]:
     """
-    Motifs our detectors find in the puzzle's solution move.
+    Motifs our detectors find in the puzzle's solution.
 
-    A puzzle whose FEN or solution will not parse is skipped rather than
+    `whole_line` is the difference between measuring the detectors and
+    measuring an artefact of the comparison. A Lichess theme describes the
+    whole solution, not its first move: a puzzle tagged "promotion" may
+    promote on the third move of the line, and one tagged "backRankMate" is
+    usually named for how the line ENDS. Scoring only the first move gave
+    promotion 10.5% recall, which is impossible for a detector whose entire
+    test is `move.promotion is not None` -- the detector was right and the
+    question was wrong.
+
+    So the line is walked and the motifs from every move the SOLVER makes are
+    unioned. The opponent's replies are played but not scored; they are not
+    the player's tactics.
+
+    Note this is the validation question, not the commentary one. Commentary
+    asks what a single move created, which is what detect_motifs answers and
+    what `whole_line=False` reproduces.
+
+    A puzzle whose position or moves will not parse is skipped rather than
     counted against the detectors -- that is a data problem, not a miss.
     """
-    move = puzzle.move
-    if move is None:
-        return set()
     try:
         board = chess.Board(puzzle.fen)
     except ValueError:
         return set()
-    if move not in board.legal_moves:
-        return set()
-    return {hit.motif for hit in detect_motifs(board, move)}
+
+    found: Set[Motif] = set()
+    for index, uci in enumerate(puzzle.solution):
+        try:
+            move = chess.Move.from_uci(uci)
+        except ValueError:
+            break
+        if move not in board.legal_moves:
+            break
+        if index % 2 == 0:  # the solver's move; odd indices are the reply
+            found.update(hit.motif for hit in detect_motifs(board, move))
+        board.push(move)
+        if not whole_line:
+            break
+    return found
 
 
 def score_theme(

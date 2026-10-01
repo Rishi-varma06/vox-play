@@ -236,8 +236,18 @@ Stated here rather than hidden, since they bound what the project can claim:
 
 - **Motif detection is rule-based.** It covers twelve well-defined tactical
   patterns. Higher-order motifs (deflection, overloading, zugzwang) are not
-  detected. Precision and recall against the Lichess puzzle database have not
-  yet been measured.
+  detected. Measured recall is in section 4, Objective 5.
+- **The pin detector deliberately trades recall for precision.** Pawn pins
+  are excluded, which costs measurable recall against human tags (45.7% with
+  the filter against 63.5% without) and buys specificity (7.9% control firing
+  against 21.6%). The filter exists because unfiltered pin detection produced
+  17 "pins" on a single 33-half-move game, almost all of them a queen
+  notionally pinning a pawn to another pawn, drowning the two that mattered.
+  The trade is the right one for commentary and the wrong one for matching a
+  puzzle database; both numbers are reported rather than the flattering one.
+- **The hanging-piece detector does not correspond to the Lichess theme of
+  the same name**, and the mismatch is a difference of question rather than a
+  defect. See Objective 5.
 - **The listener study has not been run.** Claims about engagement and pacing
   remain untested until it is.
 - **Opening-deviation detection is unimplemented**, so commentary cannot yet
@@ -312,7 +322,47 @@ Validate the system against annotated master games and real user feedback.
 *Success criterion:* precision and recall for motif detection against the
 Lichess puzzle database; agreement with Lichess annotations for move
 classification; and a blind listener study against the implemented baselines.
-**Status: outstanding.** This is the principal remaining work.
+
+**Status: motif validation complete; classification agreement and the
+listener study outstanding.**
+
+Motif detectors scored against the Lichess puzzle database (CC0), 1,000
+human-tagged puzzles per theme and 2,000 control puzzles drawn from unrelated
+themes, sampled by reservoir with a fixed seed:
+
+| Motif | Recall | Control firing |
+|---|---|---|
+| fork | 100.0% | 9.9% |
+| doubleCheck | 100.0% | 0.0% |
+| backRankMate | 100.0% | 10.7% |
+| smotheredMate | 100.0% | 0.0% |
+| promotion | 100.0% | 0.1% |
+| enPassant | 100.0% | 0.0% |
+| skewer | 95.5% | 9.6% |
+| discoveredAttack | 93.3% | 5.0% |
+| sacrifice | 87.3% | 6.2% |
+| advancedPawn | 84.0% | 6.2% |
+| pin | 47.0% | 6.2% |
+| **Mean (11 comparable)** | **91.6%** | |
+| hangingPiece | *not comparable* | |
+
+*Recall* is the share of human-tagged puzzles where our detector fires.
+*Control firing* is how often it fires on puzzles that are not about that
+theme -- reported instead of precision because Lichess tags the theme that
+makes a puzzle interesting, not every geometric feature on the board, so an
+untagged detection is not necessarily wrong.
+
+`pin` is low by design (see section 3.4). `hangingPiece` is excluded because
+Lichess tags a puzzle that way when the solution *takes* an undefended piece,
+while this project detects a move that *leaves* one hanging -- which by
+construction cannot be the piece just captured. Measured on 1,000 tagged
+puzzles: 100% have a piece already hanging before the move and 100% of
+solutions capture an undefended one. Detecting captures-of-hanging instead
+was implemented and reverted: it reached 100% recall but 56.9% control
+firing, and on a real game it labelled an ordinary recapture and the
+acceptance of a famous queen sacrifice as pieces "left undefended".
+Separating a won piece from a recapture or an accepted sacrifice requires
+move history that neither a detector nor a puzzle position carries.
 
 ### Objective 6 -- Build for reuse beyond chess
 

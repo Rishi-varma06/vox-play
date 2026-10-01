@@ -139,6 +139,41 @@ def test_a_missing_database_names_the_file_and_the_source():
 # Detection
 # ---------------------------------------------------------------------------
 
+def test_a_theme_later_in_the_line_is_still_found():
+    """
+    Regression, and the single biggest correction to this harness. A Lichess
+    theme names the whole solution, not its first move. Scoring only the first
+    move gave promotion 10.5% recall -- impossible for a detector whose entire
+    test is `move.promotion is not None`. The detector was right; the question
+    was wrong. Measured across 12 themes, the fix moved mean recall from 46.5%
+    to 86.0%.
+    """
+    # White queens on the second move of the line, not the first.
+    puzzle = Puzzle(
+        id="late", fen="8/P7/8/8/8/8/8/K5k1 w - - 0 1",
+        solution=["a1b1", "g1h1", "a7a8q"], themes=["promotion"],
+    )
+    assert Motif.PROMOTION not in detected_motifs(puzzle, whole_line=False)
+    assert Motif.PROMOTION in detected_motifs(puzzle, whole_line=True)
+
+
+def test_the_opponents_replies_are_played_but_not_scored():
+    """Their tactics are not the solver's, even though the line needs them."""
+    puzzle = Puzzle(
+        id="reply", fen="8/P7/8/8/8/8/8/K5k1 w - - 0 1",
+        solution=["a1b1", "g1h1", "a7a8q"],
+    )
+    # Reaching the third move at all proves the second was applied.
+    assert Motif.PROMOTION in detected_motifs(puzzle)
+
+
+def test_a_line_that_stops_being_legal_is_truncated_not_crashed():
+    puzzle = Puzzle(
+        id="bad", fen=chess.STARTING_FEN, solution=["e2e4", "e7e5", "zzzz"]
+    )
+    detected_motifs(puzzle)  # must not raise
+
+
 def test_a_known_fork_is_detected():
     puzzle = Puzzle(
         id="fork1", fen="r3k3/8/8/1N6/8/8/8/4K3 w - - 0 1",

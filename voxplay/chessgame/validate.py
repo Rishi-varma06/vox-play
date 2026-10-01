@@ -102,6 +102,14 @@ class Puzzle(BaseModel):
             return None
 
 
+#: Below this many tagged puzzles a recall figure is not worth printing. A
+#: first run collected zero puzzles for ten of twelve themes and the table
+#: dutifully reported "0.0% recall" for every one of them, which reads as a
+#: detector that never fires rather than a sample that never arrived. A number
+#: that looks like a measurement but is not is worse than a blank.
+MIN_SAMPLE = 20
+
+
 class ThemeScore(BaseModel):
     """How one detector did against one human-tagged theme."""
     motif: Motif
@@ -112,12 +120,21 @@ class ThemeScore(BaseModel):
     fired_in_controls: int = 0
 
     @property
-    def recall(self) -> float:
-        return self.detected_in_positives / self.positives if self.positives else 0.0
+    def measured(self) -> bool:
+        """True when enough puzzles arrived for the figures to mean anything."""
+        return self.positives >= MIN_SAMPLE
 
     @property
-    def false_positive_rate(self) -> float:
-        return self.fired_in_controls / self.controls if self.controls else 0.0
+    def recall(self) -> Optional[float]:
+        if not self.positives:
+            return None
+        return self.detected_in_positives / self.positives
+
+    @property
+    def false_positive_rate(self) -> Optional[float]:
+        if not self.controls:
+            return None
+        return self.fired_in_controls / self.controls
 
 
 class ValidationReport(BaseModel):
@@ -125,25 +142,47 @@ class ValidationReport(BaseModel):
     scores: List[ThemeScore] = Field(default_factory=list)
     puzzles_used: int = 0
 
+    @property
+    def usable(self) -> List[ThemeScore]:
+        return [s for s in self.scores if s.measured]
+
     def table(self) -> str:
         """Fixed-width summary, ASCII only for the project's terminal."""
+
+        def pct(value: Optional[float]) -> str:
+            return "     -" if value is None else "%5.1f%%" % (100 * value)
+
         lines = [
             "motif              theme              n   recall    control  fired",
             "-" * 68,
         ]
-        for score in sorted(self.scores, key=lambda s: -s.recall):
+        ordered = sorted(
+            self.scores, key=lambda s: (not s.measured, -(s.recall or 0.0))
+        )
+        for score in ordered:
+            note = "" if score.measured else "   (sample too small)"
             lines.append(
-                "%-18s %-16s %4d   %5.1f%%    %5d  %5.1f%%"
+                "%-18s %-16s %4d   %s    %5d  %s%s"
                 % (score.motif.value, score.theme, score.positives,
-                   100 * score.recall, score.controls,
-                   100 * score.false_positive_rate)
+                   pct(score.recall), score.controls,
+                   pct(score.false_positive_rate), note)
             )
-        scored = [s for s in self.scores if s.positives]
-        if scored:
-            mean = sum(s.recall for s in scored) / len(scored)
-            lines.append("-" * 68)
-            lines.append("%-18s %-16s %4d   %5.1f%%"
-                         % ("MEAN", "", self.puzzles_used, 100 * mean))
+
+        lines.append("-" * 68)
+        usable = self.usable
+        if usable:
+            mean = sum(s.recall for s in usable) / len(usable)
+            lines.append(
+                "%-18s %-16s %4d   %5.1f%%   (%d of %d themes had n >= %d)"
+                % ("MEAN", "", self.puzzles_used, 100 * mean,
+                   len(usable), len(self.scores), MIN_SAMPLE)
+            )
+        else:
+            lines.append(
+                "NO USABLE RESULT: no theme reached n >= %d. The corpus is too "
+                "small to\nmeasure anything; collect more puzzles before "
+                "reporting these figures." % MIN_SAMPLE
+            )
         return "\n".join(lines)
 
 
@@ -279,6 +318,169 @@ def fetch_puzzles(
 
     _save_cache(cache_dir, theme, puzzles)
     return puzzles[:count]
+
+
+# ---------------------------------------------------------------------------
+# The full database
+# ---------------------------------------------------------------------------
+
+DATABASE_URL = "https://database.lichess.org/lichess_db_puzzle.csv.zst"
+
+#: Fixed so a validation run is reproducible. Reservoir sampling with a
+#: pinned seed gives an unbiased sample that is also the same sample twice.
+SAMPLE_SEED = 20260101
+
+
+def puzzle_from_row(row: Dict[str, str]) -> Optional[Puzzle]:
+    """
+    One CSV row to a Puzzle, in the position the solver actually faces.
+
+    The CSV convention differs from the API's, and getting it wrong scores
+    every detector against the wrong board. Here `FEN` is the position BEFORE
+    the opponent's move: Moves[0] is that move, and Moves[1] is the first move
+    of the solution. So the puzzle position is reached by pushing Moves[0],
+    and the move under test is Moves[1].
+    """
+    moves = (row.get("Moves") or "").split()
+    if len(moves) < 2:
+        return None
+    try:
+        board = chess.Board(row["FEN"])
+        setup = chess.Move.from_uci(moves[0])
+        if setup not in board.legal_moves:
+            return None
+        board.push(setup)
+    except (ValueError, KeyError):
+        return None
+
+    try:
+        rating = int(row.get("Rating") or 0)
+    except ValueError:
+        rating = 0
+
+    return Puzzle(
+        id=row.get("PuzzleId", ""),
+        fen=board.fen(),
+        solution=moves[1:],
+        themes=(row.get("Themes") or "").split(),
+        rating=rating,
+    )
+
+
+def stream_database(archive: Path | str) -> Iterable[Puzzle]:
+    """
+    Every puzzle in the compressed CSV, decompressed on the fly.
+
+    Streamed rather than extracted: the archive is about 290MB compressed and
+    several times that on disk, and a single pass is all this needs.
+    """
+    import csv
+    import io
+
+    import zstandard
+
+    archive = Path(archive)
+    if not archive.exists():
+        raise ValidationError(
+            f"puzzle database not found at {archive}. Download it from "
+            f"{DATABASE_URL} (about 290MB, CC0)."
+        )
+
+    decompressor = zstandard.ZstdDecompressor()
+    with archive.open("rb") as raw, decompressor.stream_reader(raw) as stream:
+        text = io.TextIOWrapper(stream, encoding="utf-8", newline="")
+        for row in csv.DictReader(text):
+            puzzle = puzzle_from_row(row)
+            if puzzle is not None:
+                yield puzzle
+
+
+def sample_database(
+    archive: Path | str,
+    themes: Sequence[str],
+    per_theme: int,
+    control_themes: Sequence[str] = CONTROL_THEMES,
+    controls: int = 500,
+    max_rows: Optional[int] = None,
+    progress: bool = True,
+) -> tuple[Dict[str, List[Puzzle]], List[Puzzle]]:
+    """
+    Reservoir-sample every requested theme in a single pass over the archive.
+
+    One pass for all themes at once -- rescanning five million rows per theme
+    would turn minutes into an hour. Reservoir sampling draws uniformly from
+    the whole file rather than taking whichever puzzles happen to come first,
+    and the fixed seed makes the draw repeatable.
+    """
+    import random
+
+    rng = random.Random(SAMPLE_SEED)
+    wanted = set(themes)
+    reservoirs: Dict[str, List[Puzzle]] = {theme: [] for theme in themes}
+    seen_counts: Dict[str, int] = {theme: 0 for theme in themes}
+    control_pool: List[Puzzle] = []
+    control_seen = 0
+    control_set = set(control_themes)
+
+    for index, puzzle in enumerate(stream_database(archive)):
+        if max_rows is not None and index >= max_rows:
+            break
+        if progress and index and index % 500_000 == 0:
+            print(f"      scanned {index:,} puzzles")
+
+        tags = set(puzzle.themes)
+
+        for theme in wanted & tags:
+            seen_counts[theme] += 1
+            bucket = reservoirs[theme]
+            if len(bucket) < per_theme:
+                bucket.append(puzzle)
+            else:
+                slot = rng.randrange(seen_counts[theme])
+                if slot < per_theme:
+                    bucket[slot] = puzzle
+
+        if tags & control_set:
+            control_seen += 1
+            if len(control_pool) < controls:
+                control_pool.append(puzzle)
+            else:
+                slot = rng.randrange(control_seen)
+                if slot < controls:
+                    control_pool[slot] = puzzle
+
+    if progress:
+        print(f"      sampled from {sum(seen_counts.values()):,} theme-tagged puzzles")
+    return reservoirs, control_pool
+
+
+def run_validation_from_database(
+    archive: Path | str,
+    motifs: Optional[Sequence[Motif]] = None,
+    per_theme: int = 1000,
+    controls: int = 1000,
+    max_rows: Optional[int] = None,
+    progress: bool = True,
+) -> ValidationReport:
+    """Score every detector against a sample drawn from the full database."""
+    targets = [m for m in (motifs or list(SCORABLE)) if m in SCORABLE]
+    themes = [SCORABLE[m] for m in targets]
+
+    if progress:
+        print(f"  Scanning the puzzle database for {len(themes)} themes ...")
+    sampled, control_pool = sample_database(
+        archive, themes, per_theme, controls=controls,
+        max_rows=max_rows, progress=progress,
+    )
+
+    report = ValidationReport()
+    for motif in targets:
+        theme = SCORABLE[motif]
+        report.scores.append(
+            score_theme(motif, theme, sampled.get(theme, []), control_pool)
+        )
+    report.puzzles_used = sum(s.positives for s in report.scores) + len(control_pool)
+    return report
 
 
 # ---------------------------------------------------------------------------

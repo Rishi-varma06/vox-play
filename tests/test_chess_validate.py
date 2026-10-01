@@ -18,13 +18,17 @@ from voxplay.chessgame.models import Motif
 from voxplay.chessgame.validate import (
     CONTROL_THEMES,
     SCORABLE,
+    MIN_SAMPLE,
     Puzzle,
     ThemeScore,
+    ValidationError,
     ValidationReport,
     detected_motifs,
     load_cached,
     puzzle_fen,
+    puzzle_from_row,
     score_theme,
+    stream_database,
 )
 
 
@@ -70,6 +74,65 @@ def test_missing_data_yields_no_position():
 
 def test_an_unplayable_move_list_yields_no_position():
     assert puzzle_fen({"initialPly": 3}, {"pgn": "e4 e5 Qxz9"}) is None
+
+
+# ---------------------------------------------------------------------------
+# Database rows
+# ---------------------------------------------------------------------------
+
+def test_the_csv_convention_pushes_the_setup_move_first():
+    """
+    The CSV convention is NOT the API's. Here `FEN` is the position BEFORE
+    the opponent's move: Moves[0] is that move and Moves[1] begins the
+    solution. Treating the CSV's FEN as the puzzle position would score every
+    detector one half-move early, against a board the solver never saw.
+    """
+    row = {"PuzzleId": "x", "FEN": chess.STARTING_FEN,
+           "Moves": "e2e4 e7e5", "Themes": "opening", "Rating": "1500"}
+    puzzle = puzzle_from_row(row)
+    board = chess.Board(puzzle.fen)
+    assert board.board_fen() == board_after(["e4"]).board_fen()
+    assert board.turn == chess.BLACK
+    assert puzzle.solution == ["e7e5"]
+    assert puzzle.move in board.legal_moves
+
+
+def test_row_fields_are_carried_across():
+    row = {"PuzzleId": "abc12", "FEN": chess.STARTING_FEN, "Moves": "e2e4 e7e5",
+           "Themes": "opening short", "Rating": "1733"}
+    puzzle = puzzle_from_row(row)
+    assert puzzle.id == "abc12"
+    assert puzzle.themes == ["opening", "short"]
+    assert puzzle.rating == 1733
+
+
+def test_a_row_without_a_solution_move_is_rejected():
+    assert puzzle_from_row(
+        {"PuzzleId": "x", "FEN": chess.STARTING_FEN, "Moves": "e2e4"}
+    ) is None
+
+
+def test_a_row_whose_setup_move_is_illegal_is_rejected():
+    assert puzzle_from_row(
+        {"PuzzleId": "x", "FEN": chess.STARTING_FEN, "Moves": "e2e5 e7e5"}
+    ) is None
+
+
+def test_a_row_with_a_broken_fen_is_rejected():
+    assert puzzle_from_row(
+        {"PuzzleId": "x", "FEN": "nonsense", "Moves": "e2e4 e7e5"}
+    ) is None
+
+
+def test_a_non_numeric_rating_does_not_raise():
+    row = {"PuzzleId": "x", "FEN": chess.STARTING_FEN, "Moves": "e2e4 e7e5",
+           "Rating": "", "Themes": ""}
+    assert puzzle_from_row(row).rating == 0
+
+
+def test_a_missing_database_names_the_file_and_the_source():
+    with pytest.raises(ValidationError, match="database.lichess.org"):
+        list(stream_database("does/not/exist.csv.zst"))
 
 
 # ---------------------------------------------------------------------------
@@ -142,9 +205,16 @@ def test_a_control_actually_tagged_with_the_theme_is_discarded():
     assert score.controls == 1
 
 
-def test_empty_samples_do_not_divide_by_zero():
+def test_an_empty_sample_reports_nothing_rather_than_zero():
+    """
+    Regression. A run that collected no puzzles printed "0.0% recall" for
+    every theme, which reads as a detector that never fires rather than a
+    sample that never arrived.
+    """
     score = score_theme(Motif.FORK, "fork", [], [])
-    assert score.recall == 0.0 and score.false_positive_rate == 0.0
+    assert score.recall is None
+    assert score.false_positive_rate is None
+    assert not score.measured
 
 
 # ---------------------------------------------------------------------------
@@ -171,19 +241,33 @@ def test_control_themes_are_not_themselves_scored_motifs():
 
 
 def test_the_report_table_renders_every_score():
+    n = MIN_SAMPLE
     report = ValidationReport(
         scores=[
-            ThemeScore(motif=Motif.FORK, theme="fork", positives=10,
-                       detected_in_positives=8, controls=20, fired_in_controls=2),
-            ThemeScore(motif=Motif.PIN, theme="pin", positives=10,
-                       detected_in_positives=5, controls=20, fired_in_controls=1),
+            ThemeScore(motif=Motif.FORK, theme="fork", positives=n,
+                       detected_in_positives=int(n * 0.8), controls=20,
+                       fired_in_controls=2),
+            ThemeScore(motif=Motif.PIN, theme="pin", positives=n,
+                       detected_in_positives=n // 2, controls=20,
+                       fired_in_controls=1),
         ],
-        puzzles_used=40,
+        puzzles_used=2 * n,
     )
     table = report.table()
     assert "fork" in table and "pin" in table
     assert "80.0%" in table and "50.0%" in table
     assert "MEAN" in table
+
+
+def test_an_undersized_sample_is_marked_and_excluded_from_the_mean():
+    report = ValidationReport(scores=[
+        ThemeScore(motif=Motif.FORK, theme="fork", positives=MIN_SAMPLE - 1,
+                   detected_in_positives=1, controls=5, fired_in_controls=0),
+    ])
+    table = report.table()
+    assert "sample too small" in table
+    assert "NO USABLE RESULT" in table
+    assert "MEAN" not in table
 
 
 def test_the_table_is_ascii_only():

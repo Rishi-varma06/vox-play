@@ -393,22 +393,41 @@ def cmd_chess(args: argparse.Namespace) -> None:
 
 def cmd_validate_motifs(args: argparse.Namespace) -> None:
     """Score the motif detectors against human-tagged Lichess puzzles."""
-    from voxplay.chessgame.validate import run_validation
+    from voxplay.chessgame.validate import (
+        ValidationError, run_validation, run_validation_from_database,
+    )
 
     print("=" * 70)
     print("  Motif detector validation against the Lichess puzzle database (CC0)")
     print(f"  {args.count} puzzles per theme, {args.controls} control puzzles")
+    if args.database:
+        print(f"  source: {args.database}")
+    else:
+        print("  source: live API (slow and rate limited; prefer --database)")
     print("=" * 70)
     print()
 
     started = time.time()
-    report = run_validation(
-        count=args.count,
-        controls=args.controls,
-        cache_dir=args.cache_dir,
-        delay=args.delay,
-        progress=True,
-    )
+    try:
+        if args.database:
+            report = run_validation_from_database(
+                args.database,
+                per_theme=args.count,
+                controls=args.controls,
+                max_rows=args.max_rows,
+                progress=True,
+            )
+        else:
+            report = run_validation(
+                count=args.count,
+                controls=args.controls,
+                cache_dir=args.cache_dir,
+                delay=args.delay,
+                progress=True,
+            )
+    except ValidationError as exc:
+        print(f"  ERROR: {exc}", file=sys.stderr)
+        sys.exit(1)
     print()
     print(report.table())
     print()
@@ -592,6 +611,11 @@ def build_parser() -> argparse.ArgumentParser:
                        help="Seconds between API calls. 0.7 earns HTTP 429s; be kind.")
     p_val.add_argument("--cache-dir", default="data/puzzles",
                        help="Where fetched puzzles are cached between runs.")
+    p_val.add_argument("--database", default=None,
+                       help="Path to lichess_db_puzzle.csv.zst. Strongly preferred "
+                            "over the API: one pass, no rate limits.")
+    p_val.add_argument("--max-rows", type=int, default=None,
+                       help="Stop scanning the database after this many puzzles.")
     p_val.add_argument("--out", default="output/motif_validation.json")
 
     # eval

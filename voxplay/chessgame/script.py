@@ -456,10 +456,22 @@ class ClaudeGenerator(ScriptGenerator):
 
     name = DEFAULT_MODEL
 
-    def __init__(self, model: str = DEFAULT_MODEL, style_cache: bool = True) -> None:
+    #: How many times a beat that fails verification is regenerated before
+    #: being accepted anyway. One retry catches most of it; more than two
+    #: usually means the facts do not support the beat at all, which is a
+    #: problem for the beat sheet rather than the writing.
+    max_repairs: int = 1
+
+    def __init__(
+        self,
+        model: str = DEFAULT_MODEL,
+        style_cache: bool = True,
+        max_repairs: int = 1,
+    ) -> None:
         self.model = model
         self.name = model
         self._cache = style_cache
+        self.max_repairs = max_repairs
 
     def _client(self):
         try:
@@ -502,6 +514,9 @@ class ClaudeGenerator(ScriptGenerator):
         ).strip()
 
     def generate(self, game, sheet, style=DEFAULT_STYLE) -> CommentaryScript:
+        # Imported here because verify.py reads this module's types.
+        from .verify import licence_for, verify_line
+
         client = self._client()
         outline = self._ask(
             client, outline_prompt(game, sheet, style), max_tokens=2000, effort="medium"
@@ -509,15 +524,31 @@ class ClaudeGenerator(ScriptGenerator):
 
         spoken: List[str] = []
         lines: List[ScriptLine] = []
-        for beat in sheet.beats:
-            text = self._ask(
-                client,
-                beat_prompt(beat, game, sheet, style, outline, spoken),
-                max_tokens=1000,
-                effort="low",
-            )
-            spoken.append(text)
-            lines.append(_script_line(beat, text))
+        for index, beat in enumerate(sheet.beats):
+            prompt = beat_prompt(beat, game, sheet, style, outline, spoken)
+            line: Optional[ScriptLine] = None
+
+            for attempt in range(self.max_repairs + 1):
+                text = self._ask(client, prompt, max_tokens=1000, effort="low")
+                candidate = _script_line(beat, text)
+                licence = licence_for(
+                    candidate, game, sheet, spoiler_free=style.spoiler_free
+                )
+                problems = verify_line(candidate, index, licence)
+                if not problems or attempt == self.max_repairs:
+                    line = candidate
+                    break
+                # Hand the failure back rather than silently keeping it. The
+                # model invents when it is reaching past its facts, and saying
+                # which claim was unsupported is usually enough to stop it.
+                prompt = (
+                    f"{prompt}\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED\n"
+                    + "\n".join(f"- {p.message}" for p in problems)
+                    + "\nRewrite it using only the facts above."
+                )
+
+            spoken.append(line.text)
+            lines.append(line)
         return _assemble(game, sheet, lines, generator=self.name)
 
 

@@ -229,6 +229,55 @@ def test_empty_replies_are_dropped(game, sheet):
     assert StubClaude(reply="").generate(game, sheet).lines == []
 
 
+class RepairingStub(ClaudeGenerator):
+    """Invents something on the first attempt at each beat, then behaves."""
+
+    def __init__(self):
+        super().__init__(max_repairs=1)
+        self.prompts: list[str] = []
+        self.attempts: dict[int, int] = {}
+
+    def _client(self):
+        return object()
+
+    def _ask(self, client, prompt, max_tokens, effort):
+        self.prompts.append(prompt)
+        if "Do not write any commentary yet" in prompt:
+            return "outline"
+        beat = prompt.count("THIS BEAT")
+        self.attempts[len(self.prompts)] = beat
+        if "REJECTED" in prompt:
+            return "A quiet move, and the game goes on."
+        return "A beautiful fork decides it, says Kasparov."
+
+
+def test_a_beat_that_invents_something_is_regenerated(game, sheet):
+    """
+    The gate, not just the report. An unsupported claim costs one retry with
+    the problem fed back, which is cheaper and more honest than shipping it
+    and reporting the rate afterwards.
+    """
+    stub = RepairingStub()
+    script = stub.generate(game, sheet)
+    assert any("REJECTED" in p for p in stub.prompts)
+    assert all("fork" not in line.text for line in script.lines)
+
+
+def test_the_rejection_tells_the_model_what_was_wrong(game, sheet):
+    stub = RepairingStub()
+    stub.generate(game, sheet)
+    rejection = next(p for p in stub.prompts if "REJECTED" in p)
+    assert "ungrounded" in rejection or "tactic" in rejection or "names" in rejection
+
+
+def test_repairs_can_be_disabled(game, sheet):
+    """max_repairs=0 ships the first attempt, for measuring the raw rate."""
+    stub = RepairingStub()
+    stub.max_repairs = 0
+    stub.generate(game, sheet)
+    assert not any("REJECTED" in p for p in stub.prompts)
+
+
 # ---------------------------------------------------------------------------
 # Factory
 # ---------------------------------------------------------------------------

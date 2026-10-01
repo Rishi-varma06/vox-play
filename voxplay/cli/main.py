@@ -350,6 +350,17 @@ def cmd_chess(args: argparse.Namespace) -> None:
         print()
     print("-" * 70)
 
+    from voxplay.chessgame.verify import verify_script
+
+    checked = verify_script(script, game, sheet, spoiler_free=style.spoiler_free)
+    verdict = "clean" if checked.clean else f"{len(checked.errors)} ERRORS"
+    print(f"\n  verification: {verdict}"
+          f"   ({checked.errors_per_hundred_beats:.1f} errors per 100 beats,"
+          f" {len(checked.findings) - len(checked.errors)} warnings)")
+    for finding in checked.findings:
+        print(f"    [{finding.severity}] {finding.check} @ beat "
+              f"{finding.beat_index} ({finding.beat_type.value}): {finding.message}")
+
     if args.out:
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)

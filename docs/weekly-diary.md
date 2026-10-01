@@ -15,10 +15,10 @@ recalled. Companion document: `project-report.md`.
 | 1 | 07 Sep -- 13 Sep 2026 | Pivot to chess; analysis, motifs, pacing, script, CLI | 7 | 320 |
 | 2 | 14 Sep -- 20 Sep 2026 | No recorded activity | 0 | 320 |
 | 3 | 21 Sep -- 27 Sep 2026 | Spoken audio and the synchronised board player | 2 | 358 |
-| 4 | 28 Sep -- 04 Oct 2026 | Literature survey, documentation, motif validation | in progress | 390 |
+| 4 | 28 Sep -- 04 Oct 2026 | Literature survey, docs, validation, verification gate | in progress | 444 |
 
 **Current scale:** ~12,500 lines of Python across implementation and tests,
-390 automated tests passing.
+444 automated tests passing.
 
 ---
 
@@ -275,6 +275,34 @@ Both halves of this week's validation work followed the same pattern -- the
 first number was wrong, the confusion matrix or recall table showed *how* it
 was wrong, and the diagnosis was more useful than the final figure.
 
+### Verification gate (Objective 3)
+
+The third of the three things this project claims are new, and the last one
+that was still only a design. Every generated beat is now checked against the
+facts it was given, and a beat that invents something is regenerated once
+with the failure fed back rather than shipped.
+
+Five factual checks: notation reaching the speech backend, a square named
+aloud that is not in the beat's facts, a tactic no detector found, a claim
+about who is better that the evaluation contradicts, and a name not present
+in the game data.
+
+Validated in both directions, which matters more than it sounds: a verifier
+that never fires proves nothing. The template generator passes with zero
+findings, and every category of invention is caught when injected
+deliberately.
+
+Building it surfaced a flaw in its own design. The first licence -- the set
+of claims a beat is allowed to make -- was built only from the moves played,
+so it flagged "better was king to d eight" as an invented square. That is the
+engine's suggested alternative, a fact the model had been handed. The licence
+must mirror the facts block exactly: anything the facts give but the licence
+omits becomes a false positive, and anything the licence allows that the facts
+never supplied becomes a blind spot.
+
+The gate also caught a real repetition in the template generator's own
+output, which is a style warning rather than a defect but a fair one.
+
 ### Planned for next week
 - Draft the listener-study protocol and register thresholds before running
   it.
@@ -288,7 +316,6 @@ was wrong, and the diagnosis was more useful than the final figure.
 |---|---|---|
 | Classification agreement with Lichess annotations | 5 | Comparable because the same win-probability mapping is used |
 | Listener study | 5 | Long pole; both baselines already implemented |
-| Verification gate for chess claims | 3 | Extends the existing grounding checks |
 | Opening-deviation detection | 2 | Requires the Lichess opening explorer |
 | Live language-model commentary path | 3 | Implemented but unverified; the API key currently has no credit |
 

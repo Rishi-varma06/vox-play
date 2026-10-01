@@ -304,6 +304,31 @@ constraints. Measured on the same game: 105 seconds for the system, 144 for
 top-N (which selects adjacent half-moves and omits the checkmate) and 594 for
 flat move-by-move.
 
+**The verification gate** is part of this objective and is implemented. Every
+generated beat is checked against the same facts the model was given, and a
+beat that fails is regenerated once with the failure fed back rather than
+shipped. Five factual checks run per beat:
+
+| Check | Catches |
+|---|---|
+| `notation_leak` | algebraic notation reaching the speech backend |
+| `ungrounded_square` | a square named aloud that is not in this beat's facts |
+| `ungrounded_tactic` | a tactic named that no detector found |
+| `evaluation_contradiction` | claiming a side is better when the evaluation says otherwise |
+| `ungrounded_name` | a person or place not present in the game data |
+
+The licence a beat is checked against is derived from the same function that
+builds its facts, so the two cannot drift apart without a test failing.
+
+Validated in both directions, because a verifier that never fires proves
+nothing: the template generator, which builds every sentence from the facts,
+passes with zero findings, and each category of invention is caught when
+injected deliberately. The headline metric is **errors per 100 beats**.
+
+This responds directly to Hebbar et al. (2026), who measured a strong model
+producing incorrect chess claims 22.0% of the time without tool support. They
+measure hallucination after the fact; this gate is the other half.
+
 ### Objective 4 -- Speak it, synchronised to a board
 
 Convert the script to spoken audio and present it against an automatically

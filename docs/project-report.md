@@ -350,7 +350,27 @@ builds its facts, so the two cannot drift apart without a test failing.
 Validated in both directions, because a verifier that never fires proves
 nothing: the template generator, which builds every sentence from the facts,
 passes with zero findings, and each category of invention is caught when
-injected deliberately. The headline metric is **errors per 100 beats**.
+injected deliberately.
+
+**Measured against live model output.** Five games, 32 beats, the same games
+generated twice with the repair loop disabled and enabled:
+
+| | errors per 100 beats | cost per game |
+|---|---|---|
+| gate off | **6.2** (2 of 32) | $0.0571 |
+| gate on | **0.0** (0 of 32) | $0.0617 |
+
+The gate removed every verified invention for an 8% increase in cost. Two
+caveats belong with that figure: the sample is small, and model output
+varies between runs -- one contradiction found in an earlier pass did not
+reproduce when the same game was generated again. The rate should be read as
+evidence that the gate works, not as a precise constant.
+
+For scale, Hebbar et al. (2026) measured a strong contemporary model
+producing incorrect chess claims 22.0% of the time without tool support. A
+raw rate of 6.2 per 100 beats here is lower, which is what grounding by
+construction is for: the model is never asked to derive a chess fact, only to
+narrate one it was given.
 
 This responds directly to Hebbar et al. (2026), who measured a strong model
 producing incorrect chess claims 22.0% of the time without tool support. They

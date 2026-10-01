@@ -83,7 +83,8 @@ Nothing below is an estimate.
 | Pacing vs. flat move-by-move | **1.8x** shorter on a 33-half-move game, **3.8x** on a 136-half-move one |
 | Pacing vs. top-N by swing | similar length, but top-N never reaches the finish and clusters on adjacent half-moves |
 | Spoken-duration model accuracy | **1.03x** predicted vs. actual |
-| Verified hallucinations in grounded output | **0** errors per 100 beats |
+| Hallucinations, model-written commentary | **6.2** errors per 100 beats without the gate, **0.0** with it |
+| Cost per game, model-written | **$0.057** and 23 seconds, measured from API usage |
 | Analysis speed | 137 positions in 37s, single-threaded and reproducible |
 
 The flat baseline is one short line per move -- what move-by-move commentary

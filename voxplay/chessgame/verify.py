@@ -211,10 +211,18 @@ def licence_for(
     licence = BeatLicence()
     meta = game.meta
     for name in (meta.white, meta.black, meta.event, meta.opening):
-        if name:
-            licence.names.update(
-                w.lower() for w in re.findall(r"[A-Za-z]{3,}", ascii_fold(name))
-            )
+        if not name:
+            continue
+        folded = ascii_fold(name)
+        licence.names.update(
+            _spelling(w) for w in re.findall(r"[A-Za-z]{3,}", folded)
+        )
+        # A username like "Amin_Biriya" is usually spoken and written without
+        # its punctuation, so license the joined form too. The first live run
+        # flagged "AminBiriya" as invented when it is simply the player.
+        joined = re.sub(r"[^A-Za-z]", "", folded)
+        if len(joined) > 2:
+            licence.names.add(_spelling(joined))
 
     for move in moves:
         licence.squares.add(move.from_square)
@@ -319,6 +327,25 @@ _COMMON = frozenset({
 })
 
 
+#: British/American pairs that appear in chess vocabulary. A model writing
+#: "Sicilian Defence" when the database says "Defense" has not invented an
+#: opening, and flagging it would be a false positive rather than a catch.
+_SPELLING_VARIANTS = (
+    ("defence", "defense"), ("offence", "offense"),
+    ("centre", "center"), ("calibre", "caliber"),
+    ("manoeuvre", "maneuver"), ("analyse", "analyze"),
+)
+
+
+def _spelling(word: str) -> str:
+    """Normalise a word to one spelling so variants compare equal."""
+    lowered = word.lower()
+    for british, american in _SPELLING_VARIANTS:
+        if british in lowered:
+            lowered = lowered.replace(british, american)
+    return lowered
+
+
 def check_names(line: ScriptLine, index: int, licence: BeatLicence) -> List[Finding]:
     """
     Capitalised words mid-sentence should be names we supplied.
@@ -329,11 +356,16 @@ def check_names(line: ScriptLine, index: int, licence: BeatLicence) -> List[Find
     for sentence in re.split(r"(?<=[.!?])\s+", line.text):
         tokens = sentence.split()
         for token in tokens[1:]:
-            word = re.sub(r"[^A-Za-z]", "", token)
+            # Strip the possessive BEFORE removing punctuation, or "White's"
+            # becomes "Whites" and is flagged as an invented name. The first
+            # live generation produced exactly that three times, and all
+            # three were false positives.
+            word = re.sub(r"['’]s\b", "", token)
+            word = re.sub(r"[^A-Za-z]", "", word)
             if len(word) > 2 and word[0].isupper() and word.lower() not in _COMMON:
                 candidates.add(word)
 
-    invented = sorted(w for w in candidates if w.lower() not in licence.names)
+    invented = sorted(w for w in candidates if _spelling(w) not in licence.names)
     if not invented:
         return []
     return [Finding(

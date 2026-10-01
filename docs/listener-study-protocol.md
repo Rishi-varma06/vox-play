@@ -77,10 +77,12 @@ took a human hours -- is not testable as stated, because "as informative" has
 no threshold and no matched corpus exists. This is the defensible version of
 the same claim.
 
-**H6 is already measurable** and should be reported whatever happens to the
-rest: analysis is 23-37 seconds per game single-threaded, speech synthesis is
-under a second, and the offline voice costs nothing per game. The only
-variable cost is the language model.
+**H6 is settled, before the study runs.** Measured from API usage across five
+games: **$0.057 per game** and **23 seconds** of model time, against
+thresholds of $0.10 and 60 seconds. With the verification gate enabled it is
+$0.062. Engine analysis adds 23-37 seconds single-threaded, and the offline
+voice costs nothing per game. H6 is supported and needs no listeners; the
+remaining hypotheses are the ones only listeners can settle.
 
 ---
 

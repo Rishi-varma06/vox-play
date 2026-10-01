@@ -349,6 +349,54 @@ equally in each position, and each condition is paired equally with each game
 -- and the obvious implementation satisfies the first two while failing the
 third completely.
 
+### The model-written path, run for the first time
+
+API credit arrived, so the language-model generator ran live after weeks of
+being written, stub-tested and never executed. It worked on the first
+attempt, and the commentary is recognisably better than the template's:
+
+> *"White offers the queen on b eight with check -- nine points, free for the
+> taking. The knight must capture; refusal isn't possible. That clears the
+> square, and the rook drops onto d eight. Checkmate on the back rank, the
+> king walled in by its own men."*
+
+**Cost, measured rather than estimated:** $0.057 per game and 23 seconds of
+model time, against the pre-registered thresholds of $0.10 and 60 seconds.
+H6 is settled.
+
+**Hallucination rate, measured against the gate.** Five games generated
+twice, with the repair loop off and on:
+
+| | errors per 100 beats | cost per game |
+|---|---|---|
+| gate off | 6.2 | $0.0571 |
+| gate on | 0.0 | $0.0617 |
+
+The gate removed every verified invention for 8% more cost. The sample is
+small and output varies between runs -- a contradiction found in one pass did
+not reproduce when the same game was generated again -- so this is evidence
+the gate works rather than a precise constant.
+
+**The first measurement was wrong, again for the familiar reason.** The
+initial run reported 18.8 errors per 100 beats, which would have been a
+headline number. Inspecting the findings showed most were the verifier's
+fault, not the model's: "White's" was being stripped to "Whites" and flagged
+as an invented name, a player called "Amin_Biriya" written without the
+underscore was flagged as someone else, and "Defence" was flagged because the
+database spells it "Defense". None of those is an invented fact. Fixed, the
+honest raw rate is 6.2.
+
+That is the third time this month a first number has been an artefact of the
+measuring instrument rather than a property of the system, and the third time
+inspecting the individual findings rather than trusting the aggregate is what
+caught it.
+
+Live output also surfaced two small defects a template never would: the model
+writes em dashes and curly quotes, which print as replacement characters on
+this terminal and are handled inconsistently by speech backends. Generated
+text is now normalised to ASCII with the punctuation mapped rather than
+dropped, so the pause survives.
+
 ### Planned for next week
 - Draft the listener-study protocol and register thresholds before running
   it.
@@ -360,9 +408,8 @@ third completely.
 
 | Item | Objective | Notes |
 |---|---|---|
-| Listener study | 5 | **The only remaining research item.** Protocol pre-registered in `listener-study-protocol.md`; blocked on recruiting participants |
+| Listener study | 5 | **The only remaining item in the whole project.** Protocol pre-registered in `listener-study-protocol.md`; blocked on recruiting participants |
 | Opening-deviation detection | 2 | Requires the Lichess opening explorer |
-| Live language-model commentary path | 3 | Implemented but unverified; the API key currently has no credit |
 
 ---
 

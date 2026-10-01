@@ -186,6 +186,38 @@ _TRANSLITERATIONS = {
 }
 
 
+#: Typographic punctuation a language model produces naturally, mapped to the
+#: ASCII the rest of the pipeline assumes. Folding these away with the accent
+#: stripper would delete them entirely and glue the words either side
+#: together, so they are replaced rather than removed.
+_PUNCTUATION = {
+    "—": " -- ", "–": "-",      # em and en dash
+    "‘": "'", "’": "'",          # curly single quotes
+    "“": '"', "”": '"',          # curly double quotes
+    "…": "...", " ": " ",        # ellipsis, non-breaking space
+    "­": "",                          # soft hyphen
+}
+
+
+def normalise_for_speech(text: str) -> str:
+    """
+    Make generated text safe for this pipeline's terminal, player and voice.
+
+    A model writes em dashes and curly quotes without being asked. They print
+    as replacement characters on a CP1252 console, and speech backends handle
+    them inconsistently. Punctuation is mapped to an ASCII equivalent first so
+    the pause survives, then anything still non-ASCII is folded.
+    """
+    if not text:
+        return text
+    for source, replacement in _PUNCTUATION.items():
+        text = text.replace(source, replacement)
+    # The dash replacements add their own spacing, and the source text
+    # usually already had some, so collapse runs before folding.
+    text = re.sub(r"[ \t]{2,}", " ", text)
+    return ascii_fold(text)
+
+
 def ascii_fold(text: str) -> str:
     """
     Strip accents down to plain ASCII: 'Samisch' from 'Sa[umlaut]misch'.

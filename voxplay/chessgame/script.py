@@ -25,7 +25,7 @@ from __future__ import annotations
 import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from pydantic import BaseModel, Field
 
@@ -35,6 +35,7 @@ from .models import Color, MoveEvent, MoveQuality
 from .pgn_source import ParsedGame
 from .speech import (
     ascii_fold,
+    normalise_for_speech,
     speak_colour,
     speak_duration,
     speak_move,
@@ -88,6 +89,54 @@ class CommentaryScript(BaseModel):
     @property
     def full_text(self) -> str:
         return "\n\n".join(line.text for line in self.lines)
+
+
+#: Published per-million-token prices, for turning usage into a number the
+#: report can quote. Cache reads are a tenth of the input rate, cache writes
+#: a quarter more than it.
+MODEL_PRICES: Dict[str, Tuple[float, float]] = {
+    "claude-opus-5": (5.00, 25.00),
+    "claude-sonnet-5": (2.00, 10.00),
+    "claude-haiku-4-5": (1.00, 5.00),
+}
+
+
+@dataclass
+class TokenUsage:
+    """What a generation actually cost, accumulated across calls."""
+    calls: int = 0
+    input_tokens: int = 0
+    output_tokens: int = 0
+    cache_read: int = 0
+    cache_write: int = 0
+
+    def add(self, usage) -> None:
+        self.calls += 1
+        self.input_tokens += getattr(usage, "input_tokens", 0) or 0
+        self.output_tokens += getattr(usage, "output_tokens", 0) or 0
+        self.cache_read += getattr(usage, "cache_read_input_tokens", 0) or 0
+        self.cache_write += getattr(usage, "cache_creation_input_tokens", 0) or 0
+
+    def cost(self, model: str) -> Optional[float]:
+        """Dollars, or None for a model whose price is not recorded here."""
+        price = MODEL_PRICES.get(model)
+        if price is None:
+            return None
+        inp, out = price
+        return (
+            self.input_tokens * inp
+            + self.cache_read * inp * 0.1
+            + self.cache_write * inp * 1.25
+            + self.output_tokens * out
+        ) / 1_000_000
+
+    def summary(self, model: str) -> str:
+        spend = self.cost(model)
+        money = "unknown price" if spend is None else f"${spend:.4f}"
+        return (
+            f"{self.calls} calls, {self.input_tokens:,} in "
+            f"({self.cache_read:,} cached) / {self.output_tokens:,} out, {money}"
+        )
 
 
 @dataclass(frozen=True)
@@ -483,6 +532,10 @@ class ClaudeGenerator(ScriptGenerator):
         self.name = model
         self._cache = style_cache
         self.max_repairs = max_repairs
+        # Objective 5 asks for cost per game measured rather than estimated,
+        # so every call's usage is accumulated rather than inferred from
+        # prompt lengths.
+        self.usage = TokenUsage()
 
     def _client(self):
         try:
@@ -518,6 +571,7 @@ class ClaudeGenerator(ScriptGenerator):
         except anthropic.APIConnectionError as exc:
             raise ScriptError(f"could not reach the Claude API: {exc}") from exc
 
+        self.usage.add(response.usage)
         if response.stop_reason == "refusal":
             raise ScriptError("the model declined to generate this beat")
         return "".join(
@@ -588,6 +642,10 @@ def get_generator(name: str = "auto", model: str = DEFAULT_MODEL) -> ScriptGener
 # ---------------------------------------------------------------------------
 
 def _script_line(beat: Beat, text: str) -> ScriptLine:
+    # Every generator's output passes through here, so this is the one place
+    # typographic punctuation can be normalised before it reaches the player,
+    # the speech backend or a CP1252 terminal.
+    text = normalise_for_speech(text)
     words = len(text.split())
     return ScriptLine(
         beat_type=beat.beat_type,

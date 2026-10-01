@@ -80,13 +80,17 @@ Nothing below is an estimate.
 |---|---|
 | Tactical motif recall vs. human-tagged Lichess puzzles | **91.6%** mean over 11 motifs, n=1,000 each; six at 100% |
 | Move classification agreement with Lichess | **Cohen's kappa 0.932** on 24,255 moves from 339 games |
-| Pacing vs. baselines (same game) | **105s** system / 144s top-N / **594s** flat move-by-move |
+| Pacing vs. flat move-by-move | **1.8x** shorter on a 33-half-move game, **3.8x** on a 136-half-move one |
+| Pacing vs. top-N by swing | similar length, but top-N never reaches the finish and clusters on adjacent half-moves |
 | Spoken-duration model accuracy | **1.03x** predicted vs. actual |
 | Verified hallucinations in grounded output | **0** errors per 100 beats |
 | Analysis speed | 137 positions in 37s, single-threaded and reproducible |
 
-The pacing figure is the one to look at: narrating a 17-move game move by
-move takes nearly ten minutes and nobody listens to it.
+The flat baseline is one short line per move -- what move-by-move commentary
+actually is, and what the systems in the literature produce. It is beaten on
+length, and the gap widens with game length because the paced budget is
+capped and the baseline's is not. Top-N is beaten on structure rather than
+length: it finds the big swing but ends the commentary before the game does.
 
 ---
 

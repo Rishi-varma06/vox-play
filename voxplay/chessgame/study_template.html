@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chess Commentary Study - __PARTICIPANT__</title>
+<style>
+  :root {
+    --bg:#15181b; --panel:#1d2126; --panel-2:#252a30; --line:#31373e;
+    --ink:#e7eae7; --muted:#9aa3a0; --accent:#5fae87; --warn:#c9a227;
+    --mono:'SFMono-Regular',Consolas,'Liberation Mono',monospace;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif; }
+  .wrap { max-width:860px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:23px; margin:0 0 6px; font-weight:600; }
+  h2 { font-size:18px; margin:0 0 12px; font-weight:600; }
+  p { margin:0 0 14px; }
+  .muted { color:var(--muted); font-size:14px; }
+  .card { background:var(--panel); border:1px solid var(--line);
+          border-radius:6px; padding:22px; margin-bottom:18px; }
+  .step { display:none; } .step.on { display:block; }
+
+  button { background:var(--accent); color:#10221a; border:0; border-radius:5px;
+           padding:11px 22px; font:600 15px inherit; cursor:pointer; }
+  button:disabled { background:var(--panel-2); color:var(--muted); cursor:not-allowed; }
+  button.ghost { background:var(--panel-2); color:var(--ink); border:1px solid var(--line); }
+  button:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+
+  label.q { display:block; margin:0 0 8px; }
+  select, textarea { width:100%; background:var(--panel-2); color:var(--ink);
+    border:1px solid var(--line); border-radius:5px; padding:9px; font:15px inherit; }
+  textarea { min-height:70px; resize:vertical; }
+
+  .progress { font:12px var(--mono); color:var(--muted); letter-spacing:.08em;
+              text-transform:uppercase; margin-bottom:6px; }
+
+  /* Clip player */
+  .playwrap { display:grid; grid-template-columns:minmax(220px,340px) 1fr;
+              gap:18px; align-items:start; }
+  @media (max-width:700px){ .playwrap{ grid-template-columns:1fr; } }
+  .board { position:relative; width:100%; padding-bottom:100%; border-radius:4px;
+           overflow:hidden; }
+  .board .sq { position:absolute; width:12.5%; height:12.5%; }
+  .sq.light { background:#ebecd0; } .sq.dark { background:#5c8a5f; }
+  .sq.mark { box-shadow:inset 0 0 0 100px rgba(201,162,39,.38); }
+  .piece { position:absolute; width:12.5%; height:12.5%; display:flex;
+           align-items:center; justify-content:center; font-size:min(6vw,40px);
+           line-height:1; user-select:none; transition:left .25s, top .25s; }
+  .piece.w { color:#fff; text-shadow:0 0 1px #000,0 1px 2px #0008; }
+  .piece.b { color:#1f2326; text-shadow:0 0 1px #fff6; }
+  #caption { background:var(--panel-2); border:1px solid var(--line);
+             border-radius:5px; padding:14px; min-height:110px; }
+
+  .likert { margin:16px 0; }
+  .likert .stmt { margin-bottom:7px; }
+  .scale { display:flex; gap:6px; flex-wrap:wrap; }
+  .scale input { position:absolute; opacity:0; width:0; height:0; }
+  .scale label { flex:1; min-width:68px; text-align:center; cursor:pointer;
+    background:var(--panel-2); border:1px solid var(--line); border-radius:5px;
+    padding:9px 4px; font-size:13px; }
+  .scale input:checked + label { background:var(--accent); color:#10221a; font-weight:700; }
+  .scale input:focus-visible + label { outline:2px solid var(--accent); outline-offset:2px; }
+
+  #code { width:100%; font:12px var(--mono); min-height:120px; }
+  .ok { color:var(--accent); } .warn { color:var(--warn); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 1. Consent ------------------------------------------------------- -->
+  <section class="step on" id="s-consent">
+    <div class="card">
+      <h1>Chess commentary listening study</h1>
+      <p class="muted">Participant __PARTICIPANT__ &middot; about 25 minutes</p>
+      <p>You will listen to four short chess commentary clips and rate each
+         one. There are no right answers &mdash; we want your impression as a
+         listener.</p>
+      <h2>Before you start</h2>
+      <ul>
+        <li>Taking part is <strong>voluntary</strong>. You may stop at any
+            point, for any reason, without explaining.</li>
+        <li>We record only your ratings, your comments, and two background
+            questions about chess.</li>
+        <li>We do <strong>not</strong> record your name, email, or anything
+            that identifies you. Your responses carry a code only.</li>
+        <li>Because responses are anonymous, they cannot be withdrawn after
+            you send them &mdash; nothing links them back to you.</li>
+        <li>Responses are kept until the project is marked, then deleted.</li>
+      </ul>
+      <p>Please use headphones or speakers in a quiet place, and do not
+         refresh the page once you begin.</p>
+      <p><button id="consent">I have read this and agree to take part</button></p>
+    </div>
+  </section>
+
+  <!-- 2. Screening ----------------------------------------------------- -->
+  <section class="step" id="s-screen">
+    <div class="card">
+      <h2>Two quick questions</h2>
+      <label class="q" for="strength">How would you describe your chess?</label>
+      <select id="strength">
+        <option value="">Choose one</option>
+        <option value="never">I have never played seriously</option>
+        <option value="beginner">Beginner (roughly under 1000)</option>
+        <option value="casual">Casual (roughly 1000 to 1600)</option>
+        <option value="club">Club player (1600 or above)</option>
+      </select>
+      <p></p>
+      <label class="q" for="watched">Have you watched or listened to chess
+        commentary before?</label>
+      <select id="watched">
+        <option value="">Choose one</option>
+        <option value="often">Often</option>
+        <option value="sometimes">Sometimes</option>
+        <option value="never">Never</option>
+      </select>
+      <p></p>
+      <p><button id="to-clips" disabled>Continue</button></p>
+    </div>
+  </section>
+
+  <!-- 3. Clip ----------------------------------------------------------- -->
+  <section class="step" id="s-clip">
+    <div class="card">
+      <div class="progress" id="clip-progress"></div>
+      <h2 id="clip-title">Clip</h2>
+      <div class="playwrap">
+        <div class="board" id="board"></div>
+        <div>
+          <div id="caption" class="muted">Press play to begin.</div>
+          <p></p>
+          <button id="play">Play</button>
+          <span class="muted" id="clock" style="margin-left:10px"></span>
+        </div>
+      </div>
+      <p></p>
+      <p><button id="to-rate" disabled>I have finished listening</button>
+         <span class="muted" id="listen-hint">(available once the clip has played)</span></p>
+    </div>
+  </section>
+
+  <!-- 4. Rating --------------------------------------------------------- -->
+  <section class="step" id="s-rate">
+    <div class="card">
+      <div class="progress" id="rate-progress"></div>
+      <h2>How was that clip?</h2>
+      <div id="items"></div>
+      <label class="q" for="comment">Anything that stood out, good or bad?
+        (optional)</label>
+      <textarea id="comment"></textarea>
+      <p></p>
+      <p><button id="next-clip" disabled>Continue</button></p>
+    </div>
+  </section>
+
+  <!-- 5. Preference ----------------------------------------------------- -->
+  <section class="step" id="s-pref">
+    <div class="card">
+      <h2>One last question</h2>
+      <p>Of the four clips you heard, which would you choose to listen to
+         again?</p>
+      <div class="scale" id="pref-scale"></div>
+      <p></p>
+      <label class="q" for="why">Why? (one sentence is plenty)</label>
+      <textarea id="why"></textarea>
+      <p></p>
+      <p><button id="finish" disabled>Finish</button></p>
+    </div>
+  </section>
+
+  <!-- 6. Done ----------------------------------------------------------- -->
+  <section class="step" id="s-done">
+    <div class="card">
+      <h2 class="ok">Thank you &mdash; that is everything</h2>
+      <p>Please send your responses back using <strong>either</strong> option.</p>
+      <p><button id="download">Download my responses</button>
+         <button class="ghost" id="copy">Copy code instead</button>
+         <span class="muted" id="copied"></span></p>
+      <p class="muted">If the download does not work, copy the code below and
+         paste it into a message.</p>
+      <textarea id="code" readonly></textarea>
+    </div>
+  </section>
+
+</div>
+
+<script id="payload" type="application/json">__PAYLOAD__</script>
+<script>
+(function () {
+  "use strict";
+  var DATA = JSON.parse(document.getElementById("payload").textContent);
+  var GLYPH = { k:"♚", q:"♛", r:"♜", b:"♝", n:"♞", p:"♟" };
+  var ITEM_KEYS = Object.keys(DATA.items);
+  var SCALE = ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"];
+
+  var state = { clip: 0, ratings: [], strength: "", watched: "",
+                preferred: null, why: "" };
+
+  var boardEl = document.getElementById("board");
+  var capEl = document.getElementById("caption");
+  var playBtn = document.getElementById("play");
+  var clockEl = document.getElementById("clock");
+  var audio = new Audio();
+  var squares = {}, pieces = {}, shownPly = -1;
+
+  function show(id) {
+    Array.prototype.forEach.call(document.querySelectorAll(".step"),
+      function (s) { s.classList.remove("on"); });
+    document.getElementById(id).classList.add("on");
+    window.scrollTo(0, 0);
+  }
+
+  // ---- board ------------------------------------------------------------
+  "abcdefgh".split("").forEach(function (f, fi) {
+    for (var r = 1; r <= 8; r++) {
+      var el = document.createElement("div");
+      el.className = "sq " + ((fi + r) % 2 ? "light" : "dark");
+      el.style.left = (fi * 12.5) + "%";
+      el.style.top = ((8 - r) * 12.5) + "%";
+      boardEl.appendChild(el);
+      squares[f + r] = el;
+    }
+  });
+
+  function parseFen(fen) {
+    var out = {};
+    fen.split(" ")[0].split("/").forEach(function (row, i) {
+      var file = 0;
+      row.split("").forEach(function (ch) {
+        if (/\d/.test(ch)) { file += parseInt(ch, 10); return; }
+        out["abcdefgh"[file] + (8 - i)] = ch; file += 1;
+      });
+    });
+    return out;
+  }
+
+  function renderBoard(node) {
+    var map = parseFen(node.fen), seen = {};
+    Object.keys(map).forEach(function (sq) {
+      var key = map[sq] + ":" + sq;
+      seen[key] = true;
+      if (pieces[key]) return;
+      var el = document.createElement("div");
+      el.className = "piece " + (map[sq] === map[sq].toUpperCase() ? "w" : "b");
+      el.textContent = GLYPH[map[sq].toLowerCase()];
+      el.style.left = ("abcdefgh".indexOf(sq[0]) * 12.5) + "%";
+      el.style.top = ((8 - parseInt(sq[1], 10)) * 12.5) + "%";
+      boardEl.appendChild(el); pieces[key] = el;
+    });
+    Object.keys(pieces).forEach(function (k) {
+      if (!seen[k]) { pieces[k].remove(); delete pieces[k]; }
+    });
+    Object.keys(squares).forEach(function (s) { squares[s].classList.remove("mark"); });
+    if (node.from && squares[node.from]) squares[node.from].classList.add("mark");
+    if (node.to && squares[node.to]) squares[node.to].classList.add("mark");
+  }
+
+  function clearBoard() {
+    Object.keys(pieces).forEach(function (k) { pieces[k].remove(); delete pieces[k]; });
+    shownPly = -1;
+  }
+
+  // ---- clip playback ----------------------------------------------------
+  function current() { return DATA.clips[state.clip]; }
+
+  function plyAt(ms) {
+    var clip = current(), chosen = 0;
+    for (var i = 0; i < clip.cues.length; i++) {
+      var cue = clip.cues[i];
+      if (ms < cue.startMs) break;
+      if (!cue.plies.length) continue;
+      if (ms >= cue.startMs + cue.durationMs) { chosen = cue.plies[cue.plies.length - 1]; continue; }
+      var share = (ms - cue.startMs) / Math.max(1, cue.durationMs);
+      chosen = cue.plies[Math.min(cue.plies.length - 1, Math.floor(share * cue.plies.length))];
+    }
+    return chosen;
+  }
+
+  function cueAt(ms) {
+    var clip = current(), found = null;
+    for (var i = 0; i < clip.cues.length; i++) {
+      if (ms >= clip.cues[i].startMs) found = clip.cues[i];
+    }
+    return found;
+  }
+
+  function fmt(sec) {
+    sec = Math.max(0, Math.floor(sec));
+    return Math.floor(sec / 60) + ":" + ("0" + (sec % 60)).slice(-2);
+  }
+
+  audio.addEventListener("timeupdate", function () {
+    var ms = audio.currentTime * 1000, clip = current();
+    var ply = plyAt(ms);
+    if (ply !== shownPly) { shownPly = ply; renderBoard(clip.plies[ply]); }
+    var cue = cueAt(ms);
+    if (cue) capEl.textContent = cue.text;
+    clockEl.textContent = fmt(ms / 1000) + " / " + fmt(clip.durationMs / 1000);
+  });
+
+  audio.addEventListener("ended", function () {
+    playBtn.textContent = "Play again";
+    document.getElementById("to-rate").disabled = false;
+    document.getElementById("listen-hint").textContent = "";
+  });
+
+  playBtn.addEventListener("click", function () {
+    if (audio.paused) { audio.play(); playBtn.textContent = "Pause"; }
+    else { audio.pause(); playBtn.textContent = "Play"; }
+  });
+
+  function loadClip() {
+    var clip = current();
+    clearBoard();
+    renderBoard(clip.plies[0]);
+    audio.src = clip.audio;
+    audio.currentTime = 0;
+    playBtn.textContent = "Play";
+    capEl.textContent = "Press play to begin.";
+    clockEl.textContent = "0:00 / " + fmt(clip.durationMs / 1000);
+    var label = "Clip " + (state.clip + 1) + " of " + DATA.clips.length;
+    document.getElementById("clip-title").textContent = label;
+    document.getElementById("clip-progress").textContent = label;
+    document.getElementById("rate-progress").textContent = label;
+    document.getElementById("to-rate").disabled = true;
+    document.getElementById("listen-hint").textContent =
+      "(available once the clip has played)";
+    show("s-clip");
+  }
+
+  // ---- rating form ------------------------------------------------------
+  function buildItems() {
+    var html = "";
+    ITEM_KEYS.forEach(function (key, i) {
+      html += '<div class="likert"><div class="stmt">' + (i + 1) + ". " +
+              DATA.items[key] + '</div><div class="scale">';
+      SCALE.forEach(function (text, n) {
+        var id = "it-" + key + "-" + n;
+        html += '<input type="radio" name="' + key + '" id="' + id +
+                '" value="' + (n + 1) + '"><label for="' + id + '">' +
+                text + "</label>";
+      });
+      html += "</div></div>";
+    });
+    document.getElementById("items").innerHTML = html;
+    document.getElementById("items").addEventListener("change", checkRating);
+  }
+
+  function checkRating() {
+    var done = ITEM_KEYS.every(function (k) {
+      return document.querySelector('input[name="' + k + '"]:checked');
+    });
+    document.getElementById("next-clip").disabled = !done;
+  }
+
+  function resetRating() {
+    ITEM_KEYS.forEach(function (k) {
+      Array.prototype.forEach.call(
+        document.querySelectorAll('input[name="' + k + '"]'),
+        function (el) { el.checked = false; });
+    });
+    document.getElementById("comment").value = "";
+    document.getElementById("next-clip").disabled = true;
+  }
+
+  // ---- flow -------------------------------------------------------------
+  document.getElementById("consent").addEventListener("click", function () {
+    show("s-screen");
+  });
+
+  function checkScreen() {
+    var s = document.getElementById("strength").value;
+    var w = document.getElementById("watched").value;
+    document.getElementById("to-clips").disabled = !(s && w);
+  }
+  document.getElementById("strength").addEventListener("change", checkScreen);
+  document.getElementById("watched").addEventListener("change", checkScreen);
+
+  document.getElementById("to-clips").addEventListener("click", function () {
+    state.strength = document.getElementById("strength").value;
+    state.watched = document.getElementById("watched").value;
+    buildItems();
+    loadClip();
+  });
+
+  document.getElementById("to-rate").addEventListener("click", function () {
+    audio.pause();
+    resetRating();
+    show("s-rate");
+  });
+
+  document.getElementById("next-clip").addEventListener("click", function () {
+    var clip = current(), rating = {
+      position: clip.position, gameId: clip.gameId, condition: clip.condition,
+      comment: document.getElementById("comment").value.trim(),
+    };
+    ITEM_KEYS.forEach(function (k) {
+      var el = document.querySelector('input[name="' + k + '"]:checked');
+      rating[k] = el ? parseInt(el.value, 10) : null;
+    });
+    state.ratings.push(rating);
+
+    state.clip += 1;
+    if (state.clip < DATA.clips.length) { loadClip(); return; }
+
+    var html = "";
+    DATA.clips.forEach(function (c, i) {
+      html += '<input type="radio" name="pref" id="pref-' + i + '" value="' + i +
+              '"><label for="pref-' + i + '">Clip ' + (i + 1) + "</label>";
+    });
+    document.getElementById("pref-scale").innerHTML = html;
+    document.getElementById("pref-scale").addEventListener("change", function () {
+      document.getElementById("finish").disabled = false;
+    });
+    show("s-pref");
+  });
+
+  document.getElementById("finish").addEventListener("click", function () {
+    var chosen = document.querySelector('input[name="pref"]:checked');
+    state.preferred = chosen ? parseInt(chosen.value, 10) : null;
+    state.why = document.getElementById("why").value.trim();
+
+    var out = {
+      participant: DATA.participant,
+      strength: state.strength,
+      watched_commentary: state.watched,
+      ratings: state.ratings,
+      preferred_position: state.preferred,
+      preference_reason: state.why,
+    };
+    var json = JSON.stringify(out);
+    // Base64 so the code survives being pasted into a chat or an email body
+    // without anything reformatting it.
+    document.getElementById("code").value = btoa(unescape(encodeURIComponent(json)));
+    window.__studyJson = json;
+    show("s-done");
+  });
+
+  document.getElementById("download").addEventListener("click", function () {
+    var blob = new Blob([window.__studyJson], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = DATA.participant + "_response.json";
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var box = document.getElementById("code");
+    box.select(); box.setSelectionRange(0, box.value.length);
+    try { document.execCommand("copy"); } catch (e) {}
+    if (navigator.clipboard) { navigator.clipboard.writeText(box.value).catch(function () {}); }
+    document.getElementById("copied").textContent = "copied";
+  });
+})();
+</script>
+</body>
+</html>

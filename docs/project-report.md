@@ -300,9 +300,36 @@ model, paced around what matters rather than listing every move.
 than both a flat move-by-move baseline and an unconstrained top-N baseline,
 with both baselines implemented for comparison.
 **Status: complete.** Salience scoring with budget, coverage and spacing
-constraints. Measured on the same game: 105 seconds for the system, 144 for
-top-N (which selects adjacent half-moves and omits the checkmate) and 594 for
-flat move-by-move.
+constraints, measured against both baselines on a short game and a long one:
+
+| | system | top-N by swing | flat move-by-move |
+|---|---|---|---|
+| Opera Game, 33 half-moves | 75s | 95s | 131s (1.8x) |
+| Blitz game, 136 half-moves | 132s | 101s | 508s (3.8x) |
+| Coverage of the game (long) | 13.2% | 5.9% | 100% |
+| Reaches the finish | yes | **no** | yes |
+| Picks adjacent half-moves (long) | 0 | 3 | n/a |
+
+Two different comparisons, and conflating them would overstate the result.
+
+**Against flat**, the win is length, and it widens with the game because the
+paced budget is capped and the baseline's is not.
+
+**Against top-N**, the win is not length -- on the long game top-N is
+*shorter*, because it is fixed at eight beats however long the game runs. The
+win is structure. Top-N finds the turning point in both games, so scoring
+alone is not what it lacks; it ends the commentary before the game ends, and
+on the long game it spends three of its eight beats on half-moves adjacent to
+another pick. That is precisely the "constraints matter, not just scoring"
+claim, and it is why both baselines exist rather than one.
+
+**A correction worth recording.** This comparison previously reported the
+flat baseline at 594 seconds, because each of its lines was given a full
+45-word treatment. That is not what move-by-move commentary is -- the systems
+in the literature emit one short sentence per move -- so the baseline was a
+strawman and the advantage over it was overstated by roughly a factor of
+four. The flat arm now writes one short line per move, and the honest figures
+are above.
 
 **The verification gate** is part of this objective and is implemented. Every
 generated beat is checked against the same facts the model was given, and a

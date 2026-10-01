@@ -19,3 +19,4 @@ data/lichess_db_puzzle.csv.zst
 
 # fetched game corpus is regenerable
 data/games/
+data/study_games/

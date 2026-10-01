@@ -494,6 +494,49 @@ def cmd_agreement(args: argparse.Namespace) -> None:
     print(f"\n  report -> {out}")
 
 
+def cmd_study(args: argparse.Namespace) -> None:
+    """Build listener-study sessions, or collect returned responses."""
+    from voxplay.chessgame.study import StudyError, build_study, collect
+
+    if args.action == "collect":
+        try:
+            read, failed, path = collect(args.responses, args.out)
+        except StudyError as exc:
+            print(f"  ERROR: {exc}", file=sys.stderr)
+            sys.exit(1)
+        print(f"  {read} responses read, {failed} unreadable -> {path}")
+        return
+
+    if not args.games:
+        print("  ERROR: --games is required to build a study.", file=sys.stderr)
+        sys.exit(1)
+
+    print("=" * 70)
+    print(f"  Building {args.participants} listener-study sessions")
+    print("=" * 70)
+    started = time.time()
+    try:
+        manifest = build_study(
+            args.games, out_dir=args.out_dir, participants=args.participants,
+            nodes=args.nodes, engine=args.engine, tts=args.tts, progress=True,
+        )
+    except StudyError as exc:
+        print(f"  ERROR: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    print()
+    print(f"  {len(manifest['games'])} games x {len(manifest['conditions'])} conditions")
+    for game in manifest["games"]:
+        print(f"    {game['game_id']:<12} {game['plies']:>4} plies  {game['archetype']}")
+    print(f"  condition coverage: {manifest['coverage']}")
+    print(f"  sessions -> {args.out_dir}/session_*.html")
+    print(f"  built in {time.time() - started:.0f}s")
+    print()
+    print("  Send one session file to each participant. They return a file or")
+    print("  a pasted code; put those in a folder and run:")
+    print(f"    python -m voxplay.cli.main study collect --responses <folder>")
+
+
 def cmd_eval(args: argparse.Namespace) -> None:
     """Run commentary quality evaluation over the full test suite."""
     from voxplay.eval.runner import run_match_eval
@@ -687,6 +730,23 @@ def build_parser() -> argparse.ArgumentParser:
     p_agr.add_argument("--cache", default="data/games/annotated.pgn")
     p_agr.add_argument("--out", default="output/agreement.json")
 
+    # study
+    p_study = sub.add_parser(
+        "study", help="Build listener-study sessions or collect responses.",
+    )
+    p_study.add_argument("action", choices=["build", "collect"])
+    p_study.add_argument("--games", nargs="*", default=None,
+                         help="PGN paths or Lichess links, one per study game.")
+    p_study.add_argument("--participants", type=int, default=30)
+    p_study.add_argument("--nodes", type=int, default=400_000)
+    p_study.add_argument("--engine", default="auto",
+                         choices=["auto", "stockfish", "mock"])
+    p_study.add_argument("--tts", default="offline", choices=["offline", "mock"])
+    p_study.add_argument("--out-dir", default="output/study")
+    p_study.add_argument("--responses", default="output/study/responses",
+                         help="Folder of returned responses, for `collect`.")
+    p_study.add_argument("--out", default="output/study/results.csv")
+
     # eval
     p_eval = sub.add_parser(
         "eval",
@@ -718,6 +778,7 @@ def app() -> None:
         "chess": cmd_chess,
         "validate-motifs": cmd_validate_motifs,
         "agreement": cmd_agreement,
+        "study": cmd_study,
         "eval": cmd_eval,
     }
     dispatch[args.command](args)

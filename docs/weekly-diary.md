@@ -15,10 +15,10 @@ recalled. Companion document: `project-report.md`.
 | 1 | 07 Sep -- 13 Sep 2026 | Pivot to chess; analysis, motifs, pacing, script, CLI | 7 | 320 |
 | 2 | 14 Sep -- 20 Sep 2026 | No recorded activity | 0 | 320 |
 | 3 | 21 Sep -- 27 Sep 2026 | Spoken audio and the synchronised board player | 2 | 358 |
-| 4 | 28 Sep -- 04 Oct 2026 | Literature survey, docs, validation, verification gate | in progress | 444 |
+| 4 | 28 Sep -- 04 Oct 2026 | Survey, docs, validation, verification gate, study harness | in progress | 468 |
 
 **Current scale:** ~12,500 lines of Python across implementation and tests,
-444 automated tests passing.
+468 automated tests passing.
 
 ---
 
@@ -302,6 +302,52 @@ never supplied becomes a blind spot.
 
 The gate also caught a real repetition in the template generator's own
 output, which is a style warning rather than a defect but a fair one.
+
+### Study harness, and a correction to our own headline claim
+
+Built the instrument for the listener study: one self-contained HTML file per
+participant, carrying four blinded clips with board and audio, the consent
+and screening steps, the rating blocks, and an export the participant returns
+as a file or a pasted code. No server, no accounts, works offline. Conditions
+are assigned by Latin square and never named in the participant's hearing.
+A collector turns returned responses into one CSV.
+
+Building it exposed a problem with the pacing comparison this project has
+been quoting since week 1. Preparing the flat baseline's audio showed it
+running to thirteen minutes on a 17-move game, which is absurd on its face.
+The cause was that the flat arm gave every move a full 45-word treatment.
+That is not what move-by-move commentary is: the systems in the literature
+emit one short sentence per move. **The baseline was a strawman and the
+advantage over it was overstated by roughly a factor of four.**
+
+Corrected, the flat arm writes one short line per move -- "Black plays pawn
+to b five. A mistake." -- and the honest numbers are 1.8x shorter on a short
+game and 3.8x on a long one, the gap widening with length because the paced
+budget is capped and the baseline's is not.
+
+The same preparation showed the top-N comparison had been framed wrongly.
+On a long game top-N is *shorter* than the system, because it is fixed at
+eight beats however long the game runs, so reporting it as a duration win was
+never right. Measured properly, top-N finds the turning point in both games
+-- scoring is not what it lacks -- but it ends the commentary before the game
+ends and spends three of its eight beats on half-moves adjacent to another
+pick. The win over it is structure, which is exactly the hypothesis the
+second baseline exists to test.
+
+Both corrections make the claims weaker and defensible rather than strong and
+exposed. A reviewer would have found the strawman immediately.
+
+The harness itself then produced the worst bug of the week, caught by a test
+written specifically to look for it. The first Latin-square assignment
+rotated game and condition together, so `flat` was always heard on game 1 and
+`system` always on game 2. **Condition was perfectly confounded with game.**
+Had the study run that way, a duller game would have sunk whichever condition
+was welded to it, the dataset would have looked entirely normal, and no
+analysis afterwards could have revealed it. Three properties have to hold at
+once -- each participant hears every condition once, each condition appears
+equally in each position, and each condition is paired equally with each game
+-- and the obvious implementation satisfies the first two while failing the
+third completely.
 
 ### Planned for next week
 - Draft the listener-study protocol and register thresholds before running

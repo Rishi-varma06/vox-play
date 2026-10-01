@@ -71,9 +71,23 @@ def test_a_turning_point_gets_more_airtime_than_a_passing_moment():
     assert B.beat_seconds(B.BeatType.TURNING_POINT) > B.beat_seconds(B.BeatType.MOMENT)
 
 
-def test_a_bridge_is_the_cheapest_spoken_beat():
-    spoken = [t for t in B.BeatType if t is not B.BeatType.INTRO]
-    assert B.beat_seconds(B.BeatType.BRIDGE) == min(B.beat_seconds(t) for t in spoken)
+def test_a_flat_line_is_the_shortest_beat():
+    """
+    One short line per move, which is what move-by-move commentary is. It was
+    originally given a full moment's 45 words, making the baseline 13 minutes
+    on a 17-move game -- a strawman rather than a fair opponent.
+    """
+    assert B.beat_seconds(B.BeatType.FLAT) == min(
+        B.beat_seconds(t) for t in B.BeatType
+    )
+
+
+def test_a_bridge_is_the_cheapest_narrated_beat():
+    narrated = [t for t in B.BeatType
+                if t not in (B.BeatType.INTRO, B.BeatType.FLAT)]
+    assert B.beat_seconds(B.BeatType.BRIDGE) == min(
+        B.beat_seconds(t) for t in narrated
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -277,12 +291,18 @@ def test_flat_baseline_covers_every_half_move(game):
     assert sheet.coverage(game.total_plies) == 1.0
 
 
-def test_flat_baseline_is_absurdly_long(game):
+def test_flat_baseline_is_substantially_longer_than_the_system(game):
     """
-    Most of the pacing argument in one number: a 17-move game narrated
-    move-by-move runs to nearly ten minutes.
+    The pacing argument, stated honestly. The flat baseline is one short line
+    per move -- a fair opponent, not a strawman -- and it is still far longer
+    than a paced recap, because it cannot skip anything. The gap widens with
+    game length, since the system's budget is capped and the baseline's is
+    not.
     """
-    assert B.select_every_move(game).total_seconds > 500
+    flat = B.select_every_move(game)
+    system = B.select_beats(game, pacing=B.PacingConfig(budget_seconds=B.budget_for(game)))
+    assert flat.total_seconds > system.total_seconds
+    assert len(flat.beats) == game.total_plies
 
 
 def test_top_n_returns_exactly_n_beats(game):

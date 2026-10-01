@@ -60,6 +60,7 @@ class BeatType(str, Enum):
     INTRO = "intro"
     OPENING = "opening"
     BRIDGE = "bridge"            # fast-forward several moves in one line
+    FLAT = "flat"                # one short line per move, baseline only
     MOMENT = "moment"
     TURNING_POINT = "turning_point"
     FINISH = "finish"
@@ -73,6 +74,13 @@ BEAT_WORDS: Dict[BeatType, int] = {
     BeatType.INTRO: 35,
     BeatType.OPENING: 40,
     BeatType.BRIDGE: 22,
+    # The flat baseline gets one SHORT line per move, which is what
+    # move-by-move commentary actually is -- the systems in the literature
+    # emit a sentence per move, not a paragraph. Giving it a full moment's
+    # 45 words would make the baseline 13 minutes on a 17-move game and the
+    # comparison a strawman. At 14 words it is a fair opponent and still
+    # three to four times longer than a paced recap.
+    BeatType.FLAT: 14,
     BeatType.MOMENT: 45,
     BeatType.TURNING_POINT: 65,
     BeatType.FINISH: 50,
@@ -625,10 +633,10 @@ def select_every_move(game: ParsedGame) -> BeatSheet:
     arc = extract_arc(game)
     beats = [
         Beat(
-            beat_type=BeatType.MOMENT,
+            beat_type=BeatType.FLAT,
             plies=[move.ply],
             salience=0.0,
-            est_seconds=beat_seconds(BeatType.MOMENT),
+            est_seconds=beat_seconds(BeatType.FLAT),
             reason="flat baseline covers every move",
         )
         for move in game.moves

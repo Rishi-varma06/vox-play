@@ -390,6 +390,17 @@ class TemplateGenerator(ScriptGenerator):
             named = f"They played the {name}. " if name else ""
             return f"{named}The game opened: {spoken}."
 
+        if beat.beat_type == BeatType.FLAT and moves:
+            # One short line per move, as move-by-move commentary actually is.
+            move = moves[0]
+            spoken = f"{speak_colour(move.color)} plays {speak_move(move)}."
+            analysis = move.analysis
+            if analysis and analysis.quality in (MoveQuality.BLUNDER,
+                                                 MoveQuality.MISTAKE,
+                                                 MoveQuality.INACCURACY):
+                spoken += f" {_article(analysis.quality.value).capitalize()} "                           f"{analysis.quality.value}."
+            return spoken
+
         if beat.beat_type == BeatType.BRIDGE and moves:
             # Never claim a stretch was uneventful without checking. A bridge
             # over 40 moves of a real game said "pass without incident" across

@@ -20,3 +20,6 @@ data/lichess_db_puzzle.csv.zst
 # fetched game corpus is regenerable
 data/games/
 data/study_games/
+
+# large pre-generated demo players; rebuild with docs/demo.md
+demo/*.html

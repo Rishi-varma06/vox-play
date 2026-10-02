@@ -151,6 +151,7 @@ about it.
 | [`docs/project-report.md`](docs/project-report.md) | Problem, literature survey, limitations, objectives, results |
 | [`docs/weekly-diary.md`](docs/weekly-diary.md) | Running record of work, backed by commits |
 | [`docs/listener-study-protocol.md`](docs/listener-study-protocol.md) | Pre-registered human evaluation design |
+| [`docs/demo.md`](docs/demo.md) | Runbook for demonstrating the project live |
 | `CLAUDE.md` | Architecture notes and the decisions that are load-bearing |
 
 ---

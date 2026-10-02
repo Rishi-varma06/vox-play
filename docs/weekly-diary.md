@@ -409,7 +409,6 @@ dropped, so the pause survives.
 | Item | Objective | Notes |
 |---|---|---|
 | Listener study | 5 | **The only remaining item in the whole project.** Protocol pre-registered in `listener-study-protocol.md`; blocked on recruiting participants |
-| Opening-deviation detection | 2 | Requires the Lichess opening explorer |
 
 ---
 

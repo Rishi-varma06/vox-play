@@ -202,6 +202,37 @@ class GameState(BaseModel):
     black_clock_s: Optional[float] = None
 
 
+class OpeningReport(BaseModel):
+    """Where a game sat in theory, and where it left."""
+    eco: Optional[str] = None
+    name: Optional[str] = None
+    #: Half-moves that stayed inside a named position.
+    book_plies: int = 0
+    #: The first half-move whose resulting position is not in the book.
+    exit_ply: Optional[int] = None
+    exit_san: Optional[str] = None
+    #: Whose move left theory.
+    exit_color: Optional[str] = None
+
+    @property
+    def exit_move_number(self) -> Optional[int]:
+        """Full-move number of the departure, for saying it aloud."""
+        if self.exit_ply is None:
+            return None
+        return (self.exit_ply + 1) // 2
+
+    def describe(self) -> str:
+        """A sentence the commentary layer can use as a fact."""
+        if self.name is None:
+            return "this opening is not in the book"
+        if self.exit_ply is None:
+            return f"the whole opening followed theory: {self.name}"
+        return (
+            f"they followed {self.name} and left theory on move "
+            f"{self.exit_move_number} with {self.exit_san}"
+        )
+
+
 # ---------------------------------------------------------------------------
 # Game metadata
 # ---------------------------------------------------------------------------

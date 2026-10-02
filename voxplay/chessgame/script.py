@@ -241,6 +241,16 @@ def beat_facts(beat: Beat, game: ParsedGame, sheet: BeatSheet, style: ScriptStyl
             facts.append(f"opening played: {_opening(game)}")
         if meta.eco:
             facts.append(f"ECO code: {meta.eco}")
+        book = game.opening_report
+        if book and book.name:
+            facts.append(f"named line: {ascii_fold(book.name)}")
+            if book.exit_ply:
+                facts.append(
+                    f"they left known theory on move {book.exit_move_number} "
+                    f"with {speak_san(book.exit_san or '')}"
+                )
+            else:
+                facts.append("the whole opening stayed inside known theory")
         facts.append("moves: " + "; ".join(speak_move(m, with_number=True) for m in moves))
         if moves and moves[-1].analysis:
             facts.append(f"after these moves: {describe_eval(moves[-1].analysis.win_pct_after)}")
@@ -437,7 +447,12 @@ class TemplateGenerator(ScriptGenerator):
             spoken = "; ".join(speak_move(m) for m in moves[:6])
             name = _opening(game)
             named = f"They played the {name}. " if name else ""
-            return f"{named}The game opened: {spoken}."
+            book = game.opening_report
+            left = ""
+            if book and book.name and book.exit_ply:
+                left = (f" They left known theory on move "
+                        f"{book.exit_move_number}.")
+            return f"{named}The game opened: {spoken}.{left}"
 
         if beat.beat_type == BeatType.FLAT and moves:
             # One short line per move, as move-by-move commentary actually is.

@@ -25,6 +25,7 @@ from pydantic import BaseModel, Field
 
 from .models import (
     ChessEvent,
+    OpeningReport,
     Color,
     GameEndEvent,
     GameMeta,
@@ -78,6 +79,8 @@ class ParsedGame(BaseModel):
     """A single game: metadata plus its full event stream."""
     meta: GameMeta
     events: List[ChessEvent] = Field(default_factory=list)
+    #: Filled in by openings.probe_opening when the book is consulted.
+    opening_report: Optional[OpeningReport] = None
 
     @property
     def moves(self) -> List[MoveEvent]:

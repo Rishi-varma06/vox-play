@@ -285,11 +285,31 @@ motifs and larger structural moments.
 
 *Success criterion:* classifications agree with published annotations of
 well-studied games; motifs reproduce documented tactics.
-**Status: substantially complete.** On the 1858 Opera Game the classifier
-independently identified the two moves chess literature names as Black's
-errors; the motif layer reproduces the published annotation, including the
-discovered attack created by queenside castling. Opening-deviation detection
-is outstanding.
+**Status: complete.** On the 1858 Opera Game the classifier independently
+identified the two moves chess literature names as Black's errors; the motif
+layer reproduces the published annotation, including the discovered attack
+created by queenside castling. Motif recall is measured in Objective 5.
+
+**Opening-deviation detection** uses the CC0 opening-name database, indexed
+by POSITION rather than move order so transpositions resolve correctly -- a
+sequence comparison calls a transposed Queen's Pawn Game a novelty on move
+three. The system names the line and the move that left it: on the Opera Game,
+"they followed the Philidor Defense and left theory on move 3 with Bg4".
+
+One limitation is worth stating precisely. The database records the terminal
+position of each named line rather than every position along it, so a game in
+the middle of mainstream theory passes through unnamed positions -- in the Ruy
+Lopez, the positions after Ba4 and Nf6 are unnamed while the ones after O-O
+and Be7 are named again. The departure is therefore taken as the move after
+the LAST named position, not the first unnamed one; the first-miss reading
+announces that the Ruy Lopez left theory on move four. What this measures is
+"the last position anyone bothered to name", which is close to but not the
+same as "the last position ever played".
+
+Popularity figures -- "this move appears in 0.3% of games at this level" --
+would need Lichess's opening explorer, which has required an API token since
+2026 and answers HTTP 401 without one. The names database is CC0 and needs
+nothing.
 
 ### Objective 3 -- Generate a paced commentary script
 

@@ -304,6 +304,18 @@ def cmd_chess(args: argparse.Namespace) -> None:
               f"accuracy {average:5.1f}%   errors {len(errors)}"
               + (f"   ({', '.join(m.san for m in errors[:5])})" if errors else ""))
 
+    if args.openings:
+        from voxplay.chessgame.openings import OpeningError, load_book, probe_opening
+        try:
+            book = load_book(progress=True)
+            game.opening_report = probe_opening(game, book)
+            report = game.opening_report
+            print(f"      opening book: {report.eco or '--'} "
+                  f"{ascii_fold(report.name or 'not in book')}")
+            print(f"      {report.describe()}")
+        except OpeningError as exc:
+            print(f"      opening book unavailable ({exc}); continuing without it")
+
     motifs = [(m, h) for m in game.moves for h in (m.analysis.motifs if m.analysis else [])]
     print(f"\n[2/4] Tactical motifs: {len(motifs)} detected")
     for move, hit in motifs[: args.max_motifs]:
@@ -689,6 +701,10 @@ def build_parser() -> argparse.ArgumentParser:
                          help="Synthesise spoken audio and a timeline for the script.")
     p_chess.add_argument("--tts", default="offline", choices=["offline", "mock", "gtts"],
                          help="Voice backend. 'offline' needs no network or ffmpeg.")
+    p_chess.add_argument("--openings", action="store_true",
+                         help="Consult the CC0 opening book to find where the "
+                              "players left known theory. One small download, "
+                              "then offline.")
     p_chess.add_argument("--player", action="store_true",
                          help="Also build a standalone HTML player (implies --audio).")
     p_chess.add_argument("--audio-dir", default="output/chess",

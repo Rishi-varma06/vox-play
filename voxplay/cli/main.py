@@ -640,7 +640,7 @@ def cmd_eval(args: argparse.Namespace) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="voxplay",
-        description="AI cricket commentary engine.",
+        description="AI sports commentary engine: chess and cricket.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 

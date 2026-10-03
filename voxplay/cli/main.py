@@ -637,6 +637,33 @@ def cmd_eval(args: argparse.Namespace) -> None:
     print()
 
 
+def cmd_serve(args: argparse.Namespace) -> None:
+    """Run the web studio: upload a game, read the script, then narrate it."""
+    import uvicorn
+
+    url = f"http://{args.host}:{args.port}"
+    print("=" * 70)
+    print("  VoxPlay studio")
+    print(f"  Open {url} in a browser")
+    print("  Upload a PGN, read the commentary, then press 'Turn into audio'.")
+    print("=" * 70)
+    if args.open:
+        import threading
+        import webbrowser
+
+        # Delayed, because a browser that wins the race shows a refused
+        # connection and the person reloads instead of waiting.
+        threading.Timer(1.2, lambda: webbrowser.open(url)).start()
+
+    uvicorn.run(
+        "voxplay.web.app:app",
+        host=args.host,
+        port=args.port,
+        reload=args.reload,
+        log_level="warning",
+    )
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="voxplay",
@@ -778,6 +805,19 @@ def build_parser() -> argparse.ArgumentParser:
         help="Evaluate a single JSON file instead of the full suite.",
     )
 
+    # serve
+    p_serve = sub.add_parser(
+        "serve", help="Run the web studio (upload a PGN, review the text, narrate)."
+    )
+    p_serve.add_argument("--host", default="127.0.0.1")
+    p_serve.add_argument("--port", type=int, default=8000)
+    p_serve.add_argument(
+        "--open", action="store_true", help="Open a browser once the server is up."
+    )
+    p_serve.add_argument(
+        "--reload", action="store_true", help="Reload on code changes (development)."
+    )
+
     return parser
 
 
@@ -796,6 +836,7 @@ def app() -> None:
         "agreement": cmd_agreement,
         "study": cmd_study,
         "eval": cmd_eval,
+        "serve": cmd_serve,
     }
     dispatch[args.command](args)
 

@@ -14,7 +14,7 @@ cd C:\Users\rishi\voxplay
 python -m pytest tests/ -q
 ```
 
-Expect `468 passed`. If that works, Python, the engine wrapper and every
+Expect `520 passed`. If that works, Python, the engine wrapper and every
 layer are fine.
 
 | Check | Command | Expect |
@@ -51,7 +51,24 @@ the point.
 
 ---
 
-## Act 2 -- Run it (2 minutes)
+## Act 2 -- Run it (3 minutes)
+
+Open the studio. This is the version to show a non-technical examiner.
+
+```bash
+python -m voxplay.cli.main serve --open
+```
+
+1. **Paste PGN** tab, then **Load the Opera Game**, then **Analyse game**.
+   The progress bar counts real positions as Stockfish evaluates them.
+2. About a minute later the review screen appears: accuracies, the opening
+   and where they left theory, motif count, pacing against the every-move
+   baseline, what the script cost.
+3. Read a beat or two aloud. Point at the green **Verified** banner.
+4. Press **Turn into audio**. Play it.
+
+The terminal version does the same thing and prints more, if you would
+rather show that:
 
 ```bash
 python -m voxplay.cli.main chess data/sample_game.pgn --generator claude --player
@@ -130,6 +147,34 @@ that is nearly eight minutes. The selection layer is the contribution."
 ---
 
 ## Act 5 -- The research (2 minutes)
+
+**Do this one in the browser if the studio is already open.** It is the
+strongest thirty seconds of the demo because the examiner watches you cause
+the failure.
+
+Go back to the review screen and type this over any beat:
+
+```
+A beautiful fork on h7 wins material, pure Kasparov at his very best.
+```
+
+Stop typing. Within a second the beat turns red and three separate checks
+fire:
+
+| | |
+|---|---|
+| `notation_leak` | `h7` is notation, not speech |
+| `ungrounded_tactic` | no detector found a fork here |
+| `ungrounded_name` | Kasparov was never in this game |
+
+The banner flips from **Verified** to **3 unsupported claims found**. Say:
+
+> "It does not matter that I wrote that sentence rather than the model. The
+> gate checks the text, not the author."
+
+Then undo it and watch the banner go green again.
+
+The offline version, if the studio is not running:
 
 ```bash
 python demo/show_gate.py

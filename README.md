@@ -41,6 +41,23 @@ proof is that it was written for cricket first.
 pip install -e ".[dev]"
 ```
 
+### The studio (browser)
+
+```bash
+python -m voxplay.cli.main serve --open
+```
+
+Upload a PGN, read the commentary it writes, edit anything you disagree
+with, then press **Turn into audio**. Nothing is spoken until a person has
+read it -- speech is the expensive artefact, and committing to it before the
+words are right wastes the listener's time more than it wastes ours.
+
+Edited text goes back through the same verifier the pipeline uses, so you
+can type an invented tactic into a beat and watch it get flagged before it
+is ever narrated.
+
+### The pipeline (terminal)
+
 Narrate the bundled 1858 Opera Game:
 
 ```bash

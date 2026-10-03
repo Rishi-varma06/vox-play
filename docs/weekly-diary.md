@@ -169,7 +169,7 @@ itself an argument for building the output stage rather than deferring it.
 
 ---
 
-## Week 4 -- 28 September to 04 October 2026 (current)
+## Week 4 -- 28 September to 04 October 2026
 
 **Objective addressed:** 5 (preparation)
 
@@ -401,6 +401,99 @@ dropped, so the pause survives.
 - Draft the listener-study protocol and register thresholds before running
   it.
 - Begin recruiting listeners -- identified as the schedule's long pole.
+
+---
+
+## Week 5 -- 05 October to 11 October 2026 (current)
+
+**Objectives addressed:** 4 (spoken output and interface), 5 (validation
+surface)
+
+### Work completed
+
+A browser interface for the chess pipeline (`voxplay serve`), replacing the
+terminal as the way the system is shown and used.
+
+The design decision worth recording is that **the pipeline was split in two
+with a person in the middle**, rather than wrapping the existing one-shot
+command in a web page:
+
+```
+POST /api/chess/games              upload, analyse, pace, script   (~60s)
+POST /api/chess/games/{id}/verify  re-check edited text            (instant)
+POST /api/chess/games/{id}/narrate text to speech                  (~1s)
+```
+
+Narration is never implicit. A reviewer reads the generated script, edits
+anything they disagree with, and only then asks for audio. Speech is the
+expensive and hard-to-skim artefact, so committing to it before the words
+are right wastes the listener's time more than it wastes ours.
+
+Editing had a consequence that turned out to be the most useful part of the
+interface: **edited text goes back through `verify_script`, the same gate the
+pipeline runs**, not a lighter browser-side approximation. A reviewer can
+type an invented tactic into a beat and watch three independent checks fire
+before anything is narrated. The gate was previously demonstrable only by
+running a script that injected faults on the reviewer's behalf; it is now
+something an examiner can cause themselves.
+
+### Problems encountered and resolved
+
+1. **Progress could not be reported.** `analyse_game` evaluated every
+   position in a closed loop, so a caller had thirty seconds of silence.
+   Added an optional `progress(done, total)` callback, called once per
+   position including terminal ones -- skipping those would leave the bar one
+   short of full on every decisive game, which is most of them. The
+   alternative, a timer animating a bar that knows nothing about the work,
+   keeps moving after the work has died.
+
+2. **The offline voice could not be driven from a server.** Two distinct
+   faults, both latent until something other than the CLI called it:
+   `comtypes` initialises COM for the thread that imports it, so the first
+   `CreateObject` on a worker thread failed with "CoInitialize has not been
+   called"; and the cached `SpVoice` was shared across threads, which hands
+   one thread an object belonging to another's apartment -- undefined
+   behaviour rather than a clean error. Fixed with an explicit
+   `CoInitialize` guard and a thread-local cache.
+
+3. **Beats rendered collapsed with scrollbars.** Auto-sizing a textarea
+   measured `scrollHeight` while its panel was still `display: none`, which
+   reports zero. Sized after the panel is on screen instead.
+
+4. **Two cosmetic faults a reviewer would have seen first.** The CLI package
+   eagerly imported `.main`, so `python -m voxplay.cli.main` loaded the
+   module twice and runpy printed a `RuntimeWarning` above the first line of
+   output; and `--help` still described a cricket engine.
+
+### Validation obtained
+
+- Full suite **520 passing**, up from 488. Thirty-two new tests: twenty-nine
+  covering the HTTP contract, three covering the progress callback.
+- The two tests that carry the design: a freshly analysed game reaches
+  `ready` with **no audio attached**, and an invented tactic typed into a
+  beat is **flagged by the same verifier** that checks the model's own text.
+- End-to-end run through the browser against Stockfish and
+  `claude-opus-5`: 34 positions analysed, opening identified as C41 Philidor
+  with the departure at move 3, 13 motifs, 6 beats at 142s against a
+  250s every-move baseline, verification clean, **$0.062**, 141s of audio
+  synthesised in 0.4s with 1.00x drift.
+
+### Note on the two test failures that were my own
+
+Both initial failures were faults in the tests, not the code, and both are
+worth recording because they are easy to repeat. One asserted that an HTTP
+poll would observe a part-finished progress bar -- true against Stockfish,
+false against the mock engine, which finishes faster than a poll arrives;
+the callback contract is now tested at library level where it is
+deterministic. The other injected "a beautiful fork" into a beat that sat on
+a real fork, so the claim was correctly licensed and nothing fired; it now
+targets the framing beat, which covers no moves and is therefore licensed to
+mention no tactics at all.
+
+### Planned for next week
+
+- Recruit listeners. Still the schedule's long pole and still the only
+  outstanding item.
 
 ---
 

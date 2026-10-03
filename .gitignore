@@ -23,3 +23,6 @@ data/study_games/
 
 # large pre-generated demo players; rebuild with docs/demo.md
 demo/*.html
+
+# Web studio job artefacts (audio, players, timelines) - regenerated per run.
+output/web/

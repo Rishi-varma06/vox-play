@@ -26,7 +26,7 @@ import shutil
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Sequence
+from typing import Callable, Dict, List, Optional, Sequence
 
 import chess
 import chess.engine
@@ -405,12 +405,20 @@ def analyse_game(
     parsed: ParsedGame,
     engine: AnalysisEngine,
     thresholds: ClassificationThresholds = DEFAULT_THRESHOLDS,
+    progress: Optional[Callable[[int, int], None]] = None,
 ) -> ParsedGame:
     """
     Attach engine verdicts to every move in a parsed game, in place.
 
     Evaluates each distinct position once and reuses it as both the "after"
     of one move and the "before" of the next.
+
+    `progress` is called with (positions done, total) after each one. A long
+    game is half a minute of silence otherwise, which is fine for a terminal
+    but not for a caller that has to show someone a progress bar. A callback
+    that raises is the caller's problem, not ours, so it is left to propagate
+    rather than swallowed -- a reporting bug that silently eats itself is
+    worse than one that stops the run.
     """
     moves = parsed.moves
     if not moves:
@@ -422,15 +430,17 @@ def analyse_game(
 
     evaluations: List[Evaluation] = []
     line_sets: List[List[EngineLine]] = []
-    for board in boards:
+    for position, board in enumerate(boards, start=1):
         terminal = terminal_evaluation(board)
         if terminal is not None:
             evaluations.append(terminal)
             line_sets.append([])
-            continue
-        lines = engine.analyse_position(board)
-        line_sets.append(lines)
-        evaluations.append(lines[0].evaluation if lines else Evaluation(cp=0))
+        else:
+            lines = engine.analyse_position(board)
+            line_sets.append(lines)
+            evaluations.append(lines[0].evaluation if lines else Evaluation(cp=0))
+        if progress is not None:
+            progress(position, len(boards))
 
     for index, move in enumerate(moves):
         eval_before = evaluations[index]

@@ -215,3 +215,40 @@ def test_single_threaded_analysis_is_bit_identical_across_runs():
 def test_analysing_a_game_with_no_moves_is_a_no_op():
     empty = parse_pgn_text('[Result "*"]\n\n*')
     assert analyse_game(empty, MockAnalysisEngine()).moves == []
+
+
+# ---------------------------------------------------------------------------
+# Progress reporting
+# ---------------------------------------------------------------------------
+
+def test_progress_is_reported_once_per_position():
+    """
+    A caller showing someone a progress bar needs the engine's real position
+    count. The alternative -- a timer animating a bar that knows nothing --
+    is the kind of thing that keeps moving after the work has died.
+    """
+    seen = []
+    game = load_pgn(SAMPLE_PGN)
+    analyse_game(game, MockAnalysisEngine(), progress=lambda d, t: seen.append((d, t)))
+
+    # N moves means N+1 positions: the one before each move, plus the last.
+    assert len(seen) == game.total_plies + 1
+    assert [done for done, _ in seen] == list(range(1, len(seen) + 1))
+    assert {total for _, total in seen} == {game.total_plies + 1}
+
+
+def test_progress_covers_terminal_positions_too():
+    """
+    Checkmate is evaluated without consulting the engine. Skipping the
+    callback there would leave the bar one short of full on every decisive
+    game -- which is most of them.
+    """
+    seen = []
+    game = parse_pgn_text(SCHOLARS_MATE)
+    analyse_game(game, MockAnalysisEngine(), progress=lambda d, t: seen.append(d))
+    assert seen[-1] == game.total_plies + 1
+
+
+def test_analysis_runs_without_a_progress_callback():
+    game = analyse_game(load_pgn(SAMPLE_PGN), MockAnalysisEngine())
+    assert all(move.analysis for move in game.moves)

@@ -24,6 +24,7 @@ hang. pyttsx3 stays as the fallback for platforms whose drivers are fine.
 from __future__ import annotations
 
 import sys
+import threading
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -87,16 +88,43 @@ class OfflineTTSProvider(TTSProvider):
         self.rate = rate
         self.voice = voice
         self.volume = volume
-        self._sapi = None
+        # A COM object belongs to the apartment of the thread that made it,
+        # so the cache is per thread. One provider shared by a web server's
+        # worker threads would otherwise hand thread B an object created in
+        # thread A, which is undefined behaviour rather than a clean error.
+        self._local = threading.local()
         self._pyttsx3 = None
 
     # -- Windows: SAPI over COM -------------------------------------------
 
+    @staticmethod
+    def _ensure_com() -> None:
+        """
+        Initialise COM on this thread.
+
+        comtypes does this on import for the thread that imports it, which
+        covers the CLI and nothing else. Called from a server's worker thread
+        the first CreateObject fails with "CoInitialize has not been called".
+        Re-initialising an already-initialised thread returns S_FALSE and is
+        harmless, so this is safe to call before every object we create.
+        """
+        import comtypes
+
+        try:
+            comtypes.CoInitialize()
+        except OSError:
+            # RPC_E_CHANGED_MODE: the thread is already in a different
+            # apartment model. That apartment still works for SAPI, so this
+            # is not worth failing over.
+            pass
+
     def _get_sapi(self):
-        if self._sapi is not None:
-            return self._sapi
+        cached = getattr(self._local, "sapi", None)
+        if cached is not None:
+            return cached
         import comtypes.client
 
+        self._ensure_com()
         voice = comtypes.client.CreateObject("SAPI.SpVoice")
         voice.Rate = _wpm_to_sapi_rate(self.rate)
         voice.Volume = max(0, min(100, int(self.volume * 100)))
@@ -105,13 +133,14 @@ class OfflineTTSProvider(TTSProvider):
                 if self.voice.lower() in token.GetDescription().lower():
                     voice.Voice = token
                     break
-        self._sapi = voice
+        self._local.sapi = voice
         return voice
 
     def _synthesize_sapi(self, text: str, wav_path: Path) -> None:
         import comtypes.client
 
         voice = self._get_sapi()
+        self._ensure_com()
         stream = comtypes.client.CreateObject("SAPI.SpFileStream")
         stream.Open(str(wav_path), _SSFM_CREATE_FOR_WRITE)
         try:

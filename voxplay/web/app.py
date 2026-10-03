@@ -24,14 +24,19 @@ from voxplay.events.models import (
     WicketInfo,
 )
 from voxplay.events.state import advance_state, init_state
+from voxplay.web.chess_api import router as chess_router
 from voxplay.web.match_store import MatchSession, MatchStore
 
-app = FastAPI(title="VoxPlay Web Scorer")
+app = FastAPI(title="VoxPlay")
 store = MatchStore()
 
 _STATIC = Path(__file__).parent / "static"
 if _STATIC.exists():
     app.mount("/static", StaticFiles(directory=str(_STATIC)), name="static")
+
+# The chess pipeline lives behind its own router so the two sports do not
+# share a URL namespace or a request model.
+app.include_router(chess_router)
 
 _event_adapter: TypeAdapter = TypeAdapter(
     __import__("voxplay.events.models", fromlist=["Event"]).Event
@@ -200,6 +205,15 @@ def _recompute(session: MatchSession) -> MatchSession:
 
 @app.get("/")
 async def index():
+    """The chess studio is the front door; the cricket scorer lives at /cricket."""
+    page = _STATIC / "chess.html"
+    if page.exists():
+        return FileResponse(str(page))
+    return {"status": "VoxPlay running", "docs": "/docs"}
+
+
+@app.get("/cricket")
+async def cricket_index():
     index_html = _STATIC / "index.html"
     if index_html.exists():
         return FileResponse(str(index_html))

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoxPlay &mdash; Chess Commentary Studio</title>
+<link rel="stylesheet" href="/static/chess.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">&#9816;</span>
+    <div>
+      <h1>VoxPlay</h1>
+      <p>Spoken chess commentary from move notation alone</p>
+    </div>
+  </div>
+  <nav class="steps" id="stepper">
+    <span class="step is-active" data-step="1">1 &middot; Upload</span>
+    <span class="step" data-step="2">2 &middot; Analyse</span>
+    <span class="step" data-step="3">3 &middot; Review text</span>
+    <span class="step" data-step="4">4 &middot; Audio</span>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= STEP 1 : UPLOAD ================= -->
+  <section class="panel" id="panel-upload">
+    <h2>Give it a game</h2>
+
+    <div class="tabs" role="tablist">
+      <button class="tab is-active" data-tab="file" role="tab">Upload a .pgn</button>
+      <button class="tab" data-tab="paste" role="tab">Paste PGN</button>
+      <button class="tab" data-tab="lichess" role="tab">Lichess link</button>
+    </div>
+
+    <div class="tabpane is-active" data-pane="file">
+      <label class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept=".pgn,.txt" hidden>
+        <span class="dz-icon">&#8681;</span>
+        <span class="dz-main">Drop a PGN file here, or click to choose</span>
+        <span class="dz-sub" id="fileName">No file selected</span>
+      </label>
+    </div>
+
+    <div class="tabpane" data-pane="paste">
+      <textarea id="pgnText" rows="10" spellcheck="false"
+        placeholder="[Event &quot;...&quot;]&#10;&#10;1. e4 e5 2. Nf3 ..."></textarea>
+      <button class="link-btn" id="loadSample">Load the Opera Game (Morphy, 1858)</button>
+    </div>
+
+    <div class="tabpane" data-pane="lichess">
+      <input type="url" id="lichessUrl" placeholder="https://lichess.org/abcd1234">
+      <p class="hint">
+        Any finished public game. Standard chess only &mdash; Chess960 has no
+        opening theory to compare against.
+      </p>
+    </div>
+
+    <details class="options">
+      <summary>Analysis settings</summary>
+      <div class="optgrid">
+        <label>
+          Engine effort
+          <select id="nodes">
+            <option value="200000">Fast &mdash; 200k nodes</option>
+            <option value="1000000" selected>Standard &mdash; 1M nodes</option>
+            <option value="4000000">Deep &mdash; 4M nodes</option>
+          </select>
+        </label>
+        <label>
+          Commentary writer
+          <select id="generator">
+            <option value="auto" selected>Auto (Claude, templates if offline)</option>
+            <option value="claude">Claude only</option>
+            <option value="template">Templates only (no API)</option>
+          </select>
+        </label>
+        <label>
+          Persona
+          <select id="persona">
+            <option value="analytical" selected>Analytical</option>
+            <option value="energetic">Energetic</option>
+          </select>
+        </label>
+        <label>
+          Audience rating
+          <select id="audience">
+            <option value="800">Beginner (800)</option>
+            <option value="1200" selected>Club (1200)</option>
+            <option value="1800">Strong (1800)</option>
+          </select>
+        </label>
+        <label class="checkline">
+          <input type="checkbox" id="openings" checked>
+          Identify the opening and where they left theory
+        </label>
+      </div>
+    </details>
+
+    <div class="actions">
+      <button class="primary" id="analyseBtn">Analyse game</button>
+      <span class="err" id="uploadErr"></span>
+    </div>
+  </section>
+
+  <!-- ================= STEP 2 : PROGRESS ================= -->
+  <section class="panel hidden" id="panel-progress">
+    <h2>Working</h2>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <p class="stage" id="stageText">starting&hellip;</p>
+    <pre class="log" id="logBox"></pre>
+  </section>
+
+  <!-- ================= STEP 3 : REVIEW ================= -->
+  <section class="panel hidden" id="panel-review">
+    <div class="gamehead">
+      <h2 id="gameTitle">&nbsp;</h2>
+      <p class="sub" id="gameSub">&nbsp;</p>
+    </div>
+
+    <div class="cards" id="statCards"></div>
+
+    <div class="verdict" id="verdictBox"></div>
+
+    <h3 class="section-title">
+      The commentary
+      <small>Edit any beat. The verifier re-checks what you write.</small>
+    </h3>
+
+    <div id="beats"></div>
+
+    <div class="actions sticky">
+      <button class="ghost" id="recheckBtn">Re-check text</button>
+      <span class="spacer"></span>
+      <label class="checkline small">
+        <input type="checkbox" id="wantPlayer" checked> also build the standalone player
+      </label>
+      <button class="primary big" id="narrateBtn">Turn into audio &rarr;</button>
+    </div>
+    <p class="err" id="reviewErr"></p>
+  </section>
+
+  <!-- ================= STEP 4 : AUDIO ================= -->
+  <section class="panel hidden" id="panel-audio">
+    <h2>Narration</h2>
+    <audio id="player" controls preload="auto"></audio>
+    <div class="cards" id="audioCards"></div>
+    <h3 class="section-title">Timeline <small>click a beat to jump</small></h3>
+    <div id="cues"></div>
+    <div class="actions">
+      <a class="ghost" id="dlAudio" download>Download the WAV</a>
+      <a class="ghost" id="dlPlayer" target="_blank" rel="noopener">Open the standalone player</a>
+      <button class="ghost" id="backToText">Back to the text</button>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Every spoken claim is checked against engine output before it ships.</span>
+  <a href="/docs" target="_blank" rel="noopener">API</a>
+</footer>
+
+<script src="/static/chess.js"></script>
+</body>
+</html>

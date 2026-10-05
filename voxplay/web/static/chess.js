@@ -381,8 +381,18 @@ function applyFindings(wrap, findings) {
 
 /* ----------------------------------------------------------------- board */
 
+const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
+
 function renderBoard(fen, uci) {
   const board = el('div', 'board');
+  paintBoard(board, fen, uci);
+  return board;
+}
+
+/** Fill an existing board element. Used for the static review thumbnails
+ *  and, 30 times a second, for the board that walks the narration. */
+function paintBoard(board, fen, uci) {
+  board.innerHTML = '';
   const from = uci ? uci.slice(0, 2) : null;
   const to = uci ? uci.slice(2, 4) : null;
   const rows = fen.split(' ')[0].split('/');
@@ -411,7 +421,6 @@ function renderBoard(fen, uci) {
     }
     return sq;
   }
-  return board;
 }
 
 /* ------------------------------------------------------- re-verification */
@@ -547,13 +556,125 @@ function renderAudio(snap) {
     cues.append(row);
   });
 
+  buildMoveList(snap);
+  state.live = { cues: audio.cues, script: snap.script || [], ply: -1, cue: -1 };
+  showPly(0);
+  showCue(0);
+
   player.ontimeupdate = () => {
     const t = player.currentTime;
     cues.querySelectorAll('.cue').forEach((row) => {
       row.classList.toggle('is-playing',
         t >= Number(row.dataset.start) && t < Number(row.dataset.end));
     });
+    showCue(cueForTime(t));
+    showPly(plyForTime(t));
   };
+}
+
+/* ------------------------------------------------ the board, as it plays */
+
+function buildMoveList(snap) {
+  const box = $('moveList');
+  box.innerHTML = '';
+  (snap.moves || []).forEach((mv) => {
+    if (mv.color === 'white') box.append(el('span', 'no', `${mv.move_number}.`));
+    const span = el('span', `m ${mv.quality || ''}`, mv.san);
+    span.dataset.ply = mv.ply;
+    span.title = mv.quality || '';
+    span.addEventListener('click', () => seekToPly(mv.ply));
+    box.append(span);
+  });
+}
+
+/**
+ * Within a beat the board walks its plies evenly, so a beat covering eight
+ * half-moves actually moves instead of freezing on the last one. Same rule
+ * the standalone player uses, so the two stay in step.
+ */
+function plyForTime(seconds) {
+  const cues = (state.live && state.live.cues) || [];
+  let chosen = 0;
+  for (const cue of cues) {
+    if (seconds < cue.start_seconds) break;
+    if (!cue.plies.length) continue;
+    if (seconds >= cue.start_seconds + cue.duration_seconds) {
+      chosen = cue.plies[cue.plies.length - 1];
+      continue;
+    }
+    const share = (seconds - cue.start_seconds) / Math.max(0.001, cue.duration_seconds);
+    chosen = cue.plies[Math.min(cue.plies.length - 1, Math.floor(share * cue.plies.length))];
+  }
+  return chosen;
+}
+
+function cueForTime(seconds) {
+  const cues = (state.live && state.live.cues) || [];
+  let found = 0;
+  cues.forEach((cue, i) => { if (seconds >= cue.start_seconds) found = i; });
+  return found;
+}
+
+function seekToPly(ply) {
+  const cues = (state.live && state.live.cues) || [];
+  const cue = cues.find((c) => c.plies.includes(ply));
+  if (cue) {
+    $('player').currentTime = cue.start_seconds + 0.05;
+    $('player').play();
+  } else {
+    showPly(ply);
+  }
+}
+
+function showPly(ply) {
+  if (!state.live || state.live.ply === ply) return;
+  state.live.ply = ply;
+
+  const move = ply > 0 ? state.movesByPly[ply] : null;
+  paintBoard($('liveBoard'), move ? move.fen_after : START_FEN, move ? move.uci : null);
+
+  const white = move && move.win_pct_after != null ? move.win_pct_after : 50;
+  $('evalFill').style.height = `${Math.max(2, Math.min(98, white))}%`;
+
+  const facts = $('liveFacts');
+  facts.innerHTML = '';
+  if (move) {
+    const number = `${move.move_number}${move.color === 'white' ? '.' : '...'}${move.san}`;
+    facts.append(fact('Move', number));
+    if (move.quality) facts.append(fact('Verdict', move.quality, `q-${move.quality}`));
+    facts.append(fact('White', `${Math.round(white)}%`));
+    if (move.best_move_san && !move.is_best) facts.append(fact('Engine', move.best_move_san));
+  } else {
+    facts.append(fact('Position', 'starting position'));
+  }
+
+  document.querySelectorAll('#moveList .m').forEach((span) => {
+    span.classList.toggle('cur', Number(span.dataset.ply) === ply);
+  });
+  const current = document.querySelector('#moveList .m.cur');
+  if (current) {
+    const box = $('moveList');
+    box.scrollTop = Math.max(0, current.offsetTop - box.clientHeight / 2);
+  }
+}
+
+function fact(key, value, cls) {
+  const span = el('span', cls || null);
+  span.append(document.createTextNode(`${key} `));
+  span.append(el('b', null, value));
+  return span;
+}
+
+function showCue(index) {
+  if (!state.live || state.live.cue === index) return;
+  state.live.cue = index;
+  const cue = state.live.cues[index];
+  const line = state.live.script[cue ? cue.index : -1];
+  const box = $('caption');
+  box.innerHTML = '';
+  if (!cue) return;
+  box.append(el('span', 'beat', cue.beat_type.replace(/_/g, ' ')));
+  box.append(document.createTextNode(line ? line.text : ''));
 }
 
 function formatTime(seconds) {

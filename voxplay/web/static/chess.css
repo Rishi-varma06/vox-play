@@ -302,6 +302,73 @@ button.ghost:disabled { opacity: 0.45; cursor: not-allowed; }
 
 audio { width: 100%; margin-bottom: 1rem; }
 
+/* The payoff screen: a board that walks the game as the narration runs.
+   Without it, pressing "Turn into audio" hands back a progress bar and
+   nothing to look at -- the one screen where something has to move. */
+.stage {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 360px) 1fr;
+  gap: 0.9rem;
+  align-items: start;
+  margin-bottom: 0.9rem;
+}
+
+.evalbar {
+  width: 14px; height: 360px; border-radius: 7px; overflow: hidden;
+  background: #14171d; border: 1px solid var(--line);
+  display: flex; align-items: flex-end;
+}
+.evalfill {
+  width: 100%; height: 50%; background: #e9edf5;
+  transition: height 0.45s ease;
+}
+
+.board.big { width: 100%; height: auto; aspect-ratio: 1; max-width: 360px; }
+.board.big .sq { font-size: clamp(20px, 5.2vw, 34px); }
+
+.stage-side { display: flex; flex-direction: column; gap: 0.7rem; min-width: 0; }
+
+.facts {
+  display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem;
+  font-size: 0.82rem; color: var(--ink-dim);
+}
+.facts b { color: var(--ink); font-weight: 600; }
+.facts .q-blunder,
+.facts .q-mistake { color: var(--bad); }
+.facts .q-inaccuracy { color: var(--warn); }
+.facts .q-best,
+.facts .q-book { color: var(--good); }
+
+.movelist {
+  font-family: var(--mono); font-size: 0.8rem; line-height: 1.9;
+  max-height: 272px; overflow-y: auto;
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 8px; padding: 0.6rem 0.7rem;
+}
+.movelist .no { color: var(--ink-faint); margin-right: 0.15rem; }
+.movelist .m {
+  display: inline-block; padding: 0 0.3rem; margin-right: 0.15rem;
+  border-radius: 4px; cursor: pointer; color: var(--ink-dim);
+}
+.movelist .m:hover { background: var(--panel-2); color: var(--ink); }
+.movelist .m.cur { background: var(--accent); color: #0b0d12; font-weight: 650; }
+.movelist .m.blunder, .movelist .m.mistake { color: var(--bad); }
+.movelist .m.inaccuracy { color: var(--warn); }
+.movelist .m.cur.blunder, .movelist .m.cur.mistake,
+.movelist .m.cur.inaccuracy { color: #0b0d12; }
+
+.caption {
+  min-height: 3.2rem; margin: 0 0 1rem;
+  font-size: 0.95rem; line-height: 1.6;
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 10px; padding: 0.75rem 0.9rem;
+}
+.caption .beat {
+  display: inline-block; margin-right: 0.5rem;
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.07em;
+  color: var(--accent); font-weight: 650;
+}
+
 .cue {
   display: grid; grid-template-columns: 70px 108px 1fr auto; gap: 0.8rem;
   align-items: center; padding: 0.55rem 0.7rem; border-radius: 8px;
@@ -318,6 +385,13 @@ audio { width: 100%; margin-bottom: 1rem; }
 .cue .d { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-faint); }
 
 /* ---------- small screens ---------- */
+
+@media (max-width: 760px) {
+  .stage { grid-template-columns: 12px 1fr; }
+  .evalbar { height: auto; align-self: stretch; }
+  .stage-side { grid-column: 1 / -1; }
+  .movelist { max-height: 150px; }
+}
 
 @media (max-width: 640px) {
   .beat { grid-template-columns: 1fr; }

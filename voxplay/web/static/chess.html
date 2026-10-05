@@ -146,6 +146,20 @@
   <!-- ================= STEP 4 : AUDIO ================= -->
   <section class="panel hidden" id="panel-audio">
     <h2>Narration</h2>
+
+    <div class="stage">
+      <div class="evalbar" title="White's winning chances">
+        <div class="evalfill" id="evalFill"></div>
+      </div>
+      <div class="board big" id="liveBoard"></div>
+      <div class="stage-side">
+        <div class="facts" id="liveFacts"></div>
+        <div class="movelist" id="moveList"></div>
+      </div>
+    </div>
+
+    <p class="caption" id="caption"></p>
+
     <audio id="player" controls preload="auto"></audio>
     <div class="cards" id="audioCards"></div>
     <h3 class="section-title">Timeline <small>click a beat to jump</small></h3>

@@ -250,8 +250,13 @@ Stated here rather than hidden, since they bound what the project can claim:
   defect. See Objective 5.
 - **The listener study has not been run.** Claims about engagement and pacing
   remain untested until it is.
-- **Opening-deviation detection is unimplemented**, so commentary cannot yet
-  say when players left theory.
+- **Opening naming is bounded by what the database names.** Deviation
+  detection ships (Objective 2), but the CC0 names database records the
+  terminal position of each named line rather than every position along it.
+  The departure is therefore the move after the last NAMED position, which
+  is close to but not the same as the last position ever played. Opening
+  popularity figures remain out of reach: they need Lichess's explorer,
+  which has required an API token since 2026.
 - **Engine analysis must be single-threaded to be reproducible.** Stockfish's
   parallel search shares a transposition table between racing threads, so a
   fixed node budget does not pin the result above one thread. This was

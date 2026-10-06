@@ -97,19 +97,27 @@ all" and carry on. Nothing breaks.
 
 ## Act 3 -- The payoff (2 minutes)
 
-Open the file it just printed, or switch to the `1_opera_game.html` tab.
+Stay in the studio. Press **Turn into audio**, wait about twenty seconds,
+and the narration screen opens with the board on it.
 
 **Press play.** Then stop talking and let it run for 30-40 seconds.
 
 Then point at three things:
 
 1. **The board follows the voice.** It is not a video -- the timeline knows
-   which half-moves each sentence is about.
-2. **The beat chips** along the bottom. Click `turning point`. It jumps
-   straight there. "A supervisor reviewing twenty games does not watch them."
-3. **The move list** colour-codes by quality, and **the eval bar** moves.
+   which half-moves each sentence is about, so within a beat the board walks
+   its moves instead of freezing on the last one.
+2. **The facts line under the board.** At the turning point it reads
+   `Verdict mistake - White 88% - Engine Kd8`, and the voice says the same
+   thing in words. Both come from the same computed facts, which is the whole
+   argument in one line.
+3. **Click any move** in the list on the right. The audio jumps to the beat
+   that covers it. "A supervisor reviewing twenty games does not watch them."
 
-One file. No server, no install. You can email it.
+If you would rather hand the examiner something to keep, tick **also build
+the standalone player** before generating. That writes a single HTML file
+with the same board, audio and captions inside it -- no server, no install,
+and small enough to email.
 
 ---
 
@@ -252,6 +260,7 @@ numbers. You lose the live element and nothing else.
 ## One-line cheat sheet
 
 ```bash
+python -m voxplay.cli.main serve --open                                       # THE DEMO -- start here
 python -m pytest tests/ -q                                                    # proof it works
 python -m voxplay.cli.main chess data/sample_game.pgn --generator claude --player
 python -m voxplay.cli.main chess https://lichess.org/<id> --player --baselines

@@ -400,3 +400,9 @@ audio { width: 100%; margin-bottom: 1rem; }
   .cue .tx, .cue .d { display: none; }
   .actions.sticky { flex-direction: column; align-items: stretch; }
 }
+
+/* A select sitting inside the sticky action bar, beside the checkbox. */
+select.inline {
+  width: auto; margin-left: 0.4rem; padding: 0.2rem 0.4rem;
+  font-size: 0.8rem;
+}

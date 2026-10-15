@@ -11,3 +11,9 @@ python-dotenv>=1.0
 # Dev / testing
 pytest>=7.4
 pytest-cov
+
+# Needed only for the gTTS voice: pydub lost its stdlib audioop in Python 3.13,
+# and the clips it returns are MP3, which has to be decoded to WAV before the
+# timeline can measure it. Neither is required for the 'offline' voice.
+audioop-lts>=0.2 ; python_version >= "3.13"
+imageio-ffmpeg>=0.4

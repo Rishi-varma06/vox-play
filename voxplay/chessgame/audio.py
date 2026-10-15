@@ -18,6 +18,8 @@ same numbers used to write the track.
 
 from __future__ import annotations
 
+import shutil
+import subprocess
 import wave
 from pathlib import Path
 from typing import List, Optional
@@ -82,6 +84,56 @@ class CommentaryAudio(BaseModel):
 # ---------------------------------------------------------------------------
 # WAV helpers
 # ---------------------------------------------------------------------------
+
+class TranscodeError(RuntimeError):
+    """Raised when a clip cannot be converted to WAV."""
+
+
+def _ffmpeg_exe() -> Optional[str]:
+    """Path to a usable ffmpeg, preferring one already on PATH."""
+    found = shutil.which("ffmpeg")
+    if found:
+        return found
+    try:
+        import imageio_ffmpeg
+
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:  # noqa: BLE001 - absent or unusable, same answer
+        return None
+
+
+def to_wav(clip: Path) -> Path:
+    """
+    Convert *clip* to a 16-bit mono WAV beside it, returning the new path.
+
+    Only the voices that emit compressed audio reach this -- gTTS returns
+    MP3, and the timeline cannot measure an MP3 without decoding it anyway.
+    Converting once here is cheaper than teaching every later step a second
+    format, and keeps one rule: past this point everything is WAV.
+    """
+    if clip.suffix.lower() == ".wav":
+        return clip
+    exe = _ffmpeg_exe()
+    if exe is None:
+        raise TranscodeError(
+            "ffmpeg is not installed, so " + clip.suffix + " clips cannot be "
+            "converted. Run 'pip install imageio-ffmpeg' for a bundled copy, "
+            "or use the 'offline' voice, which already emits WAV."
+        )
+    target = clip.with_suffix(".wav")
+    result = subprocess.run(
+        [exe, "-y", "-loglevel", "error", "-i", str(clip),
+         "-ac", "1", "-ar", "22050", "-sample_fmt", "s16", str(target)],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0 or not target.exists():
+        raise TranscodeError(
+            "ffmpeg could not convert " + clip.name + ": "
+            + (result.stderr or "no output").strip()[:200]
+        )
+    return target
+
 
 def wav_duration_ms(path: Path) -> int:
     """Exact duration of a WAV file, in milliseconds."""
@@ -173,11 +225,18 @@ def narrate(
         except TTSError as exc:
             raise AudioError(f"beat {index} ({line.beat_type.value}): {exc}") from exc
 
+    # Everything below measures durations out of the WAV header, because the
+    # board sync is only as honest as those offsets. A provider that emits
+    # something else is transcoded here rather than rejected, so the choice
+    # of voice stays a question of how it sounds.
     if any(clip.suffix.lower() != ".wav" for clip in clips):
-        raise AudioError(
-            "the timeline needs WAV clips so durations can be measured exactly. "
-            "Use the 'offline' or 'mock' provider; gTTS emits MP3."
-        )
+        try:
+            clips = [to_wav(clip) for clip in clips]
+        except TranscodeError as exc:
+            raise AudioError(
+                "the timeline needs WAV clips so durations can be measured "
+                "exactly, and these could not be converted: " + str(exc)
+            ) from exc
 
     track = out_dir / f"{script.game_id}_commentary.wav"
     starts = concat_wavs(clips, track, gap_ms=gap_ms)

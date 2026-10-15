@@ -25,7 +25,7 @@ from __future__ import annotations
 import os
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from pydantic import BaseModel, Field
 
@@ -274,6 +274,34 @@ def beat_facts(beat: Beat, game: ParsedGame, sheet: BeatSheet, style: ScriptStyl
                 facts.append(f"position at the end of this stretch: "
                              f"{describe_eval(moves[-1].analysis.win_pct_after)}")
 
+    elif beat.beat_type == BeatType.FLAT:
+        # Full-match coverage: one line per half-move, so this beat carries
+        # the same per-move facts a moment would. Without them the narrator
+        # has nothing concrete to say and fills the line with generalities
+        # -- which the verifier passes, because vagueness asserts nothing.
+        for move in moves:
+            facts.extend(_move_facts(move, style))
+        if moves:
+            move = moves[0]
+            if move.ply <= 2:
+                facts.append("this is the start of the game")
+            else:
+                facts.append(
+                    f"this is half-move {move.ply} of {arc.total_plies}"
+                )
+            if move.is_capture and move.captured_piece:
+                facts.append(f"this move captures a {move.captured_piece}")
+            if move.is_checkmate:
+                facts.append("this move is checkmate")
+            elif move.is_check:
+                facts.append("this move gives check")
+            if move.is_castle:
+                facts.append("this move castles the king to safety")
+        facts.append(
+            "narrate this move specifically -- name what was played and what "
+            "it does. Do not drift into general advice about chess."
+        )
+
     elif beat.beat_type in (BeatType.MOMENT, BeatType.TURNING_POINT):
         for move in moves:
             facts.extend(_move_facts(move, style))
@@ -390,6 +418,94 @@ FACTS
 {_style_note(style)}
 
 Write the spoken words for this beat only."""
+
+
+#: How many consecutive beats one batched call covers. Six is about a run of
+#: three full moves: long enough that the model can shape a phrase across
+#: them, short enough that the facts for all six still fit comfortably and a
+#: single rejected line only costs a small rewrite.
+BATCH_SIZE = 6
+
+
+def batch_prompt(
+    batch: Sequence[Beat],
+    game: ParsedGame,
+    sheet: BeatSheet,
+    style: ScriptStyle,
+    outline: str,
+    previous: List[str],
+) -> str:
+    """
+    Prompt for a run of consecutive beats answered in one call.
+
+    Narrating a whole game one beat per request is both slow and oddly
+    written: each line is composed without sight of the next, so the result
+    reads as a list of observations rather than someone talking. Giving the
+    model the whole run lets it carry a thought across moves -- and a game
+    covered move by move is mostly runs of quiet moves, which is exactly
+    where that matters.
+    """
+    recent = "\n".join(f"  - {line}" for line in previous[-3:]) or "  (this is the opening of the commentary)"
+    blocks = []
+    for offset, beat in enumerate(batch, start=1):
+        blocks.append(
+            f"--- LINE {offset} ({beat.beat_type.value}) ---\n"
+            + beat_facts(beat, game, sheet, style)
+        )
+    facts = "\n\n".join(blocks)
+    return f"""THROUGH-LINE OF THE GAME
+{outline}
+
+LINES YOU HAVE ALREADY SPOKEN (do not repeat their phrasing)
+{recent}
+
+You are writing {len(batch)} consecutive lines of spoken commentary. Each one
+covers the moves in its own block and nothing else. Let the run read as
+continuous speech -- vary the sentence shapes, and do not begin every line
+the same way -- but keep each line able to stand on its own, because the
+listener can jump straight to any of them.
+
+{facts}
+
+{_style_note(style)}
+
+Return exactly {len(batch)} lines, each prefixed with its number and a pipe,
+like:
+1| <the spoken words for line 1>
+2| <the spoken words for line 2>
+
+No other text, no blank lines between them."""
+
+
+def split_batch_reply(text: str, expected: int) -> Optional[List[str]]:
+    """
+    Pull the numbered lines back out of a batched reply.
+
+    Returns None rather than guessing when the shape is wrong, so the caller
+    can fall back to asking for the beats one at a time. A half-parsed batch
+    would silently attach one move's commentary to a different move, which
+    the verifier cannot catch -- every claim would be true, just about the
+    wrong position.
+    """
+    found: Dict[int, str] = {}
+    for raw in text.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        head, sep, rest = line.partition("|")
+        if not sep:
+            continue
+        head = head.strip().rstrip(".)")
+        if not head.isdigit():
+            continue
+        index = int(head)
+        if 1 <= index <= expected and index not in found:
+            spoken = rest.strip()
+            if spoken:
+                found[index] = spoken
+    if len(found) != expected:
+        return None
+    return [found[i] for i in range(1, expected + 1)]
 
 
 # ---------------------------------------------------------------------------
@@ -593,6 +709,52 @@ class ClaudeGenerator(ScriptGenerator):
             block.text for block in response.content if block.type == "text"
         ).strip()
 
+    def _ask_batch(
+        self, client, batch, game, sheet, style, outline, spoken
+    ) -> Optional[List[str]]:
+        """One call for a run of beats, or None if the reply was malformed."""
+        prompt = batch_prompt(batch, game, sheet, style, outline, spoken)
+        text = self._ask(
+            client, prompt, max_tokens=400 * len(batch) + 300, effort="low"
+        )
+        return split_batch_reply(text, len(batch))
+
+    def _settle(
+        self, client, beat, index, draft, game, sheet, style, outline, spoken
+    ) -> ScriptLine:
+        """
+        Verify one drafted line, rewriting it alone if it does not hold up.
+
+        A batched line is checked exactly as a singly-generated one is. When
+        it fails, only that line is asked for again -- the rest of the batch
+        was fine, and re-rolling all six to fix one would undo the saving.
+        """
+        from .verify import licence_for, verify_line
+
+        candidate = _script_line(beat, draft)
+        licence = licence_for(candidate, game, sheet, spoiler_free=style.spoiler_free)
+        problems = verify_line(candidate, index, licence)
+        if not problems:
+            return candidate
+
+        prompt = beat_prompt(beat, game, sheet, style, outline, spoken)
+        for attempt in range(self.max_repairs + 1):
+            prompt = (
+                f"{prompt}\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED\n"
+                + "\n".join(f"- {p.message}" for p in problems)
+                + "\nRewrite it using only the facts above."
+            )
+            candidate = _script_line(beat, self._ask(
+                client, prompt, max_tokens=1000, effort="low"
+            ))
+            licence = licence_for(
+                candidate, game, sheet, spoiler_free=style.spoiler_free
+            )
+            problems = verify_line(candidate, index, licence)
+            if not problems:
+                break
+        return candidate
+
     def generate(self, game, sheet, style=DEFAULT_STYLE) -> CommentaryScript:
         # Imported here because verify.py reads this module's types.
         from .verify import licence_for, verify_line
@@ -604,7 +766,29 @@ class ClaudeGenerator(ScriptGenerator):
 
         spoken: List[str] = []
         lines: List[ScriptLine] = []
-        for index, beat in enumerate(sheet.beats):
+
+        # A paced sheet is a handful of beats and each one earns its own
+        # call. A full-match sheet is every half-move, where one call per
+        # beat is both slow and badly written -- so those go out in runs.
+        batched = len(sheet.beats) > BATCH_SIZE * 2
+        pending = list(enumerate(sheet.beats))
+
+        while batched and pending:
+            batch = pending[:BATCH_SIZE]
+            drafts = self._ask_batch(
+                client, [b for _, b in batch], game, sheet, style, outline, spoken
+            )
+            if drafts is None:
+                break  # malformed reply: fall through to one call per beat
+            for (index, beat), draft in zip(batch, drafts):
+                line = self._settle(
+                    client, beat, index, draft, game, sheet, style, outline, spoken
+                )
+                spoken.append(line.text)
+                lines.append(line)
+            pending = pending[BATCH_SIZE:]
+
+        for index, beat in pending:
             prompt = beat_prompt(beat, game, sheet, style, outline, spoken)
             line: Optional[ScriptLine] = None
 

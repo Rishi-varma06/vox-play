@@ -140,6 +140,7 @@ async function analyse() {
   }
 
   form.append('nodes', $('nodes').value);
+  form.append('pacing', $('pacing').value);
   form.append('generator', $('generator').value);
   form.append('persona', $('persona').value);
   form.append('audience', $('audience').value);
@@ -485,7 +486,7 @@ async function narrate() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         lines: currentLines(),
-        tts: 'offline',
+        tts: $('voice').value,
         player: $('wantPlayer').checked,
       }),
     });

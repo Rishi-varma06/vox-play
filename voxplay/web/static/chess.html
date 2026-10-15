@@ -71,6 +71,14 @@
           </select>
         </label>
         <label>
+          How much to cover
+          <select id="pacing">
+            <option value="paced" selected>Paced &mdash; the moments that matter</option>
+            <option value="every_move">Full match &mdash; every move</option>
+            <option value="top_n">Highlights &mdash; the 8 biggest swings</option>
+          </select>
+        </label>
+        <label>
           Commentary writer
           <select id="generator">
             <option value="auto" selected>Auto (Claude, templates if offline)</option>
@@ -135,6 +143,13 @@
     <div class="actions sticky">
       <button class="ghost" id="recheckBtn">Re-check text</button>
       <span class="spacer"></span>
+      <label class="checkline small">
+        Voice
+        <select id="voice" class="inline">
+          <option value="gtts" selected>Natural (Google, needs internet)</option>
+          <option value="offline">System voice (works offline)</option>
+        </select>
+      </label>
       <label class="checkline small">
         <input type="checkbox" id="wantPlayer" checked> also build the standalone player
       </label>

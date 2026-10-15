@@ -85,6 +85,7 @@ class Job:
     player_path: Optional[str] = None
     cost_usd: Optional[float] = None
     model: Optional[str] = None
+    pacing: str = "paced"
     baselines: Dict[str, Any] = field(default_factory=dict)
     timings: Dict[str, float] = field(default_factory=dict)
 
@@ -310,6 +311,8 @@ def snapshot(job: Job) -> Dict[str, Any]:
             payload["pacing"] = {
                 "beats": len(job.sheet.beats),
                 "seconds": round(job.sheet.total_seconds, 1),
+                "mode": job.pacing,
+                "strategy": job.sheet.strategy,
             }
 
         if job.script is not None:
@@ -338,6 +341,13 @@ def snapshot(job: Job) -> Dict[str, Any]:
 # The pipeline, on a worker thread
 # ---------------------------------------------------------------------------
 
+#: How much of the game gets talked about. "paced" is the system this
+#: project is actually about; the other two were written as baselines to
+#: measure it against, and are offered here because a listener who wants
+#: every move is asking for the baseline on purpose rather than by mistake.
+PACING_MODES = ("paced", "every_move", "top_n")
+
+
 @dataclass
 class RunOptions:
     engine: str = "auto"
@@ -348,6 +358,7 @@ class RunOptions:
     audience: int = 1200
     budget: Optional[float] = None
     openings: bool = True
+    pacing: str = "paced"
 
 
 def _run_pipeline(job: Job, source: Dict[str, str], options: RunOptions) -> None:
@@ -437,25 +448,45 @@ def _run_pipeline(job: Job, source: Dict[str, str], options: RunOptions) -> None
     # -- pace ------------------------------------------------------------
     job.note("Choosing what to talk about", stage="pacing", pct=78)
     budget = options.budget or B.budget_for(game)
-    sheet = B.select_beats(game, pacing=B.PacingConfig(budget_seconds=budget))
+    paced = B.select_beats(game, pacing=B.PacingConfig(budget_seconds=budget))
     flat = B.select_every_move(game)
     topn = B.select_top_n(game, 8)
+
+    # All three are computed either way: they cost nothing next to the engine
+    # pass, and the comparison is reported whichever one the listener picked.
+    sheet = {"paced": paced, "every_move": flat, "top_n": topn}[options.pacing]
+
     with job.lock:
         job.sheet = sheet
+        job.pacing = options.pacing
         job.baselines = {
+            "pacing": options.pacing,
             "selected_seconds": round(sheet.total_seconds),
             "selected_beats": len(sheet.beats),
+            "paced_seconds": round(paced.total_seconds),
+            "paced_beats": len(paced.beats),
             "every_move_seconds": round(flat.total_seconds),
             "every_move_beats": len(flat.beats),
             "top8_seconds": round(topn.total_seconds),
             "budget_seconds": round(budget),
         }
-    job.note(
-        str(len(sheet.beats)) + " beats, " + format(sheet.total_seconds, ".0f")
-        + "s (budget " + format(budget, ".0f") + "s; every-move baseline would be "
-        + format(flat.total_seconds, ".0f") + "s)",
-        pct=82,
-    )
+
+    if options.pacing == "every_move":
+        job.note(
+            "Full match: " + str(len(sheet.beats)) + " beats, "
+            + format(sheet.total_seconds, ".0f") + "s ("
+            + format(sheet.total_seconds / 60, ".1f") + " min) -- covering every "
+            "half-move. The paced version of this game would run "
+            + format(paced.total_seconds, ".0f") + "s.",
+            pct=82,
+        )
+    else:
+        job.note(
+            str(len(sheet.beats)) + " beats, " + format(sheet.total_seconds, ".0f")
+            + "s (budget " + format(budget, ".0f") + "s; every-move baseline would be "
+            + format(flat.total_seconds, ".0f") + "s)",
+            pct=82,
+        )
 
     # -- script ----------------------------------------------------------
     job.note("Writing the commentary", stage="scripting", pct=85)
@@ -626,6 +657,7 @@ async def create_game(
     audience: int = Form(1200),
     budget: Optional[float] = Form(None),
     openings: bool = Form(True),
+    pacing: str = Form("paced"),
 ):
     """Accept a game and start analysing it. Returns immediately."""
     source: Dict[str, str] = {}
@@ -648,6 +680,10 @@ async def create_game(
 
     if nodes < 1000 or nodes > 20_000_000:
         raise HTTPException(400, "nodes must be between 1,000 and 20,000,000")
+    if pacing not in PACING_MODES:
+        raise HTTPException(
+            400, "pacing must be one of " + ", ".join(PACING_MODES)
+        )
 
     options = RunOptions(
         engine=engine,
@@ -657,6 +693,7 @@ async def create_game(
         audience=audience,
         budget=budget,
         openings=openings,
+        pacing=pacing,
     )
     job = _new_job()
     with job.lock:
@@ -736,6 +773,12 @@ async def verify_edits(job_id: str, req: VerifyRequest):
     }
 
 
+#: Voices the studio offers. 'elevenlabs' is deliberately absent: the
+#: provider is still a stub that raises, and listing it would promise a
+#: voice that cannot be produced.
+VOICES = ("gtts", "offline", "mock")
+
+
 class NarrateRequest(BaseModel):
     lines: Optional[List[str]] = None
     tts: str = "offline"
@@ -746,6 +789,8 @@ class NarrateRequest(BaseModel):
 async def narrate_game(job_id: str, req: NarrateRequest):
     """Turn the (possibly edited) script into speech."""
     job = _get_job(job_id)
+    if req.tts not in VOICES:
+        raise HTTPException(400, "voice must be one of " + ", ".join(VOICES))
     with job.lock:
         if job.script is None:
             raise HTTPException(409, "analyse a game first")

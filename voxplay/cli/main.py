@@ -726,8 +726,10 @@ def build_parser() -> argparse.ArgumentParser:
     p_chess.add_argument("--out", default=None, help="Write the script to a JSON file.")
     p_chess.add_argument("--audio", action="store_true",
                          help="Synthesise spoken audio and a timeline for the script.")
-    p_chess.add_argument("--tts", default="offline", choices=["offline", "mock", "gtts"],
-                         help="Voice backend. 'offline' needs no network or ffmpeg.")
+    p_chess.add_argument("--tts", default="offline",
+                         choices=["offline", "mock", "gtts", "elevenlabs"],
+                         help="Voice backend. 'offline' needs no network or "
+                              "ffmpeg; 'elevenlabs' needs a key and spends credits.")
     p_chess.add_argument("--openings", action="store_true",
                          help="Consult the CC0 opening book to find where the "
                               "players left known theory. One small download, "

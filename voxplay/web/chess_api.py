@@ -773,10 +773,10 @@ async def verify_edits(job_id: str, req: VerifyRequest):
     }
 
 
-#: Voices the studio offers. 'elevenlabs' is deliberately absent: the
-#: provider is still a stub that raises, and listing it would promise a
-#: voice that cannot be produced.
-VOICES = ("gtts", "offline", "mock")
+#: Voices the studio offers. 'elevenlabs' is the only one that spends
+#: money, so it is never the default -- it is chosen per narration, on the
+#: screen where the script has already been read and approved.
+VOICES = ("elevenlabs", "gtts", "offline", "mock")
 
 
 class NarrateRequest(BaseModel):

@@ -20,7 +20,14 @@ class GTTSProvider(TTSProvider):
         # tld="co.uk" gives a British accent — appropriate for cricket commentary
         self.tld = tld
 
-    def synthesize(self, text: str, output_path: Path) -> Path:
+    def synthesize(
+        self,
+        text: str,
+        output_path: Path,
+        *,
+        previous_text: str | None = None,
+        next_text: str | None = None,
+    ) -> Path:
         try:
             from gtts import gTTS, gTTSError as _gTTSError
         except ImportError as exc:

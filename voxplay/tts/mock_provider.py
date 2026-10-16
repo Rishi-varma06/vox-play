@@ -33,7 +33,14 @@ def _write_silent_wav(path: Path, duration: float = _SILENCE_SECONDS) -> None:
 class MockTTSProvider(TTSProvider):
     """Produces silent WAV stubs — no network calls, no API keys required."""
 
-    def synthesize(self, text: str, output_path: Path) -> Path:
+    def synthesize(
+        self,
+        text: str,
+        output_path: Path,
+        *,
+        previous_text: str | None = None,
+        next_text: str | None = None,
+    ) -> Path:
         wav_path = with_audio_extension(output_path, ".wav")
         _write_silent_wav(wav_path)
         return wav_path

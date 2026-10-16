@@ -190,7 +190,14 @@ class OfflineTTSProvider(TTSProvider):
         except Exception as exc:  # noqa: BLE001 - surfaced as TTSError
             raise TTSError(f"could not list voices: {exc}") from exc
 
-    def synthesize(self, text: str, output_path: Path) -> Path:
+    def synthesize(
+        self,
+        text: str,
+        output_path: Path,
+        *,
+        previous_text: str | None = None,
+        next_text: str | None = None,
+    ) -> Path:
         wav_path = with_audio_extension(output_path, ".wav")
         wav_path.parent.mkdir(parents=True, exist_ok=True)
 

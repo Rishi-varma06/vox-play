@@ -34,13 +34,28 @@ class TTSProvider(ABC):
     """Abstract base for all TTS backends."""
 
     @abstractmethod
-    def synthesize(self, text: str, output_path: Path) -> Path:
+    def synthesize(
+        self,
+        text: str,
+        output_path: Path,
+        *,
+        previous_text: str | None = None,
+        next_text: str | None = None,
+    ) -> Path:
         """
         Convert *text* to speech and write an audio file to *output_path*.
 
         Args:
-            text:        The commentary line to speak.
-            output_path: Desired file path (provider may adjust extension).
+            text:          The commentary line to speak.
+            output_path:   Desired file path (provider may adjust extension).
+            previous_text: The line spoken immediately before this one, and
+            next_text:     the one immediately after. Neither is spoken. A
+                           backend that models prosody across a passage uses
+                           them to carry intonation between clips, so a line
+                           does not begin as though nothing preceded it --
+                           the main reason separately synthesised commentary
+                           sounds assembled rather than delivered. Backends
+                           that cannot use them ignore them.
 
         Returns:
             The actual path of the written audio file.

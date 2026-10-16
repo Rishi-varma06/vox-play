@@ -218,10 +218,21 @@ def narrate(
     clip_dir.mkdir(parents=True, exist_ok=True)
 
     clips: List[Path] = []
-    for index, line in enumerate(script.lines):
+    lines = script.lines
+    for index, line in enumerate(lines):
         target = clip_dir / f"{script.game_id}_{index:03d}_{line.beat_type.value}"
         try:
-            clips.append(backend.synthesize(line.text, target))
+            # Each clip is a separate request, so without being told what
+            # surrounds it every line is read as though it were the only
+            # sentence in the game -- landing on a full stop, starting cold.
+            # Across six beats that reads as six announcements rather than
+            # one person talking.
+            clips.append(backend.synthesize(
+                line.text,
+                target,
+                previous_text=lines[index - 1].text if index else None,
+                next_text=lines[index + 1].text if index + 1 < len(lines) else None,
+            ))
         except TTSError as exc:
             raise AudioError(f"beat {index} ({line.beat_type.value}): {exc}") from exc
 

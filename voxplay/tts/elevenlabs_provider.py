@@ -18,17 +18,25 @@ from .base import TTSProvider, TTSError, with_audio_extension
 
 API_ROOT = "https://api.elevenlabs.io/v1/text-to-speech"
 
-#: "Rachel" from the stock library: neutral, clear, unhurried. Chess
-#: commentary spends most of its time explaining rather than shouting, so a
-#: voice that stays level reads better across a whole game than a dramatic
-#: one does.
-DEFAULT_VOICE_ID = "21m00Tcm4TlvDq8ikWAM"
+#: "Daniel", a British broadcast voice. Chess commentary has a sound, and
+#: it is this one: measured, unhurried, warming at the moment the game
+#: turns. A neutral audiobook voice reads the words correctly and lands
+#: every sentence with the same weight, which is what makes it obvious
+#: nobody is behind it.
+DEFAULT_VOICE_ID = "onwK4e9ZLuTAKqWW03F9"
 
-#: Turbo is roughly half the credits of the multilingual model and the
-#: difference is inaudible on a single-language script. A full match is
-#: thirty-three clips, so halving the per-clip cost is the difference
-#: between a month of narration and a fortnight of it.
-DEFAULT_MODEL = "eleven_turbo_v2_5"
+#: v4 is the expressive model. Turbo is cheaper and faster, and was the
+#: wrong trade here -- it is tuned for latency, and latency does not matter
+#: when the whole track is rendered before anyone presses play.
+DEFAULT_MODEL = "eleven_v4"
+
+#: Stability is how little the delivery varies between generations. High
+#: stability reads a quiet developing move and the losing blunder in the
+#: same tone, which is the strongest cue that the speaker is synthetic.
+#: Lowering it lets the read follow the material; below about 0.3 it starts
+#: wandering within a sentence.
+DEFAULT_STABILITY = 0.35
+DEFAULT_SIMILARITY = 0.75
 
 
 class ElevenLabsProvider(TTSProvider):
@@ -37,16 +45,22 @@ class ElevenLabsProvider(TTSProvider):
     def __init__(
         self,
         voice_id: str | None = None,
-        model_id: str = DEFAULT_MODEL,
+        model_id: str | None = None,
         api_key: str | None = None,
         timeout: float = 60.0,
+        stability: float = DEFAULT_STABILITY,
+        similarity_boost: float = DEFAULT_SIMILARITY,
     ) -> None:
         self.voice_id = voice_id or os.environ.get(
             "ELEVENLABS_VOICE_ID", DEFAULT_VOICE_ID
         )
-        self.model_id = model_id
+        self.model_id = model_id or os.environ.get(
+            "ELEVENLABS_MODEL", DEFAULT_MODEL
+        )
         self._api_key = api_key
         self.timeout = timeout
+        self.stability = stability
+        self.similarity_boost = similarity_boost
 
     def _key(self) -> str:
         key = self._api_key or os.environ.get("ELEVENLABS_API_KEY", "")
@@ -57,11 +71,34 @@ class ElevenLabsProvider(TTSProvider):
             )
         return key.strip()
 
-    def synthesize(self, text: str, output_path: Path) -> Path:
+    def synthesize(
+        self,
+        text: str,
+        output_path: Path,
+        *,
+        previous_text: str | None = None,
+        next_text: str | None = None,
+    ) -> Path:
         import requests
 
         mp3_path = with_audio_extension(output_path, ".mp3")
         mp3_path.parent.mkdir(parents=True, exist_ok=True)
+
+        body = {
+            "text": text,
+            "model_id": self.model_id,
+            "voice_settings": {
+                "stability": self.stability,
+                "similarity_boost": self.similarity_boost,
+            },
+        }
+        # Neither is spoken. They tell the model where this line sits in the
+        # passage, so it can finish a thought rather than closing every clip
+        # as though the game ended there.
+        if previous_text:
+            body["previous_text"] = previous_text
+        if next_text:
+            body["next_text"] = next_text
 
         try:
             response = requests.post(
@@ -72,7 +109,7 @@ class ElevenLabsProvider(TTSProvider):
                     "Accept": "audio/mpeg",
                 },
                 params={"output_format": "mp3_44100_128"},
-                json={"text": text, "model_id": self.model_id},
+                json=body,
                 timeout=self.timeout,
             )
         except requests.RequestException as exc:

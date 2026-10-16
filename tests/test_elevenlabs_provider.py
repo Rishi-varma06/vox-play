@@ -161,3 +161,56 @@ def test_dotted_game_id_does_not_collapse_clips(tmp_path, captured):
     out = provider.synthesize("Check.", tmp_path / "Morphy_1858.11.02_004")
 
     assert out.name == "Morphy_1858.11.02_004.mp3"
+
+
+def test_voice_settings_are_sent(tmp_path, captured):
+    provider = ElevenLabsProvider(api_key="sk_test")
+    provider.synthesize("Check.", tmp_path / "b")
+
+    settings = captured["json"]["voice_settings"]
+    assert settings["stability"] == pytest.approx(0.35)
+    assert settings["similarity_boost"] == pytest.approx(0.75)
+
+
+def test_defaults_are_the_expressive_model_and_broadcast_voice(tmp_path, captured):
+    # Turbo is tuned for latency, which buys nothing when the whole track is
+    # rendered before playback and costs the expressiveness that stops the
+    # read sounding synthetic.
+    provider = ElevenLabsProvider(api_key="sk_test")
+    provider.synthesize("Check.", tmp_path / "b")
+
+    assert captured["json"]["model_id"] == "eleven_v4"
+    assert "onwK4e9ZLuTAKqWW03F9" in captured["url"]
+
+
+def test_neighbouring_lines_are_sent_as_context(tmp_path, captured):
+    provider = ElevenLabsProvider(api_key="sk_test")
+    provider.synthesize(
+        "And now the fatal decision.",
+        tmp_path / "b",
+        previous_text="Black develops the knight.",
+        next_text="The rook slides to d eight.",
+    )
+
+    assert captured["json"]["previous_text"] == "Black develops the knight."
+    assert captured["json"]["next_text"] == "The rook slides to d eight."
+    # Context must not leak into what is actually spoken.
+    assert captured["json"]["text"] == "And now the fatal decision."
+
+
+def test_context_is_omitted_at_the_edges(tmp_path, captured):
+    provider = ElevenLabsProvider(api_key="sk_test")
+    provider.synthesize("Opening line.", tmp_path / "b", next_text="Second line.")
+
+    assert "previous_text" not in captured["json"]
+    assert captured["json"]["next_text"] == "Second line."
+
+
+def test_model_and_voice_can_be_overridden_by_environment(tmp_path, captured, monkeypatch):
+    monkeypatch.setenv("ELEVENLABS_MODEL", "eleven_multilingual_v2")
+    monkeypatch.setenv("ELEVENLABS_VOICE_ID", "custom-voice")
+    provider = ElevenLabsProvider(api_key="sk_test")
+    provider.synthesize("Check.", tmp_path / "b")
+
+    assert captured["json"]["model_id"] == "eleven_multilingual_v2"
+    assert "custom-voice" in captured["url"]

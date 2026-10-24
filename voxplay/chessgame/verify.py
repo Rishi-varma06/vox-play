@@ -37,7 +37,7 @@ from .beats import BeatSheet, BeatType
 from .evaluation import describe_eval
 from .models import Motif, MoveEvent
 from .pgn_source import ParsedGame
-from .script import CommentaryScript, ScriptLine
+from .script import BEST_LINE_PLIES, CommentaryScript, ScriptLine
 from .speech import ascii_fold, speak_san
 
 #: Severity. Factual problems are defects; the rest are worth a human's eye.
@@ -236,6 +236,14 @@ def licence_for(
                 licence.squares.update(
                     spoken_squares(speak_san(move.analysis.best_move_san))
                 )
+            # And the facts now carry the continuation of that line, so the
+            # squares in it are licensed on exactly the same grounds. This
+            # pairing is the one in the docstring above: the licence has to
+            # move whenever beat_facts does, or a handed fact reads as an
+            # invention.
+            for san in move.analysis.best_line_san[1:BEST_LINE_PLIES + 1]:
+                if san:
+                    licence.squares.update(spoken_squares(speak_san(san)))
 
     if moves and moves[-1].analysis:
         licence.win_pct_white = moves[-1].analysis.win_pct_after

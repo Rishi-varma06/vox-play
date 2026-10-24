@@ -178,6 +178,22 @@ def _opening(game: ParsedGame) -> Optional[str]:
     return ascii_fold(game.meta.opening) if game.meta.opening else None
 
 
+#: How many half-moves of the engine's line to pass on. Far enough to show
+#: the idea, short enough to stay a sentence: a commentator says "after king
+#: to d eight the attack runs out of pieces", not twelve plies of analysis
+#: nobody can follow without a board.
+BEST_LINE_PLIES = 4
+
+
+def _spoken_line(san_moves: Sequence[str]) -> str:
+    """The engine's continuation in speakable form, or '' if there is none."""
+    # The first entry is the engine's preferred move, which the facts have
+    # already named on its own line; repeating it would have the narrator
+    # say it twice.
+    rest = [san for san in san_moves[1:BEST_LINE_PLIES + 1] if san]
+    return ", then ".join(speak_san(san) for san in rest)
+
+
 def _move_facts(move: MoveEvent, style: ScriptStyle) -> List[str]:
     """Everything true about one move, in words the narrator can reuse."""
     facts = [
@@ -200,6 +216,14 @@ def _move_facts(move: MoveEvent, style: ScriptStyle) -> List[str]:
         facts.append("this was the only move that held the position")
     if analysis.best_move_san and not analysis.is_best:
         facts.append(f"engine preferred: {speak_san(analysis.best_move_san)}")
+        # Naming the better move without its continuation gives the narrator
+        # half a thought: "king to d eight was better" invites "better how?"
+        # and the model has nothing to answer with. The engine already
+        # searched the line, so hand over what it found -- this is the
+        # difference between stating a verdict and explaining one.
+        follow_up = _spoken_line(analysis.best_line_san)
+        if follow_up:
+            facts.append(f"what that line gives: {follow_up}")
     if analysis.material_swing:
         facts.append(f"material won on this move: {analysis.material_swing} pawns")
     for hit in analysis.motifs:
@@ -357,6 +381,53 @@ ABSOLUTE RULES:
 Write only the words to be spoken. No headings, no stage directions, no notation."""
 
 
+#: How each shape of game wants to be told. The archetype has always been
+#: computed and handed over as a single word, which told the narrator what
+#: the game was without telling it anything about how to say it -- so a
+#: collapse and a grind came out in the same measured register. These are
+#: instructions about shape and emphasis only. None of them licenses a
+#: claim; the facts block remains the whole of what may be asserted.
+ARCHETYPE_NOTE: Dict[str, str] = {
+    "miniature": (
+        "This game was over quickly. Keep the whole narration brisk and do "
+        "not pad the quiet moves -- the speed is the story."
+    ),
+    "collapse": (
+        "One side was fine and then was not. Hold the earlier beats steady "
+        "so the break lands hard, and do not foreshadow it."
+    ),
+    "comeback": (
+        "The player who won was losing first. Let the early beats sit with "
+        "that, so the recovery reads as a recovery."
+    ),
+    "slugfest": (
+        "The advantage changed hands repeatedly. Keep the listener oriented "
+        "-- say who stands better each time it moves."
+    ),
+    "blunderfest": (
+        "Both sides erred badly and often. Be plain about it without "
+        "sneering; these are people, and one of them still found a way to win."
+    ),
+    "smooth_conversion": (
+        "The winner never slipped. Attend to accumulation rather than drama, "
+        "and resist inventing tension the game did not have."
+    ),
+    "grind": (
+        "This was decided slowly, deep into the game. Give the long middle "
+        "its due and keep the register patient."
+    ),
+    "draw": (
+        "Nobody won. Do not narrate toward a result that never arrives -- "
+        "the balance itself is what there is to explain."
+    ),
+}
+
+
+def _arc_note(sheet: BeatSheet) -> str:
+    """Narration guidance for the shape of this particular game."""
+    return ARCHETYPE_NOTE.get(sheet.arc.archetype.value, "")
+
+
 def _style_note(style: ScriptStyle) -> str:
     voice = {
         "analytical": "Measured and precise. Explain why things matter.",
@@ -389,6 +460,7 @@ RUNNING ORDER
 {running_order}
 
 {_style_note(style)}
+{_arc_note(sheet)}
 
 In no more than 80 words, state the through-line of this game: what it is
 about, and what a listener should come away understanding. This is a note to
@@ -416,6 +488,7 @@ FACTS
 {beat_facts(beat, game, sheet, style)}
 
 {_style_note(style)}
+{_arc_note(sheet)}
 
 Write the spoken words for this beat only."""
 
@@ -468,6 +541,7 @@ listener can jump straight to any of them.
 {facts}
 
 {_style_note(style)}
+{_arc_note(sheet)}
 
 Return exactly {len(batch)} lines, each prefixed with its number and a pipe,
 like:

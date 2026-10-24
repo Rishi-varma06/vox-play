@@ -112,6 +112,11 @@ class Archetype(str, Enum):
     SMOOTH_CONVERSION = "smooth_conversion"
     GRIND = "grind"
     DRAW = "draw"
+    #: Nothing to classify on -- the shape is read off the win-probability
+    #: trace, and an unanalysed game has none. Distinct from DRAW, which is
+    #: a finding: this one says we do not know. Using DRAW for both told the
+    #: narrator a decisive game had ended level.
+    UNKNOWN = "unknown"
 
 
 class GameArc(BaseModel):
@@ -328,7 +333,7 @@ def extract_arc(game: ParsedGame) -> GameArc:
     moves = game.moves
     winner = _winner(game.meta.result)
     arc = GameArc(
-        archetype=Archetype.DRAW,
+        archetype=Archetype.UNKNOWN,
         winner=winner,
         total_plies=len(moves),
     )

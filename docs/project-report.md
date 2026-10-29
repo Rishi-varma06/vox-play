@@ -263,9 +263,21 @@ Stated here rather than hidden, since they bound what the project can claim:
   measured, not assumed: two four-thread runs of the same game disagreed on
   27 of 33 half-moves, enough to move the detected turning point to a
   different move.
-- **Synthetic speech quality is functional, not broadcast-grade.** The
-  offline voice exists to make cost-per-game near zero; a premium backend is
-  the intended comparison arm.
+- **Broadcast-quality speech costs money per character.** Three voices are
+  implemented: the host system's own, Google Text-to-Speech, and ElevenLabs.
+  The last is audibly the best and bills per character. The near-zero
+  cost-per-game figure quoted elsewhere
+  in this report is the offline voice; the broadcast voice puts a paced game
+  at roughly 1,600 characters. Both are available at narration time, so the
+  trade is the listener's to make, but a system that must be free cannot
+  have the better voice.
+- **Delivery is shaped more coarsely than the words are.** Clips are
+  separated by a fixed gap regardless of what they contain, and the two
+  narration personas differ by a single line of instruction each. A
+  commentator's rhythm -- pausing longer before the decisive move, changing
+  register between a quiet manoeuvre and a blunder -- is only partly
+  reproduced: the narration varies because the voice model varies it, not
+  because the system asked for it.
 
 ---
 
@@ -337,6 +349,14 @@ constraints, measured against both baselines on a short game and a long one:
 
 Two different comparisons, and conflating them would overstate the result.
 
+**All three arms are now selectable at run time**, not only in the test
+harness. A listener who wants every move can ask for the flat arm, and the
+comparison above is reported alongside whichever was chosen. This is worth
+stating plainly because it cuts both ways: offering the baseline as a
+product feature is only defensible while the paced arm remains the default,
+which it is. The claim of this objective is that pacing is *better*, not
+that coverage is unavailable.
+
 **Against flat**, the win is length, and it widens with the game because the
 paced budget is capped and the baseline's is not.
 
@@ -371,6 +391,18 @@ shipped. Five factual checks run per beat:
 
 The licence a beat is checked against is derived from the same function that
 builds its facts, so the two cannot drift apart without a test failing.
+
+**What the narrator is given has since been widened twice**, in both cases
+by using analysis the pipeline already produced and had been discarding.
+The engine's principal variation now reaches the facts, so a beat can say
+why the alternative was better rather than only that it existed -- the
+difference between "king to d eight was better" and a sentence that
+finishes the thought. And the narrative archetype, which was classified off
+the win-probability trace and then handed over as a single word, now
+carries guidance on register and emphasis, so a collapse and a grind are no
+longer told in the same voice. Neither widens what may be *asserted*: both
+additions are mirrored in the licence, and the facts block remains the
+whole of what a beat is permitted to claim.
 
 Validated in both directions, because a verifier that never fires proves
 nothing: the template generator, which builds every sentence from the facts,
@@ -408,9 +440,25 @@ generated animated board, with no source video.
 
 *Success criterion:* a single artefact a person can play, in which the board
 follows the narration.
-**Status: complete.** Offline speech synthesis with a measured timeline, and
-a self-contained HTML player carrying board, audio, captions, evaluation bar
-and move list in one file.
+**Status: complete.** Speech synthesis with a measured timeline, and a
+self-contained HTML player carrying board, audio, captions, evaluation bar
+and move list in one file. The web studio presents the same board against
+the narration directly, so the synchronised artefact is reachable without
+downloading anything.
+
+Three voices sit behind one interface: the host system's own voice, needing
+neither network nor key; Google Text-to-Speech, free but networked; and
+ElevenLabs, which is audibly the best of the three and bills per character.
+Adding a fourth is a new file and one line in a factory function. The
+timeline is measured from the rendered audio in every case, which is why
+the choice of voice cannot silently desynchronise the board -- clips that
+arrive compressed are converted before any offset is taken, so the rule
+that durations come from a WAV header holds whichever voice was used.
+
+Each clip is also synthesised knowing the lines either side of it. Without
+that, a line generated in isolation closes as though the game ended there
+and opens cold, and a six-beat recap reads as six announcements rather than
+one person talking.
 
 ### Objective 5 -- Validate
 

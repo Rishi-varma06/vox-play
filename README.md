@@ -52,6 +52,14 @@ with, then press **Turn into audio**. Nothing is spoken until a person has
 read it -- speech is the expensive artefact, and committing to it before the
 words are right wastes the listener's time more than it wastes ours.
 
+Two choices are worth knowing about. **How much to cover** selects the
+pacing: the paced recap (the default, and what this project is about), every
+move, or the eight biggest swings. The second two are the baselines the
+paced arm is measured against, offered as modes because a listener who wants
+every move is asking for one on purpose. **Voice** is chosen on the review
+screen, after the text has been read, so nothing is paid for until the words
+are right.
+
 Edited text goes back through the same verifier the pipeline uses, so you
 can type an invented tactic into a beat and watch it get flagged before it
 is ever narrated.
@@ -85,7 +93,22 @@ Add `--baselines` to print the pacing comparison the project is built around.
 | `--nodes N` | engine budget per position (default 1,000,000) |
 | `--threads N` | **keep at 1** -- above 1, results stop being reproducible |
 | `--audience N` | listener rating; below 1600 chess terms get explained |
-| `--persona analytical\|energetic` | narration voice |
+| `--persona analytical\|energetic` | narration register |
+| `--tts offline\|gtts\|elevenlabs\|mock` | voice. `offline` needs no network or key; `elevenlabs` needs a key and spends credits |
+
+### Voices
+
+| | Needs | Sounds like |
+|---|---|---|
+| `offline` | nothing | a system voice; fine for checking timing |
+| `gtts` | a network | clearly better, still evidently synthetic |
+| `elevenlabs` | `ELEVENLABS_API_KEY` | broadcast; bills roughly one credit per character |
+
+`gtts` and `elevenlabs` return MP3, which is converted to WAV before the
+timeline measures it -- the board sync reads durations out of a WAV header
+and will not take an estimate. That conversion needs ffmpeg; if none is on
+your PATH, `pip install imageio-ffmpeg` supplies one without a system
+install. `offline` emits WAV and needs neither.
 
 ---
 

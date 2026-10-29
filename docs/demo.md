@@ -65,7 +65,15 @@ python -m voxplay.cli.main serve --open
    and where they left theory, motif count, pacing against the every-move
    baseline, what the script cost.
 3. Read a beat or two aloud. Point at the green **Verified** banner.
-4. Press **Turn into audio**. Play it.
+4. Set **Voice** to the broadcast option, then press **Turn into audio**.
+   Play it.
+
+**If you are asked whether it can narrate every move**, say yes and show
+it: *How much to cover* has a full-match mode, and the stat card reports
+what the paced version of the same game would have run to. Then say why
+paced is the default -- the full-match arm is the baseline this project is
+measured against, not the result. Offering it is a feature; defending it
+would undo the argument.
 
 The terminal version does the same thing and prints more, if you would
 rather show that:

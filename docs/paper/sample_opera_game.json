@@ -1,0 +1,68 @@
+{
+  "pgn_path": "data/sample_game.pgn",
+  "meta": {
+    "white": "Paul Morphy",
+    "black": "Duke Karl and Count Isouard",
+    "result": "1-0",
+    "opening": "Philidor Defense",
+    "plies": 33
+  },
+  "archetype": "miniature",
+  "turning_point_ply": 18,
+  "timings_seconds": {
+    "engine": 53.0,
+    "llm": 23.5
+  },
+  "pacing": {
+    "paced": 117.8,
+    "every_move": 249.7,
+    "top_8": 194.6
+  },
+  "verification": {
+    "clean": true,
+    "errors": 0
+  },
+  "cost_usd": 0.0486,
+  "script": [
+    {
+      "beat": "intro",
+      "plies": [],
+      "text": "Paris, at the Opera. Paul Morphy takes White against two allies, Duke Karl and Count Isouard, playing jointly. They choose the Philidor Defense -- solid, but passive, meaning it gives Black little room. Thirty-three half-moves later, Morphy has won. A miniature."
+    },
+    {
+      "beat": "opening",
+      "plies": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "text": "Both sides push their king pawns two squares. Morphy develops a knight; Black answers with a modest pawn step, shutting his own bishop in. White strikes in the centre, Black pins the knight with a bishop, then trades it off -- giving up a developed piece. White stands slightly better."
+    },
+    {
+      "beat": "turning_point",
+      "plies": [
+        18
+      ],
+      "text": "Here is the turning point. Black pushes a pawn to b five, trying to shove White's bishop away. But that's time spent on the edge of the board while the king still sits in the centre, undefended. Tucking the king to d eight was the stubborn choice -- ugly, but it holds things together. After the pawn push, White is clearly better, and Morphy's lead in development becomes a genuine attack."
+    },
+    {
+      "beat": "finish",
+      "plies": [
+        31,
+        32,
+        33
+      ],
+      "text": "And then the queen goes to b eight -- offered up, free to be taken. It's check, so the knight must capture. That clears the square. The rook drops to d eight, and the king, hemmed in on its own back rank by its own pieces, has nowhere to go. Checkmate. Morphy wins."
+    },
+    {
+      "beat": "outro",
+      "plies": [],
+      "text": "A miniature -- a game finished in just a handful of moves. Morphy played at ninety-eight percent accuracy, his opponents eighty-eight. Develop early; in short games, the faster army wins."
+    }
+  ]
+}

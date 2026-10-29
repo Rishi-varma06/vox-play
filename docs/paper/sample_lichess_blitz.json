@@ -1,0 +1,64 @@
+{
+  "game": "Joliebe vs Mortred07",
+  "lichess_id": "JgdyxXZd",
+  "plies": 79,
+  "archetype": "blunderfest",
+  "eval_seconds": 123.3,
+  "llm_seconds": 20.0,
+  "beats": 5,
+  "paced_seconds": 117.8,
+  "flat_seconds": 597.8,
+  "topn_seconds": 194.6,
+  "words": 239,
+  "verified_clean": true,
+  "errors": 0,
+  "cost_usd": 0.0464,
+  "calls": 6,
+  "meta": {
+    "opening": "Sicilian Defense: Modern Variations",
+    "result": "GameResult.WHITE_WINS"
+  },
+  "turning_point_ply": 48,
+  "script": [
+    {
+      "beat": "intro",
+      "plies": [],
+      "text": "Two players rated near the top of the bullet charts: Joliebe with the white pieces, Mortred07 with black. A Sicilian Defense -- Black's sharpest answer to a king's pawn opening. What follows is messy. Both sides blunder repeatedly. White survives."
+    },
+    {
+      "beat": "opening",
+      "plies": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "text": "White opens with the king's pawn two squares; Black answers with the c-pawn -- that's the Sicilian, staking a claim on the center without mirroring White. The knights come out, White builds a modest, solid setup with bishop and pawn, and after eight moves neither side holds an edge. Even footing."
+    },
+    {
+      "beat": "turning_point",
+      "plies": [
+        48
+      ],
+      "text": "Move twenty-four, and here's where it tips. Black plays rook to e eight -- one second of thought. The problem: a knight sitting on e seven is undefended, hanging, free to be taken, and a knight is worth about three pawns. Instead, rook takes on c one was there, trading pieces and keeping things level. After the rook retreat, White is slightly better. Small slip, real consequences."
+    },
+    {
+      "beat": "finish",
+      "plies": [
+        77,
+        78,
+        79
+      ],
+      "text": "The end comes cleanly. White's king snaps off the pawn on b four, Black's rook steps to f seven -- and the bishop swings to c four with check. That's a skewer: the king on e six must move, and the rook sitting behind it on the same diagonal falls. White wins."
+    },
+    {
+      "beat": "outro",
+      "plies": [],
+      "text": "Messy from both sides, and that's honest chess. Joliebe finished at ninety-five percent accuracy, Mortred at ninety-one. Mistakes came often; the win went to whoever stopped making them first."
+    }
+  ]
+}

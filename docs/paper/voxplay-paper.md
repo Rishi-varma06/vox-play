@@ -23,8 +23,8 @@ synchronised to an animated board. First, commentary is *paced*: beat
 selection is budgeted maximum-weight selection under separation constraints,
 solved greedily within 1.3% of an exact dynamic program. Over 106 Lichess
 games the paced output is 3.5× shorter than move-by-move narration and covers
-the opening, the decisive move and the finish in every game, against 9% for
-an unconstrained top-*N* baseline.
+the opening, the decisive move and the finish in every game, where an
+unconstrained top-*N* baseline reaches the finish in 9%.
 Second, the model never derives a chess fact; facts come from
 deterministic components validated against external labels — mean 91.9%
 recall and 89.9% precision over 14,000 human-tagged puzzles, and Cohen's

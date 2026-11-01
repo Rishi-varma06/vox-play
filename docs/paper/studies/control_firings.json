@@ -1,0 +1,67 @@
+{
+  "backRankMate": {
+    "fired_on_controls": 232,
+    "control_pool": 2000,
+    "their_control_themes": {
+      "endgame": 153,
+      "mateIn2": 129,
+      "middlegame": 78
+    },
+    "line_really_ends_in_back_rank_mate": 232,
+    "share_genuine": 1.0
+  },
+  "fork": {
+    "fired_on_controls": 178,
+    "control_pool": 2000,
+    "their_control_themes": {
+      "middlegame": 91,
+      "endgame": 80,
+      "advantage": 55,
+      "crushing": 49,
+      "mateIn2": 28
+    }
+  },
+  "skewer": {
+    "fired_on_controls": 215,
+    "control_pool": 2000,
+    "their_control_themes": {
+      "middlegame": 130,
+      "endgame": 79,
+      "crushing": 55,
+      "advantage": 55,
+      "mateIn2": 51
+    }
+  },
+  "pin": {
+    "fired_on_controls": 121,
+    "control_pool": 2000,
+    "their_control_themes": {
+      "middlegame": 86,
+      "advantage": 48,
+      "crushing": 34,
+      "endgame": 30,
+      "mateIn2": 15
+    }
+  },
+  "hangingPiece": {
+    "fired_on_controls": 524,
+    "control_pool": 2000,
+    "their_control_themes": {
+      "middlegame": 332,
+      "advantage": 305,
+      "crushing": 207,
+      "endgame": 163
+    }
+  },
+  "discoveredAttack": {
+    "fired_on_controls": 115,
+    "control_pool": 2000,
+    "their_control_themes": {
+      "middlegame": 97,
+      "advantage": 66,
+      "crushing": 30,
+      "endgame": 11,
+      "mateIn2": 9
+    }
+  }
+}

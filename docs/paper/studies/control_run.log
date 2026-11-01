@@ -1,0 +1,18 @@
+drawing the same control pool as the precision study ...
+      scanned 1,000,000 rows
+      scanned 2,000,000 rows
+      scanned 3,000,000 rows
+      scanned 4,000,000 rows
+      scanned 5,000,000 rows
+      scanned 6,000,000 rows
+      drew from 3,069,464 theme-tagged puzzles
+2000 controls
+  backRankMate       fired on  232 controls   {'endgame': 153, 'mateIn2': 129, 'middlegame': 78}
+      of which the line really does end in back-rank mate: 232 (100%)
+  fork               fired on  178 controls   {'middlegame': 91, 'endgame': 80, 'advantage': 55}
+  skewer             fired on  215 controls   {'middlegame': 130, 'endgame': 79, 'crushing': 55}
+  pin                fired on  121 controls   {'middlegame': 86, 'advantage': 48, 'crushing': 34}
+  hangingPiece       fired on  524 controls   {'middlegame': 332, 'advantage': 305, 'crushing': 207}
+  discoveredAttack   fired on  115 controls   {'middlegame': 97, 'advantage': 66, 'crushing': 30}
+
+wrote docs\paper\studies\control_firings.json

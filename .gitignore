@@ -26,3 +26,6 @@ demo/*.html
 
 # Web studio job artefacts (audio, players, timelines) - regenerated per run.
 output/web/
+
+# Regenerable engine-analysis cache for the paper studies (5MB)
+docs/paper/studies/analysed/

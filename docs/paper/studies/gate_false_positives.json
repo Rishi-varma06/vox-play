@@ -1,0 +1,700 @@
+{
+  "games": 60,
+  "failed": 0,
+  "nodes": 200000,
+  "beats": 412,
+  "false_positives": 0,
+  "false_positive_rate_per_100_beats": 0.0,
+  "games_entirely_clean": 60,
+  "warnings": 64,
+  "error_checks": {},
+  "warning_checks": {
+    "phrase_repetition": 64
+  },
+  "seconds": 398.7,
+  "examples": [],
+  "rows": [
+    {
+      "game_id": "lMEPNFqi",
+      "plies": 41,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "IyRGuiUw",
+      "plies": 53,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "y3EDLQJJ",
+      "plies": 49,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "lLYzW3V7",
+      "plies": 27,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "w9XHhAk9",
+      "plies": 86,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "DKQKCeWw",
+      "plies": 84,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "k9HzRyl6",
+      "plies": 32,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "wLT5RniK",
+      "plies": 38,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "K7DcIEKs",
+      "plies": 45,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "5eJwH280",
+      "plies": 43,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "m5aDuc63",
+      "plies": 119,
+      "beats": 10,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "hTs7n4Gu",
+      "plies": 58,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "V64n61iS",
+      "plies": 33,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "FwmCwjtc",
+      "plies": 42,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "bS58DSzq",
+      "plies": 41,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "5jxlQ9Xa",
+      "plies": 64,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "TDWwcCuE",
+      "plies": 67,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "rNRk0s6f",
+      "plies": 54,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "aB9ALnBv",
+      "plies": 39,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "QRYdA2q6",
+      "plies": 57,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "JZjAqIp6",
+      "plies": 66,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "uP63LpOh",
+      "plies": 108,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "AAzvDXQB",
+      "plies": 123,
+      "beats": 10,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "BejimhZy",
+      "plies": 42,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "ZJRA9Rn4",
+      "plies": 39,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "L8KSQl96",
+      "plies": 41,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "NtthjYiR",
+      "plies": 36,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "a47On1tN",
+      "plies": 51,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "TWims9HO",
+      "plies": 71,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "1RZEpGQ5",
+      "plies": 44,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "EPOfds8D",
+      "plies": 71,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "1VjIl1aH",
+      "plies": 38,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "78DRgxUS",
+      "plies": 39,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "OkIKKhm6",
+      "plies": 78,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "OJn7wUE9",
+      "plies": 56,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "8Xv1kc1u",
+      "plies": 66,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "HFOmn2vM",
+      "plies": 56,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "FzaO547N",
+      "plies": 46,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "3w6QYJYK",
+      "plies": 50,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "pU54REM6",
+      "plies": 87,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "RbKcKkNE",
+      "plies": 36,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "uKSrOC7z",
+      "plies": 85,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "3wJInQBa",
+      "plies": 66,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "xjYsuRyt",
+      "plies": 58,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "Oza2kqDg",
+      "plies": 83,
+      "beats": 8,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "gDpb31od",
+      "plies": 64,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "HANMakxQ",
+      "plies": 106,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 3,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 3
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "0ojTGd0P",
+      "plies": 77,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "QsvkpvQR",
+      "plies": 102,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "uEj1cUSj",
+      "plies": 80,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "eVaO01BL",
+      "plies": 106,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "IL7vzVyb",
+      "plies": 100,
+      "beats": 8,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "6cEFQBMn",
+      "plies": 61,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "4ZK2YRHG",
+      "plies": 79,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "kie9uAGI",
+      "plies": 83,
+      "beats": 8,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "0uoOXjrx",
+      "plies": 78,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "mUDnsQwA",
+      "plies": 75,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "E4jtq4Kx",
+      "plies": 68,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "ERasFTT2",
+      "plies": 127,
+      "beats": 11,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "yHAGXbG5",
+      "plies": 72,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    }
+  ]
+}

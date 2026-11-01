@@ -1,0 +1,30 @@
+12 detectors, 12 themes under test, 5 control themes
+sampling 1000 per theme + 2000 controls from data\lichess_db_puzzle.csv.zst
+      scanned 1,000,000 rows
+      scanned 2,000,000 rows
+      scanned 3,000,000 rows
+      scanned 4,000,000 rows
+      scanned 5,000,000 rows
+      scanned 6,000,000 rows
+      drew from 3,069,464 theme-tagged puzzles
+sampled in 47s
+  fork               n=1000  recall 100.0%  precision  82.4%  F1 0.904  fired on 213/2000 controls
+  pin                n=1000  recall  49.2%  precision  77.1%  F1 0.601  fired on 146/2000 controls
+  skewer             n=1000  recall  96.8%  precision  82.2%  F1 0.889  fired on 210/2000 controls
+  discoveredAttack   n=1000  recall  94.0%  precision  91.0%  F1 0.925  fired on 93/2000 controls
+  doubleCheck        n=1000  recall 100.0%  precision 100.0%  F1 1.000  fired on 0/2000 controls
+  hangingPiece       n=1000  recall  26.1%  precision  33.2%  F1 0.292  fired on 526/2000 controls
+  sacrifice          n=1000  recall  86.1%  precision  86.7%  F1 0.864  fired on 132/2000 controls
+  backRankMate       n=1000  recall 100.0%  precision  81.2%  F1 0.896  fired on 231/2000 controls
+  smotheredMate      n=1000  recall 100.0%  precision 100.0%  F1 1.000  fired on 0/2000 controls
+  promotion          n=1000  recall 100.0%  precision  99.7%  F1 0.999  fired on 3/2000 controls
+  enPassant          n=1000  recall 100.0%  precision 100.0%  F1 1.000  fired on 0/2000 controls
+  advancedPawn       n=1000  recall  85.2%  precision  88.9%  F1 0.870  fired on 106/2000 controls
+
+comparable detectors: 11 of 12
+mean recall    91.9%
+mean precision 89.9%
+mean F1        0.904
+puzzles used   14,000
+
+wrote docs\paper\studies\motif_precision.json

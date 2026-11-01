@@ -1,0 +1,68 @@
+60 games, 200,000 nodes, 5 workers
+[1/60]   lMEPNFqi beats   6 errors  0 warnings  1
+[2/60]   IyRGuiUw beats   7 errors  0 warnings  0
+[3/60]   y3EDLQJJ beats   6 errors  0 warnings  0
+[4/60]   lLYzW3V7 beats   6 errors  0 warnings  1
+[5/60]   w9XHhAk9 beats   7 errors  0 warnings  2
+[6/60]   DKQKCeWw beats   7 errors  0 warnings  0
+[7/60]   k9HzRyl6 beats   7 errors  0 warnings  2
+[8/60]   wLT5RniK beats   6 errors  0 warnings  1
+[9/60]   K7DcIEKs beats   6 errors  0 warnings  0
+[10/60]   5eJwH280 beats   7 errors  0 warnings  1
+[11/60]   m5aDuc63 beats  10 errors  0 warnings  4
+[12/60]   hTs7n4Gu beats   7 errors  0 warnings  1
+[13/60]   V64n61iS beats   7 errors  0 warnings  1
+[14/60]   FwmCwjtc beats   6 errors  0 warnings  1
+[15/60]   bS58DSzq beats   6 errors  0 warnings  1
+[16/60]   5jxlQ9Xa beats   7 errors  0 warnings  1
+[17/60]   TDWwcCuE beats   6 errors  0 warnings  0
+[18/60]   rNRk0s6f beats   6 errors  0 warnings  0
+[19/60]   aB9ALnBv beats   6 errors  0 warnings  0
+[20/60]   QRYdA2q6 beats   7 errors  0 warnings  1
+[21/60]   JZjAqIp6 beats   6 errors  0 warnings  0
+[22/60]   uP63LpOh beats   9 errors  0 warnings  4
+[23/60]   AAzvDXQB beats  10 errors  0 warnings  4
+[24/60]   BejimhZy beats   7 errors  0 warnings  0
+[25/60]   ZJRA9Rn4 beats   7 errors  0 warnings  1
+[26/60]   L8KSQl96 beats   6 errors  0 warnings  0
+[27/60]   NtthjYiR beats   7 errors  0 warnings  0
+[28/60]   a47On1tN beats   6 errors  0 warnings  1
+[29/60]   TWims9HO beats   6 errors  0 warnings  1
+[30/60]   1RZEpGQ5 beats   6 errors  0 warnings  0
+[31/60]   EPOfds8D beats   6 errors  0 warnings  2
+[32/60]   1VjIl1aH beats   6 errors  0 warnings  1
+[33/60]   78DRgxUS beats   6 errors  0 warnings  2
+[34/60]   OkIKKhm6 beats   7 errors  0 warnings  0
+[35/60]   OJn7wUE9 beats   6 errors  0 warnings  1
+[36/60]   8Xv1kc1u beats   6 errors  0 warnings  1
+[37/60]   HFOmn2vM beats   6 errors  0 warnings  1
+[38/60]   FzaO547N beats   7 errors  0 warnings  0
+[39/60]   3w6QYJYK beats   6 errors  0 warnings  0
+[40/60]   pU54REM6 beats   7 errors  0 warnings  2
+[41/60]   RbKcKkNE beats   7 errors  0 warnings  0
+[42/60]   uKSrOC7z beats   7 errors  0 warnings  1
+[43/60]   3wJInQBa beats   6 errors  0 warnings  1
+[44/60]   xjYsuRyt beats   6 errors  0 warnings  0
+[45/60]   Oza2kqDg beats   8 errors  0 warnings  2
+[46/60]   gDpb31od beats   6 errors  0 warnings  0
+[47/60]   HANMakxQ beats   9 errors  0 warnings  3
+[48/60]   0ojTGd0P beats   6 errors  0 warnings  1
+[49/60]   QsvkpvQR beats   9 errors  0 warnings  2
+[50/60]   uEj1cUSj beats   7 errors  0 warnings  1
+[51/60]   eVaO01BL beats   9 errors  0 warnings  1
+[52/60]   IL7vzVyb beats   8 errors  0 warnings  2
+[53/60]   6cEFQBMn beats   6 errors  0 warnings  0
+[54/60]   4ZK2YRHG beats   7 errors  0 warnings  1
+[55/60]   kie9uAGI beats   8 errors  0 warnings  1
+[56/60]   0uoOXjrx beats   7 errors  0 warnings  1
+[57/60]   mUDnsQwA beats   6 errors  0 warnings  2
+[58/60]   E4jtq4Kx beats   7 errors  0 warnings  1
+[59/60]   ERasFTT2 beats  11 errors  0 warnings  4
+[60/60]   yHAGXbG5 beats   6 errors  0 warnings  1
+
+412 beats over 60 games
+false positives (error severity): 0  = 0.00 per 100 beats
+games with no false positive: 60/60
+warnings (expected on template prose): 64 {'phrase_repetition': 64}
+
+wrote docs\paper\studies\gate_false_positives.json

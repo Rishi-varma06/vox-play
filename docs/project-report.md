@@ -489,6 +489,15 @@ Raw agreement **97.8%**, expected by chance 66.8%, **Cohen's kappa 0.932** --
 "almost perfect" on the conventional scale. Per class: inaccuracy 92.0%,
 mistake 90.5%, blunder 96.7%.
 
+**Note on how this was fitted.** The figure above is measured on the same
+24,255 moves the thresholds were chosen on, which measures the fit as much as
+the classifier. `docs/paper/studies/threshold_split.py` repeats it properly:
+the games are split in half, the thresholds are grid-searched on one half
+only, and kappa is reported on the other. The search independently recovers
+5 / 10 / 15 and held-out kappa is **0.939** on 12,337 unseen moves -- slightly
+higher than the figure above, so there is no overfitting. Quote the held-out
+number.
+
 Kappa is the headline rather than raw agreement because most moves are not
 errors: a classifier that called everything "fine" would score over 90% raw
 and have no skill at all.
@@ -523,6 +532,15 @@ themes, sampled by reservoir with a fixed seed:
 | **Mean (11 comparable)** | **91.6%** | |
 | hangingPiece | *not comparable* | |
 
+**Superseded by a fuller measurement.** `docs/paper/studies/motif_precision.py`
+re-runs this with precision and F1 per detector rather than recall alone, on
+a fresh draw from the same database: mean recall **91.9%**, mean precision
+**89.9%**, mean F1 **0.904** across the same 11 comparable detectors. Small
+per-detector differences from the table above are the sampling draw, not a
+change in the detectors. Control firing is an *upper* bound on false
+positives: of the 232 controls the back-rank-mate detector fires on, all 232
+genuinely end in checkmate on a back rank and are simply untagged.
+
 *Recall* is the share of human-tagged puzzles where our detector fires.
 *Control firing* is how often it fires on puzzles that are not about that
 theme -- reported instead of precision because Lichess tags the theme that
@@ -548,10 +566,28 @@ sports.
 
 *Success criterion:* a second domain running through the same core without
 modifying it.
-**Status: met by construction.** The core was originally built for cricket
-and the chess domain was added alongside it, sharing the event contract,
-commentary engine, evaluation checks and speech layer. The reuse claim is
-demonstrated by the project's own history rather than asserted.
+**Status: not met as stated — corrected.** An earlier version of this report
+claimed this objective was "met by construction", on the grounds that the
+core was first built for cricket and chess was added alongside it sharing the
+event contract, commentary engine, evaluation checks and speech layer. Read
+against the imports, that is wrong, and it is recorded here rather than
+quietly removed.
+
+The two domains share the speech providers and the CLI and web shell. They
+share nothing else. `voxplay/chessgame/` imports no module from
+`voxplay/events/`, `voxplay/commentary/`, `voxplay/eval/` or
+`voxplay/scorer/`, and those packages import nothing from `chessgame`. The
+chess event model, beat selection, generation and verification are separate
+implementations that *mirror* the cricket design — `chessgame/models.py`
+says so in its own header, and `chessgame/verify.py` notes that its finding
+type is "kept local so the chess package does not depend on the cricket one."
+
+What the project actually demonstrates is that the **architecture** ports: a
+second domain was built to the same shape at low cost. What it does not
+demonstrate is a shared core running two sports unmodified. The honest
+success criterion for a second domain would require the pacing, generation
+and verification stages to be parameterised by a domain adapter, which they
+are not, and that is future work rather than a completed objective.
 
 ---
 

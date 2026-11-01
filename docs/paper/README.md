@@ -144,53 +144,88 @@ script narrates four consecutive half-moves then skips twenty.
 Both runs: Stockfish 19, **1,000,000 nodes/position, single-threaded**,
 `claude-opus-5`, `COMMENTARY_THRESHOLDS`.
 
+Every number below is produced by a script in `docs/paper/studies/`. None is
+hand-copied; re-run the script to regenerate it.
+
 | | Opera Game 1858 | Lichess blitz `JgdyxXZd` |
 |---|---|---|
 | Half-moves | 33 | 79 |
 | Archetype | miniature | blunderfest |
-| Engine time | **53.0 s** | **123.3 s** |
-| LLM time | **23.5 s** | **20.0 s** |
-| API calls | 6 | 6 |
-| Tokens (in / out) | 6,305 / 682 | — |
-| Cost | **$0.0486** | **$0.0464** |
-| Beats | 5 | 5 |
-| Paced length | 117.8 s | 117.8 s |
-| Every-move baseline | 249.7 s (**2.1×**) | 597.8 s (**5.1×**) |
+| Spoken budget, eq. (6) | 150.0 s | 158.0 s |
+| Engine time | **29.6 s** | **66.6 s** |
+| LLM time | **22.4 s** | **29.5 s** |
+| API calls | 7 | 8 |
+| Cost | **$0.0572** | **$0.0631** |
+| Beats | 6 | 7 |
+| Paced length | 142.2 s | 154.1 s |
+| Every-move baseline | 249.7 s (**1.8×**) | 597.8 s (**3.9×**) |
 | Top-8 baseline | 194.6 s | 194.6 s |
 | Verification | clean, 0 errors | clean, 0 errors |
 
-The pacing advantage widening from 2.1× to 5.1× as the game lengthens is the
-result worth putting in a figure: the paced budget is capped and the
-baseline's is not.
+> **Earlier drafts reported 117.8 s for both games and ratios of 2.1× and
+> 5.1×.** Those came from a measurement script that passed a fixed 120 s
+> budget, which is not what the system runs: `budget_for()` scales the budget
+> with game length. Identical durations on two different games was the tell.
+> The figures above are at the shipped budget.
+
+### Pacing over a corpus, not two games — `pacing_study.py`
+
+120 games attempted, **106 completed** (14 lost to engine processes failing
+under concurrent load), 7,609 half-moves, median length 65.
+
+| Spoken duration | Paced | Top-8 | Every move |
+|---|---|---|---|
+| Median | **143.2 s** | 194.6 s | 491.9 s |
+| IQR | 142.2–166.5 | constant | 370.8–643.2 |
+| Range | 131.4–348.6 | 194.6 | 204.3–1483.2 |
+
+Median reduction against every-move narration **3.5×** (IQR 2.6–3.9).
+Top-8's duration is *constant by construction* — eight beats of fixed cost —
+which is why it was identical on both sample games. That is a property of
+the baseline, not a bug.
+
+| | Paced | Top-8 |
+|---|---|---|
+| Opening covered | **100%** | 36.8% |
+| Decisive move covered | 99.1% | 99.1% |
+| Finish covered | **100%** | 9.4% |
+| Games with no adjacent pick | **106/106** | 0/106 |
+
+This is the strongest single table in the project: top-8 finds the decisive
+move just as often, and fails at everything the constraints provide.
+
+Greedy selection reaches **98.7%** of the exact dynamic-programming optimum
+on average, is exactly optimal on 81 of 106 games, and worst case 74.3%.
 
 ### Validation against external data
 
 | Measure | Result | Corpus |
 |---|---|---|
-| Tactical motif recall | **91.6%** mean, 6 detectors at 100% | 14,000 human-tagged Lichess puzzles |
-| Classifier agreement | **κ = 0.932** (raw 97.8%, chance 66.8%) | 24,255 moves, 339 games, Lichess annotations |
-| Hallucination rate | **6.2 → 0.0** per 100 beats, gate off → on | 32 beats of live model output |
-| Cost per game | $0.0571 (gate off) / $0.0617 (gate on) | 5 games |
+| Motif recall and precision | **91.9%** recall, **89.9%** precision, F1 **0.904** | 14,000 human-tagged Lichess puzzles |
+| Classifier agreement | **κ = 0.939** held out (raw 98.1%, chance 68.8%) | thresholds fitted on 169 games, tested on 170 / 12,337 moves |
+| Gate false positives | **0** over 412 beats, 60/60 games clean | template output, grounded by construction |
+| Hallucination, model output | pilot only: 2/32 → 0/32, intervals overlap | 32 beats, 2 games |
+| Cost per game | $0.0572 / $0.0631 | 2 games |
 
 None of these labels were produced by this project — that is the point of
 quoting them.
 
-### ⚠ A number in the project report I could not reproduce
+### ⚠ Two numbers to be careful with
 
-`docs/project-report.md` (Objective 1) states *"137 positions of a 136-half-
-move game analysed in 36.9 seconds."* That is 0.27 s/position. Both runs
-above measure **~1.55 s/position** at 1M nodes single-threaded, consistently
-(34 pos → 53.0 s; 80 pos → 123.3 s). 137 positions should therefore take
-**~212 s**, not 36.9 s.
+**The hallucination result is a pilot, not a result.** 2 of 32 beats with the
+gate off and 0 of 32 with it on gives exact 95% intervals of [0.8%, 20.8%]
+and [0.0%, 10.9%]. They overlap, so the pair does not establish that the gate
+reduces the rate on model output. It also was not labelled independently —
+the same checker both found and counted the errors. Reaching a 95% upper
+bound under 2% needs 183 clean beats; under 1% needs 368. Say this before
+you are asked.
 
-Analysis is a **sequential loop** — there is no parallelism in
-`analyse_game()`, despite a docstring that anticipates it. The 36.9 s figure
-is consistent with roughly 200k nodes, i.e. the "Fast" preset, not the 1M
-the reproducibility claims assume.
-
-**Before this goes in a paper**: either re-measure at 1M nodes and update
-the report, or state the node budget alongside the timing. A reviewer who
-divides 137 by 36.9 will notice.
+**`docs/project-report.md` Objective 1 states "137 positions in 36.9
+seconds."** That is 0.27 s/position, and measurement gives **1.43 s/position**
+at 1M nodes single-threaded. The discrepancy is now explained: 0.278
+s/position is exactly the measured rate at **200,000 nodes**, so the 36.9 s
+figure was taken at the fast preset, not at the 1M the reproducibility claims
+assume. Quote the node budget alongside any timing.
 
 ---
 
@@ -229,11 +264,23 @@ hypothesis, not a constant.*
 
 **Motif recall was 46.5% because of a scoring bug, not a detection bug.** The
 validator scored only the first move of each puzzle; Lichess tags describe
-the whole solution line. Fixed: 91.6%.
+the whole solution line. Fixed: 91.9%.
 
 **The hallucination rate was overstated at 18.8 per 100 beats.** Most
 "errors" were the checker mishandling apostrophes and British spellings, not
-the model inventing anything. Real rate: 6.2.
+the model inventing anything. Real rate: 6.2 — on 32 beats, which is too few
+to conclude from.
+
+**The pacing comparison was run at a budget the system does not use.** A
+measurement script passed a fixed 120 s budget while the shipped code scales
+the budget with game length. Both games coming out at exactly 117.8 s was
+the giveaway. *The lesson that generalises: when two different inputs give
+byte-identical outputs, that is a bug report, not a result.*
+
+**A claimed objective did not survive reading the imports.** The report said
+a second sport ran through the same core unmodified. The chess package
+imports nothing from the cricket packages and vice versa; the design was
+mirrored, not reused. Corrected in `docs/project-report.md`, Objective 6.
 
 **A fix that improved a metric and made the product worse.** One change took
 a detector to 100% recall while making it call Morphy's queen sacrifice "a

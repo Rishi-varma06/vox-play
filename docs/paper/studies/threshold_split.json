@@ -1,0 +1,51 @@
+{
+  "seed": 20261102,
+  "games": 339,
+  "train_games": 169,
+  "train_moves": 11918,
+  "test_games": 170,
+  "test_moves": 12337,
+  "fitted": [
+    5.0,
+    10.0,
+    15.0
+  ],
+  "train_kappa": 0.9258,
+  "test_kappa_fitted": 0.9394,
+  "test_kappa_shipped": 0.9394,
+  "test_kappa_community": 0.3632,
+  "full_corpus_kappa_shipped": 0.9324,
+  "test_raw_agreement": 0.9811,
+  "test_expected": 0.6885,
+  "test_recall": {
+    "inaccuracy": 0.9201,
+    "mistake": 0.9177,
+    "blunder": 0.9729
+  },
+  "test_matrix": {
+    "ok": {
+      "ok": 10053,
+      "inaccuracy": 78,
+      "mistake": 24,
+      "blunder": 0
+    },
+    "inaccuracy": {
+      "ok": 71,
+      "inaccuracy": 898,
+      "mistake": 15,
+      "blunder": 7
+    },
+    "mistake": {
+      "ok": 18,
+      "inaccuracy": 0,
+      "mistake": 435,
+      "blunder": 13
+    },
+    "blunder": {
+      "ok": 7,
+      "inaccuracy": 0,
+      "mistake": 0,
+      "blunder": 718
+    }
+  }
+}

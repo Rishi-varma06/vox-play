@@ -1,0 +1,73 @@
+60 games, 1,000,000 nodes, 9 workers
+[1/60]   lLYzW3V7   27p eta  30.6m
+[2/60]   k9HzRyl6   32p eta  18.7m
+[3/60]   wLT5RniK   38p eta  14.9m
+[4/60]   lMEPNFqi   41p eta  11.9m
+[5/60]   y3EDLQJJ   49p eta  11.0m
+[6/60]   IyRGuiUw   53p eta   9.1m
+[7/60]   w9XHhAk9   86p eta  11.0m
+[8/60]   K7DcIEKs   45p eta   9.9m
+[9/60]   m5aDuc63  119p eta   8.8m
+[10/60]   V64n61iS   33p eta   7.8m
+[11/60]   DKQKCeWw   84p eta   7.0m
+[12/60]   5eJwH280   43p eta   6.8m
+[13/60]   hTs7n4Gu   58p eta   6.6m
+[14/60]   FwmCwjtc   42p eta   7.6m
+[15/60]   5jxlQ9Xa   64p eta   7.2m
+[16/60]   bS58DSzq   41p eta   6.6m
+[17/60]   TDWwcCuE   67p eta   6.1m
+[18/60]   rNRk0s6f   54p eta   6.3m
+[19/60]   QRYdA2q6   57p eta   6.3m
+[20/60]   aB9ALnBv   39p eta   6.3m
+[21/60]   JZjAqIp6   66p eta   6.0m
+[22/60]   L8KSQl96   41p eta   5.7m
+[23/60]   BejimhZy   42p eta   5.4m
+[24/60]   ZJRA9Rn4   39p eta   5.0m
+[25/60]   uP63LpOh  108p eta   4.9m
+[26/60]   AAzvDXQB  123p eta   5.0m
+[27/60]   NtthjYiR   36p eta   4.9m
+[28/60]   a47On1tN   51p eta   4.6m
+[29/60]   TWims9HO   71p eta   4.6m
+[30/60]   1RZEpGQ5   44p eta   4.3m
+[31/60]   1VjIl1aH   38p eta   4.1m
+[32/60]   EPOfds8D   71p eta   4.0m
+[33/60]   78DRgxUS   39p eta   3.8m
+[34/60]   OkIKKhm6   78p eta   3.7m
+[35/60]   8Xv1kc1u   66p eta   3.5m
+[36/60]   OJn7wUE9   56p eta   3.4m
+[37/60]   HFOmn2vM   56p eta   3.2m
+[38/60]   RbKcKkNE   36p eta   3.1m
+[39/60]   3w6QYJYK   50p eta   2.9m
+[40/60]   FzaO547N   46p eta   2.8m
+[41/60]   pU54REM6   87p eta   2.7m
+[42/60]   uKSrOC7z   85p eta   2.6m
+[43/60]   3wJInQBa   66p eta   2.4m
+[44/60]   xjYsuRyt   58p eta   2.3m
+[45/60]   Oza2kqDg   83p eta   2.2m
+[46/60]   gDpb31od   64p eta   2.1m
+[47/60]   HANMakxQ  106p eta   1.9m
+[48/60]   0ojTGd0P   77p eta   1.8m
+[49/60]   QsvkpvQR  102p eta   1.6m
+[50/60]   6cEFQBMn   61p eta   1.5m
+[51/60]   uEj1cUSj   80p eta   1.3m
+[52/60]   eVaO01BL  106p eta   1.2m
+[53/60]   IL7vzVyb  100p eta   1.0m
+[54/60]   4ZK2YRHG   79p eta   0.9m
+[55/60]   kie9uAGI   83p eta   0.7m
+[56/60]   0uoOXjrx   78p eta   0.6m
+[57/60]   mUDnsQwA   75p eta   0.5m
+[58/60]   yHAGXbG5   72p eta   0.3m
+[59/60]   E4jtq4Kx   68p eta   0.1m
+[60/60]   ERasFTT2  127p eta   0.0m
+
+signal removed  retained   jaccard     value turning pt
+------------------------------------------------------
+swing             48.9%     0.382     0.787     71.7%
+narrative         82.8%     0.776     0.973     51.7%
+motif             82.7%     0.794     0.953     76.7%
+criticality       86.4%     0.816     0.985     76.7%
+material          91.4%     0.882     0.984     76.7%
+think_time       100.0%     1.000     1.000     76.7%
+
+baseline turning-point coverage 76.7%
+wrote docs\paper\studies\weight_ablation.json

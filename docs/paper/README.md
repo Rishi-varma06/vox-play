@@ -170,40 +170,48 @@ hand-copied; re-run the script to regenerate it.
 
 ### Pacing over a corpus, not two games — `pacing_study.py`
 
-120 games attempted, **106 completed** (14 lost to engine processes failing
-under concurrent load), 7,609 half-moves, median length 65.
+**173 standard games**, 13,251 half-moves, median length 68. No run failed.
+
+> ⚠ **The corpus had to be filtered first.** It was exported from Lichess TV,
+> which carries the variant channels: of 339 games only **174 are standard
+> chess**. The other 165 are Chess960, Horde, Antichess, Atomic, King of the
+> Hill, Racing Kings and Three-check. An earlier run reported "14 games lost
+> to engine failures" — those were Stockfish refusing Antichess, and the
+> remaining corpus was about half variants being scored by a standard-chess
+> engine. Every number here is standard chess only.
 
 | Spoken duration | Paced | Top-8 | Every move |
 |---|---|---|---|
-| Median | **143.2 s** | 194.6 s | 491.9 s |
-| IQR | 142.2–166.5 | constant | 370.8–643.2 |
-| Range | 131.4–348.6 | 194.6 | 204.3–1483.2 |
+| Median | **143.2 s** | 194.6 s | 514.6 s |
+| IQR | 142.2–178.4 | constant | 416.2–696.2 |
+| Range | 117.8–348.6 | 194.6 | 158.9–1483.2 |
 
-Median reduction against every-move narration **3.5×** (IQR 2.6–3.9).
+Median reduction against every-move narration **3.6×** (IQR 2.9–3.9).
 Top-8's duration is *constant by construction* — eight beats of fixed cost —
 which is why it was identical on both sample games. That is a property of
 the baseline, not a bug.
 
 | | Paced | Top-8 |
 |---|---|---|
-| Opening covered | **100%** | 36.8% |
-| Decisive move covered | 99.1% | 99.1% |
-| Finish covered | **100%** | 9.4% |
-| Games with no adjacent pick | **106/106** | 0/106 |
+| Opening covered | **100%** | 22.5% |
+| Decisive move covered | 97.1% | 98.3% |
+| Finish covered | **100%** | 7.5% |
+| Games with no adjacent pick | **173/173** | 1/173 |
 
 This is the strongest single table in the project: top-8 finds the decisive
-move just as often, and fails at everything the constraints provide.
+move marginally *more* often, and fails at everything the constraints
+provide.
 
 Greedy selection reaches **98.7%** of the exact dynamic-programming optimum
-on average, is exactly optimal on 81 of 106 games, and worst case 74.3%.
+on average, is exactly optimal on 138 of 173 games, worst case 75.0%.
 
 ### Validation against external data
 
 | Measure | Result | Corpus |
 |---|---|---|
 | Motif recall and precision | **91.9%** recall, **89.9%** precision, F1 **0.904** | 14,000 human-tagged Lichess puzzles |
-| Classifier agreement | **κ = 0.939** held out (raw 98.1%, chance 68.8%) | thresholds fitted on 169 games, tested on 170 / 12,337 moves |
-| Gate false positives | **0** over 412 beats, 60/60 games clean | template output, grounded by construction |
+| Classifier agreement | **κ = 0.955** held out (raw 98.7%, chance 71.9%) | thresholds fitted on 87 games, tested on 87 / 6,864 moves |
+| Gate false positives | **0.66 per 100 beats** over 456 beats, after fixing a defect the measurement found | template output, grounded by construction |
 | Hallucination, model output | pilot only: 2/32 → 0/32, intervals overlap | 32 beats, 2 games |
 | Cost per game | $0.0572 / $0.0631 | 2 games |
 

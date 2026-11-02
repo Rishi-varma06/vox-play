@@ -59,7 +59,7 @@ TITLE_BLOCK = 1.45 * inch                       # full-width band on page 1
 #: earlier ones were dropped because they restated a table as a bar chart.
 FIGURES = {
     "III. System Architecture": (
-        "fig1_pipeline.png", 0.74,
+        "fig1_pipeline.png", 0.76,
         "Fig. 1. The six-stage pipeline. Stages 1-3 compute chess facts "
         "before the model is invoked; stages 4-6 pace, realise and speak "
         "them."),
@@ -73,21 +73,25 @@ FIGURES = {
         "Fig. 3. The gate rejecting a sentence typed by a user. Three checks "
         "fire at once: notation reaching the speech backend, a player name "
         "absent from the game, and a tactic no detector found."),
-    "C. Pacing over 120 games": (
-        "fig4_pacing.png", 0.92,
+    "C. Pacing over 173 games": (
+        "fig4_pacing.png", 0.86,
         "Fig. 4. Spoken duration against game length over 106 games. The "
         "paced arm is clamped by (6); the every-move baseline grows without "
         "bound; top-N is constant by construction."),
 }
 
-#: Replaced when --blind is passed, for double-blind submission.
+#: Replaced when --blind is passed, for double-blind submission. The author
+#: block collapses to a single anonymous line and every pointer that would
+#: identify the group — the code host, the phrase "the repository" — becomes
+#: a pointer to the anonymous supplementary material instead.
 BLIND_PATTERNS = [
-    (r"`\[TODO: four names \+ registration numbers\]`", "Anonymous Authors"),
-    (r"`\[TODO: name, designation\]`", "Anonymous"),
-    (r"`\[TODO: department, institution\]`", "Anonymous Institution"),
-    (r"https://github\.com/\S+", "[repository URL withheld for review]"),
+    (r"\*\*Authors:\*\*.*", "Anonymous submission"),
+    (r"\*\*Guide:\*\*.*\n", ""),
+    (r"\*\*Department:\*\*.*\n", ""),
+    (r"https://github\.com/\S+", "[URL withheld for review]"),
     (r"\bin the repository\b", "in the supplementary material"),
     (r"\bthe repository\b", "the supplementary material"),
+    (r"`docs/paper/studies/`", "the supplementary material"),
 ]
 
 
@@ -107,16 +111,20 @@ def styles():
     s["h2"] = ParagraphStyle(
         "h2", fontName="Times-Italic", fontSize=10, leading=12,
         spaceBefore=2.6 * mm, spaceAfter=1.1 * mm, textColor=INK)
+    # IEEE body text separates paragraphs by first-line indent alone, with
+    # no vertical space between them. The previous 1.5 mm gap was both
+    # non-standard and, over ninety paragraphs, more than half a page.
     s["body"] = ParagraphStyle(
-        "body", fontName="Times-Roman", fontSize=9.5, leading=11.4,
-        alignment=TA_JUSTIFY, spaceAfter=1.5 * mm, firstLineIndent=4 * mm,
+        "body", fontName="Times-Roman", fontSize=9.5, leading=11.05,
+        alignment=TA_JUSTIFY, spaceAfter=0, firstLineIndent=4 * mm,
         textColor=INK)
     s["abstract"] = ParagraphStyle(
         "abstract", parent=s["body"], fontName="Times-Bold", fontSize=9,
-        leading=10.8, firstLineIndent=4 * mm)
+        leading=10.8, firstLineIndent=4 * mm, spaceAfter=1.5 * mm)
     s["bullet"] = ParagraphStyle(
         "bullet", parent=s["body"], leftIndent=4.5 * mm,
-        bulletIndent=1 * mm, firstLineIndent=0, spaceAfter=1 * mm)
+        bulletIndent=1 * mm, firstLineIndent=0, spaceAfter=1 * mm,
+        spaceBefore=0.8 * mm)
     s["eq"] = ParagraphStyle(
         "eq", fontName="Times-Italic", fontSize=9.5, leading=12,
         alignment=TA_CENTER, textColor=INK)
@@ -124,12 +132,12 @@ def styles():
         "eqnum", fontName="Times-Roman", fontSize=9.5, leading=12,
         alignment=TA_LEFT, textColor=INK)
     s["caption"] = ParagraphStyle(
-        "caption", fontName="Times-Roman", fontSize=8, leading=9.6,
-        alignment=TA_JUSTIFY, textColor=INK, spaceBefore=1.4 * mm,
-        spaceAfter=3 * mm)
+        "caption", fontName="Times-Roman", fontSize=7.8, leading=9.2,
+        alignment=TA_JUSTIFY, textColor=INK, spaceBefore=1.2 * mm,
+        spaceAfter=2.4 * mm)
     s["tcaption"] = ParagraphStyle(
-        "tcaption", fontName="Times-Roman", fontSize=8, leading=9.6,
-        alignment=TA_CENTER, textColor=INK, spaceAfter=1.2 * mm)
+        "tcaption", fontName="Times-Roman", fontSize=7.8, leading=9.0,
+        alignment=TA_CENTER, textColor=INK, spaceAfter=0.9 * mm)
     s["cell"] = ParagraphStyle(
         "cell", fontName="Times-Roman", fontSize=7.6, leading=9,
         textColor=INK)
@@ -237,21 +245,29 @@ def build_table(rows, S, caption=None):
         ("RIGHTPADDING", (0, 0), (-1, -1), 1.8),
         ("ALIGN", (1, 1), (-1, -1), "CENTER"),
     ]))
-    out = [Spacer(1, 1.4 * mm)]
+    out = [Spacer(1, 1.6 * mm)]
     if caption:
         out.append(Paragraph(caption, S["tcaption"]))
-    out += [table, Spacer(1, 2.6 * mm)]
+    out += [table, Spacer(1, 1.9 * mm)]
     return out
 
 
-def parse(md: str, S):
-    # Author-facing notes are not part of the paper.
-    md = re.sub(r"> \*\*DRAFT\.\*\*.*?(?=\n\*\*Authors)", "", md, flags=re.S)
+def strip_draft_note(md: str) -> str:
+    """
+    Remove the author-facing banner, which is not part of the paper.
 
+    Done before any anonymisation, because the banner is delimited by the
+    author block and blinding rewrites that block away.
+    """
+    return re.sub(r"> \*\*DRAFT\.\*\*.*?(?=\n\*\*Authors)", "", md, flags=re.S)
+
+
+def parse(md: str, S):
     flow = []
     lines = md.split("\n")
     i = 0
     table_number = 0
+    pending_caption = None
     in_front_matter = True
 
     while i < len(lines):
@@ -268,7 +284,13 @@ def parse(md: str, S):
             i += 1
             continue
 
-        # Table, with a numbered caption in IEEE style.
+        # A "Table: ..." line titles the table that follows it.
+        if line.startswith("Table: "):
+            pending_caption = line[len("Table: "):].strip()
+            i += 1
+            continue
+
+        # Table, with a numbered caption above it in IEEE style.
         if line.startswith("|") and i + 1 < len(lines) \
                 and set(lines[i + 1]) <= set("|-: "):
             rows = []
@@ -280,7 +302,11 @@ def parse(md: str, S):
                 i += 1
             if rows:
                 table_number += 1
-                flow += build_table(rows, S, "TABLE %s" % _roman(table_number))
+                caption = "TABLE %s" % _roman(table_number)
+                if pending_caption:
+                    caption += "<br/>%s" % inline(pending_caption.upper())
+                    pending_caption = None
+                flow += build_table(rows, S, caption)
             continue
 
         if line.startswith("# "):
@@ -290,10 +316,11 @@ def parse(md: str, S):
             if in_front_matter and heading.startswith("Abstract"):
                 flow += [NextPageTemplate("rest"), FrameBreak()]
                 in_front_matter = False
-            flow.append(Paragraph(inline(heading).upper()
-                                  if heading[0].isdigit() or
-                                  heading.startswith(("I", "V", "X", "A"))
-                                  else inline(heading), S["h1"]))
+            # Every level-2 heading in this paper is an IEEE section head,
+            # which is set in capitals. The previous rule capitalised only
+            # headings beginning with a roman numeral or "A", which left
+            # "References" in mixed case beside "V. EXPERIMENTAL VALIDATION".
+            flow.append(Paragraph(inline(heading).upper(), S["h1"]))
             flow += figure_for(heading, S)
         elif line.startswith("### "):
             heading = line[4:]
@@ -386,7 +413,7 @@ def main():
         PageTemplate(id="rest", frames=rest_cols, onPage=footer),
     ])
 
-    md = SRC.read_text(encoding="utf-8")
+    md = strip_draft_note(SRC.read_text(encoding="utf-8"))
     if blind:
         for pattern, replacement in BLIND_PATTERNS:
             md = re.sub(pattern, replacement, md)

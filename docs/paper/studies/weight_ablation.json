@@ -1,913 +1,46 @@
 {
-  "games": 60,
+  "games": 80,
   "nodes": 1000000,
-  "base_turning_point_coverage": 0.7667,
+  "base_turning_point_coverage": 0.875,
   "signals": {
     "swing": {
-      "mean_retained": 0.4892,
-      "mean_jaccard": 0.3824,
-      "mean_value_ratio": 0.7869,
-      "turning_point_coverage": 0.7167
+      "mean_retained": 0.4513,
+      "mean_jaccard": 0.3231,
+      "mean_value_ratio": 0.7822,
+      "turning_point_coverage": 0.8125
     },
     "narrative": {
-      "mean_retained": 0.8278,
-      "mean_jaccard": 0.7758,
-      "mean_value_ratio": 0.9729,
-      "turning_point_coverage": 0.5167
+      "mean_retained": 0.8042,
+      "mean_jaccard": 0.7505,
+      "mean_value_ratio": 0.9841,
+      "turning_point_coverage": 0.5625
     },
     "motif": {
-      "mean_retained": 0.8272,
-      "mean_jaccard": 0.7938,
-      "mean_value_ratio": 0.9531,
-      "turning_point_coverage": 0.7667
+      "mean_retained": 0.8111,
+      "mean_jaccard": 0.7452,
+      "mean_value_ratio": 0.9743,
+      "turning_point_coverage": 0.9
     },
     "criticality": {
-      "mean_retained": 0.8642,
-      "mean_jaccard": 0.8155,
-      "mean_value_ratio": 0.9851,
-      "turning_point_coverage": 0.7667
+      "mean_retained": 0.8734,
+      "mean_jaccard": 0.8253,
+      "mean_value_ratio": 0.9846,
+      "turning_point_coverage": 0.8625
     },
     "material": {
-      "mean_retained": 0.9139,
-      "mean_jaccard": 0.8819,
-      "mean_value_ratio": 0.9842,
-      "turning_point_coverage": 0.7667
+      "mean_retained": 0.9196,
+      "mean_jaccard": 0.8833,
+      "mean_value_ratio": 0.9956,
+      "turning_point_coverage": 0.875
     },
     "think_time": {
       "mean_retained": 1.0,
       "mean_jaccard": 1.0,
       "mean_value_ratio": 1.0,
-      "turning_point_coverage": 0.7667
+      "turning_point_coverage": 0.875
     }
   },
   "rows": [
-    {
-      "game_id": "lLYzW3V7",
-      "plies": 27,
-      "base_picks": 2,
-      "base_value": 1.6391,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.5944956616052061,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 1.0129473969631235,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "k9HzRyl6",
-      "plies": 32,
-      "base_picks": 2,
-      "base_value": 1.7478,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.568722186904005,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9788302606484424,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "wLT5RniK",
-      "plies": 38,
-      "base_picks": 2,
-      "base_value": 2.825,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8634021632251722,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.7876106194690266,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "lMEPNFqi",
-      "plies": 41,
-      "base_picks": 2,
-      "base_value": 2.585,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9895551257253384,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "y3EDLQJJ",
-      "plies": 49,
-      "base_picks": 2,
-      "base_value": 3.2253,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8276147168251343,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "IyRGuiUw",
-      "plies": 53,
-      "base_picks": 2,
-      "base_value": 2.3713,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.5210851841439416,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.843407365757661,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "w9XHhAk9",
-      "plies": 86,
-      "base_picks": 3,
-      "base_value": 4.8994,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.8573448585933151,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9384208216680332,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "K7DcIEKs",
-      "plies": 45,
-      "base_picks": 2,
-      "base_value": 3.0677,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.820746857908653,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9299503784997646,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "m5aDuc63",
-      "plies": 119,
-      "base_picks": 5,
-      "base_value": 8.0587,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 5,
-          "retained": 0.2,
-          "jaccard": 0.1111111111111111,
-          "value_ratio": 0.6208619543846394,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 5,
-          "retained": 0.8,
-          "jaccard": 0.6666666666666666,
-          "value_ratio": 0.9609117557032989,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 5,
-          "retained": 0.8,
-          "jaccard": 0.6666666666666666,
-          "value_ratio": 0.9810418568225877,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "V64n61iS",
-      "plies": 33,
-      "base_picks": 2,
-      "base_value": 2.1528,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8120558041589893,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "DKQKCeWw",
-      "plies": 84,
-      "base_picks": 3,
-      "base_value": 2.6656,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9867444768653605,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9807836598582743,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9807836598582743,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "5eJwH280",
-      "plies": 43,
-      "base_picks": 2,
-      "base_value": 2.825,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.799410029498525,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9911504424778761,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "hTs7n4Gu",
-      "plies": 58,
-      "base_picks": 2,
-      "base_value": 2.72,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.5051470588235295,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "FwmCwjtc",
-      "plies": 42,
-      "base_picks": 2,
-      "base_value": 3.2623,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8084193317666292,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9870236027383265,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "5jxlQ9Xa",
-      "plies": 64,
-      "base_picks": 2,
-      "base_value": 2.6714,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.4875389408099689,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.8337596546173713,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "bS58DSzq",
-      "plies": 41,
-      "base_picks": 2,
-      "base_value": 2.7939,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8121264182683705,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7951887246421769,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9405410994587415,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "TDWwcCuE",
-      "plies": 67,
-      "base_picks": 2,
-      "base_value": 3.0337,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9712485807420429,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9449236347654104,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.990940555982859,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
     {
       "game_id": "rNRk0s6f",
       "plies": 54,
@@ -952,1587 +85,6 @@
         },
         "think_time": {
           "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "QRYdA2q6",
-      "plies": 57,
-      "base_picks": 2,
-      "base_value": 1.9767,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7502529510961213,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8296795952782463,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9858347386172006,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "aB9ALnBv",
-      "plies": 39,
-      "base_picks": 2,
-      "base_value": 2.4487,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9447318268445414,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 1,
-          "retained": 0.5,
-          "jaccard": 0.5,
-          "value_ratio": 0.8188129594337055,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "JZjAqIp6",
-      "plies": 66,
-      "base_picks": 2,
-      "base_value": 2.7514,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8140370714372249,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8964180430480959,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.95505391107701,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "L8KSQl96",
-      "plies": 41,
-      "base_picks": 2,
-      "base_value": 2.2495,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9874933317527117,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9874933317527117,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "BejimhZy",
-      "plies": 42,
-      "base_picks": 2,
-      "base_value": 1.5273,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 1.1571366215626362,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "ZJRA9Rn4",
-      "plies": 39,
-      "base_picks": 2,
-      "base_value": 0.6282,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 1,
-          "retained": 0.5,
-          "jaccard": 0.5,
-          "value_ratio": 0.5792359391581182,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 0,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 1,
-          "retained": 0.5,
-          "jaccard": 0.5,
-          "value_ratio": 0.4207640608418818,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "uP63LpOh",
-      "plies": 108,
-      "base_picks": 5,
-      "base_value": 7.5951,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 5,
-          "retained": 0.4,
-          "jaccard": 0.25,
-          "value_ratio": 0.7175478377903916,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 5,
-          "retained": 0.8,
-          "jaccard": 0.6666666666666666,
-          "value_ratio": 0.9970441512083796,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 5,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "AAzvDXQB",
-      "plies": 123,
-      "base_picks": 6,
-      "base_value": 6.5235,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 6,
-          "retained": 0.3333333333333333,
-          "jaccard": 0.2,
-          "value_ratio": 0.6856419707245952,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 6,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 6,
-          "retained": 0.8333333333333334,
-          "jaccard": 0.7142857142857143,
-          "value_ratio": 0.9923694546544624,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 6,
-          "retained": 0.8333333333333334,
-          "jaccard": 0.7142857142857143,
-          "value_ratio": 0.9923694546544624,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 6,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9877144813443386,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 6,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "NtthjYiR",
-      "plies": 36,
-      "base_picks": 2,
-      "base_value": 2.0278,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.4020986301369863,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "a47On1tN",
-      "plies": 51,
-      "base_picks": 2,
-      "base_value": 3.1333,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7253900709219858,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.5714893617021276,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "TWims9HO",
-      "plies": 71,
-      "base_picks": 2,
-      "base_value": 3.1539,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.6842302733095182,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9001247119998309,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "1RZEpGQ5",
-      "plies": 44,
-      "base_picks": 2,
-      "base_value": 2.317,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8997266580348151,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "1VjIl1aH",
-      "plies": 38,
-      "base_picks": 2,
-      "base_value": 2.9428,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "EPOfds8D",
-      "plies": 71,
-      "base_picks": 2,
-      "base_value": 3.4001,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.714006774388042,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8397087634045792,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "78DRgxUS",
-      "plies": 39,
-      "base_picks": 2,
-      "base_value": 2.907,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.6994610709780988,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "OkIKKhm6",
-      "plies": 78,
-      "base_picks": 2,
-      "base_value": 3.479,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8901025198811919,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9841269841269842,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "8Xv1kc1u",
-      "plies": 66,
-      "base_picks": 2,
-      "base_value": 3.2028,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7818213356461406,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8688638334778837,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9522983521248917,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "OJn7wUE9",
-      "plies": 56,
-      "base_picks": 2,
-      "base_value": 2.7828,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9368736274705529,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "HFOmn2vM",
-      "plies": 56,
-      "base_picks": 2,
-      "base_value": 3.2739,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9953504473073319,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8732572661987699,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9953504473073319,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9953504473073319,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "RbKcKkNE",
-      "plies": 36,
-      "base_picks": 2,
-      "base_value": 1.3023,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.6194181383840969,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9183687398686118,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "3w6QYJYK",
-      "plies": 50,
-      "base_picks": 2,
-      "base_value": 2.264,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.5064782096584216,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "FzaO547N",
-      "plies": 46,
-      "base_picks": 2,
-      "base_value": 0.7577,
-      "base_covers_turning_point": false,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 0,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.0,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8232878721220119,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": false
-        }
-      }
-    },
-    {
-      "game_id": "pU54REM6",
-      "plies": 87,
-      "base_picks": 3,
-      "base_value": 4.8371,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.8583045054233225,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9606378433507451,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "uKSrOC7z",
-      "plies": 85,
-      "base_picks": 3,
-      "base_value": 4.355,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.8944508228090317,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9778032912361269,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "3wJInQBa",
-      "plies": 66,
-      "base_picks": 2,
-      "base_value": 2.825,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7155948869223205,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "xjYsuRyt",
-      "plies": 58,
-      "base_picks": 2,
-      "base_value": 2.931,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.925357291785132,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "Oza2kqDg",
-      "plies": 83,
-      "base_picks": 2,
-      "base_value": 2.9428,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7648650179346801,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 3,
-          "retained": 0.5,
-          "jaccard": 0.25,
-          "value_ratio": 1.2643552954502548,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9818821974702663,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "gDpb31od",
-      "plies": 64,
-      "base_picks": 2,
-      "base_value": 2.5673,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.0,
-          "jaccard": 0.0,
-          "value_ratio": 0.5909287630918375,
-          "covers_turning_point": false
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9509672812256557,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "HANMakxQ",
-      "plies": 106,
-      "base_picks": 4,
-      "base_value": 6.1067,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 4,
-          "retained": 0.25,
-          "jaccard": 0.14285714285714285,
-          "value_ratio": 0.6579313419121827,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 4,
-          "retained": 0.75,
-          "jaccard": 0.6,
-          "value_ratio": 0.9768016266153573,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 4,
-          "retained": 0.75,
-          "jaccard": 0.6,
-          "value_ratio": 0.9737994841773447,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "0ojTGd0P",
-      "plies": 77,
-      "base_picks": 2,
-      "base_value": 2.8826,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.734290802284974,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8301706792479011,
-          "covers_turning_point": false
-        },
-        "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9945882189689863,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
-      "game_id": "QsvkpvQR",
-      "plies": 102,
-      "base_picks": 4,
-      "base_value": 5.0737,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 4,
-          "retained": 0.25,
-          "jaccard": 0.14285714285714285,
-          "value_ratio": 0.7291910299367101,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 4,
-          "retained": 0.75,
-          "jaccard": 0.6,
-          "value_ratio": 0.9364912511223528,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 4,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
@@ -2643,57 +195,6 @@
       }
     },
     {
-      "game_id": "eVaO01BL",
-      "plies": 106,
-      "base_picks": 4,
-      "base_value": 5.2948,
-      "base_covers_turning_point": true,
-      "variants": {
-        "swing": {
-          "picks": 4,
-          "retained": 0.75,
-          "jaccard": 0.6,
-          "value_ratio": 0.9040995853408768,
-          "covers_turning_point": true
-        },
-        "narrative": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "motif": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        },
-        "criticality": {
-          "picks": 4,
-          "retained": 0.75,
-          "jaccard": 0.6,
-          "value_ratio": 0.9729716117984791,
-          "covers_turning_point": true
-        },
-        "material": {
-          "picks": 4,
-          "retained": 0.75,
-          "jaccard": 0.6,
-          "value_ratio": 0.9617867275504894,
-          "covers_turning_point": true
-        },
-        "think_time": {
-          "picks": 4,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
-        }
-      }
-    },
-    {
       "game_id": "IL7vzVyb",
       "plies": 100,
       "base_picks": 4,
@@ -2745,49 +246,100 @@
       }
     },
     {
-      "game_id": "4ZK2YRHG",
-      "plies": 79,
-      "base_picks": 2,
-      "base_value": 2.8808,
+      "game_id": "eVaO01BL",
+      "plies": 106,
+      "base_picks": 4,
+      "base_value": 5.2948,
       "base_covers_turning_point": true,
       "variants": {
         "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.7549942435304802,
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9040995853408768,
           "covers_turning_point": true
         },
         "narrative": {
-          "picks": 3,
-          "retained": 0.5,
-          "jaccard": 0.25,
-          "value_ratio": 1.0798384717296599,
-          "covers_turning_point": false
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
         },
         "motif": {
-          "picks": 2,
+          "picks": 4,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
           "covers_turning_point": true
         },
         "criticality": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.9025218543352868,
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9729716117984791,
           "covers_turning_point": true
         },
         "material": {
-          "picks": 2,
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9617867275504894,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "QsvkpvQR",
+      "plies": 102,
+      "base_picks": 4,
+      "base_value": 5.0737,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 4,
+          "retained": 0.25,
+          "jaccard": 0.14285714285714285,
+          "value_ratio": 0.7291910299367101,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9364912511223528,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 4,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
           "covers_turning_point": true
         },
         "think_time": {
-          "picks": 2,
+          "picks": 4,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
@@ -2847,53 +399,53 @@
       }
     },
     {
-      "game_id": "0uoOXjrx",
-      "plies": 78,
-      "base_picks": 3,
-      "base_value": 2.263,
-      "base_covers_turning_point": false,
+      "game_id": "4ZK2YRHG",
+      "plies": 79,
+      "base_picks": 2,
+      "base_value": 2.8808,
+      "base_covers_turning_point": true,
       "variants": {
         "swing": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.8666961260863161,
-          "covers_turning_point": false
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7549942435304802,
+          "covers_turning_point": true
         },
         "narrative": {
           "picks": 3,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
+          "retained": 0.5,
+          "jaccard": 0.25,
+          "value_ratio": 1.0798384717296599,
           "covers_turning_point": false
         },
         "motif": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9242401924682083,
-          "covers_turning_point": false
-        },
-        "criticality": {
-          "picks": 3,
-          "retained": 0.3333333333333333,
-          "jaccard": 0.2,
-          "value_ratio": 0.949771689497717,
-          "covers_turning_point": false
-        },
-        "material": {
-          "picks": 3,
-          "retained": 0.6666666666666666,
-          "jaccard": 0.5,
-          "value_ratio": 0.9895419060244515,
-          "covers_turning_point": false
-        },
-        "think_time": {
-          "picks": 3,
+          "picks": 2,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
-          "covers_turning_point": false
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9025218543352868,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
         }
       }
     },
@@ -2949,53 +501,53 @@
       }
     },
     {
-      "game_id": "yHAGXbG5",
-      "plies": 72,
-      "base_picks": 2,
-      "base_value": 2.825,
-      "base_covers_turning_point": true,
+      "game_id": "0uoOXjrx",
+      "plies": 78,
+      "base_picks": 3,
+      "base_value": 2.263,
+      "base_covers_turning_point": false,
       "variants": {
         "swing": {
-          "picks": 2,
-          "retained": 0.5,
-          "jaccard": 0.3333333333333333,
-          "value_ratio": 0.8190757128810227,
-          "covers_turning_point": true
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.8666961260863161,
+          "covers_turning_point": false
         },
         "narrative": {
-          "picks": 2,
+          "picks": 3,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
-          "covers_turning_point": true
+          "covers_turning_point": false
         },
         "motif": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9242401924682083,
+          "covers_turning_point": false
         },
         "criticality": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.949771689497717,
+          "covers_turning_point": false
         },
         "material": {
-          "picks": 2,
-          "retained": 1.0,
-          "jaccard": 1.0,
-          "value_ratio": 1.0,
-          "covers_turning_point": true
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9895419060244515,
+          "covers_turning_point": false
         },
         "think_time": {
-          "picks": 2,
+          "picks": 3,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,
-          "covers_turning_point": true
+          "covers_turning_point": false
         }
       }
     },
@@ -3094,6 +646,3474 @@
         },
         "think_time": {
           "picks": 6,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "yHAGXbG5",
+      "plies": 72,
+      "base_picks": 2,
+      "base_value": 2.825,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8190757128810227,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "SdurwyNy",
+      "plies": 37,
+      "base_picks": 2,
+      "base_value": 1.6862,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.6441750131787033,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.919016868740116,
+          "covers_turning_point": false
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "BipyKnRr",
+      "plies": 42,
+      "base_picks": 2,
+      "base_value": 2.314,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.4403750120042254,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "l07poVV9",
+      "plies": 58,
+      "base_picks": 2,
+      "base_value": 3.05,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8781420765027322,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9262295081967213,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "qXGL10xr",
+      "plies": 89,
+      "base_picks": 3,
+      "base_value": 4.7822,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.7150902889432058,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9957527486314929,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9957527486314929,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "VmFRr82q",
+      "plies": 65,
+      "base_picks": 2,
+      "base_value": 3.1013,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.737691409244968,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8065306648896151,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9834691201444572,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "IRMHgdoq",
+      "plies": 142,
+      "base_picks": 8,
+      "base_value": 5.4594,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 8,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8049048539737458,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 8,
+          "retained": 0.625,
+          "jaccard": 0.45454545454545453,
+          "value_ratio": 0.9346290831382925,
+          "covers_turning_point": false
+        },
+        "criticality": {
+          "picks": 8,
+          "retained": 0.875,
+          "jaccard": 0.7777777777777778,
+          "value_ratio": 0.9620840541365625,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 8,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9575455378040094,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "dgpPFhBM",
+      "plies": 120,
+      "base_picks": 6,
+      "base_value": 6.5345,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.16666666666666666,
+          "jaccard": 0.1,
+          "value_ratio": 0.5703891625532002,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 6,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 6,
+          "retained": 0.8333333333333334,
+          "jaccard": 0.7142857142857143,
+          "value_ratio": 0.9876043386515085,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 6,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9983523462487396,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 6,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 6,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "fsCozTnW",
+      "plies": 114,
+      "base_picks": 5,
+      "base_value": 4.1583,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 4,
+          "retained": 0.6,
+          "jaccard": 0.5,
+          "value_ratio": 0.7899799599198397,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9694589178356714,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 5,
+          "retained": 0.4,
+          "jaccard": 0.25,
+          "value_ratio": 0.8904208416833668,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 5,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 1.0050955243820976,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "3KOg6JjM",
+      "plies": 51,
+      "base_picks": 2,
+      "base_value": 1.1,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9777272727272726,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.6363636363636362,
+          "covers_turning_point": false
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7448484848484848,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9777272727272726,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "ybrYDM6d",
+      "plies": 86,
+      "base_picks": 3,
+      "base_value": 4.4644,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.6848053599739169,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.8708290089673041,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9645825089038386,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "JAmzDW6J",
+      "plies": 65,
+      "base_picks": 2,
+      "base_value": 3.1927,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8120683444787244,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "oBU03Dip",
+      "plies": 83,
+      "base_picks": 2,
+      "base_value": 2.9983,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7717250324254217,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.5,
+          "jaccard": 0.25,
+          "value_ratio": 1.3335278858625161,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "RXPe1bIN",
+      "plies": 189,
+      "base_picks": 10,
+      "base_value": 7.122,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.5,
+          "jaccard": 0.5,
+          "value_ratio": 0.6537489469250212,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 10,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 10,
+          "retained": 0.9,
+          "jaccard": 0.8181818181818182,
+          "value_ratio": 0.9886267902274642,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 10,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 10,
+          "retained": 0.9,
+          "jaccard": 0.8181818181818182,
+          "value_ratio": 0.9658335673499954,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 10,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "7R1Lhe0k",
+      "plies": 53,
+      "base_picks": 2,
+      "base_value": 2.3801,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9181060641426637,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9992997525792445,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9992997525792445,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "qD9YoSbB",
+      "plies": 55,
+      "base_picks": 2,
+      "base_value": 1.992,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.967871485943775,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 1,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.8032128514056225,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "RHrwaEbN",
+      "plies": 104,
+      "base_picks": 4,
+      "base_value": 5.1085,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 4,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7157131531468828,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9882157060843105,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 4,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9413069082106166,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9882157060843105,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "MwDrne7m",
+      "plies": 112,
+      "base_picks": 5,
+      "base_value": 5.2071,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.2,
+          "jaccard": 0.1111111111111111,
+          "value_ratio": 0.691979084314623,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "1vMBEpHw",
+      "plies": 155,
+      "base_picks": 8,
+      "base_value": 9.9552,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 8,
+          "retained": 0.125,
+          "jaccard": 0.06666666666666667,
+          "value_ratio": 0.5830692330572627,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 8,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "CuImvFcJ",
+      "plies": 64,
+      "base_picks": 2,
+      "base_value": 2.7453,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8881738708110732,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9881010199125788,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "QEQxzklj",
+      "plies": 106,
+      "base_picks": 4,
+      "base_value": 3.547,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.25,
+          "jaccard": 0.125,
+          "value_ratio": 0.7657175077530307,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 4,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9517902452776994,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 4,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9517902452776994,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "aaAiccwe",
+      "plies": 56,
+      "base_picks": 2,
+      "base_value": 2.915,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7865446922050696,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7941680960548885,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8919382504288165,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "D3HfwNJC",
+      "plies": 62,
+      "base_picks": 2,
+      "base_value": 2.9778,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8195522388059702,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "62pTXCGZ",
+      "plies": 91,
+      "base_picks": 3,
+      "base_value": 3.2203,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.7769382051547458,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 3,
+          "retained": 0.6666666666666666,
+          "jaccard": 0.5,
+          "value_ratio": 0.9349273712176103,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "C3e8kzxc",
+      "plies": 62,
+      "base_picks": 2,
+      "base_value": 3.3626,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8334619267199435,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9800616917823043,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ZbYvHZDe",
+      "plies": 144,
+      "base_picks": 7,
+      "base_value": 9.2589,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 7,
+          "retained": 0.14285714285714285,
+          "jaccard": 0.07692307692307693,
+          "value_ratio": 0.5859091817307421,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 7,
+          "retained": 0.7142857142857143,
+          "jaccard": 0.5555555555555556,
+          "value_ratio": 0.9798254293314004,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "SHTGmMGe",
+      "plies": 68,
+      "base_picks": 2,
+      "base_value": 2.6,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7769230769230769,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8037179487179488,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "KByncFqi",
+      "plies": 75,
+      "base_picks": 2,
+      "base_value": 3.1181,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7524814569996597,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9358927989195797,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9249816930743698,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9526728111420136,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "wzZKngda",
+      "plies": 54,
+      "base_picks": 2,
+      "base_value": 2.6454,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7577281700197405,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.991557814271914,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "zX3Qp5P5",
+      "plies": 51,
+      "base_picks": 2,
+      "base_value": 1.5907,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9541072925398156,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "UmpOWIq5",
+      "plies": 29,
+      "base_picks": 2,
+      "base_value": 2.3467,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9730113636363635,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "a3TyOpYs",
+      "plies": 81,
+      "base_picks": 2,
+      "base_value": 2.9428,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7714932980932604,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.5,
+          "jaccard": 0.25,
+          "value_ratio": 1.13709646969983,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "T3RUhHBF",
+      "plies": 106,
+      "base_picks": 4,
+      "base_value": 5.113,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 4,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7335067463758195,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9833758173556465,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 4,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9999500187972783,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 4,
+          "retained": 0.75,
+          "jaccard": 0.6,
+          "value_ratio": 0.9833758173556465,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 4,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "cHChHqzd",
+      "plies": 58,
+      "base_picks": 2,
+      "base_value": 2.5247,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8101399524689727,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "Uu1rYIAc",
+      "plies": 87,
+      "base_picks": 3,
+      "base_value": 3.7827,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.7265509340853014,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.8525731406415228,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "jkcldCrU",
+      "plies": 196,
+      "base_picks": 10,
+      "base_value": 8.8859,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 10,
+          "retained": 0.4,
+          "jaccard": 0.25,
+          "value_ratio": 0.7274066358521579,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 11,
+          "retained": 0.9,
+          "jaccard": 0.75,
+          "value_ratio": 1.008152736262108,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 10,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 0.9168846043953502,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 10,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.981118662951253,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 10,
+          "retained": 0.7,
+          "jaccard": 0.5384615384615384,
+          "value_ratio": 0.9697523481318419,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 10,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "VCzpbqDM",
+      "plies": 136,
+      "base_picks": 7,
+      "base_value": 7.4956,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 7,
+          "retained": 0.2857142857142857,
+          "jaccard": 0.16666666666666666,
+          "value_ratio": 0.689476063770651,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 7,
+          "retained": 0.7142857142857143,
+          "jaccard": 0.5555555555555556,
+          "value_ratio": 0.9658466806501582,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 7,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "Q7R6XpO6",
+      "plies": 60,
+      "base_picks": 2,
+      "base_value": 3.1161,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7247281155286147,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8654359065787129,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9958994473168123,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9958994473168123,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ABODmYeS",
+      "plies": 71,
+      "base_picks": 2,
+      "base_value": 2.4518,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9435330372518806,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9673252968367625,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "gQGvYmcq",
+      "plies": 51,
+      "base_picks": 2,
+      "base_value": 2.5877,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8029541843788913,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "GmvptYiF",
+      "plies": 21,
+      "base_picks": 1,
+      "base_value": 1.6,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 1,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 1.064236111111111,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 1,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 1,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 1,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 1,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "rFCWdNs5",
+      "plies": 71,
+      "base_picks": 2,
+      "base_value": 2.915,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.6095673718315228,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7941680960548885,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9395845244901849,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "HPzVjOPT",
+      "plies": 92,
+      "base_picks": 3,
+      "base_value": 4.9162,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.7142455164932027,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.9759297555683627,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 3,
+          "retained": 0.3333333333333333,
+          "jaccard": 0.2,
+          "value_ratio": 0.9658869263540922,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 3,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "JCqA9YRr",
+      "plies": 112,
+      "base_picks": 5,
+      "base_value": 6.2878,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.2,
+          "jaccard": 0.1111111111111111,
+          "value_ratio": 0.6883760957132772,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9719163418881654,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "fJJT0WI3",
+      "plies": 66,
+      "base_picks": 2,
+      "base_value": 3.1611,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7814059753954306,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.884323374340949,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "4Xqw3B4v",
+      "plies": 26,
+      "base_picks": 2,
+      "base_value": 1.6103,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.5111329607396673,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "6eK6wqRZ",
+      "plies": 68,
+      "base_picks": 2,
+      "base_value": 2.7577,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7373383295056206,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ghpxbnXQ",
+      "plies": 59,
+      "base_picks": 2,
+      "base_value": 2.6,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7866858974358975,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9145299145299145,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "wSyYYQ7C",
+      "plies": 59,
+      "base_picks": 2,
+      "base_value": 3.0287,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8909311027955096,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9740259740259739,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "YLDFRazt",
+      "plies": 53,
+      "base_picks": 2,
+      "base_value": 3.02,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8014459161147903,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.9172295805739513,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ZmTFYMH4",
+      "plies": 110,
+      "base_picks": 5,
+      "base_value": 6.4602,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.4,
+          "jaccard": 0.25,
+          "value_ratio": 0.7910568798061296,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9960269616232013,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 5,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 0.9850211293404586,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9972481119468061,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "4mbiYwfu",
+      "plies": 80,
+      "base_picks": 2,
+      "base_value": 3.1538,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7336905781094212,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.5,
+          "jaccard": 0.25,
+          "value_ratio": 1.1321171509200638,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9846427023770518,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "47V96oXZ",
+      "plies": 79,
+      "base_picks": 2,
+      "base_value": 2.6,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.807008547008547,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.5,
+          "jaccard": 0.25,
+          "value_ratio": 1.1014102564102566,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "0ef5j84c",
+      "plies": 68,
+      "base_picks": 2,
+      "base_value": 2.9361,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.885903500473037,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "wJ7Opb77",
+      "plies": 116,
+      "base_picks": 5,
+      "base_value": 4.6128,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.4,
+          "jaccard": 0.25,
+          "value_ratio": 0.797446706009876,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 6,
+          "retained": 0.6,
+          "jaccard": 0.375,
+          "value_ratio": 0.987907985065639,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9657714079248465,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9755991810189087,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 5,
+          "retained": 0.8,
+          "jaccard": 0.6666666666666666,
+          "value_ratio": 0.9755991810189087,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ExdvTEoG",
+      "plies": 41,
+      "base_picks": 2,
+      "base_value": 2.8354,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.797868255025667,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9865825463380224,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "cqTkqe6m",
+      "plies": 72,
+      "base_picks": 2,
+      "base_value": 3.0478,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7882245716368939,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.9312796208530806,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "dZ1Mkhiq",
+      "plies": 66,
+      "base_picks": 2,
+      "base_value": 3.14,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7991153573956121,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8089171974522292,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "RPlpFQrc",
+      "plies": 111,
+      "base_picks": 5,
+      "base_value": 3.5069,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 5,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 0.7925986946327863,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 5,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 0.9077054686014828,
+          "covers_turning_point": false
+        },
+        "criticality": {
+          "picks": 5,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 0.9685697991255307,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 5,
+          "retained": 0.6,
+          "jaccard": 0.42857142857142855,
+          "value_ratio": 0.9685697991255307,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 5,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "OehppJE7",
+      "plies": 83,
+      "base_picks": 2,
+      "base_value": 2.7698,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8478247788675612,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 3,
+          "retained": 0.5,
+          "jaccard": 0.25,
+          "value_ratio": 1.2707744148264035,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9386846380648655,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ceWHwCZz",
+      "plies": 53,
+      "base_picks": 2,
+      "base_value": 3.2134,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8469766517120061,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "YA36wDLD",
+      "plies": 65,
+      "base_picks": 2,
+      "base_value": 2.4087,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8884583448657625,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9065873235538333,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "rhr694u8",
+      "plies": 50,
+      "base_picks": 2,
+      "base_value": 3.2569,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.7661411238530936,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.8208855933721222,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "cmoWtfK2",
+      "plies": 45,
+      "base_picks": 2,
+      "base_value": 2.7133,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.4877149877149878,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "K6LrPms4",
+      "plies": 49,
+      "base_picks": 2,
+      "base_value": 2.645,
+      "base_covers_turning_point": false,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8834278512917455,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.8816005040957783,
+          "covers_turning_point": false
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9829867674858224,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": false
+        }
+      }
+    },
+    {
+      "game_id": "7A2GGLMH",
+      "plies": 68,
+      "base_picks": 2,
+      "base_value": 3.035,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.773970345963756,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9994508511806699,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "ExwgbDtc",
+      "plies": 47,
+      "base_picks": 2,
+      "base_value": 2.6943,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.0,
+          "jaccard": 0.0,
+          "value_ratio": 0.555487969582188,
+          "covers_turning_point": false
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.9329043113206962,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        }
+      }
+    },
+    {
+      "game_id": "2XyJbwnj",
+      "plies": 62,
+      "base_picks": 2,
+      "base_value": 3.23,
+      "base_covers_turning_point": true,
+      "variants": {
+        "swing": {
+          "picks": 2,
+          "retained": 0.5,
+          "jaccard": 0.3333333333333333,
+          "value_ratio": 0.8203147574819402,
+          "covers_turning_point": true
+        },
+        "narrative": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "motif": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "criticality": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "material": {
+          "picks": 2,
+          "retained": 1.0,
+          "jaccard": 1.0,
+          "value_ratio": 1.0,
+          "covers_turning_point": true
+        },
+        "think_time": {
+          "picks": 2,
           "retained": 1.0,
           "jaccard": 1.0,
           "value_ratio": 1.0,

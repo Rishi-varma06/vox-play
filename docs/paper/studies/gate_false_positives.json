@@ -2,212 +2,25 @@
   "games": 60,
   "failed": 0,
   "nodes": 200000,
-  "beats": 412,
-  "false_positives": 0,
-  "false_positive_rate_per_100_beats": 0.0,
-  "games_entirely_clean": 60,
-  "warnings": 64,
-  "error_checks": {},
-  "warning_checks": {
-    "phrase_repetition": 64
+  "beats": 456,
+  "false_positives": 3,
+  "false_positive_rate_per_100_beats": 0.658,
+  "games_entirely_clean": 57,
+  "warnings": 113,
+  "error_checks": {
+    "ungrounded_tactic": 1,
+    "ungrounded_square": 2
   },
-  "seconds": 398.7,
-  "examples": [],
+  "warning_checks": {
+    "phrase_repetition": 113
+  },
+  "seconds": 324.4,
+  "examples": [
+    "ungrounded_tactic: claims tactics no detector found: ['promotion']",
+    "ungrounded_square: names squares not in this beat's facts: ['a4']",
+    "ungrounded_square: names squares not in this beat's facts: ['a4']"
+  ],
   "rows": [
-    {
-      "game_id": "lMEPNFqi",
-      "plies": 41,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "IyRGuiUw",
-      "plies": 53,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "y3EDLQJJ",
-      "plies": 49,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "lLYzW3V7",
-      "plies": 27,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "w9XHhAk9",
-      "plies": 86,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 2,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 2
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "DKQKCeWw",
-      "plies": 84,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "k9HzRyl6",
-      "plies": 32,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 2,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 2
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "wLT5RniK",
-      "plies": 38,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "K7DcIEKs",
-      "plies": 45,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "5eJwH280",
-      "plies": 43,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "m5aDuc63",
-      "plies": 119,
-      "beats": 10,
-      "errors": 0,
-      "warnings": 4,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 4
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "hTs7n4Gu",
-      "plies": 58,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "V64n61iS",
-      "plies": 33,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "FwmCwjtc",
-      "plies": 42,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "bS58DSzq",
-      "plies": 41,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "5jxlQ9Xa",
-      "plies": 64,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "TDWwcCuE",
-      "plies": 67,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
     {
       "game_id": "rNRk0s6f",
       "plies": 54,
@@ -216,342 +29,6 @@
       "warnings": 0,
       "error_checks": {},
       "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "aB9ALnBv",
-      "plies": 39,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "QRYdA2q6",
-      "plies": 57,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "JZjAqIp6",
-      "plies": 66,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "uP63LpOh",
-      "plies": 108,
-      "beats": 9,
-      "errors": 0,
-      "warnings": 4,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 4
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "AAzvDXQB",
-      "plies": 123,
-      "beats": 10,
-      "errors": 0,
-      "warnings": 4,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 4
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "BejimhZy",
-      "plies": 42,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "ZJRA9Rn4",
-      "plies": 39,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "L8KSQl96",
-      "plies": 41,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "NtthjYiR",
-      "plies": 36,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "a47On1tN",
-      "plies": 51,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "TWims9HO",
-      "plies": 71,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "1RZEpGQ5",
-      "plies": 44,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "EPOfds8D",
-      "plies": 71,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 2,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 2
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "1VjIl1aH",
-      "plies": 38,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "78DRgxUS",
-      "plies": 39,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 2,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 2
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "OkIKKhm6",
-      "plies": 78,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "OJn7wUE9",
-      "plies": 56,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "8Xv1kc1u",
-      "plies": 66,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "HFOmn2vM",
-      "plies": 56,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "FzaO547N",
-      "plies": 46,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "3w6QYJYK",
-      "plies": 50,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "pU54REM6",
-      "plies": 87,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 2,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 2
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "RbKcKkNE",
-      "plies": 36,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "uKSrOC7z",
-      "plies": 85,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "3wJInQBa",
-      "plies": 66,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "xjYsuRyt",
-      "plies": 58,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "Oza2kqDg",
-      "plies": 83,
-      "beats": 8,
-      "errors": 0,
-      "warnings": 2,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 2
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "gDpb31od",
-      "plies": 64,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 0,
-      "error_checks": {},
-      "warning_checks": {},
-      "error_messages": []
-    },
-    {
-      "game_id": "HANMakxQ",
-      "plies": 106,
-      "beats": 9,
-      "errors": 0,
-      "warnings": 3,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 3
-      },
-      "error_messages": []
-    },
-    {
-      "game_id": "0ojTGd0P",
-      "plies": 77,
-      "beats": 6,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
       "error_messages": []
     },
     {
@@ -613,9 +90,9 @@
       "error_messages": []
     },
     {
-      "game_id": "4ZK2YRHG",
-      "plies": 79,
-      "beats": 7,
+      "game_id": "kie9uAGI",
+      "plies": 83,
+      "beats": 8,
       "errors": 0,
       "warnings": 1,
       "error_checks": {},
@@ -625,9 +102,9 @@
       "error_messages": []
     },
     {
-      "game_id": "kie9uAGI",
-      "plies": 83,
-      "beats": 8,
+      "game_id": "4ZK2YRHG",
+      "plies": 79,
+      "beats": 7,
       "errors": 0,
       "warnings": 1,
       "error_checks": {},
@@ -661,18 +138,6 @@
       "error_messages": []
     },
     {
-      "game_id": "E4jtq4Kx",
-      "plies": 68,
-      "beats": 7,
-      "errors": 0,
-      "warnings": 1,
-      "error_checks": {},
-      "warning_checks": {
-        "phrase_repetition": 1
-      },
-      "error_messages": []
-    },
-    {
       "game_id": "ERasFTT2",
       "plies": 127,
       "beats": 11,
@@ -685,8 +150,580 @@
       "error_messages": []
     },
     {
+      "game_id": "SdurwyNy",
+      "plies": 37,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
       "game_id": "yHAGXbG5",
       "plies": 72,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "E4jtq4Kx",
+      "plies": 68,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "BipyKnRr",
+      "plies": 42,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "qXGL10xr",
+      "plies": 89,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 3,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 3
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "l07poVV9",
+      "plies": 58,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "VmFRr82q",
+      "plies": 65,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "IRMHgdoq",
+      "plies": 142,
+      "beats": 12,
+      "errors": 1,
+      "warnings": 4,
+      "error_checks": {
+        "ungrounded_tactic": 1
+      },
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": [
+        "ungrounded_tactic: claims tactics no detector found: ['promotion']"
+      ]
+    },
+    {
+      "game_id": "dgpPFhBM",
+      "plies": 120,
+      "beats": 10,
+      "errors": 0,
+      "warnings": 5,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 5
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "fsCozTnW",
+      "plies": 114,
+      "beats": 10,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "ybrYDM6d",
+      "plies": 86,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "3KOg6JjM",
+      "plies": 51,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "oBU03Dip",
+      "plies": 83,
+      "beats": 8,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "RXPe1bIN",
+      "plies": 189,
+      "beats": 15,
+      "errors": 0,
+      "warnings": 8,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 8
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "JAmzDW6J",
+      "plies": 65,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "RHrwaEbN",
+      "plies": 104,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "7R1Lhe0k",
+      "plies": 53,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "MwDrne7m",
+      "plies": 112,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "qD9YoSbB",
+      "plies": 55,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "1vMBEpHw",
+      "plies": 155,
+      "beats": 13,
+      "errors": 0,
+      "warnings": 6,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 6
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "CuImvFcJ",
+      "plies": 64,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "aaAiccwe",
+      "plies": 56,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "QEQxzklj",
+      "plies": 106,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "D3HfwNJC",
+      "plies": 62,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "62pTXCGZ",
+      "plies": 91,
+      "beats": 8,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "C3e8kzxc",
+      "plies": 62,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "wzZKngda",
+      "plies": 54,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "SHTGmMGe",
+      "plies": 68,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "ZbYvHZDe",
+      "plies": 144,
+      "beats": 13,
+      "errors": 0,
+      "warnings": 7,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 7
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "KByncFqi",
+      "plies": 75,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "zX3Qp5P5",
+      "plies": 51,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "UmpOWIq5",
+      "plies": 29,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "a3TyOpYs",
+      "plies": 81,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "T3RUhHBF",
+      "plies": 106,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "jkcldCrU",
+      "plies": 196,
+      "beats": 15,
+      "errors": 0,
+      "warnings": 3,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 3
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "Uu1rYIAc",
+      "plies": 87,
+      "beats": 7,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "VCzpbqDM",
+      "plies": 136,
+      "beats": 11,
+      "errors": 0,
+      "warnings": 6,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 6
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "cHChHqzd",
+      "plies": 58,
+      "beats": 6,
+      "errors": 1,
+      "warnings": 1,
+      "error_checks": {
+        "ungrounded_square": 1
+      },
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": [
+        "ungrounded_square: names squares not in this beat's facts: ['a4']"
+      ]
+    },
+    {
+      "game_id": "ABODmYeS",
+      "plies": 71,
+      "beats": 6,
+      "errors": 1,
+      "warnings": 1,
+      "error_checks": {
+        "ungrounded_square": 1
+      },
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": [
+        "ungrounded_square: names squares not in this beat's facts: ['a4']"
+      ]
+    },
+    {
+      "game_id": "Q7R6XpO6",
+      "plies": 60,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "gQGvYmcq",
+      "plies": 51,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "HPzVjOPT",
+      "plies": 92,
+      "beats": 8,
+      "errors": 0,
+      "warnings": 2,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 2
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "JCqA9YRr",
+      "plies": 112,
+      "beats": 9,
+      "errors": 0,
+      "warnings": 4,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 4
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "GmvptYiF",
+      "plies": 21,
+      "beats": 5,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "rFCWdNs5",
+      "plies": 71,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 1,
+      "error_checks": {},
+      "warning_checks": {
+        "phrase_repetition": 1
+      },
+      "error_messages": []
+    },
+    {
+      "game_id": "fJJT0WI3",
+      "plies": 66,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "6eK6wqRZ",
+      "plies": 68,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "4Xqw3B4v",
+      "plies": 26,
+      "beats": 6,
+      "errors": 0,
+      "warnings": 0,
+      "error_checks": {},
+      "warning_checks": {},
+      "error_messages": []
+    },
+    {
+      "game_id": "ghpxbnXQ",
+      "plies": 59,
       "beats": 6,
       "errors": 0,
       "warnings": 1,

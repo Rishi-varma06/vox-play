@@ -212,3 +212,40 @@ def test_the_licence_mirrors_the_beat_it_describes(script, game, sheet):
     licence = licence_for(script.lines[1], game, sheet)
     assert licence.squares
     assert licence.names
+
+
+# ---------------------------------------------------------------------------
+# Licence / fact-block symmetry
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize("opening,spoken", [
+    ("Nimzo-Larsen Attack", "NimzoLarsen"),
+    ("Czech-Indian Defense", "CzechIndian"),
+    ("Van't Kruijs Opening", "Vant"),
+    ("Bishop's Opening", "Bishops"),
+])
+def test_hyphenated_opening_names_are_licensed(game, sheet, opening, spoken):
+    """
+    An opening name the facts supply must survive the name check.
+
+    `check_names` strips punctuation from each whitespace-delimited token, so
+    "Nimzo-Larsen Attack" reaches it as "NimzoLarsen" and "Attack". The
+    licence used to join the whole string instead, licensing
+    "NimzoLarsenAttack" and nothing else, so an opening the model had been
+    handed came back as an invented name. That accounted for 12 of the 15
+    false positives in the gate measurement, every one an opening name.
+    """
+    patched = game.model_copy(deep=True)
+    patched.meta.opening = opening
+    line = ScriptLine(
+        beat_type=B.BeatType.OPENING,
+        plies=[],
+        text=f"They are into the {spoken} here, a line with its own ideas.",
+    )
+    licence = licence_for(line, patched, sheet)
+    assert _spelling_of(spoken) in licence.names
+
+
+def _spelling_of(word: str) -> str:
+    from voxplay.chessgame.verify import _spelling
+    return _spelling(word)

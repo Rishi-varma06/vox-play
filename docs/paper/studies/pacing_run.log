@@ -1,150 +1,175 @@
-120 games selected (20-200 plies), 1,000,000 nodes, 10 workers
-[1/120]   lLYzW3V7   27p paced  131.4s flat  204.3s opt 0.987 eta 113.8m
-[2/120]   k9HzRyl6   32p paced  131.4s flat  242.2s opt 1.000 eta  71.5m
-[3/120]   wLT5RniK   38p paced  142.2s flat  287.6s opt 1.000 eta  56.7m
-[4/120]   lMEPNFqi   41p paced  142.2s flat  310.3s opt 1.000 eta  46.1m
-[5/120]   K7DcIEKs   45p paced  142.2s flat  340.5s opt 1.000 eta  39.2m
-[6/120]   y3EDLQJJ   49p paced  142.2s flat  370.8s opt 1.000 eta  34.9m
-[7/120]   IyRGuiUw   53p paced  143.2s flat  401.1s opt 1.000 eta  29.7m
-[8/120]   w9XHhAk9   86p paced  166.5s flat  650.8s opt 1.000 eta  36.4m
-[9/120]   V64n61iS   33p paced  143.2s flat  249.7s opt 1.000 eta  33.5m
-[10/120]   m5aDuc63  119p paced  227.0s flat  900.5s opt 0.984 eta  30.4m
-[11/120]   5eJwH280   43p paced  142.2s flat  325.4s opt 1.000 eta  27.8m
-[12/120]   DKQKCeWw   84p paced  166.5s flat  635.7s opt 1.000 eta  25.3m
-[13/120]   hTs7n4Gu   58p paced  143.2s flat  438.9s opt 1.000 eta  25.0m
-[14/120]   FwmCwjtc   42p paced  142.2s flat  317.8s opt 1.000 eta  25.4m
-[15/120]   bS58DSzq   41p paced  142.2s flat  310.3s opt 1.000 eta  23.8m
-[16/120]   5jxlQ9Xa   64p paced  143.2s flat  484.3s opt 1.000 eta  26.3m
-[17/120]   TDWwcCuE   67p paced  142.2s flat  507.0s opt 1.000 eta  24.9m
-[18/120]   aB9ALnBv   39p paced  142.2s flat  295.1s opt 1.000 eta  25.2m
-[19/120]   rNRk0s6f   54p paced  142.2s flat  408.6s opt 1.000 eta  24.1m
-[20/120]   QRYdA2q6   57p paced  143.2s flat  431.4s opt 1.000 eta  24.4m
-[21/120]   BejimhZy   42p paced  143.2s flat  317.8s opt 0.865 eta  23.0m
-[22/120]   ZJRA9Rn4   39p paced  143.2s flat  295.1s opt 1.000 eta  22.2m
-[23/120]   JZjAqIp6   66p paced  142.2s flat  499.5s opt 1.000 eta  21.4m
-[24/120]   L8KSQl96   41p paced  142.2s flat  310.3s opt 1.000 eta  22.4m
-[25/120]   uP63LpOh  108p paced  215.1s flat  817.3s opt 1.000 eta  23.4m
-[26/120]   NtthjYiR   36p paced  143.2s flat  272.4s opt 1.000 eta  23.3m
-[27/120]   a47On1tN   51p paced  142.2s flat  385.9s opt 1.000 eta  22.2m
-[28/120]   AAzvDXQB  123p paced  239.5s flat  930.8s opt 1.000 eta  22.2m
-[29/120]   1RZEpGQ5   44p paced  142.2s flat  333.0s opt 1.000 eta  21.2m
-[30/120]   TWims9HO   71p paced  142.2s flat  537.3s opt 1.000 eta  21.2m
-[31/120]   1VjIl1aH   38p paced  142.2s flat  287.6s opt 1.000 eta  20.8m
-[32/120]   EPOfds8D   71p paced  142.2s flat  537.3s opt 1.000 eta  20.2m
-[33/120]   OkIKKhm6   78p paced  154.1s flat  590.3s opt 1.000 eta  20.8m
-[34/120]   78DRgxUS   39p paced  142.2s flat  295.1s opt 1.000 eta  20.0m
-[35/120]   8Xv1kc1u   66p paced  142.2s flat  499.5s opt 1.000 eta  19.8m
-[36/120]   OJn7wUE9   56p paced  142.2s flat  423.8s opt 1.000 eta  20.1m
-[37/120]   HFOmn2vM   56p paced  142.2s flat  423.8s opt 1.000 eta  19.9m
-[38/120]   RbKcKkNE   36p paced  143.2s flat  272.4s opt 1.000 eta  19.3m
-[39/120]   FzaO547N   46p paced  143.2s flat  348.1s opt 1.000 eta  19.5m
-[40/120]   3w6QYJYK   50p paced  142.2s flat  378.4s opt 1.000 eta  18.9m
-[41/120]   pU54REM6   87p paced  166.5s flat  658.4s opt 1.000 eta  19.4m
-[42/120]   uKSrOC7z   85p paced  166.5s flat  643.2s opt 1.000 eta  19.5m
-[43/120]   xjYsuRyt   58p paced  142.2s flat  438.9s opt 1.000 eta  19.0m
-[44/120]   3wJInQBa   66p paced  142.2s flat  499.5s opt 1.000 eta  18.4m
-[45/120]   Oza2kqDg   83p paced  165.9s flat  628.1s opt 0.743 eta  18.8m
-[46/120]   gDpb31od   64p paced  142.2s flat  484.3s opt 1.000 eta  18.9m
-[47/120]   0ojTGd0P   77p paced  142.2s flat  582.7s opt 1.000 eta  18.9m
-[48/120]   HANMakxQ  106p paced  202.7s flat  802.2s opt 0.953 eta  18.3m
-[49/120]   QsvkpvQR  102p paced  202.7s flat  771.9s opt 1.000 eta  18.2m
-[50/120]   uEj1cUSj   80p paced  154.1s flat  605.4s opt 0.874 eta  17.8m
-[51/120]   6cEFQBMn   61p paced  142.2s flat  461.6s opt 1.000 eta  17.4m
-[52/120]   eVaO01BL  106p paced  202.7s flat  802.2s opt 1.000 eta  17.1m
-[53/120]   4ZK2YRHG   79p paced  154.1s flat  597.8s opt 0.926 eta  16.7m
-[54/120]   IL7vzVyb  100p paced  190.8s flat  756.8s opt 1.000 eta  16.3m
-[55/120]   kie9uAGI   83p paced  165.9s flat  628.1s opt 1.000 eta  15.9m
-[56/120]   SdurwyNy   37p paced  143.2s flat  280.0s opt 1.000 eta  15.7m
-[57/120]   0uoOXjrx   78p paced  155.7s flat  590.3s opt 1.000 eta  15.3m
-[58/120]   mUDnsQwA   75p paced  142.2s flat  567.6s opt 1.000 eta  14.9m
-[59/120]   BipyKnRr   42p paced  142.2s flat  317.8s opt 1.000 eta  14.6m
-[60/120]   E4jtq4Kx   68p paced  143.2s flat  514.6s opt 1.000 eta  14.2m
-[61/120]   yHAGXbG5   72p paced  142.2s flat  544.9s opt 1.000 eta  13.7m
-[62/120]   ERasFTT2  127p paced  251.4s flat  961.1s opt 1.000 eta  13.8m
-[63/120]   l07poVV9   58p paced  142.2s flat  438.9s opt 1.000 eta  13.3m
-[64/120]   qXGL10xr   89p paced  166.5s flat  673.5s opt 1.000 eta  13.2m
-[65/120]   VmFRr82q   65p paced  142.2s flat  491.9s opt 1.000 eta  13.0m
-[66/120]   IRMHgdoq  142p paced  277.3s flat 1074.6s opt 1.000 eta  12.9m
-[67/120]   3KOg6JjM   51p paced  143.2s flat  385.9s opt 1.000 eta  12.5m
-[68/120]   ybrYDM6d   86p paced  166.5s flat  650.8s opt 1.000 eta  12.3m
-[69/120]   oBU03Dip   83p paced  165.9s flat  628.1s opt 0.750 eta  11.9m
-[70/120]   fsCozTnW  114p paced  227.0s flat  862.7s opt 0.995 eta  11.5m
-[71/120]   JAmzDW6J   65p paced  142.2s flat  491.9s opt 1.000 eta  11.2m
-[72/120]   dgpPFhBM  120p paced  239.5s flat  908.1s opt 1.000 eta  10.9m
-[73/120]   7R1Lhe0k   53p paced  142.2s flat  401.1s opt 1.000 eta  11.0m
-[74/120]   qD9YoSbB   55p paced  143.2s flat  416.2s opt 1.000 eta  10.7m
-[75/120]   CuImvFcJ   64p paced  142.2s flat  484.3s opt 1.000 eta  10.5m
-[76/120]   RXPe1bIN  189p paced  348.6s flat 1430.3s opt 1.000 eta  10.2m
-[77/120]   MwDrne7m  112p paced  215.1s flat  847.6s opt 1.000 eta   9.8m
-[78/120]   RHrwaEbN  104p paced  202.7s flat  787.0s opt 1.000 eta   9.6m
-[79/120]   aaAiccwe   56p paced  142.2s flat  423.8s opt 1.000 eta   9.3m
-[80/120]   1vMBEpHw  155p paced  300.0s flat 1173.0s opt 1.000 eta   9.0m
-[81/120]   QEQxzklj  106p paced  202.7s flat  802.2s opt 1.000 eta   8.7m
-[82/120]   62pTXCGZ   91p paced  178.4s flat  688.6s opt 1.000 eta   8.4m
-[83/120]   D3HfwNJC   62p paced  142.2s flat  469.2s opt 1.000 eta   8.3m
-[84/120]   UmpOWIq5   29p paced  142.2s flat  219.5s opt 1.000 eta   8.1m
-[85/120]   C3e8kzxc   62p paced  142.2s flat  469.2s opt 1.000 eta   7.8m
-[86/120]   wzZKngda   54p paced  142.2s flat  408.6s opt 1.000 eta   7.5m
-[87/120]   zX3Qp5P5   51p paced  142.2s flat  385.9s opt 1.000 eta   7.3m
-[88/120]   SHTGmMGe   68p paced  142.2s flat  514.6s opt 1.000 eta   7.0m
-[89/120]   KByncFqi   75p paced  142.2s flat  567.6s opt 1.000 eta   6.8m
-[90/120]   ZbYvHZDe  144p paced  287.6s flat 1089.7s opt 0.904 eta   6.5m
-<UciProtocol (pid=4916)>: Unexpected engine output: ''
-[91/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   6.2m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-[92/120]   a3TyOpYs   81p paced  154.1s flat  613.0s opt 0.879 eta   6.2m
-[93/120]   T3RUhHBF  106p paced  202.7s flat  802.2s opt 0.942 eta   5.9m
-<UciProtocol (pid=22372)>: Unexpected engine output: ''
-[94/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   5.7m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=34572)>: Unexpected engine output: ''
-[95/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   5.4m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=6964)>: Unexpected engine output: ''
-[96/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   5.2m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-[97/120]   jkcldCrU  196p paced  348.6s flat 1483.2s opt 0.992 eta   4.9m
-<UciProtocol (pid=27496)>: Unexpected engine output: ''
-[98/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   4.7m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-[99/120]   oOINjESL   74p paced  142.2s flat  560.0s opt 1.000 eta   4.4m
-[100/120]   zrQIyj8I   68p paced  142.2s flat  514.6s opt 1.000 eta   4.2m
-<UciProtocol (pid=31460)>: Unexpected engine output: ''
-[101/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   4.0m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-[102/120]   Uu1rYIAc   87p paced  166.5s flat  658.4s opt 1.000 eta   3.7m
-<UciProtocol (pid=1900)>: Unexpected engine output: ''
-[103/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   3.5m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=9248)>: Unexpected engine output: ''
-[104/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   3.3m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-[105/120]   VCzpbqDM  136p paced  263.8s flat 1029.2s opt 1.000 eta   3.1m
-<UciProtocol (pid=17348)>: Unexpected engine output: ''
-[106/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   2.8m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=884)>: Unexpected engine output: ''
-[107/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   2.6m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=23248)>: Unexpected engine output: ''
-[108/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   2.4m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=34168)>: Unexpected engine output: ''
-[109/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   2.2m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=14996)>: Unexpected engine output: ''
-[110/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   2.0m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-<UciProtocol (pid=19336)>: Unexpected engine output: ''
-[111/120]      ERROR    ?p paced    0.0s flat    0.0s opt 0.000 eta   1.8m
-    AnalysisError: engine analysis failed: engine process died unexpectedly (exit code: 1)
-[112/120]   M8Fp3nzE   34p paced  143.2s flat  257.3s opt 1.000 eta   1.6m
-[113/120]   YGUnKLLf   46p paced  142.2s flat  348.1s opt 1.000 eta   1.4m
-[114/120]   bspHnt5f   55p paced  142.2s flat  416.2s opt 1.000 eta   1.2m
-[115/120]   rQpaCMGq   47p paced  143.2s flat  355.7s opt 1.000 eta   1.0m
-[116/120]   pNmcMII9   78p paced  154.1s flat  590.3s opt 0.839 eta   0.8m
-[117/120]   By6U7PJO   63p paced  143.2s flat  476.8s opt 1.000 eta   0.6m
-[118/120]   nr0Kuo3M   73p paced  142.2s flat  552.4s opt 1.000 eta   0.4m
-[119/120]   KpUplvAq   46p paced  142.2s flat  348.1s opt 1.000 eta   0.2m
-[120/120]   FcqZGBHe   51p paced  143.2s flat  385.9s opt 1.000 eta   0.0m
+173 games selected (20-200 plies), 1,000,000 nodes, 10 workers
+[1/173]   rNRk0s6f   54p paced  142.2s flat  408.6s opt 1.000 eta 204.0m
+[2/173]   6cEFQBMn   61p paced  142.2s flat  461.6s opt 1.000 eta 115.1m
+[3/173]   kie9uAGI   83p paced  165.9s flat  628.1s opt 1.000 eta  90.4m
+[4/173]   4ZK2YRHG   79p paced  154.1s flat  597.8s opt 0.926 eta  72.0m
+[5/173]   0uoOXjrx   78p paced  155.7s flat  590.3s opt 1.000 eta  58.8m
+[6/173]   QsvkpvQR  102p paced  202.7s flat  771.9s opt 1.000 eta  50.6m
+[7/173]   uEj1cUSj   80p paced  154.1s flat  605.4s opt 0.874 eta  45.6m
+[8/173]   eVaO01BL  106p paced  202.7s flat  802.2s opt 1.000 eta  40.4m
+[9/173]   IL7vzVyb  100p paced  190.8s flat  756.8s opt 1.000 eta  36.3m
+[10/173]   ERasFTT2  127p paced  251.4s flat  961.1s opt 1.000 eta  41.4m
+[11/173]   SdurwyNy   37p paced  143.2s flat  280.0s opt 1.000 eta  39.5m
+[12/173]   BipyKnRr   42p paced  142.2s flat  317.8s opt 1.000 eta  39.1m
+[13/173]   mUDnsQwA   75p paced  142.2s flat  567.6s opt 1.000 eta  38.9m
+[14/173]   E4jtq4Kx   68p paced  143.2s flat  514.6s opt 1.000 eta  35.9m
+[15/173]   yHAGXbG5   72p paced  142.2s flat  544.9s opt 1.000 eta  33.8m
+[16/173]   l07poVV9   58p paced  142.2s flat  438.9s opt 1.000 eta  33.9m
+[17/173]   qXGL10xr   89p paced  166.5s flat  673.5s opt 1.000 eta  36.9m
+[18/173]   VmFRr82q   65p paced  142.2s flat  491.9s opt 1.000 eta  36.9m
+[19/173]   3KOg6JjM   51p paced  143.2s flat  385.9s opt 1.000 eta  36.9m
+[20/173]   IRMHgdoq  142p paced  277.3s flat 1074.6s opt 1.000 eta  37.2m
+[21/173]   dgpPFhBM  120p paced  239.5s flat  908.1s opt 1.000 eta  37.1m
+[22/173]   JAmzDW6J   65p paced  142.2s flat  491.9s opt 1.000 eta  35.5m
+[23/173]   fsCozTnW  114p paced  227.0s flat  862.7s opt 0.995 eta  34.1m
+[24/173]   ybrYDM6d   86p paced  166.5s flat  650.8s opt 1.000 eta  33.1m
+[25/173]   oBU03Dip   83p paced  165.9s flat  628.1s opt 0.750 eta  31.7m
+[26/173]   7R1Lhe0k   53p paced  142.2s flat  401.1s opt 1.000 eta  35.5m
+[27/173]   qD9YoSbB   55p paced  143.2s flat  416.2s opt 1.000 eta  34.1m
+[28/173]   RHrwaEbN  104p paced  202.7s flat  787.0s opt 1.000 eta  34.2m
+[29/173]   CuImvFcJ   64p paced  142.2s flat  484.3s opt 1.000 eta  33.5m
+[30/173]   aaAiccwe   56p paced  142.2s flat  423.8s opt 1.000 eta  32.3m
+[31/173]   MwDrne7m  112p paced  215.1s flat  847.6s opt 1.000 eta  31.1m
+[32/173]   RXPe1bIN  189p paced  348.6s flat 1430.3s opt 1.000 eta  29.9m
+[33/173]   1vMBEpHw  155p paced  300.0s flat 1173.0s opt 1.000 eta  29.9m
+[34/173]   QEQxzklj  106p paced  202.7s flat  802.2s opt 1.000 eta  29.6m
+[35/173]   62pTXCGZ   91p paced  178.4s flat  688.6s opt 1.000 eta  28.9m
+[36/173]   D3HfwNJC   62p paced  142.2s flat  469.2s opt 1.000 eta  29.3m
+[37/173]   C3e8kzxc   62p paced  142.2s flat  469.2s opt 1.000 eta  29.2m
+[38/173]   UmpOWIq5   29p paced  142.2s flat  219.5s opt 1.000 eta  28.4m
+[39/173]   zX3Qp5P5   51p paced  142.2s flat  385.9s opt 1.000 eta  27.6m
+[40/173]   wzZKngda   54p paced  142.2s flat  408.6s opt 1.000 eta  26.8m
+[41/173]   SHTGmMGe   68p paced  142.2s flat  514.6s opt 1.000 eta  26.6m
+[42/173]   KByncFqi   75p paced  142.2s flat  567.6s opt 1.000 eta  26.2m
+[43/173]   ZbYvHZDe  144p paced  287.6s flat 1089.7s opt 0.904 eta  25.5m
+[44/173]   cHChHqzd   58p paced  142.2s flat  438.9s opt 1.000 eta  27.3m
+[45/173]   a3TyOpYs   81p paced  154.1s flat  613.0s opt 0.879 eta  26.6m
+[46/173]   T3RUhHBF  106p paced  202.7s flat  802.2s opt 0.942 eta  25.9m
+[47/173]   ABODmYeS   71p paced  142.2s flat  537.3s opt 1.000 eta  25.6m
+[48/173]   jkcldCrU  196p paced  348.6s flat 1483.2s opt 0.992 eta  25.2m
+[49/173]   Q7R6XpO6   60p paced  142.2s flat  454.1s opt 1.000 eta  24.8m
+[50/173]   Uu1rYIAc   87p paced  166.5s flat  658.4s opt 1.000 eta  24.6m
+[51/173]   GmvptYiF   21p paced  117.8s flat  158.9s opt 0.940 eta  24.2m
+[52/173]   VCzpbqDM  136p paced  263.8s flat 1029.2s opt 1.000 eta  24.2m
+[53/173]   HPzVjOPT   92p paced  178.4s flat  696.2s opt 0.992 eta  24.0m
+[54/173]   gQGvYmcq   51p paced  142.2s flat  385.9s opt 1.000 eta  23.6m
+[55/173]   4Xqw3B4v   26p paced  131.4s flat  196.8s opt 1.000 eta  23.2m
+[56/173]   JCqA9YRr  112p paced  215.1s flat  847.6s opt 1.000 eta  22.8m
+[57/173]   fJJT0WI3   66p paced  142.2s flat  499.5s opt 1.000 eta  22.4m
+[58/173]   rFCWdNs5   71p paced  142.2s flat  537.3s opt 1.000 eta  22.3m
+[59/173]   6eK6wqRZ   68p paced  142.2s flat  514.6s opt 1.000 eta  21.9m
+[60/173]   ghpxbnXQ   59p paced  142.2s flat  446.5s opt 1.000 eta  21.7m
+[61/173]   wSyYYQ7C   59p paced  142.2s flat  446.5s opt 1.000 eta  21.5m
+[62/173]   YLDFRazt   53p paced  142.2s flat  401.1s opt 1.000 eta  21.9m
+[63/173]   0ef5j84c   68p paced  142.2s flat  514.6s opt 1.000 eta  21.8m
+[64/173]   4mbiYwfu   80p paced  154.1s flat  605.4s opt 0.883 eta  21.6m
+[65/173]   47V96oXZ   79p paced  154.1s flat  597.8s opt 0.908 eta  21.3m
+[66/173]   ZmTFYMH4  110p paced  215.1s flat  832.4s opt 0.998 eta  20.9m
+[67/173]   ExdvTEoG   41p paced  142.2s flat  310.3s opt 1.000 eta  20.5m
+[68/173]   wJ7Opb77  116p paced  227.0s flat  877.8s opt 0.951 eta  20.8m
+[69/173]   cqTkqe6m   72p paced  142.2s flat  544.9s opt 1.000 eta  20.8m
+[70/173]   OehppJE7   83p paced  165.9s flat  628.1s opt 0.787 eta  20.4m
+[71/173]   RPlpFQrc  111p paced  216.2s flat  840.0s opt 1.000 eta  20.2m
+[72/173]   YA36wDLD   65p paced  142.2s flat  491.9s opt 1.000 eta  20.0m
+[73/173]   dZ1Mkhiq   66p paced  142.2s flat  499.5s opt 1.000 eta  19.6m
+[74/173]   cmoWtfK2   45p paced  143.2s flat  340.5s opt 1.000 eta  19.2m
+[75/173]   ceWHwCZz   53p paced  142.2s flat  401.1s opt 1.000 eta  18.8m
+[76/173]   rhr694u8   50p paced  142.2s flat  378.4s opt 1.000 eta  18.4m
+[77/173]   K6LrPms4   49p paced  143.2s flat  370.8s opt 1.000 eta  18.0m
+[78/173]   ExwgbDtc   47p paced  142.2s flat  355.7s opt 1.000 eta  18.5m
+[79/173]   2XyJbwnj   62p paced  142.2s flat  469.2s opt 1.000 eta  18.3m
+[80/173]   7A2GGLMH   68p paced  142.2s flat  514.6s opt 1.000 eta  17.9m
+[81/173]   T8r0PDRG   45p paced  142.2s flat  340.5s opt 1.000 eta  17.7m
+[82/173]   ICz7wxQ6   72p paced  143.2s flat  544.9s opt 1.000 eta  17.7m
+[83/173]   cigdH5Uu   37p paced  142.2s flat  280.0s opt 1.000 eta  17.4m
+[84/173]   MU1ONWMK   70p paced  142.2s flat  529.7s opt 1.000 eta  17.0m
+[85/173]   YQyzkLVx   82p paced  154.1s flat  620.5s opt 1.000 eta  16.7m
+[86/173]   JSn0hp4W   73p paced  142.2s flat  552.4s opt 1.000 eta  16.4m
+[87/173]   9UdV1o0Y   84p paced  166.5s flat  635.7s opt 1.000 eta  16.0m
+[88/173]   Z5TZFoyN   83p paced  154.1s flat  628.1s opt 0.822 eta  15.9m
+[89/173]   yiurzHuc   56p paced  142.2s flat  423.8s opt 1.000 eta  16.0m
+[90/173]   KwgOoaMo   65p paced  142.2s flat  491.9s opt 1.000 eta  15.6m
+[91/173]   fsPVxM8L   72p paced  142.2s flat  544.9s opt 1.000 eta  15.3m
+[92/173]   nPUm3cjJ   44p paced  142.2s flat  333.0s opt 1.000 eta  15.3m
+[93/173]   7rtfrxO5   51p paced  142.2s flat  385.9s opt 1.000 eta  15.0m
+[94/173]   vEIqvD6j   54p paced  142.2s flat  408.6s opt 1.000 eta  14.7m
+[95/173]   pQyL1N5m   57p paced  142.2s flat  431.4s opt 1.000 eta  14.4m
+[96/173]   NAkVxWCK   63p paced  142.2s flat  476.8s opt 1.000 eta  14.3m
+[97/173]   SnYO4Pt5   53p paced  142.2s flat  401.1s opt 1.000 eta  14.1m
+[98/173]   lAZZrDVI   46p paced  142.2s flat  348.1s opt 1.000 eta  13.9m
+[99/173]   LTpVlex5   95p paced  178.4s flat  718.9s opt 1.000 eta  13.6m
+[100/173]   F2VBMgLj   60p paced  142.2s flat  454.1s opt 1.000 eta  13.6m
+[101/173]   IPogDcbQ   49p paced  142.2s flat  370.8s opt 1.000 eta  13.4m
+[102/173]   ilHFXlf8   79p paced  154.1s flat  597.8s opt 0.825 eta  13.4m
+[103/173]   BVjHNPxk   60p paced  142.2s flat  454.1s opt 1.000 eta  13.0m
+[104/173]   NwvPAEkF   46p paced  142.2s flat  348.1s opt 1.000 eta  12.9m
+[105/173]   uUKqVLhL   89p paced  166.5s flat  673.5s opt 1.000 eta  12.7m
+[106/173]   lgZpuMeY   81p paced  155.7s flat  613.0s opt 1.000 eta  12.4m
+[107/173]   QGOuq9Fr   67p paced  142.2s flat  507.0s opt 1.000 eta  12.4m
+[108/173]   6DT1n8e9  100p paced  190.8s flat  756.8s opt 1.000 eta  12.2m
+[109/173]   xSibMC1M   40p paced  142.2s flat  302.7s opt 1.000 eta  12.0m
+[110/173]   xpITiOLu   57p paced  142.2s flat  431.4s opt 1.000 eta  11.8m
+[111/173]   si7h2LJv  105p paced  202.7s flat  794.6s opt 0.982 eta  11.5m
+[112/173]   MVGTqXc0   52p paced  142.2s flat  393.5s opt 1.000 eta  11.3m
+[113/173]   q0GgMXPh   90p paced  178.4s flat  681.1s opt 1.000 eta  11.1m
+[114/173]   6OpU94qt   33p paced  143.2s flat  249.7s opt 1.000 eta  10.9m
+[115/173]   NAMq8REo   53p paced  142.2s flat  401.1s opt 1.000 eta  10.6m
+[116/173]   Ot3gGEyx   57p paced  142.2s flat  431.4s opt 1.000 eta  10.4m
+[117/173]   4ICId2K1   34p paced  143.2s flat  257.3s opt 1.000 eta  10.3m
+[118/173]   MvgVuBsh   34p paced  131.4s flat  257.3s opt 1.000 eta  10.1m
+[119/173]   D3vIV2QJ   92p paced  178.4s flat  696.2s opt 0.857 eta   9.9m
+[120/173]   I3dy6QwM   56p paced  143.2s flat  423.8s opt 1.000 eta   9.8m
+[121/173]   OW12vy2M   56p paced  142.2s flat  423.8s opt 1.000 eta   9.7m
+[122/173]   L0TrCfvO   65p paced  143.2s flat  491.9s opt 1.000 eta   9.5m
+[123/173]   Oae4nWSK  127p paced  251.4s flat  961.1s opt 1.000 eta   9.3m
+[124/173]   7LGQlHCI  115p paced  227.0s flat  870.3s opt 0.949 eta   9.2m
+[125/173]   8kntbvSI   97p paced  190.8s flat  734.1s opt 1.000 eta   9.0m
+[126/173]   FsOdr2Ln   70p paced  142.2s flat  529.7s opt 1.000 eta   8.7m
+[127/173]   5P77b7IC   92p paced  178.4s flat  696.2s opt 0.885 eta   8.5m
+[128/173]   7dmNCAdy   84p paced  166.5s flat  635.7s opt 1.000 eta   8.4m
+[129/173]   H3BKKaxO   87p paced  166.5s flat  658.4s opt 1.000 eta   8.2m
+[130/173]   CgYCLobo   66p paced  143.2s flat  499.5s opt 1.000 eta   8.0m
+[131/173]   WFi9Qf2n   50p paced  142.2s flat  378.4s opt 1.000 eta   7.9m
+[132/173]   PJRcEdNw  112p paced  215.1s flat  847.6s opt 1.000 eta   7.8m
+[133/173]   FJlg2dLB   66p paced  142.2s flat  499.5s opt 1.000 eta   7.6m
+[134/173]   vvZIfCxu   47p paced  143.2s flat  355.7s opt 1.000 eta   7.4m
+[135/173]   ahJLWQ9D  119p paced  227.0s flat  900.5s opt 1.000 eta   7.2m
+[136/173]   MdqSx77B  119p paced  228.6s flat  900.5s opt 1.000 eta   7.0m
+[137/173]   OVvc5kA2   67p paced  142.2s flat  507.0s opt 1.000 eta   6.8m
+[138/173]   gasP8bVw  104p paced  203.8s flat  787.0s opt 1.000 eta   6.6m
+[139/173]   oT0ARmaw   50p paced  142.2s flat  378.4s opt 1.000 eta   6.4m
+[140/173]   Fh44KeZT   84p paced  166.5s flat  635.7s opt 1.000 eta   6.2m
+[141/173]   ZYkMcTmS  143p paced  275.7s flat 1082.2s opt 0.965 eta   6.0m
+[142/173]   N3dz1PgB   51p paced  142.2s flat  385.9s opt 1.000 eta   6.0m
+[143/173]   63JFCL4D   71p paced  142.2s flat  537.3s opt 1.000 eta   5.8m
+[144/173]   t9d4En60  111p paced  215.1s flat  840.0s opt 1.000 eta   5.5m
+[145/173]   yLV4cpai   87p paced  166.5s flat  658.4s opt 1.000 eta   5.3m
+[146/173]   hr7h3z7F   62p paced  142.2s flat  469.2s opt 1.000 eta   5.2m
+[147/173]   wCosW3cA  106p paced  202.7s flat  802.2s opt 1.000 eta   5.0m
+[148/173]   FBu1CjyU  103p paced  202.7s flat  779.5s opt 0.925 eta   4.8m
+[149/173]   aN0Oywz5   93p paced  178.4s flat  703.8s opt 0.898 eta   4.6m
+[150/173]   8MM7OMSn   67p paced  143.2s flat  507.0s opt 1.000 eta   4.4m
+[151/173]   I7skWbs0  149p paced  288.1s flat 1127.6s opt 1.000 eta   4.2m
+[152/173]   TiomBIqZ   48p paced  143.2s flat  363.2s opt 1.000 eta   4.0m
+[153/173]   Sz1F3lfj   47p paced  142.2s flat  355.7s opt 1.000 eta   3.8m
+[154/173]   emcQqYqT   67p paced  142.2s flat  507.0s opt 1.000 eta   3.6m
+[155/173]   FTVQSN7F   57p paced  142.2s flat  431.4s opt 1.000 eta   3.4m
+[156/173]   IwxuTXOy   84p paced  166.5s flat  635.7s opt 1.000 eta   3.2m
+[157/173]   ER7kGhwZ   49p paced  142.2s flat  370.8s opt 1.000 eta   3.1m
+[158/173]   ttq3gRs7   82p paced  154.1s flat  620.5s opt 1.000 eta   2.9m
+[159/173]   6ijmx1Zx   61p paced  142.2s flat  461.6s opt 1.000 eta   2.7m
+[160/173]   b0dUo9Cy  102p paced  202.7s flat  771.9s opt 1.000 eta   2.5m
+[161/173]   1dSbfZjv  100p paced  190.8s flat  756.8s opt 1.000 eta   2.3m
+[162/173]   Uxw8E7Jp   43p paced  142.2s flat  325.4s opt 1.000 eta   2.1m
+[163/173]   VFaxURkj  110p paced  215.1s flat  832.4s opt 1.000 eta   1.9m
+[164/173]   HNUNjt47   63p paced  142.2s flat  476.8s opt 1.000 eta   1.7m
+[165/173]   Ds1nKsZy  104p paced  202.7s flat  787.0s opt 1.000 eta   1.5m
+[166/173]   h56zEtx8   47p paced  142.2s flat  355.7s opt 1.000 eta   1.3m
+[167/173]   BFliGF9J   93p paced  178.4s flat  703.8s opt 1.000 eta   1.1m
+[168/173]   wNFiDdGe   54p paced  142.2s flat  408.6s opt 1.000 eta   0.9m
+[169/173]   MaWFMAs9   66p paced  142.2s flat  499.5s opt 1.000 eta   0.8m
+[170/173]   yQkP7qsi   91p paced  180.0s flat  688.6s opt 1.000 eta   0.6m
+[171/173]   C4l5NQ2f  100p paced  190.8s flat  756.8s opt 1.000 eta   0.4m
+[172/173]   8vAY6oEi   91p paced  178.4s flat  688.6s opt 1.000 eta   0.2m
+[173/173]   nG0Xdxvg  131p paced  251.4s flat  991.4s opt 1.000 eta   0.0m
 DONE

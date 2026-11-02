@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import statistics
 import sys
 import time
@@ -234,12 +235,39 @@ def split_pgn(text: str) -> List[str]:
     return out
 
 
-def collect(limit: int) -> List[str]:
+def is_standard(chunk: str) -> bool:
+    """
+    True only for ordinary chess.
+
+    The corpus was exported from Lichess TV, whose channels include the
+    variants, so roughly half of it is Chess960, Horde, Antichess, Atomic,
+    King of the Hill, Racing Kings or Three-check. None of those belongs in
+    an evaluation of this system:
+
+    * Stockfish refuses Antichess outright, which is what the engine failures
+      in the first run of this study actually were.
+    * For Horde, Atomic, King of the Hill, Racing Kings and Three-check the
+      win condition differs, so a standard engine's evaluation does not mean
+      what the pipeline assumes it means, and the win-probability mapping of
+      (1) was fitted by Lichess for standard chess.
+    * Chess960 shares the rules but the engine wrapper never sets
+      `UCI_Chess960`, so castling is not handled on the engine's terms.
+
+    Filtering here rather than discarding failures afterwards is the
+    difference between a stated inclusion criterion and a silent one.
+    """
+    match = re.search(r'\[Variant "([^"]+)"\]', chunk)
+    return match is None or match.group(1) == "Standard"
+
+
+def collect(limit: int, standard_only: bool = True) -> List[str]:
     from voxplay.chessgame.pgn_source import parse_pgn_text
 
     text = PGN.read_text(encoding="utf-8", errors="replace")
     chosen: List[str] = []
     for chunk in split_pgn(text):
+        if standard_only and not is_standard(chunk):
+            continue
         try:
             game = parse_pgn_text(chunk)
         except Exception:  # noqa: BLE001 - unparseable games are skipped
@@ -251,10 +279,31 @@ def collect(limit: int) -> List[str]:
     return chosen
 
 
-def run(games: int, nodes: int, workers: int) -> None:
+def completed_ids() -> set:
+    """Game ids already recorded, so a resumed run does not repeat them."""
+    if not OUT.exists():
+        return set()
+    done = set()
+    for line in OUT.read_text(encoding="utf-8").splitlines():
+        if line.strip():
+            record = json.loads(line)
+            if "game_id" in record:
+                done.add(record["game_id"])
+    return done
+
+
+def run(games: int, nodes: int, workers: int, resume: bool = False) -> None:
     import multiprocessing
 
     chunks = collect(games)
+    if resume:
+        from voxplay.chessgame.pgn_source import parse_pgn_text
+        done = completed_ids()
+        chunks = [c for c in chunks
+                  if parse_pgn_text(c).meta.game_id not in done]
+        print("resuming: %d of %d games still missing"
+              % (len(chunks), games), flush=True)
+
     print("%d games selected (%d-%d plies), %s nodes, %d workers"
           % (len(chunks), MIN_PLIES, MAX_PLIES, format(nodes, ","), workers),
           flush=True)
@@ -359,11 +408,13 @@ def main() -> None:
     parser.add_argument("--nodes", type=int, default=1_000_000)
     parser.add_argument("--workers", type=int, default=10)
     parser.add_argument("--report", action="store_true")
+    parser.add_argument("--resume", action="store_true",
+                        help="only run games not already recorded")
     args = parser.parse_args()
     if args.report:
         report()
     else:
-        run(args.games, args.nodes, args.workers)
+        run(args.games, args.nodes, args.workers, resume=args.resume)
 
 
 if __name__ == "__main__":

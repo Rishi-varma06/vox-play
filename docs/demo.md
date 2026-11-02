@@ -209,18 +209,24 @@ Then quote the numbers from `docs/project-report.md`:
 | | |
 |---|---|
 | Motif detection vs 14,000 human-tagged puzzles | **91.9%** recall, **89.9%** precision, six detectors at 100% |
-| Move classification vs Lichess's own labels | **Cohen's kappa 0.939** on a held-out split of 12,337 moves |
-| Pacing vs move-by-move, 106 games | **3.5x shorter**, opening and finish covered in 100% of games |
-| Verification gate, false positives | **zero** over 412 grounded beats |
+| Move classification vs Lichess's own labels | **Cohen's kappa 0.955** on a held-out split of 6,864 moves |
+| Pacing vs move-by-move, 173 games | **3.6x shorter**, opening and finish covered in 100% of games |
+| Greedy vs the exact optimum | **98.7%** of optimal, exactly optimal on 138 of 173 games |
+| Verification gate, false positives | **0.66 per 100 beats** on grounded text, after a fix the measurement found |
 | Cost | **$0.057** and 23 seconds per game |
 
 **If she asks about the hallucination number**, say it straight: on live
 model output we have a *pilot* of 32 beats -- 2 errors without the gate, 0
 with it -- and the confidence intervals overlap, so that pair of numbers does
-not yet prove the gate works on model output. What is established is that the
-gate never fires on text that is correct: zero false positives in 412 beats.
-The larger study is designed and pre-registered. Saying this yourself is far
-stronger than being asked.
+not yet prove the gate works on model output. The larger study is designed
+and pre-registered.
+
+**And if she asks what the testing found**, you have a better answer than
+"nothing". Measuring the gate against text that is correct by construction
+found it rejecting opening names the system had supplied itself -- twelve
+false positives traced to one line of the licence. It is fixed, there is a
+regression test, and the rate went from 3.3 to 0.66 per 100 beats. A gate
+nobody audits is a gate nobody can trust.
 
 ---
 
@@ -236,7 +242,7 @@ itself -- that is the architecture, not a limitation.
 **"How do you know the commentary is correct?"**
 Two ways. Everything factual is computed by code with tests, and validated
 against external ground truth -- 91.9% motif recall against human-tagged
-puzzles, kappa 0.939 against Lichess's own move labels on a held-out split
+puzzles, kappa 0.955 against Lichess's own move labels on a held-out split
 that the thresholds were not fitted on. Then the verification
 gate checks the generated text against those facts and regenerates anything
 unsupported. Measured on live output: 0.0 errors per 100 beats with the gate.

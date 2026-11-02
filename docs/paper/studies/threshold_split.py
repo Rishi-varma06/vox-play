@@ -32,14 +32,29 @@ SEED = 20261102
 GRID = [float(x) for x in range(2, 31)]
 
 
-def load_by_game() -> List[List[AnnotatedMove]]:
+def load_by_game() -> tuple[List[List[AnnotatedMove]], int]:
+    """
+    Moves grouped by game, ordinary chess only.
+
+    The corpus was exported from Lichess TV, which carries the variant
+    channels, so about half of it is Chess960, Horde, Antichess and the rest.
+    The win-probability mapping of (1) was fitted by Lichess for standard
+    chess and the labels under test are standard-chess labels, so the
+    variants are excluded rather than scored. The count of what was dropped
+    is returned so the paper can state it.
+    """
     text = PGN.read_text(encoding="utf-8", errors="replace")
-    per_game = []
+    per_game: List[List[AnnotatedMove]] = []
+    skipped = 0
     for game in read_games(text):
+        variant = game.headers.get("Variant")
+        if variant is not None and variant != "Standard":
+            skipped += 1
+            continue
         moves = annotated_moves(game)
         if moves:
             per_game.append(moves)
-    return per_game
+    return per_game, skipped
 
 
 def search(moves: Sequence[AnnotatedMove]) -> tuple[ClassificationThresholds, float]:
@@ -62,7 +77,9 @@ def search(moves: Sequence[AnnotatedMove]) -> tuple[ClassificationThresholds, fl
 
 
 def main() -> None:
-    per_game = load_by_game()
+    per_game, skipped = load_by_game()
+    print("%d standard-chess games (%d variant games excluded)"
+          % (len(per_game), skipped))
     random.Random(SEED).shuffle(per_game)
     half = len(per_game) // 2
     train_games, test_games = per_game[:half], per_game[half:]
@@ -97,6 +114,7 @@ def main() -> None:
     OUT.write_text(json.dumps({
         "seed": SEED,
         "games": len(per_game),
+        "variant_games_excluded": skipped,
         "train_games": len(train_games), "train_moves": len(train),
         "test_games": len(test_games), "test_moves": len(test),
         "fitted": [fitted.inaccuracy, fitted.mistake, fitted.blunder],

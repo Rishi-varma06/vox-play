@@ -129,6 +129,98 @@ def unused_motif_chart() -> None:
     print("fig5_motif_quality.png")
 
 
+#: Stage boxes of Fig. 1: number, name, one-line gloss.
+STAGES = [
+    ("1", "Ingest", "notation to move events"),
+    ("2", "Evaluate", "Stockfish, every position"),
+    ("3", "Detect", "12 motifs, opening theory"),
+    ("4", "Pace", "salience + budget + spacing"),
+    ("5", "Write", "LLM realises supplied facts"),
+    ("6", "Verify + speak", "licence check, then TTS"),
+]
+
+
+def fig1_pipeline() -> None:
+    """
+    The six-stage pipeline, redrawn for a 3.5 in column.
+
+    The previous version had three problems. Its bottom legend overlapped the
+    last stage box; it described stages 4-6 as "shared with cricket", a claim
+    the paper no longer makes because the chess package imports none of the
+    cricket one; and at aspect 1.32 it consumed half a column.
+
+    This replaces the legend with brackets labelling the two groups down the
+    left margin, so nothing can collide, and trades box height for padding.
+    """
+    from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+
+    box_h, gap = 0.92, 0.62
+    left, width = 2.05, 8.1
+    pitch = box_h + gap
+    top = 9.4
+
+    fig, ax = plt.subplots(figsize=(3.45, 3.45))
+    ax.set_xlim(0, left + width + 0.25)
+    ax.set_ylim(0, top + 1.5)
+    ax.axis("off")
+
+    def centre(index: int) -> float:
+        return top - index * pitch - box_h / 2
+
+    ax.text(left + width / 2, top + 1.02, "PGN file or Lichess link",
+            ha="center", va="center", fontsize=7.6, style="italic")
+    ax.add_patch(FancyArrowPatch(
+        (left + width / 2, top + 0.78), (left + width / 2, top + 0.1),
+        arrowstyle="-|>", mutation_scale=9, lw=0.9, color=INK))
+
+    for index, (number, name, gloss) in enumerate(STAGES):
+        chess_stage = index < 3
+        y = top - index * pitch - box_h
+        ax.add_patch(FancyBboxPatch(
+            (left, y), width, box_h,
+            boxstyle="round,pad=0,rounding_size=0.12",
+            linewidth=1.0,
+            edgecolor="#2f6b4f" if chess_stage else "#4a4a8f",
+            facecolor="#e7f3ec" if chess_stage else "#ececf7"))
+        ax.text(left + 0.46, y + box_h / 2, number, ha="center", va="center",
+                fontsize=9, fontweight="bold", color=INK)
+        ax.text(left + 0.92, y + box_h * 0.68, name, ha="left", va="center",
+                fontsize=8.4, fontweight="bold", color=INK)
+        ax.text(left + 0.92, y + box_h * 0.24, gloss, ha="left", va="center",
+                fontsize=7.1, color="#333333")
+        if index < len(STAGES) - 1:
+            ax.add_patch(FancyArrowPatch(
+                (left + width / 2, y - 0.09),
+                (left + width / 2, y - gap + 0.09),
+                arrowstyle="-|>", mutation_scale=9, lw=0.9, color=INK))
+
+    # Group brackets in the left margin, in place of a legend.
+    for first, last, label, colour in (
+        (0, 2, "chess facts,\ncomputed", "#2f6b4f"),
+        (3, 5, "pacing and\ndelivery", "#4a4a8f"),
+    ):
+        y_top = centre(first) + box_h / 2
+        y_bottom = centre(last) - box_h / 2
+        x = left - 0.30
+        ax.plot([x, x], [y_bottom, y_top], color=colour, lw=1.0)
+        for y in (y_top, y_bottom):
+            ax.plot([x, x + 0.16], [y, y], color=colour, lw=1.0)
+        ax.text(x - 0.16, (y_top + y_bottom) / 2, label, ha="right",
+                va="center", fontsize=7.0, color=colour, linespacing=1.5)
+
+    bottom = top - len(STAGES) * pitch + gap
+    ax.add_patch(FancyArrowPatch(
+        (left + width / 2, bottom - 0.04), (left + width / 2, bottom - 0.66),
+        arrowstyle="-|>", mutation_scale=9, lw=0.9, color=INK))
+    ax.text(left + width / 2, bottom - 0.95,
+            "spoken audio + synchronised board",
+            ha="center", va="center", fontsize=7.6, style="italic")
+
+    fig.savefig(FIGS / "fig1_pipeline.png")
+    plt.close(fig)
+    print("fig1_pipeline.png")
+
+
 def fig4_pacing() -> None:
     rows = [json.loads(line)
             for line in (STUDIES / "pacing_study.jsonl")
@@ -206,9 +298,10 @@ def fig3_gate() -> None:
 
 def main() -> None:
     FIGS.mkdir(parents=True, exist_ok=True)
-    fig4_pacing()
+    fig1_pipeline()
     fig3_gate()
-    print("fig1_pipeline.png and fig2_trace.png are carried over unchanged")
+    fig4_pacing()
+    print("fig2_trace.png is carried over unchanged")
 
 
 if __name__ == "__main__":

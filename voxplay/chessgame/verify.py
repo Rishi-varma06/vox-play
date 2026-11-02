@@ -223,6 +223,17 @@ def licence_for(
         joined = re.sub(r"[^A-Za-z]", "", folded)
         if len(joined) > 2:
             licence.names.add(_spelling(joined))
+        # And license each whitespace-delimited token the same way, because
+        # that is exactly what check_names does to the generated text: it
+        # strips punctuation per token, so "Nimzo-Larsen Attack" reaches the
+        # check as "NimzoLarsen" and "Attack". Licensing only the whole
+        # joined string left "NimzoLarsen" unlicensed, and an opening name
+        # the facts had supplied was reported as invented -- 12 of the 15
+        # false positives in the gate measurement, all of them opening names.
+        for token in folded.split():
+            piece = re.sub(r"[^A-Za-z]", "", token)
+            if len(piece) > 2:
+                licence.names.add(_spelling(piece))
 
     for move in moves:
         licence.squares.add(move.from_square)

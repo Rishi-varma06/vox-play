@@ -221,7 +221,7 @@ def fig1_pipeline() -> None:
     print("fig1_pipeline.png")
 
 
-def fig4_pacing() -> None:
+def fig2_pacing() -> None:
     rows = [json.loads(line)
             for line in (STUDIES / "pacing_study.jsonl")
             .read_text().splitlines() if line.strip()]
@@ -239,9 +239,9 @@ def fig4_pacing() -> None:
     ax.set_ylabel("spoken duration (s)")
     ax.legend(frameon=False, fontsize=7, loc="upper left")
     ax.set_title("%d games" % len(rows), fontsize=7.5, color=GREY)
-    fig.savefig(FIGS / "fig4_pacing.png")
+    fig.savefig(FIGS / "fig2_pacing.png")
     plt.close(fig)
-    print("fig4_pacing.png")
+    print("fig2_pacing.png")
 
 
 def unused_hallucination_chart() -> None:
@@ -300,8 +300,8 @@ def main() -> None:
     FIGS.mkdir(parents=True, exist_ok=True)
     fig1_pipeline()
     fig3_gate()
-    fig4_pacing()
-    print("fig2_trace.png is carried over unchanged")
+    fig2_pacing()
+    print("fig1_pipeline.png is regenerated above; no other figures are used")
 
 
 if __name__ == "__main__":

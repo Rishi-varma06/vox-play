@@ -44,13 +44,17 @@ FAINT = colors.HexColor("#cccccc")
 MUTED = colors.HexColor("#444444")
 
 # --- IEEE page geometry ----------------------------------------------------
+#: Measured from the reference layout: US Letter, 49 pt side margins, two
+#: 246 pt columns with a 22 pt gutter, 10 pt Times. These are the numbers a
+#: LaTeX IEEEtran letterpaper build produces, so matching them here keeps the
+#: output visually interchangeable with one.
 PAGE = letter
-SIDE = 0.625 * inch
-TOP = 0.70 * inch
-BOTTOM = 0.85 * inch
-GUTTER = 0.25 * inch
-COL = (PAGE[0] - 2 * SIDE - GUTTER) / 2.0      # 3.5 in
-TITLE_BLOCK = 1.45 * inch                       # full-width band on page 1
+SIDE = 49.0
+TOP = 56.0
+BOTTOM = 56.0
+GUTTER = 22.0
+COL = (PAGE[0] - 2 * SIDE - GUTTER) / 2.0      # 246 pt, about 3.42 in
+TITLE_BLOCK = 1.58 * inch                       # full-width band on page 1
 
 #: Figures anchored to the heading they follow, in order of appearance, so
 #: the numbering in the captions matches the order a reader meets them.
@@ -59,23 +63,19 @@ TITLE_BLOCK = 1.45 * inch                       # full-width band on page 1
 #: earlier ones were dropped because they restated a table as a bar chart.
 FIGURES = {
     "III. System Architecture": (
-        "fig1_pipeline.png", 0.76,
+        "fig1_pipeline.png", 0.58,
         "Fig. 1. The six-stage pipeline. Stages 1-3 compute chess facts "
         "before the model is invoked; stages 4-6 pace, realise and speak "
         "them."),
-    "E. Pacing as budgeted selection": (
-        "fig2_trace.png", 1.0,
+    "D. Pacing as budgeted selection": (
+        "fig2_trace.png", 0.98,
         "Fig. 2. White win probability across the 1858 Opera Game with the "
         "selected beats marked. The turning point, half-move 18, coincides "
         "with the largest single swing."),
-    "G. The verification gate": (
-        "fig3_gate_flagged.jpg", 1.0,
-        "Fig. 3. The gate rejecting a sentence typed by a user. Three checks "
-        "fire at once: notation reaching the speech backend, a player name "
-        "absent from the game, and a tactic no detector found."),
     "C. Pacing over 173 games": (
-        "fig4_pacing.png", 0.86,
-        "Fig. 4. Spoken duration against game length over 106 games. The "
+        "fig2_pacing.png", 0.70,
+        "Fig. 3. Spoken duration against game length over 173 standard "
+        "games. The "
         "paced arm is clamped by (6); the every-move baseline grows without "
         "bound; top-N is constant by construction."),
 }
@@ -105,7 +105,7 @@ def styles():
         "authors", fontName="Times-Roman", fontSize=10.5, leading=13.5,
         alignment=TA_CENTER, spaceAfter=1 * mm, textColor=INK)
     s["h1"] = ParagraphStyle(
-        "h1", fontName="Times-Bold", fontSize=10, leading=12,
+        "h1", fontName="Times-Bold", fontSize=10, leading=12.5,
         alignment=TA_CENTER, spaceBefore=4 * mm, spaceAfter=1.6 * mm,
         textColor=INK)
     s["h2"] = ParagraphStyle(
@@ -115,21 +115,21 @@ def styles():
     # no vertical space between them. The previous 1.5 mm gap was both
     # non-standard and, over ninety paragraphs, more than half a page.
     s["body"] = ParagraphStyle(
-        "body", fontName="Times-Roman", fontSize=9.5, leading=11.05,
+        "body", fontName="Times-Roman", fontSize=10, leading=11.4,
         alignment=TA_JUSTIFY, spaceAfter=0, firstLineIndent=4 * mm,
         textColor=INK)
     s["abstract"] = ParagraphStyle(
         "abstract", parent=s["body"], fontName="Times-Bold", fontSize=9,
-        leading=10.8, firstLineIndent=4 * mm, spaceAfter=1.5 * mm)
+        leading=10.9, firstLineIndent=4 * mm, spaceAfter=1.5 * mm)
     s["bullet"] = ParagraphStyle(
         "bullet", parent=s["body"], leftIndent=4.5 * mm,
         bulletIndent=1 * mm, firstLineIndent=0, spaceAfter=1 * mm,
         spaceBefore=0.8 * mm)
     s["eq"] = ParagraphStyle(
-        "eq", fontName="Times-Italic", fontSize=9.5, leading=12,
+        "eq", fontName="Times-Italic", fontSize=10, leading=12.5,
         alignment=TA_CENTER, textColor=INK)
     s["eqnum"] = ParagraphStyle(
-        "eqnum", fontName="Times-Roman", fontSize=9.5, leading=12,
+        "eqnum", fontName="Times-Roman", fontSize=10, leading=12.5,
         alignment=TA_LEFT, textColor=INK)
     s["caption"] = ParagraphStyle(
         "caption", fontName="Times-Roman", fontSize=7.8, leading=9.2,
@@ -139,11 +139,17 @@ def styles():
         "tcaption", fontName="Times-Roman", fontSize=7.8, leading=9.0,
         alignment=TA_CENTER, textColor=INK, spaceAfter=0.9 * mm)
     s["cell"] = ParagraphStyle(
-        "cell", fontName="Times-Roman", fontSize=7.6, leading=9,
+        "cell", fontName="Times-Roman", fontSize=8, leading=9.4,
         textColor=INK)
     s["cellh"] = ParagraphStyle(
-        "cellh", fontName="Times-Bold", fontSize=7.6, leading=9,
+        "cellh", fontName="Times-Bold", fontSize=8, leading=9.4,
         alignment=TA_CENTER, textColor=INK)
+    # IEEE sets the reference list two points below body size, with a
+    # hanging indent under the bracketed number.
+    s["ref"] = ParagraphStyle(
+        "ref", fontName="Times-Roman", fontSize=8, leading=9.0,
+        alignment=TA_JUSTIFY, textColor=INK, leftIndent=4.2 * mm,
+        firstLineIndent=-4.2 * mm, spaceAfter=0.45 * mm)
     s["code"] = ParagraphStyle(
         "code", fontName="Courier", fontSize=7, leading=9,
         leftIndent=1.5 * mm, spaceBefore=1 * mm, spaceAfter=1.6 * mm,
@@ -245,10 +251,10 @@ def build_table(rows, S, caption=None):
         ("RIGHTPADDING", (0, 0), (-1, -1), 1.8),
         ("ALIGN", (1, 1), (-1, -1), "CENTER"),
     ]))
-    out = [Spacer(1, 1.6 * mm)]
+    out = [Spacer(1, 1.3 * mm)]
     if caption:
         out.append(Paragraph(caption, S["tcaption"]))
-    out += [table, Spacer(1, 1.9 * mm)]
+    out += [table, Spacer(1, 1.6 * mm)]
     return out
 
 
@@ -354,8 +360,12 @@ def parse(md: str, S):
                 i += 1
                 buf.append(lines[i])
             text = " ".join(buf)
-            style = S["abstract"] if text.startswith("Millions of chess") \
-                else S["body"]
+            if re.match(r"^\[\d+\] ", text):
+                style = S["ref"]
+            elif text.startswith("Millions of chess"):
+                style = S["abstract"]
+            else:
+                style = S["body"]
             flow.append(Paragraph(inline(text), style))
         i += 1
     return flow

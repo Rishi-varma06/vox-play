@@ -13,6 +13,8 @@ Contents:
 - **S2** — a worked beat: fact block in, spoken line out, licence checked
 - **S3** — correction history
 - **S4** — reproducing the measurements
+- **S5** — the pre-registered evaluation protocol, in full
+- **S6** — per-signal ablation of the salience weights
 
 ---
 
@@ -259,15 +261,76 @@ regenerates the results tables and both data figures:
 
 | Script | Produces |
 |---|---|
-| `motif_precision.py` | Table III — per-detector precision, recall and F1 |
+| `motif_precision.py` | Table I — per-detector precision, recall and F1 |
 | `control_firings.py` | the check that control firings are untagged true instances, quoted in Section V-A |
-| `threshold_split.py` | Table IV — thresholds fitted and tested on disjoint splits |
-| `pacing_study.py` | Tables V–VII — duration, coverage, adjacency and greedy optimality |
-| `weight_ablation.py` | Table VIII — per-signal sensitivity |
+| `threshold_split.py` | Table II — thresholds fitted and tested on disjoint splits |
+| `pacing_study.py` | Table III, and the greedy optimality quoted in Section V-D |
+| `weight_ablation.py` | the ablation of Section S6 |
 | `gate_false_positives.py` | the gate false-positive rate quoted in Section V-E |
-| `make_figures.py` | Figs. 1, 3 and 4 |
+| `make_figures.py` | Figs. 1 and 3 |
 
 All of them read the same two corpora: a PGN export of analysed Lichess games
 and the Lichess puzzle database, both CC0. The engine is pinned by node
 budget rather than depth or time, and runs single-threaded, so repeated runs
 of the same script on the same corpus are bit-identical.
+
+---
+
+## S5. Pre-registered evaluation protocol
+
+
+**The listener study has not been conducted.** Its design and analysis plan
+were committed before any data collection and are reported as a
+pre-registration; no human ratings are claimed anywhere in this paper.
+Section V establishes that the commentary is *correct*, not that it is *worth
+listening to*, which is the central claim of this work. Five arms are
+rendered identically — flat one-line-per-half-move (A), top-*N* by swing (B),
+the system (C), the system's pacing with sentences assembled mechanically
+from the same facts (D), and a recruited club player given the same PGN and
+analysis (E) — so that A and B isolate pacing, D isolates the language model
+and E is the ceiling. Within-subjects, *n* = 30, stratified by playing
+strength, Latin square over four clips each, five 5-point Likert items,
+Friedman per item with Wilcoxon signed-rank on pre-specified pairs and
+Holm–Bonferroni correction. The pre-registered thresholds are C > A on
+engagement by a median of 1.0, C > B on pacing by 0.5, C non-inferior to E on
+informativeness within 0.5, and C > D on engagement by 0.5. If C does not
+exceed A the pacing hypothesis is not supported, and that is the result we
+would report.
+
+Replacing the pilot of Section V-E: at least 20 games generated twice each
+with the gate disabled and enabled, not fewer than 400 beats per arm,
+segmented into atomic claims. Two annotators, at least one club-strength,
+label each claim independently as supported, unsupported or unverifiable,
+working from the board and engine output and **not** from the checker's
+findings; inter-annotator agreement is reported as Cohen's κ before any rate
+is. Reported per arm: unsupported claims per 100 beats with exact binomial
+intervals, and for the gated arm the regeneration rate and the gate's
+false-positive rate against the annotators' labels. The same protocol is
+applied to one open-weight model.
+
+---
+
+## S6. Per-signal ablation of the salience weights
+
+Over 80 standard games the selector was run at the shipped weights of (2) and
+again with each signal zeroed in turn. *Retained* is the share of the shipped
+selection the variant still picks; *jaccard* is the overlap of the two
+selected ply sets; *value* is the variant's total salience scored under the
+**shipped** weights as a fraction of the shipped selection's, so a variant
+that picks worse moves scores below 1.0 on the objective the system is
+actually maximising; *decisive beat* is the share of games in which the
+turning point is selected as a beat of its own, which stands at 87.5% for the
+shipped weights.
+
+| Signal removed | Retained | Jaccard | Value | Decisive beat |
+|---|---|---|---|---|
+| swing | 45.1% | 0.323 | 0.782 | 81.2% |
+| narrative | 80.4% | 0.750 | 0.984 | 56.2% |
+| motif | 81.1% | 0.745 | 0.974 | 90.0% |
+| criticality | 87.3% | 0.825 | 0.985 | 86.2% |
+| material | 92.0% | 0.883 | 0.996 | 87.5% |
+| think time | 100.0% | 1.000 | 1.000 | 87.5% |
+
+Think time is identically zero on this corpus because the games were exported
+without clock annotations, so the row records that the weight is untested
+here rather than that it is unnecessary. Produced by `weight_ablation.py`.

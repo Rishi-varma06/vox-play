@@ -1,0 +1,57 @@
+{
+  "cases": [
+    {
+      "case": "wrong side",
+      "why": "gives the move to the player who did not make it; White played it",
+      "text": "Black sacrifices on d seven and the position opens up.",
+      "caught": false,
+      "checks": []
+    },
+    {
+      "case": "wrong piece",
+      "why": "a licensed square, but the piece standing on it is a rook",
+      "text": "The bishop takes on d seven and the position opens up.",
+      "caught": false,
+      "checks": []
+    },
+    {
+      "case": "motif on the wrong move",
+      "why": "a licensed tactic attached to a move that did not create it",
+      "text": "The sacrifice here is on g three, quietly setting everything up.",
+      "caught": false,
+      "checks": []
+    },
+    {
+      "case": "unanchored strategy",
+      "why": "a strategic claim with no square, motif or name to check",
+      "text": "Black has the better structure here and simply controls the centre.",
+      "caught": false,
+      "checks": []
+    },
+    {
+      "case": "implied result",
+      "why": "reveals the outcome without naming it",
+      "text": "There is nothing left to play for; the board says it all now.",
+      "caught": false,
+      "checks": []
+    },
+    {
+      "case": "invented square (control)",
+      "why": "names a square the facts never supplied -- should be caught",
+      "text": "The rook swings to h seven and decides it.",
+      "caught": true,
+      "checks": [
+        "ungrounded_square"
+      ]
+    },
+    {
+      "case": "invented name (control)",
+      "why": "names a player not in the game -- should be caught",
+      "text": "Pure Kasparov, this.",
+      "caught": true,
+      "checks": [
+        "ungrounded_name"
+      ]
+    }
+  ]
+}

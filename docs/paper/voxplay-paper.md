@@ -23,17 +23,18 @@ only for elite play. Prior work emits one comment per move as text and
 measures factual accuracy after generation rather than constraining it.
 Voxplay turns move notation alone into spoken commentary synchronised to an
 animated board. First, commentary is *paced*: beat selection is budgeted
-maximum-weight selection under separation constraints, solved greedily to a
-mean 98.7% of the exact optimum. Over 173 standard Lichess games it runs 3.6× shorter than
-move-by-move narration and covers the opening and finish in every game,
-against 23% and 8% for an unconstrained top-*N* baseline. Second, the model is
+maximum-weight selection, solved greedily to a mean 98.7% of the exact
+optimum. Over 173 standard Lichess games it runs 3.6× shorter than
+move-by-move narration while covering the opening and finish in every one. Second, the model is
 never asked to derive a chess fact; facts come from deterministic components
 validated externally — 91.9% mean recall and 89.9% precision over 14,000
-human-tagged puzzles, and κ = 0.955 against Lichess annotations on a held-out
-6,864 moves. Third, every sentence is checked against the facts licensing it,
-and the check is auditable: run over grounded text where any finding is by
-construction a false positive, it exposed a licence defect we then fixed,
-leaving 0.66 per 100 beats. Generation costs US$0.06 per game.
+human-tagged puzzles, and κ = 0.955 for the classification rule against
+Lichess annotations on a held-out 6,864 moves, falling to 0.673 once our own
+engine supplies the evaluations. Third, every sentence is checked against
+the facts licensing it, and the check is itself auditable: run over grounded
+text it exposed a licence defect we then fixed, leaving 0.66 false positives
+per 100 beats, though the checks are lexical and cannot see a sentence that
+misuses licensed vocabulary. Generation costs US$0.06 per game.
 
 **Keywords** — sports commentary, data-to-text generation, content
 selection, grounded generation, hallucination mitigation, chess.
@@ -42,13 +43,13 @@ selection, grounded generation, hallucination mitigation, chess.
 
 ## I. Introduction
 
-A chess game is a complete and unambiguous record: every move is known, every
-position computable, and a strong engine can quantify the consequence of each
-decision. Yet what an ordinary player gets after a game is a table — moves
-tagged *blunder*, *mistake* or *inaccuracy* with numeric evaluations beside
-them. It states that a move was bad, not what was missed, which of eighty
-moves decided the outcome, or why; and it cannot be listened to. Human
-commentary supplies all of that and is economically restricted to elite play.
+A chess game is a complete and unambiguous record: every move is known,
+every position computable, and a strong engine can quantify the consequence
+of each decision. Yet what an ordinary player gets afterwards is a table —
+moves tagged *blunder*, *mistake* or *inaccuracy* beside numeric
+evaluations. It says a move was bad, not what was missed, which of eighty
+moves decided the game, or why; and it cannot be listened to. Human
+commentary supplies all of that and is restricted to elite play.
 This paper describes a system occupying that gap: the input is the move list,
 and the output is spoken audio with a board that follows the narration, with
 no video and no vision model involved. Chess admits this because its facts
@@ -76,35 +77,32 @@ than word counts.
 
 ## II. Related Work
 
-**Chess commentary.** Jhamtani et al. [1] introduced the task with a dataset
-mined from forum discussion; Zang et al. [2] coupled generation to a neural
-engine; Lee et al. [3] added symbolic reasoning engines; Kim et al. [4]
-introduced concept-guided generation with a dedicated metric. All four
-generate text and all four operate per move. Concept prioritisation [4]
-selects what to say *about a move*; none selects which moves to speak about
-at all, which is what a listener experiences as pacing.
+**Chess commentary.** Jhamtani et al. [1] introduced the task from forum
+discussion; Zang et al. [2] coupled generation to a neural engine; Lee et
+al. [3] added symbolic reasoning; Kim et al. [4] introduced concept-guided
+generation with a dedicated metric. All four generate text per move.
+Concept prioritisation [4] selects what to say *about a move*; none selects
+which moves to speak about at all, which is what a listener experiences as
+pacing.
 
-**Factuality.** Hebbar et al. [5] report that GPT-5.4 without tool support
-produced incorrect sub-claims 22.0% of the time, open-weight models exceeding
+**Factuality.** Hebbar et al. [5] report GPT-5.4 producing incorrect
+sub-claims 22.0% of the time without tools, open-weight models exceeding
 40%; their contribution is evaluation *after* generation. Ji et al. [6]
-survey hallucination and distinguish intrinsic from extrinsic error; the
-architecture here targets extrinsic error by making the admissible fact set
-finite and explicit.
+distinguish intrinsic from extrinsic hallucination; we target the extrinsic
+kind by making the admissible fact set finite and explicit.
 
-**Content selection.** Barzilay and Lapata [7] framed collective content
-selection as a constrained decision over candidate records; Wiseman et
-al. [8] showed on RotoWire that fluent generation from structured records
-implies neither faithful nor well-selected content; Puduppully et al. [9]
-made selection and ordering explicit as a content plan preceding realisation.
-Our formulation is in that tradition, the addition being a *duration* budget,
-meaningful only once output is spoken rather than read.
+**Content selection.** Barzilay and Lapata [7] framed content selection as
+a constrained decision over candidate records; Wiseman et al. [8] showed on
+RotoWire that fluent generation from structured records implies neither
+faithful nor well-selected content; Puduppully et al. [9] made selection and
+ordering explicit as a content plan. Our formulation adds a *duration*
+budget, meaningful only once output is spoken.
 
 **Other sports.** MatchTime [10] and SoccerNet-Caption [11] generate soccer
-commentary from video, where ground truth is inferred rather than computed; a
-survey [12] confirms the pattern of dense per-event text with factuality as a
-post-hoc metric. That a language model can write chess commentary is
-established; our claims are pacing, spoken delivery, and grounding enforced
-by construction.
+commentary from video, where ground truth is inferred rather than computed;
+a survey [12] confirms the pattern. That a language model can write chess
+commentary is established; our claims are pacing, spoken delivery and
+grounding enforced by construction.
 
 ---
 
@@ -169,8 +167,8 @@ sacrifice, back-rank mate, smothered mate, double check, promotion, en
 passant and advanced pawn. A model asked whether a position contains a fork
 answers confidently either way, and a listener who plays chess catches the
 error. Detector names match Lichess puzzle themes, so validation is a direct
-comparison. Geometry establishes that material was given up but not that a
-sacrifice was *sound*; soundness is decided in the analysis layer. Naming the
+comparison. Geometry shows material was given up but not that a sacrifice
+was *sound*; soundness is decided in the analysis layer. Naming the
 opening by prefix-matching moves would miss every transposition, so we
 instead replay each line of the CC0 `lichess-org/chess-openings` database and
 index the resulting **position**.
@@ -210,8 +208,7 @@ coverage requirement directly rather than as a constraint:
 
 For a 33-half-move game *T* = 150 s, so *r*·*T* = 277 words; the mandatory
 beats cost 153, leaving *B* = 124 — a turning point and one further moment.
-A fixed budget does not transfer across game lengths. Fig. 2 shows the
-resulting selection on one game against its win-probability trace.
+A fixed budget does not transfer across game lengths.
 
 **Solver and optimality.** Equations (3)–(5) are solved **greedily**:
 candidates sorted by σ descending are accepted if they fit the budget and
@@ -219,14 +216,10 @@ violate no separation constraint, which is *O*(|M| log |M|) in practice.
 Greedy is not optimal in general, but the problem is exactly solvable: with
 candidates in ply order, (5) between *consecutive* chosen candidates implies
 it for every pair, so (3)–(5) is a knapsack on a line admitting an exact
-*O*(|P|·B) dynamic program over (candidate index, remaining word budget),
-tractable because *c* is integral in words. We implement it purely as a
-reference and report the gap in Section V-D rather than asserting it is
-small. Without separation the highest-scoring moves in a tactical flurry are
-all adjacent: the script narrates four consecutive half-moves and skips
-twenty, the failure of the top-*N* baseline. Finally, *r* = 1.85 is measured,
-not nominal: a 134-word script rendered at a nominal 155 wpm produced 72.6 s
-of audio, an effective 111 wpm.
+*O*(|P|·B) dynamic program, tractable because *c* is integral in words. We
+implement it as a reference and report the gap in Section V-D. Finally,
+*r* = 1.85 is measured, not nominal: a 134-word script rendered at a nominal
+155 wpm produced 72.6 s of audio, an effective 111 wpm.
 
 ### E. Script generation
 
@@ -267,6 +260,18 @@ blind spot. Section V-E measures the first and finds one. A failing beat is
 user edited by hand, so an invented claim typed by a person is caught
 identically.
 
+**What the licence cannot express.** Every check is lexical: which squares,
+motif names, player names and evaluation direction appear. A sentence
+drawing only on licensed vocabulary can therefore be false about the
+position and pass. Five such sentences, each built from one beat's own
+licence, pass all seven checks: giving the move to the wrong side, naming a
+licensed square but the wrong piece on it, attaching a licensed motif to a
+move that did not create it, a strategic claim with no lexical anchor
+("controls the centre"), and revealing the outcome without a result word.
+Two controls reaching outside the licence are caught, so the checks fire
+when they can. The gate bounds what may be *named*, not what may be
+*asserted* about it.
+
 ### G. Speech and timeline
 
 Audio offsets are measured from the rendered waveform, never estimated, and
@@ -304,32 +309,15 @@ reservoir sampling over 6.5 million rows of the Lichess puzzle database
 in all. A detector is credited if it fires anywhere among the solver's moves,
 since a Lichess theme describes the whole solution, not its first move.
 
-Table: Motif detector quality against 14,000 human-tagged puzzles
-| Detector | Recall | Precision | F1 |
-|---|---|---|---|
-| double check, smothered mate, en passant | 100.0% | 100.0% | 1.000 |
-| promotion | 100.0% | 99.7% | 0.999 |
-| discovered attack | 94.0% | 91.0% | 0.925 |
-| fork | 100.0% | 82.4% | 0.904 |
-| back-rank mate | 100.0% | 81.2%* | 0.896 |
-| skewer | 96.8% | 82.2% | 0.889 |
-| advanced pawn | 85.2% | 88.9% | 0.870 |
-| sacrifice | 86.1% | 86.7% | 0.864 |
-| pin | 49.2% | 77.1% | 0.601 |
-| **Mean, 11 comparable** | **91.9%** | **89.9%** | **0.904** |
-| hanging piece, excluded | 26.1% | 33.2% | 0.292 |
-
-Precision is reported at this 1,000-to-2,000 sampling ratio, which is not the
+Precision is reported at this 1,000-to-2,000 sampling ratio, not the
 prevalence of motifs in commentary, and is a **lower bound** because Lichess
-tags are not exhaustive, so a control firing may be an untagged true
-instance. That is measurable: the back-rank detector fired on 232 controls
-and replaying each line shows *all 232 do finish in checkmate on a back
-rank*, so its 81.2% is an artefact of tagging. Hanging piece is excluded
-because the theme does not ask what the detector answers — Lichess tags it
-when the solution *takes* an undefended piece, whereas we detect a move that
-*leaves* one hanging. The pin detector is the one genuine weakness, trading
-recall for precision at 49.2% against 63.5% unfiltered, because the
-unfiltered version reported 17 pins on a single short game.
+tags are not exhaustive. That is measurable: the back-rank detector fired on
+232 controls and replaying each line shows *all 232 do finish in checkmate
+on a back rank*, so its 81.2% is an artefact of tagging. Hanging piece is
+excluded because Lichess tags it when the solution *takes* an undefended
+piece whereas we detect a move that *leaves* one hanging. The pin detector
+is the one genuine weakness, trading recall for precision at 49.2% against
+63.5% unfiltered.
 
 ### B. Classification agreement, fitted and tested on disjoint splits
 
@@ -340,21 +328,36 @@ tail cannot be scored, so it is not counted. Games — not moves — were
 shuffled under a fixed seed and split in half; θ was grid-searched on the
 training half alone, and κ reported on the other.
 
-Table: Classification thresholds fitted and tested on disjoint splits
-| | Train, 87 games | Held out, 87 games |
+Table: Agreement with Lichess labels, fitted and tested on disjoint splits
+| | Train, 87 | Held out, 87 |
 |---|---|---|
 | Moves | 6,366 | 6,864 |
 | θ fitted on train | 5 / 10 / 15 | — |
-| κ, fitted θ | 0.957 | **0.955** |
+| κ, our rule on Lichess evals | 0.957 | 0.955 |
 | κ, documented 10/20/30 | — | 0.343 |
-| Raw agreement | — | 98.7% |
+| **κ, our engine's evals** | — | **0.673** |
+| Raw agreement, our engine | — | 90.8% |
 | Expected by chance | — | 71.9% |
 
 Held-out κ is within 0.002 of training κ, so there is no measurable
 overfitting — unsurprising, since the search recovers a published constant
-rather than discovering a free parameter. Per-class held-out agreement is
-95.2%, 86.1% and 95.3%. The substantive finding is that the widely circulated
-10/20/30 bands are about twice too lenient, yielding κ = 0.343 held out.
+rather than discovering a free parameter.
+
+That figure is close to tautological, though, and the last two rows matter
+more. κ = 0.955 has both sides reading *Lichess's* evaluations, so it
+isolates the rule and says little beyond that our implementation of a
+formula adopted from Lichess is faithful. The shipped pipeline does not read
+those evaluations: it runs Stockfish at 1,000,000 nodes on one thread.
+Scoring the same held-out games from **our** engine against the same labels
+gives **κ = 0.673**, raw agreement 90.8%, per-class 53.2%, 41.3% and 84.1%.
+That 0.282 difference is two engines at two search efforts disagreeing about
+borderline moves, and the rule-only figure hides all of it.
+
+Neither number is accuracy — Lichess's annotations are another engine's
+output, not ground truth — so this measures agreement between two
+configurations. The rule is faithful; the pipeline is substantially rather
+than almost perfectly aligned with a reference system; and the circulated
+10/20/30 bands are about twice too lenient, yielding κ = 0.343.
 
 ### C. Pacing over 173 games
 
@@ -378,20 +381,43 @@ Table: Pacing against both baselines over 173 standard games
 
 *Over the 170 games that have a decisive move; three drawn games have none.
 
-Median reduction against every-move narration is **3.6×** (IQR 2.9–3.9), and
-it widens with game length because the paced budget is clamped by (6) and the
-baseline's is not (Fig. 3). Against top-*N* the advantage is structural rather than
-duration: top-*N* emits exactly *N* = 8 beats of fixed cost, so its 194.6 s
-is **constant by construction** on every game — worth stating, since an
-identical figure across games otherwise invites the suspicion of a
-measurement error. It is also worth conceding the one column top-*N*
-wins, and saying why. Top-*N* is the eight largest swings and the decisive
-move is by construction the largest, so it covers it in all 170 games that
-have one; the paced selector covers 168. Ranking by swing is therefore not
-what top-*N* lacks. What it lacks is everything the constraints supply — it
-names the opening in under a quarter of games, reaches the finish in one in
-thirteen, and in all but one game spends beats on half-moves adjacent to
-another selection, four per game against none.
+Median reduction against every-move narration is **3.6×** (IQR 2.9–3.9),
+widening with game length because the paced budget is clamped by (6) and the
+baseline's is not (Fig. 2). Top-*N* emits exactly *N* = 8 beats of fixed
+cost, so its 194.6 s is **constant by construction** — worth stating, since
+an identical figure across games otherwise suggests a measurement error.
+Two cautions, though: top-*N* has no mandatory beats and a different budget,
+so its opening and finish coverage is structurally poor rather than
+empirically worse, and the adjacency row is (5) holding by construction. It
+also covers the decisive move in all 170 games that have one, against 168
+for the paced selector. The informative comparison is the matched one.
+
+**A budget-matched baseline.** To separate the spacing constraint from
+everything else, the selector was run against itself with *g* = 0 in (5):
+same mandatory beats, same budget *B* from (7), same salience, same greedy
+order, differing only in whether adjacent picks are allowed.
+
+Table: The separation constraint isolated, over 173 games
+| Mean per game | *g* = 4 | *g* = 0 |
+|---|---|---|
+| Spoken seconds | 167.1 | 167.2 |
+| Moments selected | 2.90 | 2.91 |
+| Total salience | 3.52 | **3.73** |
+| Adjacent picks | **0.00** | 0.83 |
+| Longest dead stretch, half-moves | **33.1** | 37.4 |
+| Decisive move covered | 87.6% | **89.4%** |
+
+This is a smaller result than the unmatched table suggests, and two columns
+go the other way. Dropping (5) raises total salience by 6.2% — it must,
+since removing a constraint cannot lower the objective — and covers the
+decisive move slightly more often. What (5) buys is spread: the longest
+stretch a listener hears nothing about falls from 37.4 half-moves to 33.1,
+about 11%, and adjacent picks go to zero. So the defensible claim is
+narrower than "the constraints carry the contribution": the budget of (6)
+and (7) and the mandatory beats produce the duration control and the
+complete opening and finish coverage, while separation is a modest
+refinement trading salience for spread — a trade for the listener study to
+judge, not the objective.
 
 **Why the decisive move is ever missed.** It is worth being exact, because
 the turning point is not a mandatory beat: it is an ordinary candidate
@@ -411,11 +437,10 @@ letting narrative role override salience.
 
 ### D. Greedy optimality and weight sensitivity
 
-Running the greedy selector and the exact dynamic program over the same 173
-games gives the gap directly: greedy reaches a mean **0.987** of the optimum,
-is **exactly optimal on 138 of 173 games (80%)**, and its worst case is
-0.750, the gap arising where a high-scoring candidate blocks two slightly
-lower-scoring ones that together score more.
+Greedy reaches a mean **0.987** of the exact dynamic program's optimum, is
+**exactly optimal on 138 of 173 games (80%)**, and its worst case is 0.750 —
+the gap arising where a high-scoring candidate blocks two lower-scoring ones
+that together score more.
 
 The six weights of (2) are set by hand, so the question is whether each
 measurably changes the output. Over 80 standard games the selector was run at
@@ -426,10 +451,9 @@ weight does a narrow but irreplaceable job**: dropping it retains 80.4% of
 picks and costs 1.6% of salience, yet the share of games giving the decisive
 move a beat of its own falls from 88.6% to 57.0% — invisible to the
 objective, and exactly what the term exists to produce. Motif, criticality
-and material each shift the selection modestly (81.1%, 87.3% and 92.0%
-retained) at under 3% of salience. **Think time is inert on this corpus**,
-not unimportant: the games were exported without clocks, so its weight is
-untested rather than shown unnecessary.
+and material shift the selection modestly at under 3% of salience. **Think
+time is inert on this corpus**: the games were exported without clocks, so
+its weight is untested rather than shown unnecessary.
 
 ### E. The verification gate
 
@@ -452,6 +476,15 @@ added, and both arms re-measured over that same corpus, the rate falls to
 games with none rise from 51 to 57 of 60. We report rather than pursue zero: the claim worth making is not
 that the gate is perfect but that its false-positive rate is **measurable on
 grounded text**.
+
+That rate is measured on the wrong distribution for a strong claim, and we
+say so rather than generalise it. Template sentences are assembled from the
+fact block, so they exercise the licence along its exact-string path, where
+it is strongest; model output paraphrases, and paraphrase is exactly where a
+lexical licence misfires, as the defect above shows. So 0.66 per 100 beats
+is a false-positive rate for template prose and a lower bound for anything
+else. Measuring it on model beats needs beats a human has confirmed correct,
+which is part of the protocol in Section VI.
 
 The gate's **catch rate** on model output is at present a pilot. Over 32
 generated beats, disabling the gate yielded 2 unsupported claims (6.2 per 100
@@ -505,13 +538,18 @@ A second protocol replaces the pilot of Section V-E with at least 400 beats
 per arm over 20 games, labelled independently by two annotators who do not
 see the checker's findings, and repeated on one open-weight model.
 
-**Live commentary** is not a small change. Every per-position component works
-unchanged on streamed input, but pacing does not: the budget needs the game's
-length and the turning point is by definition the largest error *of the
-game*, so a naive live system would reproduce the every-move baseline in real
-time. A fixed delay, or pacing within segments, preserves part of the
-contribution. Also: rating-conditioned thresholds, multilingual output,
-Chess960 support, and learned salience weights replacing **w** of (2).
+What would most improve this paper for least effort is not that design but
+a pilot a fraction of its size — ten listeners, three games, paced against
+top-*N*, one forced-choice question. That would move the central claim from
+planned to preliminary, and it is the one result no amount of further
+computation can supply.
+
+**Live commentary** is not a small change: pacing needs the game's length,
+and the turning point is by definition the largest error *of the game*, so a
+naive live system would reproduce the every-move baseline in real time. A
+fixed delay, or pacing within segments, preserves part of it. Also:
+rating-conditioned thresholds, multilingual output, Chess960 support, and
+learned salience weights replacing **w** of (2).
 
 ---
 
@@ -530,17 +568,17 @@ wrong thing.
 
 **C. Motif detection is rule-based.** Deflection, overloading and zugzwang
 are not detected, the pin detector recovers under half of tagged pins, and
-two move-quality labels are defined but never assigned. The think-time weight
-is likewise untested, the corpus having been exported without clocks.
+two move-quality labels are never assigned. The think-time weight is
+likewise untested, the corpus having no clocks.
 
 **D. The hallucination result is a pilot**, with overlapping intervals and
 non-independent labelling. The gate's false-positive rate is established on
 grounded text; its catch rate on model output is not.
 
-**E. English only**, and not by configuration: the notation-to-speech
-converter is a rule-based *English* grammar, the prompts are English, and the
-verifier's vocabulary is English, so translating after verification would
-void the gate's guarantee.
+**E. English only**: the notation-to-speech converter is a rule-based
+*English* grammar, the prompts are English and the verifier's vocabulary is
+English, so translating after verification would void the gate's
+guarantee.
 
 **F. Several reported quantities reached their final values only after an
 initial measurement was found to be wrong**, in every case located by
@@ -558,11 +596,12 @@ mean 98.7% of an exact dynamic program and measured over 173 games against
 two implemented baselines — grounding by construction, and a gate whose licence
 is derived symmetrically from the facts it checks. Validation against
 external labels gives 91.9% mean recall and 89.9% precision over 14,000
-human-tagged puzzles, and κ = 0.955 on a held-out 6,864 moves. Auditing the
-gate against mechanically grounded text found and then removed a licence
-defect, leaving 0.66 false positives per 100 beats; its effect on model
-output is a pilot with wide intervals, and we report the protocol that would
-settle it rather than the conclusion we would prefer.
+human-tagged puzzles, and κ = 0.955 for the rule on a held-out 6,864 moves —
+0.673 for the pipeline that actually runs, a gap the rule-only figure hides.
+Auditing the gate against grounded text found and removed a licence defect,
+leaving 0.66 false positives per 100 beats; its effect on model output is a
+pilot with wide intervals, and we report the protocol that would settle it
+rather than the conclusion we would prefer.
 
 ---
 
@@ -603,8 +642,9 @@ pp. 6908–6915.
 automatic soccer game commentary generation," in *Proc. EMNLP*, 2024,
 pp. 1671–1685.
 
-[11] H. Mkhallati, A. Cioppa, S. Giancola, B. Ghanem, and
-M. Van Droogenbroeck, "SoccerNet-Caption: Dense video captioning for soccer broadcasts," in *Proc. CVPRW*, 2023, pp. 5074–5085.
+[11] H. Mkhallati, A. Cioppa, S. Giancola, B. Ghanem, and M. Van
+Droogenbroeck, "SoccerNet-Caption: Dense video captioning for soccer
+broadcasts," in *Proc. CVPRW*, 2023, pp. 5074–5085.
 
 [12] Q. Zheng *et al.*, "From multimodal perception to strategic reasoning:
 A survey on AI-generated game commentary," Jun. 2026,

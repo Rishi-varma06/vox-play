@@ -1,0 +1,39 @@
+{
+  "nodes": 1000000,
+  "games": 87,
+  "moves": 6864,
+  "kappa": 0.6733,
+  "observed": 0.9082,
+  "expected": 0.7191,
+  "recall": {
+    "inaccuracy": 0.5317,
+    "mistake": 0.4127,
+    "blunder": 0.8411
+  },
+  "matrix": {
+    "ok": {
+      "ok": 5583,
+      "inaccuracy": 166,
+      "mistake": 38,
+      "blunder": 10
+    },
+    "inaccuracy": {
+      "ok": 177,
+      "inaccuracy": 277,
+      "mistake": 38,
+      "blunder": 14
+    },
+    "mistake": {
+      "ok": 8,
+      "inaccuracy": 60,
+      "mistake": 104,
+      "blunder": 27
+    },
+    "blunder": {
+      "ok": 2,
+      "inaccuracy": 18,
+      "mistake": 72,
+      "blunder": 270
+    }
+  }
+}

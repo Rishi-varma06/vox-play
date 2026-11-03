@@ -53,7 +53,7 @@ MUTED = colors.HexColor("#444444")
 PAGE = letter
 SIDE = 49.0
 TOP = 56.0
-BOTTOM = 56.0
+BOTTOM = 50.0
 GUTTER = 22.0
 COL = (PAGE[0] - 2 * SIDE - GUTTER) / 2.0      # 246 pt, about 3.42 in
 TITLE_BLOCK = 1.58 * inch                       # full-width band on page 1
@@ -69,14 +69,9 @@ FIGURES = {
         "Fig. 1. The six-stage pipeline. Stages 1-3 compute chess facts "
         "before the model is invoked; stages 4-6 pace, realise and speak "
         "them."),
-    "D. Pacing as budgeted selection": (
-        "fig2_trace.png", 0.98,
-        "Fig. 2. White win probability across the 1858 Opera Game with the "
-        "selected beats marked. The turning point, half-move 18, coincides "
-        "with the largest single swing."),
     "C. Pacing over 173 games": (
-        "fig2_pacing.png", 0.70,
-        "Fig. 3. Spoken duration against game length over 173 standard "
+        "fig2_pacing.png", 0.58,
+        "Fig. 2. Spoken duration against game length over 173 standard "
         "games. The "
         "paced arm is clamped by (6); the every-move baseline grows without "
         "bound; top-N is constant by construction."),
@@ -117,7 +112,7 @@ def styles():
     # no vertical space between them. The previous 1.5 mm gap was both
     # non-standard and, over ninety paragraphs, more than half a page.
     s["body"] = ParagraphStyle(
-        "body", fontName="Times-Roman", fontSize=10, leading=11.4,
+        "body", fontName="Times-Roman", fontSize=10, leading=11.2,
         alignment=TA_JUSTIFY, spaceAfter=0, firstLineIndent=4 * mm,
         textColor=INK)
     s["abstract"] = ParagraphStyle(
@@ -149,9 +144,9 @@ def styles():
     # IEEE sets the reference list two points below body size, with a
     # hanging indent under the bracketed number.
     s["ref"] = ParagraphStyle(
-        "ref", fontName="Times-Roman", fontSize=8, leading=9.0,
+        "ref", fontName="Times-Roman", fontSize=8, leading=8.8,
         alignment=TA_JUSTIFY, textColor=INK, leftIndent=4.2 * mm,
-        firstLineIndent=-4.2 * mm, spaceAfter=0.45 * mm)
+        firstLineIndent=-4.2 * mm, spaceAfter=0.35 * mm)
     s["code"] = ParagraphStyle(
         "code", fontName="Courier", fontSize=7, leading=9,
         leftIndent=1.5 * mm, spaceBefore=1 * mm, spaceAfter=1.6 * mm,

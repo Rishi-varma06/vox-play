@@ -15,6 +15,7 @@ Contents:
 - **S4** — reproducing the measurements
 - **S5** — the pre-registered evaluation protocol, in full
 - **S6** — per-signal ablation of the salience weights
+- **S7** — per-detector motif quality
 
 ---
 
@@ -340,3 +341,34 @@ as a miss.
 Think time is identically zero on this corpus because the games were exported
 without clock annotations, so the row records that the weight is untested
 here rather than that it is unnecessary. Produced by `weight_ablation.py`.
+
+---
+
+## S7. Per-detector motif quality
+
+Against 14,000 puzzles from the Lichess puzzle database (CC0): 1,000 per
+detector carrying that detector's own theme, plus 2,000 controls drawn from
+five themes that are not motifs. Precision is at that 1,000-to-2,000
+sampling ratio and is a lower bound, because Lichess theme tags are not
+exhaustive and a control firing may be an untagged true instance.
+
+| Detector | Recall | Precision | F1 |
+|---|---|---|---|
+| double check | 100.0% | 100.0% | 1.000 |
+| smothered mate | 100.0% | 100.0% | 1.000 |
+| en passant | 100.0% | 100.0% | 1.000 |
+| promotion | 100.0% | 99.7% | 0.999 |
+| discovered attack | 94.0% | 91.0% | 0.925 |
+| fork | 100.0% | 82.4% | 0.904 |
+| back-rank mate | 100.0% | 81.2%* | 0.896 |
+| skewer | 96.8% | 82.2% | 0.889 |
+| advanced pawn | 85.2% | 88.9% | 0.870 |
+| sacrifice | 86.1% | 86.7% | 0.864 |
+| pin | 49.2% | 77.1% | 0.601 |
+| **Mean, 11 comparable** | **91.9%** | **89.9%** | **0.904** |
+| hanging piece, excluded | 26.1% | 33.2% | 0.292 |
+
+*All 232 control firings of the back-rank detector were verified by
+replaying each solution line to its end: every one finishes in checkmate on
+a back rank, so its apparent precision is an artefact of tagging rather than
+a defect. Produced by `motif_precision.py` and `control_firings.py`.

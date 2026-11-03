@@ -1,0 +1,4180 @@
+{
+  "games": 173,
+  "games_with_turning_point": 170,
+  "means": {
+    "spaced": {
+      "moments": 2.9017,
+      "value": 3.5157,
+      "adjacent": 0.0,
+      "max_gap": 33.0925,
+      "bridges": 0.3757,
+      "seconds": 167.0809
+    },
+    "unspaced": {
+      "moments": 2.9075,
+      "value": 3.7344,
+      "adjacent": 0.8266,
+      "max_gap": 37.3815,
+      "bridges": 0.3584,
+      "seconds": 167.204
+    }
+  },
+  "decisive_covered": {
+    "spaced": 0.8765,
+    "unspaced": 0.8941
+  },
+  "rows": [
+    {
+      "game_id": "rNRk0s6f",
+      "plies": 54,
+      "spaced": {
+        "moments": 2,
+        "value": 2.379,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.379,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "QsvkpvQR",
+      "plies": 102,
+      "spaced": {
+        "moments": 4,
+        "value": 5.0737,
+        "adjacent": 0,
+        "max_gap": 48,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.1128,
+        "adjacent": 1,
+        "max_gap": 48,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "uEj1cUSj",
+      "plies": 80,
+      "spaced": {
+        "moments": 2,
+        "value": 3.2583,
+        "adjacent": 0,
+        "max_gap": 58,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.37,
+        "adjacent": 1,
+        "max_gap": 57,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "0uoOXjrx",
+      "plies": 78,
+      "spaced": {
+        "moments": 3,
+        "value": 2.263,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 155.7,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 2.396,
+        "adjacent": 2,
+        "max_gap": 61,
+        "bridges": 0,
+        "seconds": 155.7,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "eVaO01BL",
+      "plies": 106,
+      "spaced": {
+        "moments": 4,
+        "value": 5.2948,
+        "adjacent": 0,
+        "max_gap": 47,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.8845,
+        "adjacent": 1,
+        "max_gap": 64,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "6cEFQBMn",
+      "plies": 61,
+      "spaced": {
+        "moments": 2,
+        "value": 2.3717,
+        "adjacent": 0,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.3717,
+        "adjacent": 0,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "E4jtq4Kx",
+      "plies": 68,
+      "spaced": {
+        "moments": 2,
+        "value": 2.225,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.225,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "mUDnsQwA",
+      "plies": 75,
+      "spaced": {
+        "moments": 2,
+        "value": 3.8443,
+        "adjacent": 0,
+        "max_gap": 42,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.8443,
+        "adjacent": 0,
+        "max_gap": 42,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "yHAGXbG5",
+      "plies": 72,
+      "spaced": {
+        "moments": 2,
+        "value": 2.825,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.825,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ERasFTT2",
+      "plies": 127,
+      "spaced": {
+        "moments": 6,
+        "value": 4.7238,
+        "adjacent": 0,
+        "max_gap": 48,
+        "bridges": 1,
+        "seconds": 251.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 6,
+        "value": 4.9016,
+        "adjacent": 2,
+        "max_gap": 54,
+        "bridges": 1,
+        "seconds": 251.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "IL7vzVyb",
+      "plies": 100,
+      "spaced": {
+        "moments": 4,
+        "value": 4.1259,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 4.4727,
+        "adjacent": 2,
+        "max_gap": 46,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "4ZK2YRHG",
+      "plies": 79,
+      "spaced": {
+        "moments": 2,
+        "value": 2.8808,
+        "adjacent": 0,
+        "max_gap": 63,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.8808,
+        "adjacent": 0,
+        "max_gap": 63,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "SdurwyNy",
+      "plies": 37,
+      "spaced": {
+        "moments": 2,
+        "value": 1.6862,
+        "adjacent": 0,
+        "max_gap": 21,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.6862,
+        "adjacent": 0,
+        "max_gap": 21,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "BipyKnRr",
+      "plies": 42,
+      "spaced": {
+        "moments": 2,
+        "value": 2.314,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.314,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "kie9uAGI",
+      "plies": 83,
+      "spaced": {
+        "moments": 2,
+        "value": 2.515,
+        "adjacent": 0,
+        "max_gap": 44,
+        "bridges": 2,
+        "seconds": 165.9,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.7549,
+        "adjacent": 1,
+        "max_gap": 44,
+        "bridges": 2,
+        "seconds": 165.9,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "l07poVV9",
+      "plies": 58,
+      "spaced": {
+        "moments": 2,
+        "value": 3.05,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.05,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "qXGL10xr",
+      "plies": 89,
+      "spaced": {
+        "moments": 3,
+        "value": 4.7822,
+        "adjacent": 0,
+        "max_gap": 42,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.7963,
+        "adjacent": 1,
+        "max_gap": 42,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "VmFRr82q",
+      "plies": 65,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1013,
+        "adjacent": 0,
+        "max_gap": 20,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.1013,
+        "adjacent": 0,
+        "max_gap": 20,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "fsCozTnW",
+      "plies": 114,
+      "spaced": {
+        "moments": 5,
+        "value": 4.1583,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 5.6213,
+        "adjacent": 2,
+        "max_gap": 42,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "3KOg6JjM",
+      "plies": 51,
+      "spaced": {
+        "moments": 2,
+        "value": 1.1,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": false
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.1,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": false
+      }
+    },
+    {
+      "game_id": "IRMHgdoq",
+      "plies": 142,
+      "spaced": {
+        "moments": 8,
+        "value": 5.4594,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 277.3,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 8,
+        "value": 5.6763,
+        "adjacent": 2,
+        "max_gap": 49,
+        "bridges": 0,
+        "seconds": 277.3,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ybrYDM6d",
+      "plies": 86,
+      "spaced": {
+        "moments": 3,
+        "value": 4.4644,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.5879,
+        "adjacent": 1,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "oBU03Dip",
+      "plies": 83,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9983,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 2,
+        "seconds": 165.9,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9983,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 2,
+        "seconds": 165.9,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "dgpPFhBM",
+      "plies": 120,
+      "spaced": {
+        "moments": 6,
+        "value": 6.5345,
+        "adjacent": 0,
+        "max_gap": 37,
+        "bridges": 0,
+        "seconds": 239.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 6,
+        "value": 6.9399,
+        "adjacent": 2,
+        "max_gap": 41,
+        "bridges": 0,
+        "seconds": 239.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "JAmzDW6J",
+      "plies": 65,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1927,
+        "adjacent": 0,
+        "max_gap": 23,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.1927,
+        "adjacent": 0,
+        "max_gap": 23,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "qD9YoSbB",
+      "plies": 55,
+      "spaced": {
+        "moments": 2,
+        "value": 1.992,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.213,
+        "adjacent": 1,
+        "max_gap": 41,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "7R1Lhe0k",
+      "plies": 53,
+      "spaced": {
+        "moments": 2,
+        "value": 2.3801,
+        "adjacent": 0,
+        "max_gap": 14,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.3801,
+        "adjacent": 0,
+        "max_gap": 14,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "RXPe1bIN",
+      "plies": 189,
+      "spaced": {
+        "moments": 10,
+        "value": 7.122,
+        "adjacent": 0,
+        "max_gap": 69,
+        "bridges": 1,
+        "seconds": 348.6,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 10,
+        "value": 8.5027,
+        "adjacent": 4,
+        "max_gap": 69,
+        "bridges": 1,
+        "seconds": 348.6,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "CuImvFcJ",
+      "plies": 64,
+      "spaced": {
+        "moments": 2,
+        "value": 2.7453,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2813,
+        "adjacent": 1,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "RHrwaEbN",
+      "plies": 104,
+      "spaced": {
+        "moments": 4,
+        "value": 5.1085,
+        "adjacent": 0,
+        "max_gap": 54,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.8503,
+        "adjacent": 2,
+        "max_gap": 54,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "MwDrne7m",
+      "plies": 112,
+      "spaced": {
+        "moments": 5,
+        "value": 5.2071,
+        "adjacent": 0,
+        "max_gap": 40,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 5.3605,
+        "adjacent": 1,
+        "max_gap": 40,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "QEQxzklj",
+      "plies": 106,
+      "spaced": {
+        "moments": 4,
+        "value": 3.547,
+        "adjacent": 0,
+        "max_gap": 47,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 3.7003,
+        "adjacent": 1,
+        "max_gap": 47,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "1vMBEpHw",
+      "plies": 155,
+      "spaced": {
+        "moments": 8,
+        "value": 9.9552,
+        "adjacent": 0,
+        "max_gap": 50,
+        "bridges": 1,
+        "seconds": 300.0,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 8,
+        "value": 9.9552,
+        "adjacent": 3,
+        "max_gap": 50,
+        "bridges": 1,
+        "seconds": 300.0,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "aaAiccwe",
+      "plies": 56,
+      "spaced": {
+        "moments": 2,
+        "value": 2.915,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.915,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "D3HfwNJC",
+      "plies": 62,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9778,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2306,
+        "adjacent": 1,
+        "max_gap": 47,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "62pTXCGZ",
+      "plies": 91,
+      "spaced": {
+        "moments": 3,
+        "value": 3.2203,
+        "adjacent": 0,
+        "max_gap": 57,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 3.2348,
+        "adjacent": 1,
+        "max_gap": 54,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "C3e8kzxc",
+      "plies": 62,
+      "spaced": {
+        "moments": 2,
+        "value": 3.3626,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.3626,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "SHTGmMGe",
+      "plies": 68,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6897,
+        "adjacent": 1,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "zX3Qp5P5",
+      "plies": 51,
+      "spaced": {
+        "moments": 2,
+        "value": 1.5907,
+        "adjacent": 0,
+        "max_gap": 20,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.6167,
+        "adjacent": 1,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "UmpOWIq5",
+      "plies": 29,
+      "spaced": {
+        "moments": 2,
+        "value": 2.3467,
+        "adjacent": 0,
+        "max_gap": 9,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.358,
+        "adjacent": 1,
+        "max_gap": 14,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "wzZKngda",
+      "plies": 54,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6454,
+        "adjacent": 0,
+        "max_gap": 15,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6556,
+        "adjacent": 1,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "KByncFqi",
+      "plies": 75,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1181,
+        "adjacent": 0,
+        "max_gap": 36,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.1181,
+        "adjacent": 0,
+        "max_gap": 36,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ZbYvHZDe",
+      "plies": 144,
+      "spaced": {
+        "moments": 7,
+        "value": 9.2589,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 2,
+        "seconds": 287.6,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 7,
+        "value": 10.3643,
+        "adjacent": 3,
+        "max_gap": 41,
+        "bridges": 2,
+        "seconds": 287.6,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "a3TyOpYs",
+      "plies": 81,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9428,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9428,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "T3RUhHBF",
+      "plies": 106,
+      "spaced": {
+        "moments": 4,
+        "value": 5.113,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.683,
+        "adjacent": 2,
+        "max_gap": 60,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "cHChHqzd",
+      "plies": 58,
+      "spaced": {
+        "moments": 2,
+        "value": 2.5247,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.5247,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ABODmYeS",
+      "plies": 71,
+      "spaced": {
+        "moments": 2,
+        "value": 2.4518,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.4877,
+        "adjacent": 1,
+        "max_gap": 36,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Uu1rYIAc",
+      "plies": 87,
+      "spaced": {
+        "moments": 3,
+        "value": 3.7827,
+        "adjacent": 0,
+        "max_gap": 40,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.0077,
+        "adjacent": 1,
+        "max_gap": 40,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "jkcldCrU",
+      "plies": 196,
+      "spaced": {
+        "moments": 10,
+        "value": 8.8859,
+        "adjacent": 0,
+        "max_gap": 87,
+        "bridges": 1,
+        "seconds": 348.6,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 10,
+        "value": 11.6937,
+        "adjacent": 7,
+        "max_gap": 107,
+        "bridges": 1,
+        "seconds": 348.6,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "gQGvYmcq",
+      "plies": 51,
+      "spaced": {
+        "moments": 2,
+        "value": 2.5877,
+        "adjacent": 0,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.825,
+        "adjacent": 1,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Q7R6XpO6",
+      "plies": 60,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1161,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.1161,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "VCzpbqDM",
+      "plies": 136,
+      "spaced": {
+        "moments": 7,
+        "value": 7.4956,
+        "adjacent": 0,
+        "max_gap": 47,
+        "bridges": 0,
+        "seconds": 263.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 7,
+        "value": 7.9399,
+        "adjacent": 1,
+        "max_gap": 47,
+        "bridges": 0,
+        "seconds": 263.8,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "GmvptYiF",
+      "plies": 21,
+      "spaced": {
+        "moments": 1,
+        "value": 1.6,
+        "adjacent": 0,
+        "max_gap": 5,
+        "bridges": 0,
+        "seconds": 117.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.0328,
+        "adjacent": 1,
+        "max_gap": 4,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "4Xqw3B4v",
+      "plies": 26,
+      "spaced": {
+        "moments": 2,
+        "value": 1.6103,
+        "adjacent": 0,
+        "max_gap": 6,
+        "bridges": 0,
+        "seconds": 131.4,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.6103,
+        "adjacent": 0,
+        "max_gap": 6,
+        "bridges": 0,
+        "seconds": 131.4,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "HPzVjOPT",
+      "plies": 92,
+      "spaced": {
+        "moments": 3,
+        "value": 4.9162,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 5.099,
+        "adjacent": 1,
+        "max_gap": 47,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "rFCWdNs5",
+      "plies": 71,
+      "spaced": {
+        "moments": 2,
+        "value": 2.915,
+        "adjacent": 0,
+        "max_gap": 44,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.915,
+        "adjacent": 0,
+        "max_gap": 44,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "fJJT0WI3",
+      "plies": 66,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1611,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.1611,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "JCqA9YRr",
+      "plies": 112,
+      "spaced": {
+        "moments": 5,
+        "value": 6.2878,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 6.9768,
+        "adjacent": 2,
+        "max_gap": 68,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "6eK6wqRZ",
+      "plies": 68,
+      "spaced": {
+        "moments": 2,
+        "value": 2.7577,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.7577,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ghpxbnXQ",
+      "plies": 59,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9778,
+        "adjacent": 1,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "wSyYYQ7C",
+      "plies": 59,
+      "spaced": {
+        "moments": 2,
+        "value": 3.0287,
+        "adjacent": 0,
+        "max_gap": 23,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.3978,
+        "adjacent": 1,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "47V96oXZ",
+      "plies": 79,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 60,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.95,
+        "adjacent": 1,
+        "max_gap": 66,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "YLDFRazt",
+      "plies": 53,
+      "spaced": {
+        "moments": 2,
+        "value": 3.02,
+        "adjacent": 0,
+        "max_gap": 15,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.02,
+        "adjacent": 1,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "4mbiYwfu",
+      "plies": 80,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1538,
+        "adjacent": 0,
+        "max_gap": 53,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.1538,
+        "adjacent": 0,
+        "max_gap": 53,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "0ef5j84c",
+      "plies": 68,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9361,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.5251,
+        "adjacent": 1,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "wJ7Opb77",
+      "plies": 116,
+      "spaced": {
+        "moments": 5,
+        "value": 4.6128,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 5.9601,
+        "adjacent": 2,
+        "max_gap": 44,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ExdvTEoG",
+      "plies": 41,
+      "spaced": {
+        "moments": 2,
+        "value": 2.8354,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2175,
+        "adjacent": 1,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "RPlpFQrc",
+      "plies": 111,
+      "spaced": {
+        "moments": 5,
+        "value": 3.5069,
+        "adjacent": 0,
+        "max_gap": 46,
+        "bridges": 1,
+        "seconds": 216.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 3.8837,
+        "adjacent": 1,
+        "max_gap": 46,
+        "bridges": 1,
+        "seconds": 216.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ZmTFYMH4",
+      "plies": 110,
+      "spaced": {
+        "moments": 5,
+        "value": 6.4602,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 6.8567,
+        "adjacent": 2,
+        "max_gap": 48,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "YA36wDLD",
+      "plies": 65,
+      "spaced": {
+        "moments": 2,
+        "value": 2.4087,
+        "adjacent": 0,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.425,
+        "adjacent": 1,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "cqTkqe6m",
+      "plies": 72,
+      "spaced": {
+        "moments": 2,
+        "value": 3.0478,
+        "adjacent": 0,
+        "max_gap": 40,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.0611,
+        "adjacent": 1,
+        "max_gap": 43,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "OehppJE7",
+      "plies": 83,
+      "spaced": {
+        "moments": 2,
+        "value": 2.7698,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 2,
+        "seconds": 165.9,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.95,
+        "adjacent": 1,
+        "max_gap": 69,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ceWHwCZz",
+      "plies": 53,
+      "spaced": {
+        "moments": 2,
+        "value": 3.2134,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2134,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "rhr694u8",
+      "plies": 50,
+      "spaced": {
+        "moments": 2,
+        "value": 3.2569,
+        "adjacent": 0,
+        "max_gap": 13,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2569,
+        "adjacent": 0,
+        "max_gap": 13,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "dZ1Mkhiq",
+      "plies": 66,
+      "spaced": {
+        "moments": 2,
+        "value": 3.14,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.14,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "K6LrPms4",
+      "plies": 49,
+      "spaced": {
+        "moments": 2,
+        "value": 2.645,
+        "adjacent": 0,
+        "max_gap": 18,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.245,
+        "adjacent": 1,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "cmoWtfK2",
+      "plies": 45,
+      "spaced": {
+        "moments": 2,
+        "value": 2.7133,
+        "adjacent": 0,
+        "max_gap": 15,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.7133,
+        "adjacent": 0,
+        "max_gap": 15,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ExwgbDtc",
+      "plies": 47,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6943,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6943,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "2XyJbwnj",
+      "plies": 62,
+      "spaced": {
+        "moments": 2,
+        "value": 3.23,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.23,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "7A2GGLMH",
+      "plies": 68,
+      "spaced": {
+        "moments": 2,
+        "value": 3.035,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2583,
+        "adjacent": 1,
+        "max_gap": 50,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "MU1ONWMK",
+      "plies": 70,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1589,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2952,
+        "adjacent": 1,
+        "max_gap": 32,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "9UdV1o0Y",
+      "plies": 84,
+      "spaced": {
+        "moments": 3,
+        "value": 4.49,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.615,
+        "adjacent": 1,
+        "max_gap": 36,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "KwgOoaMo",
+      "plies": 65,
+      "spaced": {
+        "moments": 2,
+        "value": 2.4083,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.95,
+        "adjacent": 1,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "fsPVxM8L",
+      "plies": 72,
+      "spaced": {
+        "moments": 2,
+        "value": 3.005,
+        "adjacent": 0,
+        "max_gap": 48,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.005,
+        "adjacent": 0,
+        "max_gap": 48,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "yiurzHuc",
+      "plies": 56,
+      "spaced": {
+        "moments": 2,
+        "value": 3.114,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.114,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "LTpVlex5",
+      "plies": 95,
+      "spaced": {
+        "moments": 3,
+        "value": 3.0022,
+        "adjacent": 0,
+        "max_gap": 45,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 3.08,
+        "adjacent": 1,
+        "max_gap": 57,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "cigdH5Uu",
+      "plies": 37,
+      "spaced": {
+        "moments": 2,
+        "value": 2.3308,
+        "adjacent": 0,
+        "max_gap": 16,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6352,
+        "adjacent": 1,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "T8r0PDRG",
+      "plies": 45,
+      "spaced": {
+        "moments": 2,
+        "value": 3.175,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.175,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "nPUm3cjJ",
+      "plies": 44,
+      "spaced": {
+        "moments": 2,
+        "value": 2.499,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.499,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "vEIqvD6j",
+      "plies": 54,
+      "spaced": {
+        "moments": 2,
+        "value": 3.0328,
+        "adjacent": 0,
+        "max_gap": 39,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.0328,
+        "adjacent": 0,
+        "max_gap": 39,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "pQyL1N5m",
+      "plies": 57,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9083,
+        "adjacent": 0,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9083,
+        "adjacent": 0,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ICz7wxQ6",
+      "plies": 72,
+      "spaced": {
+        "moments": 2,
+        "value": 2.225,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.225,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ilHFXlf8",
+      "plies": 79,
+      "spaced": {
+        "moments": 2,
+        "value": 3.5202,
+        "adjacent": 0,
+        "max_gap": 37,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.5202,
+        "adjacent": 0,
+        "max_gap": 37,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "F2VBMgLj",
+      "plies": 60,
+      "spaced": {
+        "moments": 2,
+        "value": 3.005,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.005,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "JSn0hp4W",
+      "plies": 73,
+      "spaced": {
+        "moments": 2,
+        "value": 3.32,
+        "adjacent": 0,
+        "max_gap": 50,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.5628,
+        "adjacent": 1,
+        "max_gap": 49,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "lgZpuMeY",
+      "plies": 81,
+      "spaced": {
+        "moments": 3,
+        "value": 3.9718,
+        "adjacent": 0,
+        "max_gap": 40,
+        "bridges": 0,
+        "seconds": 155.7,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.0278,
+        "adjacent": 1,
+        "max_gap": 53,
+        "bridges": 0,
+        "seconds": 155.7,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "uUKqVLhL",
+      "plies": 89,
+      "spaced": {
+        "moments": 3,
+        "value": 4.406,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.7435,
+        "adjacent": 1,
+        "max_gap": 44,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "BVjHNPxk",
+      "plies": 60,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1893,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.8478,
+        "adjacent": 1,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "6DT1n8e9",
+      "plies": 100,
+      "spaced": {
+        "moments": 4,
+        "value": 5.5311,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.5311,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Z5TZFoyN",
+      "plies": 83,
+      "spaced": {
+        "moments": 2,
+        "value": 2.8833,
+        "adjacent": 0,
+        "max_gap": 59,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.8833,
+        "adjacent": 0,
+        "max_gap": 59,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "YQyzkLVx",
+      "plies": 82,
+      "spaced": {
+        "moments": 2,
+        "value": 3.5008,
+        "adjacent": 0,
+        "max_gap": 49,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.5008,
+        "adjacent": 0,
+        "max_gap": 49,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "QGOuq9Fr",
+      "plies": 67,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "q0GgMXPh",
+      "plies": 90,
+      "spaced": {
+        "moments": 3,
+        "value": 2.7367,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 2.7367,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "xpITiOLu",
+      "plies": 57,
+      "spaced": {
+        "moments": 2,
+        "value": 3.0347,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.0347,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "7rtfrxO5",
+      "plies": 51,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "xSibMC1M",
+      "plies": 40,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9801,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9801,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "lAZZrDVI",
+      "plies": 46,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6278,
+        "adjacent": 1,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Ot3gGEyx",
+      "plies": 57,
+      "spaced": {
+        "moments": 2,
+        "value": 2.8063,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9917,
+        "adjacent": 1,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "D3vIV2QJ",
+      "plies": 92,
+      "spaced": {
+        "moments": 3,
+        "value": 3.825,
+        "adjacent": 0,
+        "max_gap": 39,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.175,
+        "adjacent": 1,
+        "max_gap": 48,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "NAkVxWCK",
+      "plies": 63,
+      "spaced": {
+        "moments": 2,
+        "value": 2.4693,
+        "adjacent": 0,
+        "max_gap": 20,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.848,
+        "adjacent": 1,
+        "max_gap": 37,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Oae4nWSK",
+      "plies": 127,
+      "spaced": {
+        "moments": 6,
+        "value": 4.8454,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 1,
+        "seconds": 251.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 6,
+        "value": 5.1941,
+        "adjacent": 2,
+        "max_gap": 56,
+        "bridges": 1,
+        "seconds": 251.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "7LGQlHCI",
+      "plies": 115,
+      "spaced": {
+        "moments": 5,
+        "value": 7.085,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 7.46,
+        "adjacent": 2,
+        "max_gap": 81,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "SnYO4Pt5",
+      "plies": 53,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6,
+        "adjacent": 1,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "IPogDcbQ",
+      "plies": 49,
+      "spaced": {
+        "moments": 2,
+        "value": 2.48,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.915,
+        "adjacent": 1,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "NwvPAEkF",
+      "plies": 46,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6803,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6803,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "MVGTqXc0",
+      "plies": 52,
+      "spaced": {
+        "moments": 2,
+        "value": 3.4149,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.4149,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "5P77b7IC",
+      "plies": 92,
+      "spaced": {
+        "moments": 3,
+        "value": 4.175,
+        "adjacent": 0,
+        "max_gap": 61,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.7861,
+        "adjacent": 2,
+        "max_gap": 74,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "NAMq8REo",
+      "plies": 53,
+      "spaced": {
+        "moments": 2,
+        "value": 3.6222,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.6222,
+        "adjacent": 0,
+        "max_gap": 19,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "6OpU94qt",
+      "plies": 33,
+      "spaced": {
+        "moments": 2,
+        "value": 1.3894,
+        "adjacent": 0,
+        "max_gap": 13,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.942,
+        "adjacent": 1,
+        "max_gap": 15,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "4ICId2K1",
+      "plies": 34,
+      "spaced": {
+        "moments": 2,
+        "value": 1.9423,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.99,
+        "adjacent": 1,
+        "max_gap": 19,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "H3BKKaxO",
+      "plies": 87,
+      "spaced": {
+        "moments": 3,
+        "value": 4.49,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.49,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "MvgVuBsh",
+      "plies": 34,
+      "spaced": {
+        "moments": 2,
+        "value": 0.747,
+        "adjacent": 0,
+        "max_gap": 10,
+        "bridges": 0,
+        "seconds": 131.4,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 0.8,
+        "adjacent": 1,
+        "max_gap": 15,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "si7h2LJv",
+      "plies": 105,
+      "spaced": {
+        "moments": 4,
+        "value": 5.1951,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.4201,
+        "adjacent": 1,
+        "max_gap": 30,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "I3dy6QwM",
+      "plies": 56,
+      "spaced": {
+        "moments": 2,
+        "value": 2.1183,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.1183,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "MdqSx77B",
+      "plies": 119,
+      "spaced": {
+        "moments": 6,
+        "value": 2.5683,
+        "adjacent": 0,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 228.6,
+        "decisive": false,
+        "has_turning_point": false
+      },
+      "unspaced": {
+        "moments": 6,
+        "value": 2.9913,
+        "adjacent": 3,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 228.6,
+        "decisive": false,
+        "has_turning_point": false
+      }
+    },
+    {
+      "game_id": "OW12vy2M",
+      "plies": 56,
+      "spaced": {
+        "moments": 2,
+        "value": 3.3411,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.3411,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "gasP8bVw",
+      "plies": 104,
+      "spaced": {
+        "moments": 4,
+        "value": 1.8439,
+        "adjacent": 0,
+        "max_gap": 65,
+        "bridges": 2,
+        "seconds": 203.8,
+        "decisive": false,
+        "has_turning_point": false
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 2.0996,
+        "adjacent": 2,
+        "max_gap": 65,
+        "bridges": 0,
+        "seconds": 204.3,
+        "decisive": false,
+        "has_turning_point": false
+      }
+    },
+    {
+      "game_id": "L0TrCfvO",
+      "plies": 65,
+      "spaced": {
+        "moments": 2,
+        "value": 2.2682,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.2682,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "FsOdr2Ln",
+      "plies": 70,
+      "spaced": {
+        "moments": 2,
+        "value": 3.2352,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.2352,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "FJlg2dLB",
+      "plies": 66,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9446,
+        "adjacent": 0,
+        "max_gap": 36,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.02,
+        "adjacent": 1,
+        "max_gap": 41,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Fh44KeZT",
+      "plies": 84,
+      "spaced": {
+        "moments": 3,
+        "value": 3.1501,
+        "adjacent": 0,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.7657,
+        "adjacent": 2,
+        "max_gap": 48,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "OVvc5kA2",
+      "plies": 67,
+      "spaced": {
+        "moments": 2,
+        "value": 2.8521,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.8521,
+        "adjacent": 0,
+        "max_gap": 29,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "8kntbvSI",
+      "plies": 97,
+      "spaced": {
+        "moments": 4,
+        "value": 5.7453,
+        "adjacent": 0,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.7453,
+        "adjacent": 1,
+        "max_gap": 38,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "oT0ARmaw",
+      "plies": 50,
+      "spaced": {
+        "moments": 2,
+        "value": 2.7064,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.7064,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "t9d4En60",
+      "plies": 111,
+      "spaced": {
+        "moments": 5,
+        "value": 6.2918,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 6.6017,
+        "adjacent": 3,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "yLV4cpai",
+      "plies": 87,
+      "spaced": {
+        "moments": 3,
+        "value": 3.5968,
+        "adjacent": 0,
+        "max_gap": 52,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 3.6278,
+        "adjacent": 1,
+        "max_gap": 52,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "I7skWbs0",
+      "plies": 149,
+      "spaced": {
+        "moments": 8,
+        "value": 8.9181,
+        "adjacent": 0,
+        "max_gap": 42,
+        "bridges": 0,
+        "seconds": 288.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 8,
+        "value": 9.9709,
+        "adjacent": 3,
+        "max_gap": 41,
+        "bridges": 0,
+        "seconds": 288.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "63JFCL4D",
+      "plies": 71,
+      "spaced": {
+        "moments": 2,
+        "value": 2.2383,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.5637,
+        "adjacent": 1,
+        "max_gap": 31,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "CgYCLobo",
+      "plies": 66,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6969,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6969,
+        "adjacent": 0,
+        "max_gap": 27,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "7dmNCAdy",
+      "plies": 84,
+      "spaced": {
+        "moments": 3,
+        "value": 5.035,
+        "adjacent": 0,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 5.0356,
+        "adjacent": 1,
+        "max_gap": 51,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "aN0Oywz5",
+      "plies": 93,
+      "spaced": {
+        "moments": 3,
+        "value": 4.4058,
+        "adjacent": 0,
+        "max_gap": 59,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.4058,
+        "adjacent": 0,
+        "max_gap": 59,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "WFi9Qf2n",
+      "plies": 50,
+      "spaced": {
+        "moments": 2,
+        "value": 3.4,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.8475,
+        "adjacent": 1,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "hr7h3z7F",
+      "plies": 62,
+      "spaced": {
+        "moments": 2,
+        "value": 2.5533,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.5533,
+        "adjacent": 0,
+        "max_gap": 22,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "8MM7OMSn",
+      "plies": 67,
+      "spaced": {
+        "moments": 2,
+        "value": 2.2836,
+        "adjacent": 0,
+        "max_gap": 36,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.2836,
+        "adjacent": 0,
+        "max_gap": 36,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "PJRcEdNw",
+      "plies": 112,
+      "spaced": {
+        "moments": 5,
+        "value": 7.6799,
+        "adjacent": 0,
+        "max_gap": 39,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 7.6799,
+        "adjacent": 0,
+        "max_gap": 39,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "IwxuTXOy",
+      "plies": 84,
+      "spaced": {
+        "moments": 3,
+        "value": 4.5389,
+        "adjacent": 0,
+        "max_gap": 44,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 4.6151,
+        "adjacent": 1,
+        "max_gap": 41,
+        "bridges": 0,
+        "seconds": 166.5,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Sz1F3lfj",
+      "plies": 47,
+      "spaced": {
+        "moments": 2,
+        "value": 2.9083,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9083,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "vvZIfCxu",
+      "plies": 47,
+      "spaced": {
+        "moments": 2,
+        "value": 1.508,
+        "adjacent": 0,
+        "max_gap": 14,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.508,
+        "adjacent": 0,
+        "max_gap": 14,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "N3dz1PgB",
+      "plies": 51,
+      "spaced": {
+        "moments": 2,
+        "value": 2.3497,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.3497,
+        "adjacent": 0,
+        "max_gap": 17,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ttq3gRs7",
+      "plies": 82,
+      "spaced": {
+        "moments": 2,
+        "value": 2.7678,
+        "adjacent": 0,
+        "max_gap": 40,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.7678,
+        "adjacent": 0,
+        "max_gap": 40,
+        "bridges": 1,
+        "seconds": 154.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "b0dUo9Cy",
+      "plies": 102,
+      "spaced": {
+        "moments": 4,
+        "value": 4.3679,
+        "adjacent": 0,
+        "max_gap": 42,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 4.7357,
+        "adjacent": 1,
+        "max_gap": 50,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ahJLWQ9D",
+      "plies": 119,
+      "spaced": {
+        "moments": 5,
+        "value": 4.1119,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 4.1119,
+        "adjacent": 0,
+        "max_gap": 33,
+        "bridges": 1,
+        "seconds": 227.0,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "6ijmx1Zx",
+      "plies": 61,
+      "spaced": {
+        "moments": 2,
+        "value": 2.5908,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.5908,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ER7kGhwZ",
+      "plies": 49,
+      "spaced": {
+        "moments": 2,
+        "value": 3.1544,
+        "adjacent": 0,
+        "max_gap": 20,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.4747,
+        "adjacent": 1,
+        "max_gap": 23,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "TiomBIqZ",
+      "plies": 48,
+      "spaced": {
+        "moments": 2,
+        "value": 1.7193,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 1.7193,
+        "adjacent": 0,
+        "max_gap": 25,
+        "bridges": 1,
+        "seconds": 143.2,
+        "decisive": false,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "wCosW3cA",
+      "plies": 106,
+      "spaced": {
+        "moments": 4,
+        "value": 3.6753,
+        "adjacent": 0,
+        "max_gap": 60,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 3.9186,
+        "adjacent": 1,
+        "max_gap": 57,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "BFliGF9J",
+      "plies": 93,
+      "spaced": {
+        "moments": 3,
+        "value": 3.543,
+        "adjacent": 0,
+        "max_gap": 41,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 3.6,
+        "adjacent": 1,
+        "max_gap": 40,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "HNUNjt47",
+      "plies": 63,
+      "spaced": {
+        "moments": 2,
+        "value": 2.8453,
+        "adjacent": 0,
+        "max_gap": 26,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.9209,
+        "adjacent": 1,
+        "max_gap": 25,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Uxw8E7Jp",
+      "plies": 43,
+      "spaced": {
+        "moments": 2,
+        "value": 2.0817,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.331,
+        "adjacent": 1,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "yQkP7qsi",
+      "plies": 91,
+      "spaced": {
+        "moments": 4,
+        "value": 6.21,
+        "adjacent": 0,
+        "max_gap": 46,
+        "bridges": 0,
+        "seconds": 180.0,
+        "decisive": false,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 5.01,
+        "adjacent": 1,
+        "max_gap": 45,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "h56zEtx8",
+      "plies": 47,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6714,
+        "adjacent": 0,
+        "max_gap": 15,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.8013,
+        "adjacent": 1,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "wNFiDdGe",
+      "plies": 54,
+      "spaced": {
+        "moments": 2,
+        "value": 2.3031,
+        "adjacent": 0,
+        "max_gap": 28,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.323,
+        "adjacent": 1,
+        "max_gap": 27,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "ZYkMcTmS",
+      "plies": 143,
+      "spaced": {
+        "moments": 7,
+        "value": 7.4622,
+        "adjacent": 0,
+        "max_gap": 75,
+        "bridges": 1,
+        "seconds": 275.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 7,
+        "value": 9.1272,
+        "adjacent": 4,
+        "max_gap": 84,
+        "bridges": 1,
+        "seconds": 275.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "FBu1CjyU",
+      "plies": 103,
+      "spaced": {
+        "moments": 4,
+        "value": 5.0719,
+        "adjacent": 0,
+        "max_gap": 37,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.2969,
+        "adjacent": 1,
+        "max_gap": 62,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "FTVQSN7F",
+      "plies": 57,
+      "spaced": {
+        "moments": 2,
+        "value": 2.516,
+        "adjacent": 0,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6124,
+        "adjacent": 1,
+        "max_gap": 24,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "emcQqYqT",
+      "plies": 67,
+      "spaced": {
+        "moments": 2,
+        "value": 3.115,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 3.115,
+        "adjacent": 0,
+        "max_gap": 35,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "1dSbfZjv",
+      "plies": 100,
+      "spaced": {
+        "moments": 4,
+        "value": 4.6873,
+        "adjacent": 0,
+        "max_gap": 55,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.4453,
+        "adjacent": 3,
+        "max_gap": 62,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "Ds1nKsZy",
+      "plies": 104,
+      "spaced": {
+        "moments": 4,
+        "value": 3.1369,
+        "adjacent": 0,
+        "max_gap": 34,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 3.1747,
+        "adjacent": 1,
+        "max_gap": 53,
+        "bridges": 1,
+        "seconds": 202.7,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "MaWFMAs9",
+      "plies": 66,
+      "spaced": {
+        "moments": 2,
+        "value": 2.6777,
+        "adjacent": 0,
+        "max_gap": 32,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 2,
+        "value": 2.6777,
+        "adjacent": 0,
+        "max_gap": 32,
+        "bridges": 0,
+        "seconds": 142.2,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "VFaxURkj",
+      "plies": 110,
+      "spaced": {
+        "moments": 5,
+        "value": 3.9207,
+        "adjacent": 0,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 5,
+        "value": 4.9019,
+        "adjacent": 3,
+        "max_gap": 36,
+        "bridges": 0,
+        "seconds": 215.1,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "C4l5NQ2f",
+      "plies": 100,
+      "spaced": {
+        "moments": 4,
+        "value": 5.0574,
+        "adjacent": 0,
+        "max_gap": 30,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 4,
+        "value": 5.4015,
+        "adjacent": 1,
+        "max_gap": 47,
+        "bridges": 0,
+        "seconds": 190.8,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "8vAY6oEi",
+      "plies": 91,
+      "spaced": {
+        "moments": 3,
+        "value": 3.3633,
+        "adjacent": 0,
+        "max_gap": 32,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 3,
+        "value": 3.4067,
+        "adjacent": 1,
+        "max_gap": 37,
+        "bridges": 1,
+        "seconds": 178.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    },
+    {
+      "game_id": "nG0Xdxvg",
+      "plies": 131,
+      "spaced": {
+        "moments": 6,
+        "value": 5.2177,
+        "adjacent": 0,
+        "max_gap": 77,
+        "bridges": 1,
+        "seconds": 251.4,
+        "decisive": true,
+        "has_turning_point": true
+      },
+      "unspaced": {
+        "moments": 6,
+        "value": 5.5604,
+        "adjacent": 1,
+        "max_gap": 77,
+        "bridges": 1,
+        "seconds": 251.4,
+        "decisive": true,
+        "has_turning_point": true
+      }
+    }
+  ]
+}

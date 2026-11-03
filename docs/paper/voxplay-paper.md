@@ -202,7 +202,7 @@ coverage requirement directly rather than as a constraint:
 
 > (6)  T(M) = min( 360, max( 150, 2·|M| ) )  seconds
 
-> (7)  B = ⌊ r·T(M) ⌋ − Σ_{j∈R} c(j)
+> (7)  B = floor( r·T(M) ) − Σ_{j∈R} c(j)
 
 For a 33-half-move game *T* = 150 s, so *r*·*T* = 277 words; the mandatory
 beats cost 153, leaving *B* = 124 — a turning point and one further moment.

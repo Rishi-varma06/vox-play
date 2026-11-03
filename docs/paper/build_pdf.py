@@ -22,6 +22,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from typing import Dict
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_CENTER, TA_JUSTIFY, TA_LEFT
@@ -29,6 +30,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import inch, mm
 from reportlab.lib.utils import ImageReader
+from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import (
     BaseDocTemplate, Frame, FrameBreak, Image, KeepTogether, NextPageTemplate,
     PageTemplate, Paragraph, Spacer, Table, TableStyle,
@@ -155,6 +157,30 @@ def styles():
         leftIndent=1.5 * mm, spaceBefore=1 * mm, spaceAfter=1.6 * mm,
         textColor=INK)
     return s
+
+
+def unrenderable(text: str) -> Dict[str, int]:
+    """
+    Characters the built-in Type 1 fonts will draw as something else.
+
+    ReportLab resolves a character the base font lacks by falling back to
+    Symbol and then to ZapfDingbats. Symbol covers Greek and the common
+    mathematical operators, so most of what this paper uses survives. Anything
+    that reaches ZapfDingbats does not: the floor brackets of (7) landed on
+    its code point 110, a filled black square, and shipped that way because
+    nothing checked. A missing glyph is silent in Platypus -- no warning, no
+    exception, just the wrong mark on the page -- so the build has to look.
+    """
+    missing: Dict[str, int] = {}
+    base = pdfmetrics.getFont("Times-Roman")
+    chain = [base] + list(base.substitutionFonts)
+    for char in sorted(set(text)):
+        if ord(char) < 128:
+            continue
+        for font, _ in pdfmetrics.unicode2T1(char, chain):
+            if font.fontName == "ZapfDingbats":
+                missing[char] = missing.get(char, 0) + text.count(char)
+    return missing
 
 
 def inline(text: str) -> str:
@@ -424,6 +450,15 @@ def main():
     ])
 
     md = strip_draft_note(SRC.read_text(encoding="utf-8"))
+
+    bad = unrenderable(md + " ".join(c for _, _, c in FIGURES.values()))
+    if bad:
+        raise SystemExit(
+            "these characters would be drawn as ZapfDingbats, not themselves: "
+            + ", ".join("U+%04X %r x%d" % (ord(c), c, n)
+                        for c, n in sorted(bad.items()))
+            + ". Rewrite them; the built-in fonts cannot draw them.")
+
     if blind:
         for pattern, replacement in BLIND_PATTERNS:
             md = re.sub(pattern, replacement, md)

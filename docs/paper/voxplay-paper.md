@@ -23,11 +23,11 @@ only for elite play. Prior work emits one comment per move as text and
 measures factual accuracy after generation rather than constraining it.
 Voxplay turns move notation alone into spoken commentary synchronised to an
 animated board. First, commentary is *paced*: beat selection is budgeted
-maximum-weight selection under separation constraints, solved greedily within
-1.3% of optimal. Over 173 standard Lichess games it runs 3.6× shorter than
+maximum-weight selection under separation constraints, solved greedily to a
+mean 98.7% of the exact optimum. Over 173 standard Lichess games it runs 3.6× shorter than
 move-by-move narration and covers the opening and finish in every game,
-against 23% and 8% for an unconstrained top-*N* baseline. Second, the model
-never derives a chess fact; facts come from deterministic components
+against 23% and 8% for an unconstrained top-*N* baseline. Second, the model is
+never asked to derive a chess fact; facts come from deterministic components
 validated externally — 91.9% mean recall and 89.9% precision over 14,000
 human-tagged puzzles, and κ = 0.955 against Lichess annotations on a held-out
 6,864 moves. Third, every sentence is checked against the facts licensing it,
@@ -52,10 +52,13 @@ commentary supplies all of that and is economically restricted to elite play.
 This paper describes a system occupying that gap: the input is the move list,
 and the output is spoken audio with a board that follows the narration, with
 no video and no vision model involved. Chess admits this because its facts
-are computable and checkable, which permits a pipeline in which the language
-model cannot invent a domain fact because it is never asked to produce one —
-and is equally why the approach generalises less readily to domains whose
-ground truth must itself be inferred.
+are computable and checkable. That permits a pipeline in which the model is
+never asked to derive a chess fact and every sentence it writes is checked
+against the facts it was given. Neither step makes invention impossible — the
+ungated pilot of Section V-E produced two unsupported claims in 32 beats —
+but together they remove the occasion for it and give a mechanical test for
+what survives. The same property is why the approach generalises less readily
+to domains whose ground truth must itself be inferred.
 
 **Contributions.** (i) *Pacing as budgeted selection*: we formalise what to
 say as maximum-weight selection under a spoken-duration budget and minimum
@@ -364,9 +367,11 @@ Table: Pacing against both baselines over 173 standard games
 | Range | 117.8–348.6 | 194.6 | 158.9–1483.2 |
 | Median beats | 7 | 8 | — |
 | Opening covered | **100%** | 22.5% | 100% |
-| Decisive move covered | 97.1% | 98.3% | 100% |
+| Decisive move covered* | 98.8% | 100% | 100% |
 | Finish covered | **100%** | 7.5% | 100% |
 | Games with no adjacent pick | **173/173** | 1/173 | — |
+
+*Over the 170 games that have a decisive move; three drawn games have none.
 
 Median reduction against every-move narration is **3.6×** (IQR 2.9–3.9), and
 it widens with game length because the paced budget is clamped by (6) and the
@@ -374,12 +379,30 @@ baseline's is not (Fig. 3). Against top-*N* the advantage is structural rather t
 duration: top-*N* emits exactly *N* = 8 beats of fixed cost, so its 194.6 s
 is **constant by construction** on every game — worth stating, since an
 identical figure across games otherwise invites the suspicion of a
-measurement error. It is also worth conceding the one column top-*N* wins:
-it covers the decisive move slightly *more* often, 98.3% against 97.1%, so
-ranking by swing is not what it lacks. What it lacks is everything the
-constraints supply — it names the opening in under a quarter of games,
-reaches the finish in one in thirteen, and in all but one game spends beats
-on half-moves adjacent to another selection, four per game against none.
+measurement error. It is also worth conceding the one column top-*N*
+wins, and saying why. Top-*N* is the eight largest swings and the decisive
+move is by construction the largest, so it covers it in all 170 games that
+have one; the paced selector covers 168. Ranking by swing is therefore not
+what top-*N* lacks. What it lacks is everything the constraints supply — it
+names the opening in under a quarter of games, reaches the finish in one in
+thirteen, and in all but one game spends beats on half-moves adjacent to
+another selection, four per game against none.
+
+**Why the decisive move is ever missed.** It is worth being exact, because
+the turning point is not a mandatory beat: it is an ordinary candidate
+carrying a narrative weight of 0.60 in (2), and it competes for the budget
+like any other. Both misses have the same cause, and it is the separation
+constraint (5) rather than the budget or the salience floor. In one game the
+turning point at half-move 32 scored 1.600 while its immediate predecessor
+scored 1.645; in the other, half-move 54 scored 1.628 against its successor's
+1.755. The neighbour was accepted first, and (5) then excluded a half-move
+one ply away. A decisive move and the reply to it share the swing that makes
+either salient, so near-ties between adjacent plies are the expected case
+rather than a pathology. In both games a beat still lands on the half-move
+immediately beside the turning point, so coverage within one half-move is
+170 of 170; it is the exact-ply test that fails. A selector that resolved
+such ties toward the turning point would close the gap, at the cost of
+letting narrative role override salience.
 
 ### D. Greedy optimality and weight sensitivity
 
@@ -396,7 +419,7 @@ supplementary Section S6. **Swing dominates**: removing it retains only 45.1%
 of the shipped selection and costs a fifth of the objective. **Narrative
 weight does a narrow but irreplaceable job**: dropping it retains 80.4% of
 picks and costs 1.6% of salience, yet the share of games giving the decisive
-move a beat of its own falls from 87.5% to 56.2% — invisible to the
+move a beat of its own falls from 88.6% to 57.0% — invisible to the
 objective, and exactly what the term exists to produce. Motif, criticality
 and material each shift the selection modestly (81.1%, 87.3% and 92.0%
 retained) at under 3% of salience. **Think time is inert on this corpus**,
@@ -517,9 +540,9 @@ records each correction and its cause.
 
 We have described a system converting chess move notation into spoken
 commentary with a synchronised board, without video. Its contributions are
-pacing — formalised as budgeted selection in (3)–(5), solved greedily within
-1.3% of an exact dynamic program and measured over 173 games against two
-implemented baselines — grounding by construction, and a gate whose licence
+pacing — formalised as budgeted selection in (3)–(5), solved greedily to a
+mean 98.7% of an exact dynamic program and measured over 173 games against
+two implemented baselines — grounding by construction, and a gate whose licence
 is derived symmetrically from the facts it checks. Validation against
 external labels gives 91.9% mean recall and 89.9% precision over 14,000
 human-tagged puzzles, and κ = 0.955 on a held-out 6,864 moves. Auditing the

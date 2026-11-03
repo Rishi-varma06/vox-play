@@ -266,6 +266,7 @@ regenerates the results tables and both data figures:
 | `threshold_split.py` | Table II — thresholds fitted and tested on disjoint splits |
 | `pacing_study.py` | Table III, and the greedy optimality quoted in Section V-D |
 | `weight_ablation.py` | the ablation of Section S6 |
+| `why_missed.py` | the diagnosis of the two missed decisive moves in Section V-C |
 | `gate_false_positives.py` | the gate false-positive rate quoted in Section V-E |
 | `make_figures.py` | Figs. 1 and 3 |
 
@@ -319,17 +320,19 @@ selected ply sets; *value* is the variant's total salience scored under the
 **shipped** weights as a fraction of the shipped selection's, so a variant
 that picks worse moves scores below 1.0 on the objective the system is
 actually maximising; *decisive beat* is the share of games in which the
-turning point is selected as a beat of its own, which stands at 87.5% for the
-shipped weights.
+turning point is selected as a beat of its own, which stands at 88.6% for the
+shipped weights. It is taken over the 79 of 80 games that have a turning
+point at all; the one drawn game without one is excluded rather than scored
+as a miss.
 
 | Signal removed | Retained | Jaccard | Value | Decisive beat |
 |---|---|---|---|---|
-| swing | 45.1% | 0.323 | 0.782 | 81.2% |
-| narrative | 80.4% | 0.750 | 0.984 | 56.2% |
-| motif | 81.1% | 0.745 | 0.974 | 90.0% |
-| criticality | 87.3% | 0.825 | 0.985 | 86.2% |
-| material | 92.0% | 0.883 | 0.996 | 87.5% |
-| think time | 100.0% | 1.000 | 1.000 | 87.5% |
+| swing | 45.1% | 0.323 | 0.782 | 82.3% |
+| narrative | 80.4% | 0.750 | 0.984 | 57.0% |
+| motif | 81.1% | 0.745 | 0.974 | 91.1% |
+| criticality | 87.3% | 0.825 | 0.985 | 87.3% |
+| material | 92.0% | 0.883 | 0.996 | 88.6% |
+| think time | 100.0% | 1.000 | 1.000 | 88.6% |
 
 Think time is identically zero on this corpus because the games were exported
 without clock annotations, so the row records that the weight is untested

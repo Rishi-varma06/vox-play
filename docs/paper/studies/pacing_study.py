@@ -380,11 +380,22 @@ def report() -> None:
     print()
     print("COVERAGE (share of games where the arm says anything about it)")
     for field in ("covers_opening", "covers_turning_point", "covers_finish"):
-        paced = sum(1 for r in rows if r["paced_%s" % field])
-        topn = sum(1 for r in rows if r["topn_%s" % field])
-        print("  %-15s paced %5.1f%%   topn %5.1f%%"
+        # A drawn game can have no turning point at all, and scoring those as
+        # misses understates both arms: the first run of this study reported
+        # 97.1% for a selector that had in fact missed two games, not five.
+        # Turning-point coverage is therefore taken over the games that have
+        # one.
+        eligible = [r for r in rows
+                    if field != "covers_turning_point"
+                    or r["turning_point_ply"] is not None]
+        paced = sum(1 for r in eligible if r["paced_%s" % field])
+        topn = sum(1 for r in eligible if r["topn_%s" % field])
+        note = ("" if len(eligible) == len(rows)
+                else "   (of %d; %d games have none)"
+                     % (len(eligible), len(rows) - len(eligible)))
+        print("  %-15s paced %5.1f%%   topn %5.1f%%%s"
               % (field.replace("covers_", ""),
-                 100 * paced / len(rows), 100 * topn / len(rows)))
+                 100 * paced / len(eligible), 100 * topn / len(eligible), note))
     print()
     print("GREEDY OPTIMALITY (greedy total salience / exact DP optimum)")
     ratios = [r["optimality"] for r in rows if r.get("optimality")]

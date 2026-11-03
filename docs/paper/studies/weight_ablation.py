@@ -104,6 +104,9 @@ def _worker(payload: Tuple[str, int]) -> dict:
             "base_picks": len(base),
             "base_value": round(base_value, 4),
             "base_covers_turning_point": arc.turning_point_ply in base_set,
+            # A drawn game can have no turning point, and scoring those as
+            # misses understates every arm equally but misstates the level.
+            "has_turning_point": arc.turning_point_ply is not None,
             "variants": variants,
         }
     except Exception as exc:  # noqa: BLE001 - one game failing is not fatal
@@ -144,11 +147,16 @@ def main() -> None:
                 print("    " + record["error"], flush=True)
 
     good = [r for r in rows if "error" not in r]
+    # Games with no turning point cannot give one a beat, so they are
+    # excluded from that column rather than counted as misses.
+    eligible = [r for r in good if r.get("has_turning_point", True)]
     summary = {
         "games": len(good),
+        "games_with_turning_point": len(eligible),
         "nodes": args.nodes,
         "base_turning_point_coverage": round(
-            sum(1 for r in good if r["base_covers_turning_point"]) / len(good), 4),
+            sum(1 for r in eligible if r["base_covers_turning_point"])
+            / len(eligible), 4),
         "signals": {},
         "rows": good,
     }
@@ -163,13 +171,13 @@ def main() -> None:
                    if r["variants"][signal]["jaccard"] is not None]
         value = [r["variants"][signal]["value_ratio"] for r in good
                  if r["variants"][signal]["value_ratio"] is not None]
-        turning = sum(1 for r in good
+        turning = sum(1 for r in eligible
                       if r["variants"][signal]["covers_turning_point"])
         entry = {
             "mean_retained": round(statistics.fmean(retained), 4),
             "mean_jaccard": round(statistics.fmean(jaccard), 4),
             "mean_value_ratio": round(statistics.fmean(value), 4),
-            "turning_point_coverage": round(turning / len(good), 4),
+            "turning_point_coverage": round(turning / len(eligible), 4),
         }
         summary["signals"][signal] = entry
         print("%-13s %8.1f%% %9.3f %9.3f %8.1f%%"

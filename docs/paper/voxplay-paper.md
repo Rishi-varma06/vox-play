@@ -136,9 +136,10 @@ and λ = 0.00368208:
 > (1)  W(c) = 50 + 50 ( 2 / (1 + e^(-λc)) - 1 )
 
 The mapping saturates at the extremes, so the same 100-centipawn delta is
-worth about 12 percentage points near equality and under one at +900. Every
-downstream component reads *W*, and the constant is adopted from Lichess so
-our classifications are directly comparable with Lichess's own annotations.
+worth 9.1 points of win probability from equality but 1.5 from +800 — a
+six-fold difference, which is the property centipawns lack. Every downstream
+component reads *W*, and the constant is adopted from Lichess so our
+classifications are directly comparable with Lichess's own annotations.
 Analysis is budgeted by **nodes**, not depth or wall-clock time, since
 time-limited search returns different results on different machines and would
 make every number here irreproducible: 1,000,000 nodes per position,
@@ -333,9 +334,11 @@ unfiltered version reported 17 pins on a single short game.
 ### B. Classification agreement, fitted and tested on disjoint splits
 
 Lichess publishes both halves of what this needs: `[%eval]` on every move and
-its own verdict as a NAG. On the 174 standard games (13,230 moves), games —
-not moves — were shuffled under a fixed seed and split in half; θ was
-grid-searched on the training half alone, and κ reported on the other.
+its own verdict as a NAG. This section uses all 174 standard games, counting
+only the 13,230 half-moves that carry an evaluation — a game's unannotated
+tail cannot be scored, so it is not counted. Games — not moves — were
+shuffled under a fixed seed and split in half; θ was grid-searched on the
+training half alone, and κ reported on the other.
 
 Table: Classification thresholds fitted and tested on disjoint splits
 | | Train, 87 games | Held out, 87 games |
@@ -355,9 +358,11 @@ rather than discovering a free parameter. Per-class held-out agreement is
 
 ### C. Pacing over 173 games
 
-The selector was run over all 173 standard games of 20–200 half-moves —
-13,251 half-moves, median length 68 (IQR 55–92) — against both baselines. No
-run failed.
+The selector was run over the 173 standard games of 20–200 half-moves, one
+game of the 174 being too short. Pacing needs every half-move, annotated or
+not, so this section counts all 13,251 of them rather than the 13,230
+evaluated ones of Section V-B; median length is 68 (IQR 55–92). No run
+failed.
 
 Table: Pacing against both baselines over 173 standard games
 | | Paced | Top-*N* | Every move |
@@ -434,7 +439,7 @@ generator assembles sentences mechanically from the same fact block the gate
 licences, so every claim is true by construction and any error-severity
 finding is a false positive.
 
-The measurement found a defect. Over 450 beats from 59 standard games the
+The measurement found a defect. Over 456 beats from 60 standard games the
 gate raised **15 false positives**, 3.3 per 100, twelve of them one cause:
 the name check strips punctuation per whitespace token, so a supplied opening
 such as "Nimzo-Larsen Attack" reaches it as `NimzoLarsen`, while the licence
@@ -442,8 +447,9 @@ joined the whole string and admitted only `NimzoLarsenAttack`. An opening the
 model had been handed came back as an invented name — exactly the asymmetry
 Section IV-F says the shared derivation prevents, surviving because no test
 used a hyphenated opening. With the licence corrected and a regression test
-added the rate falls to **3 over 456 beats**, 0.66 per 100 (exact 95% upper
-bound 1.91). We report rather than pursue zero: the claim worth making is not
+added, and both arms re-measured over that same corpus, the rate falls to
+**3 false positives**, 0.66 per 100 (exact 95% upper bound 1.91), and the
+games with none rise from 51 to 57 of 60. We report rather than pursue zero: the claim worth making is not
 that the gate is perfect but that its false-positive rate is **measurable on
 grounded text**.
 
@@ -467,14 +473,21 @@ Effort is `low` for realisation, batching and repairs and `medium` for the
 outline; ceilings are 2,000 tokens for the outline and 1,000 per beat; the
 system prompt is cached. Each figure is a single run.
 
-End to end on the 1858 Opera Game (33 plies) and a 79-ply blitz game: engine
-analysis 29.6 s and 66.6 s, script generation 22.4 s and 29.5 s over 7 and 8
-calls, cost **$0.0572** and **$0.0631**, both verifying clean. Cost and
-latency are approximately constant in game length, because the number of
-beats is bounded by the duration budget rather than the number of moves — a
-direct consequence of pacing — while engine analysis scales linearly at about
-1.43 s per position. Results depending on a single proprietary model are a
-weakness; an open-weight replication is specified in Section VI.
+Generation, on the 1858 Opera Game (33 plies) and a 79-ply blitz game, takes
+22.4 s and 29.5 s over 7 and 8 calls and costs **$0.0572** and **$0.0631**,
+both verifying clean. Cost and latency are approximately constant in game
+length, because the number of beats is bounded by the duration budget rather
+than the number of moves — a direct consequence of pacing.
+
+Engine analysis is the other half of the runtime and is the half that scales.
+Timed on its own at 1,000,000 nodes, `MultiPV` 3 and one thread, two repeats
+per game on an idle machine, it costs **1.18 s per position** — 1.15 on a
+34-position game and 1.19 on an 81-position one — so it dominates runtime on
+any game of ordinary length. We report it as a measured rate rather than as
+per-game totals because an earlier draft quoted totals and a rate that were
+mutually inconsistent (supplementary S3). Results depending on a single
+proprietary model are a weakness; an open-weight replication is specified in
+Section VI.
 
 ---
 
@@ -508,7 +521,7 @@ Chess960 support, and learned salience weights replacing **w** of (2).
 shares a transposition table between racing threads, so a fixed node budget
 does not determine the result above one thread: two four-thread runs of one
 game disagreed on 27 of 33 half-moves, enough to relocate the turning point.
-All reported analysis is single-threaded, at about 1.43 s per position.
+All reported analysis is single-threaded, at 1.18 s per position.
 
 **B. Standard chess only.** Nothing here is evidence about variants, and
 because the available corpus was roughly half variants the evaluation set is

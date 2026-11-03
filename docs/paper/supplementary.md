@@ -242,8 +242,11 @@ only because a number was *identical* where it had no reason to be.
 | Paced duration | 117.8 s on both games | 142.2 / 154.1 s | The measurement script passed a fixed 120 s budget instead of the length-scaled budget the system ships with. Two different games producing byte-identical durations was the tell. |
 | Speaking rate | 155 wpm nominal | 111 wpm measured | Clause-boundary pauses, numeral expansion and per-clip padding. |
 | Evaluation corpus | 339 games | 174 standard games | The corpus was exported from Lichess TV, which carries the variant channels, so about half of it was Chess960, Horde, Antichess, Atomic, King of the Hill, Racing Kings or Three-check. Engine failures on 14 games turned out to be Stockfish refusing Antichess, which is what led to the rest being found. |
+| Engine rate | 1.43 s per position | 1.18 s per position | The 1.43 came from three games timed in one sequential process on a loaded machine, and disagreed by about 1.7x with the per-game totals reported alongside it. Re-measured with two repeats per game on an idle machine at the configuration the paper claims. |
+| Gate before/after | 450 beats vs 456 | 456 vs 456 | The two arms had been measured over different corpora, 59 games against 60, because one game failed in the earlier run. Both were re-measured over the same 60. |
+| Win-probability example | 12 points near equality, under 1 at +900 | 9.1 and 1.5 | Arithmetic never checked against the formula it illustrates. |
 | Classifier agreement | κ = 0.932 on the mixed corpus | κ = 0.955 held out on standard games | Fitted and reported on the same 24,255 moves, about half of which were variants. Splitting the games and restricting to standard chess both raised it. |
-| Gate false positives | reported as zero | 15 per 450 beats, then 3 after a fix | The zero was measured on the variant-contaminated corpus. On standard games the gate rejected opening names it had itself supplied, because the licence joined the whole name while the check splits on whitespace. |
+| Gate false positives | reported as zero | 15 per 456 beats, then 3 after a fix | The zero was measured on the variant-contaminated corpus. On standard games the gate rejected opening names it had itself supplied, because the licence joined the whole name while the check splits on whitespace. |
 
 The last of these is the most instructive. The failures were initially
 attributed to memory pressure, because they appeared during a run with

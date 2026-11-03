@@ -1,0 +1,30 @@
+{
+  "nodes": 1000000,
+  "threads": 1,
+  "repeats": 2,
+  "pooled_s_per_position": 1.178,
+  "cases": [
+    {
+      "label": "Opera Game",
+      "plies": 33,
+      "positions": 34,
+      "runs_s": [
+        39.0,
+        40.4
+      ],
+      "seconds": 39.0,
+      "s_per_position": 1.147
+    },
+    {
+      "label": "corpus game uEj1cUSj",
+      "plies": 80,
+      "positions": 81,
+      "runs_s": [
+        97.1,
+        96.5
+      ],
+      "seconds": 96.5,
+      "s_per_position": 1.191
+    }
+  ]
+}

@@ -65,12 +65,12 @@ TITLE_BLOCK = 1.58 * inch                       # full-width band on page 1
 #: earlier ones were dropped because they restated a table as a bar chart.
 FIGURES = {
     "III. System Architecture": (
-        "fig1_pipeline.png", 0.58,
+        "fig1-pipeline.png", 0.58,
         "Fig. 1. The six-stage pipeline. Stages 1-3 compute chess facts "
         "before the model is invoked; stages 4-6 pace, realise and speak "
         "them."),
     "C. Pacing over 173 games": (
-        "fig2_pacing.png", 0.58,
+        "fig2-pacing.png", 0.58,
         "Fig. 2. Spoken duration against game length over 173 standard "
         "games. The "
         "paced arm is clamped by (6); the every-move baseline grows without "

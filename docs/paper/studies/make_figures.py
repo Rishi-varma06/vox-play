@@ -216,9 +216,9 @@ def fig1_pipeline() -> None:
             "spoken audio + synchronised board",
             ha="center", va="center", fontsize=7.6, style="italic")
 
-    fig.savefig(FIGS / "fig1_pipeline.png")
+    fig.savefig(FIGS / "fig1-pipeline.png")
     plt.close(fig)
-    print("fig1_pipeline.png")
+    print("fig1-pipeline.png")
 
 
 def fig2_pacing() -> None:
@@ -239,9 +239,9 @@ def fig2_pacing() -> None:
     ax.set_ylabel("spoken duration (s)")
     ax.legend(frameon=False, fontsize=7, loc="upper left")
     ax.set_title("%d games" % len(rows), fontsize=7.5, color=GREY)
-    fig.savefig(FIGS / "fig2_pacing.png")
+    fig.savefig(FIGS / "fig2-pacing.png")
     plt.close(fig)
-    print("fig2_pacing.png")
+    print("fig2-pacing.png")
 
 
 def unused_hallucination_chart() -> None:
@@ -292,8 +292,8 @@ def fig3_gate() -> None:
 
     source = Image.open(FIGS / "source_gate_screenshot.jpg")
     source.crop((78, 205, 772, 432)).save(
-        FIGS / "fig3_gate_flagged.jpg", quality=94)
-    print("fig3_gate_flagged.jpg (cropped from the review screen)")
+        FIGS / "fig3-gate-flagged.jpg", quality=94)
+    print("fig3-gate-flagged.jpg (cropped from the review screen)")
 
 
 def main() -> None:
@@ -301,7 +301,7 @@ def main() -> None:
     fig1_pipeline()
     fig3_gate()
     fig2_pacing()
-    print("fig1_pipeline.png is regenerated above; no other figures are used")
+    print("fig1-pipeline.png is regenerated above; no other figures are used")
 
 
 if __name__ == "__main__":
